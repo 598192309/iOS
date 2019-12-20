@@ -1,0 +1,15 @@
+//
+//  PrefixHeader.pch
+//  LqTool
+//
+//  Created by lqq on 2019/12/21.
+//  Copyright © 2019 lqq. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#import "UIView+LqExtension.h"
+#import "UIColor+LqExtension.h"
+
+#endif /* PrefixHeader_pch */

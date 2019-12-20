@@ -1,0 +1,14 @@
+//
+//  PrefixHeader.pch
+//  Bigjpg
+//
+//  Created by lqq on 2019/12/21.
+//  Copyright © 2019 lqq. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#import <LqTool/LqTool.h>
+
+#endif /* PrefixHeader_pch */

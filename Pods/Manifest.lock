@@ -1,0 +1,61 @@
+PODS:
+  - AFNetworking (3.2.1):
+    - AFNetworking/NSURLSession (= 3.2.1)
+    - AFNetworking/Reachability (= 3.2.1)
+    - AFNetworking/Security (= 3.2.1)
+    - AFNetworking/Serialization (= 3.2.1)
+    - AFNetworking/UIKit (= 3.2.1)
+  - AFNetworking/NSURLSession (3.2.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.2.1)
+  - AFNetworking/Security (3.2.1)
+  - AFNetworking/Serialization (3.2.1)
+  - AFNetworking/UIKit (3.2.1):
+    - AFNetworking/NSURLSession
+  - AliyunOSSiOS (2.10.7)
+  - JSONModel (1.8.0)
+  - Masonry (1.1.0)
+  - Reachability (3.2)
+  - SAMKeychain (1.5.3)
+  - SDWebImage (5.4.0):
+    - SDWebImage/Core (= 5.4.0)
+  - SDWebImage/Core (5.4.0)
+  - ZLPhotoBrowser (3.1.2):
+    - SDWebImage
+
+DEPENDENCIES:
+  - AFNetworking
+  - AliyunOSSiOS
+  - JSONModel
+  - Masonry
+  - Reachability
+  - SAMKeychain
+  - SDWebImage
+  - ZLPhotoBrowser
+
+SPEC REPOS:
+  trunk:
+    - AFNetworking
+    - AliyunOSSiOS
+    - JSONModel
+    - Masonry
+    - Reachability
+    - SAMKeychain
+    - SDWebImage
+    - ZLPhotoBrowser
+
+SPEC CHECKSUMS:
+  AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
+  AliyunOSSiOS: 602b6a4e70e62a5f0a6431c20496343141d7e66f
+  JSONModel: 02ab723958366a3fd27da57ea2af2113658762e9
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+  SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
+  SDWebImage: 5bf6aec6481ae2a062bdc59f9d6c1d1e552090e0
+  ZLPhotoBrowser: 7e88434918366af98f8ebbaf5b94206985812ed6
+
+PODFILE CHECKSUM: 8f1789bd64571df21d284e285b6d7e75b1f75aca
+
+COCOAPODS: 1.8.4

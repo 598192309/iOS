@@ -1,0 +1,490 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4920AE7E23AD221B00FE7A65 /* UIViewController+LqExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = 4920AE7C23AD221B00FE7A65 /* UIViewController+LqExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4920AE7F23AD221B00FE7A65 /* UIViewController+LqExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4920AE7D23AD221B00FE7A65 /* UIViewController+LqExtension.m */; };
+		4920AE8323AD252A00FE7A65 /* LqSandBox.h in Headers */ = {isa = PBXBuildFile; fileRef = 4920AE8123AD252A00FE7A65 /* LqSandBox.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4920AE8423AD252A00FE7A65 /* LqSandBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 4920AE8223AD252A00FE7A65 /* LqSandBox.m */; };
+		4920AE8723AD26B900FE7A65 /* LqWGS84TOGCJ02.h in Headers */ = {isa = PBXBuildFile; fileRef = 4920AE8523AD26B900FE7A65 /* LqWGS84TOGCJ02.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4920AE8823AD26B900FE7A65 /* LqWGS84TOGCJ02.m in Sources */ = {isa = PBXBuildFile; fileRef = 4920AE8623AD26B900FE7A65 /* LqWGS84TOGCJ02.m */; };
+		4920AE8B23AD273F00FE7A65 /* RSAEncryptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 4920AE8923AD273F00FE7A65 /* RSAEncryptor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4920AE8C23AD273F00FE7A65 /* RSAEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 4920AE8A23AD273F00FE7A65 /* RSAEncryptor.m */; };
+		4920AE8F23AD279600FE7A65 /* LqToolKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 4920AE8D23AD279600FE7A65 /* LqToolKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4920AE9023AD279600FE7A65 /* LqToolKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 4920AE8E23AD279600FE7A65 /* LqToolKit.m */; };
+		4920AE9323AD289700FE7A65 /* SafeControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4920AE9123AD289700FE7A65 /* SafeControl.m */; };
+		4920AE9423AD289700FE7A65 /* SafeControl.h in Headers */ = {isa = PBXBuildFile; fileRef = 4920AE9223AD289700FE7A65 /* SafeControl.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4920AE9723AD2B2800FE7A65 /* PrefixHeader.pch in Headers */ = {isa = PBXBuildFile; fileRef = 4920AE9623AD2B2800FE7A65 /* PrefixHeader.pch */; };
+		4920AEBA23AD319900FE7A65 /* LqNoPasteTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = 4920AEB823AD319900FE7A65 /* LqNoPasteTextField.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4920AEBB23AD319900FE7A65 /* LqNoPasteTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4920AEB923AD319900FE7A65 /* LqNoPasteTextField.m */; };
+		4920AEBE23AD31DC00FE7A65 /* LqTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4920AEBC23AD31DC00FE7A65 /* LqTextView.h */; };
+		4920AEBF23AD31DC00FE7A65 /* LqTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4920AEBD23AD31DC00FE7A65 /* LqTextView.m */; };
+		496DA05B23AD111900DDB905 /* LqTool.h in Headers */ = {isa = PBXBuildFile; fileRef = 496DA05923AD111900DDB905 /* LqTool.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		496DA08823AD170E00DDB905 /* UIColor+LqExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = 496DA08623AD170E00DDB905 /* UIColor+LqExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		496DA08923AD170E00DDB905 /* UIColor+LqExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 496DA08723AD170E00DDB905 /* UIColor+LqExtension.m */; };
+		496DA08E23AD18A500DDB905 /* UIImage+LqExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = 496DA08C23AD18A500DDB905 /* UIImage+LqExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		496DA08F23AD18A500DDB905 /* UIImage+LqExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 496DA08D23AD18A500DDB905 /* UIImage+LqExtension.m */; };
+		496DA09223AD1B5A00DDB905 /* UIStoryboard+LqExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = 496DA09023AD1B5A00DDB905 /* UIStoryboard+LqExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		496DA09323AD1B5A00DDB905 /* UIStoryboard+LqExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 496DA09123AD1B5A00DDB905 /* UIStoryboard+LqExtension.m */; };
+		496DA09A23AD1BFD00DDB905 /* UIView+LqExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = 496DA09823AD1BFD00DDB905 /* UIView+LqExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		496DA09B23AD1BFD00DDB905 /* UIView+LqExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 496DA09923AD1BFD00DDB905 /* UIView+LqExtension.m */; };
+		496DA09E23AD1DC300DDB905 /* NSError+LqExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = 496DA09C23AD1DC300DDB905 /* NSError+LqExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		496DA09F23AD1DC300DDB905 /* NSError+LqExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 496DA09D23AD1DC300DDB905 /* NSError+LqExtension.m */; };
+		496DA0A223AD1E3700DDB905 /* NSFileManager+LqExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = 496DA0A023AD1E3700DDB905 /* NSFileManager+LqExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		496DA0A323AD1E3700DDB905 /* NSFileManager+LqExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 496DA0A123AD1E3700DDB905 /* NSFileManager+LqExtension.m */; };
+		496DA0A623AD1F1300DDB905 /* NSString+LqExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = 496DA0A423AD1F1200DDB905 /* NSString+LqExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		496DA0A723AD1F1300DDB905 /* NSString+LqExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 496DA0A523AD1F1300DDB905 /* NSString+LqExtension.m */; };
+		496DA0AA23AD1FE100DDB905 /* UIImageView+LqExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = 496DA0A823AD1FE100DDB905 /* UIImageView+LqExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		496DA0AB23AD1FE100DDB905 /* UIImageView+LqExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 496DA0A923AD1FE100DDB905 /* UIImageView+LqExtension.m */; };
+		496DA0AE23AD202500DDB905 /* UIScrollView+LqExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = 496DA0AC23AD202500DDB905 /* UIScrollView+LqExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		496DA0AF23AD202500DDB905 /* UIScrollView+LqExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 496DA0AD23AD202500DDB905 /* UIScrollView+LqExtension.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		4920AE7C23AD221B00FE7A65 /* UIViewController+LqExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+LqExtension.h"; sourceTree = "<group>"; };
+		4920AE7D23AD221B00FE7A65 /* UIViewController+LqExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+LqExtension.m"; sourceTree = "<group>"; };
+		4920AE8123AD252A00FE7A65 /* LqSandBox.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LqSandBox.h; sourceTree = "<group>"; };
+		4920AE8223AD252A00FE7A65 /* LqSandBox.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LqSandBox.m; sourceTree = "<group>"; };
+		4920AE8523AD26B900FE7A65 /* LqWGS84TOGCJ02.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LqWGS84TOGCJ02.h; sourceTree = "<group>"; };
+		4920AE8623AD26B900FE7A65 /* LqWGS84TOGCJ02.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LqWGS84TOGCJ02.m; sourceTree = "<group>"; };
+		4920AE8923AD273F00FE7A65 /* RSAEncryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSAEncryptor.h; sourceTree = "<group>"; };
+		4920AE8A23AD273F00FE7A65 /* RSAEncryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSAEncryptor.m; sourceTree = "<group>"; };
+		4920AE8D23AD279600FE7A65 /* LqToolKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LqToolKit.h; sourceTree = "<group>"; };
+		4920AE8E23AD279600FE7A65 /* LqToolKit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LqToolKit.m; sourceTree = "<group>"; };
+		4920AE9123AD289700FE7A65 /* SafeControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SafeControl.m; sourceTree = "<group>"; };
+		4920AE9223AD289700FE7A65 /* SafeControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SafeControl.h; sourceTree = "<group>"; };
+		4920AE9623AD2B2800FE7A65 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		4920AEB823AD319900FE7A65 /* LqNoPasteTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LqNoPasteTextField.h; sourceTree = "<group>"; };
+		4920AEB923AD319900FE7A65 /* LqNoPasteTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LqNoPasteTextField.m; sourceTree = "<group>"; };
+		4920AEBC23AD31DC00FE7A65 /* LqTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LqTextView.h; sourceTree = "<group>"; };
+		4920AEBD23AD31DC00FE7A65 /* LqTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LqTextView.m; sourceTree = "<group>"; };
+		496DA05623AD111900DDB905 /* LqTool.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LqTool.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		496DA05923AD111900DDB905 /* LqTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LqTool.h; sourceTree = "<group>"; };
+		496DA05A23AD111900DDB905 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		496DA08623AD170E00DDB905 /* UIColor+LqExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+LqExtension.h"; sourceTree = "<group>"; };
+		496DA08723AD170E00DDB905 /* UIColor+LqExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+LqExtension.m"; sourceTree = "<group>"; };
+		496DA08C23AD18A500DDB905 /* UIImage+LqExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+LqExtension.h"; sourceTree = "<group>"; };
+		496DA08D23AD18A500DDB905 /* UIImage+LqExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+LqExtension.m"; sourceTree = "<group>"; };
+		496DA09023AD1B5A00DDB905 /* UIStoryboard+LqExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIStoryboard+LqExtension.h"; sourceTree = "<group>"; };
+		496DA09123AD1B5A00DDB905 /* UIStoryboard+LqExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIStoryboard+LqExtension.m"; sourceTree = "<group>"; };
+		496DA09823AD1BFD00DDB905 /* UIView+LqExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+LqExtension.h"; sourceTree = "<group>"; };
+		496DA09923AD1BFD00DDB905 /* UIView+LqExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+LqExtension.m"; sourceTree = "<group>"; };
+		496DA09C23AD1DC300DDB905 /* NSError+LqExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSError+LqExtension.h"; sourceTree = "<group>"; };
+		496DA09D23AD1DC300DDB905 /* NSError+LqExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSError+LqExtension.m"; sourceTree = "<group>"; };
+		496DA0A023AD1E3700DDB905 /* NSFileManager+LqExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+LqExtension.h"; sourceTree = "<group>"; };
+		496DA0A123AD1E3700DDB905 /* NSFileManager+LqExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+LqExtension.m"; sourceTree = "<group>"; };
+		496DA0A423AD1F1200DDB905 /* NSString+LqExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+LqExtension.h"; sourceTree = "<group>"; };
+		496DA0A523AD1F1300DDB905 /* NSString+LqExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+LqExtension.m"; sourceTree = "<group>"; };
+		496DA0A823AD1FE100DDB905 /* UIImageView+LqExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImageView+LqExtension.h"; sourceTree = "<group>"; };
+		496DA0A923AD1FE100DDB905 /* UIImageView+LqExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+LqExtension.m"; sourceTree = "<group>"; };
+		496DA0AC23AD202500DDB905 /* UIScrollView+LqExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+LqExtension.h"; sourceTree = "<group>"; };
+		496DA0AD23AD202500DDB905 /* UIScrollView+LqExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+LqExtension.m"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		496DA05323AD111900DDB905 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4920AE8023AD24F700FE7A65 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				496DA09823AD1BFD00DDB905 /* UIView+LqExtension.h */,
+				496DA09923AD1BFD00DDB905 /* UIView+LqExtension.m */,
+				496DA08623AD170E00DDB905 /* UIColor+LqExtension.h */,
+				496DA08723AD170E00DDB905 /* UIColor+LqExtension.m */,
+				496DA08C23AD18A500DDB905 /* UIImage+LqExtension.h */,
+				496DA08D23AD18A500DDB905 /* UIImage+LqExtension.m */,
+				496DA09023AD1B5A00DDB905 /* UIStoryboard+LqExtension.h */,
+				496DA09123AD1B5A00DDB905 /* UIStoryboard+LqExtension.m */,
+				496DA09C23AD1DC300DDB905 /* NSError+LqExtension.h */,
+				496DA09D23AD1DC300DDB905 /* NSError+LqExtension.m */,
+				496DA0A023AD1E3700DDB905 /* NSFileManager+LqExtension.h */,
+				496DA0A123AD1E3700DDB905 /* NSFileManager+LqExtension.m */,
+				496DA0A423AD1F1200DDB905 /* NSString+LqExtension.h */,
+				496DA0A523AD1F1300DDB905 /* NSString+LqExtension.m */,
+				496DA0A823AD1FE100DDB905 /* UIImageView+LqExtension.h */,
+				496DA0A923AD1FE100DDB905 /* UIImageView+LqExtension.m */,
+				496DA0AC23AD202500DDB905 /* UIScrollView+LqExtension.h */,
+				496DA0AD23AD202500DDB905 /* UIScrollView+LqExtension.m */,
+				4920AE7C23AD221B00FE7A65 /* UIViewController+LqExtension.h */,
+				4920AE7D23AD221B00FE7A65 /* UIViewController+LqExtension.m */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		4920AEB323AD30F900FE7A65 /* Widget */ = {
+			isa = PBXGroup;
+			children = (
+				4920AEB823AD319900FE7A65 /* LqNoPasteTextField.h */,
+				4920AEB923AD319900FE7A65 /* LqNoPasteTextField.m */,
+				4920AEBC23AD31DC00FE7A65 /* LqTextView.h */,
+				4920AEBD23AD31DC00FE7A65 /* LqTextView.m */,
+			);
+			path = Widget;
+			sourceTree = "<group>";
+		};
+		496DA04C23AD111900DDB905 = {
+			isa = PBXGroup;
+			children = (
+				496DA05823AD111900DDB905 /* LqTool */,
+				496DA05723AD111900DDB905 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		496DA05723AD111900DDB905 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				496DA05623AD111900DDB905 /* LqTool.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		496DA05823AD111900DDB905 /* LqTool */ = {
+			isa = PBXGroup;
+			children = (
+				4920AE9623AD2B2800FE7A65 /* PrefixHeader.pch */,
+				496DA05923AD111900DDB905 /* LqTool.h */,
+				4920AE8D23AD279600FE7A65 /* LqToolKit.h */,
+				4920AE8E23AD279600FE7A65 /* LqToolKit.m */,
+				4920AE8123AD252A00FE7A65 /* LqSandBox.h */,
+				4920AE8223AD252A00FE7A65 /* LqSandBox.m */,
+				4920AE8523AD26B900FE7A65 /* LqWGS84TOGCJ02.h */,
+				4920AE8623AD26B900FE7A65 /* LqWGS84TOGCJ02.m */,
+				4920AE8923AD273F00FE7A65 /* RSAEncryptor.h */,
+				4920AE8A23AD273F00FE7A65 /* RSAEncryptor.m */,
+				4920AE9223AD289700FE7A65 /* SafeControl.h */,
+				4920AE9123AD289700FE7A65 /* SafeControl.m */,
+				4920AEB323AD30F900FE7A65 /* Widget */,
+				4920AE8023AD24F700FE7A65 /* Extension */,
+				496DA05A23AD111900DDB905 /* Info.plist */,
+			);
+			path = LqTool;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		496DA05123AD111900DDB905 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				496DA0A223AD1E3700DDB905 /* NSFileManager+LqExtension.h in Headers */,
+				4920AE8323AD252A00FE7A65 /* LqSandBox.h in Headers */,
+				4920AE8723AD26B900FE7A65 /* LqWGS84TOGCJ02.h in Headers */,
+				4920AE9423AD289700FE7A65 /* SafeControl.h in Headers */,
+				496DA0A623AD1F1300DDB905 /* NSString+LqExtension.h in Headers */,
+				4920AEBA23AD319900FE7A65 /* LqNoPasteTextField.h in Headers */,
+				496DA09223AD1B5A00DDB905 /* UIStoryboard+LqExtension.h in Headers */,
+				4920AE7E23AD221B00FE7A65 /* UIViewController+LqExtension.h in Headers */,
+				4920AE8B23AD273F00FE7A65 /* RSAEncryptor.h in Headers */,
+				496DA0AE23AD202500DDB905 /* UIScrollView+LqExtension.h in Headers */,
+				4920AE8F23AD279600FE7A65 /* LqToolKit.h in Headers */,
+				496DA05B23AD111900DDB905 /* LqTool.h in Headers */,
+				496DA08E23AD18A500DDB905 /* UIImage+LqExtension.h in Headers */,
+				496DA09E23AD1DC300DDB905 /* NSError+LqExtension.h in Headers */,
+				496DA08823AD170E00DDB905 /* UIColor+LqExtension.h in Headers */,
+				496DA09A23AD1BFD00DDB905 /* UIView+LqExtension.h in Headers */,
+				496DA0AA23AD1FE100DDB905 /* UIImageView+LqExtension.h in Headers */,
+				4920AE9723AD2B2800FE7A65 /* PrefixHeader.pch in Headers */,
+				4920AEBE23AD31DC00FE7A65 /* LqTextView.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		496DA05523AD111900DDB905 /* LqTool */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 496DA05E23AD111900DDB905 /* Build configuration list for PBXNativeTarget "LqTool" */;
+			buildPhases = (
+				496DA05123AD111900DDB905 /* Headers */,
+				496DA05223AD111900DDB905 /* Sources */,
+				496DA05323AD111900DDB905 /* Frameworks */,
+				496DA05423AD111900DDB905 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LqTool;
+			productName = LqTool;
+			productReference = 496DA05623AD111900DDB905 /* LqTool.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		496DA04D23AD111900DDB905 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1100;
+				ORGANIZATIONNAME = lqq;
+				TargetAttributes = {
+					496DA05523AD111900DDB905 = {
+						CreatedOnToolsVersion = 11.0;
+					};
+				};
+			};
+			buildConfigurationList = 496DA05023AD111900DDB905 /* Build configuration list for PBXProject "LqTool" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 496DA04C23AD111900DDB905;
+			productRefGroup = 496DA05723AD111900DDB905 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				496DA05523AD111900DDB905 /* LqTool */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		496DA05423AD111900DDB905 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		496DA05223AD111900DDB905 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				496DA09F23AD1DC300DDB905 /* NSError+LqExtension.m in Sources */,
+				4920AEBF23AD31DC00FE7A65 /* LqTextView.m in Sources */,
+				4920AE7F23AD221B00FE7A65 /* UIViewController+LqExtension.m in Sources */,
+				4920AE8823AD26B900FE7A65 /* LqWGS84TOGCJ02.m in Sources */,
+				496DA0A723AD1F1300DDB905 /* NSString+LqExtension.m in Sources */,
+				496DA09323AD1B5A00DDB905 /* UIStoryboard+LqExtension.m in Sources */,
+				496DA0AF23AD202500DDB905 /* UIScrollView+LqExtension.m in Sources */,
+				496DA09B23AD1BFD00DDB905 /* UIView+LqExtension.m in Sources */,
+				4920AE9323AD289700FE7A65 /* SafeControl.m in Sources */,
+				4920AEBB23AD319900FE7A65 /* LqNoPasteTextField.m in Sources */,
+				496DA08F23AD18A500DDB905 /* UIImage+LqExtension.m in Sources */,
+				4920AE8423AD252A00FE7A65 /* LqSandBox.m in Sources */,
+				496DA0AB23AD1FE100DDB905 /* UIImageView+LqExtension.m in Sources */,
+				496DA08923AD170E00DDB905 /* UIColor+LqExtension.m in Sources */,
+				496DA0A323AD1E3700DDB905 /* NSFileManager+LqExtension.m in Sources */,
+				4920AE8C23AD273F00FE7A65 /* RSAEncryptor.m in Sources */,
+				4920AE9023AD279600FE7A65 /* LqToolKit.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		496DA05C23AD111900DDB905 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		496DA05D23AD111900DDB905 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		496DA05F23AD111900DDB905 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = RBSX9MVBF6;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/$(TARGET_NAME)/PrefixHeader.pch";
+				INFOPLIST_FILE = LqTool/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				PRODUCT_BUNDLE_IDENTIFIER = bigjpg.LqTool;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		496DA06023AD111900DDB905 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = RBSX9MVBF6;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/$(TARGET_NAME)/PrefixHeader.pch";
+				INFOPLIST_FILE = LqTool/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				PRODUCT_BUNDLE_IDENTIFIER = bigjpg.LqTool;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		496DA05023AD111900DDB905 /* Build configuration list for PBXProject "LqTool" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				496DA05C23AD111900DDB905 /* Debug */,
+				496DA05D23AD111900DDB905 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		496DA05E23AD111900DDB905 /* Build configuration list for PBXNativeTarget "LqTool" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				496DA05F23AD111900DDB905 /* Debug */,
+				496DA06023AD111900DDB905 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 496DA04D23AD111900DDB905 /* Project object */;
+}
