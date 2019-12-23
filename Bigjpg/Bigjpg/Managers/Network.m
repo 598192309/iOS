@@ -86,7 +86,7 @@
     // 二进制格式
     _manager.responseSerializer = [AFJSONResponseSerializer serializer];
     // 设置接受文本类型
-    _manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"text/html",@"application/json",nil];
+    _manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json",nil];
     //超时
     _manager.requestSerializer.timeoutInterval = 15;
 
