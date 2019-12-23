@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-
+#import "I_Account.h"
 @interface ViewController ()
 
 @end
@@ -19,5 +19,12 @@
     
 }
 
+- (IBAction)action:(id)sender {
+    [I_Account loginOrRegistWithUserName:@"454140866@qq.com" pwd:@"123456" notReg:NO success:^(M_Account * _Nonnull account) {
+        
+    } :^(NSError *error) {
+        
+    }];
+}
 
 @end

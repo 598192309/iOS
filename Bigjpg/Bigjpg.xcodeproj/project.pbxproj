@@ -21,6 +21,8 @@
 		4920AED023AD32D800FE7A65 /* Network.m in Sources */ = {isa = PBXBuildFile; fileRef = 4920AECD23AD32D800FE7A65 /* Network.m */; };
 		4920AED123AD32D800FE7A65 /* RunInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4920AECE23AD32D800FE7A65 /* RunInfo.m */; };
 		4920AED623AD33AB00FE7A65 /* KeyNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 4920AED323AD33AB00FE7A65 /* KeyNotification.m */; };
+		4920AEDB23B0598D00FE7A65 /* I_Account.m in Sources */ = {isa = PBXBuildFile; fileRef = 4920AEDA23B0598D00FE7A65 /* I_Account.m */; };
+		4920AEDE23B085B900FE7A65 /* M_Account.m in Sources */ = {isa = PBXBuildFile; fileRef = 4920AEDD23B085B900FE7A65 /* M_Account.m */; };
 		496DA06F23AD114400DDB905 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 496DA06E23AD114400DDB905 /* AppDelegate.m */; };
 		496DA07523AD114400DDB905 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 496DA07423AD114400DDB905 /* ViewController.m */; };
 		496DA07823AD114400DDB905 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 496DA07623AD114400DDB905 /* Main.storyboard */; };
@@ -59,6 +61,10 @@
 		4920AED323AD33AB00FE7A65 /* KeyNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyNotification.m; sourceTree = "<group>"; };
 		4920AED423AD33AB00FE7A65 /* CommMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommMacro.h; sourceTree = "<group>"; };
 		4920AED523AD33AB00FE7A65 /* KeyNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyNotification.h; sourceTree = "<group>"; };
+		4920AED923B0598D00FE7A65 /* I_Account.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = I_Account.h; sourceTree = "<group>"; };
+		4920AEDA23B0598D00FE7A65 /* I_Account.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = I_Account.m; sourceTree = "<group>"; };
+		4920AEDC23B085B900FE7A65 /* M_Account.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = M_Account.h; sourceTree = "<group>"; };
+		4920AEDD23B085B900FE7A65 /* M_Account.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = M_Account.m; sourceTree = "<group>"; };
 		496DA06A23AD114400DDB905 /* Bigjpg.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bigjpg.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		496DA06D23AD114400DDB905 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		496DA06E23AD114400DDB905 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -184,6 +190,8 @@
 			children = (
 				4920AEA423AD2CC100FE7A65 /* M_Base.h */,
 				4920AE9E23AD2CC100FE7A65 /* M_Base.m */,
+				4920AEDC23B085B900FE7A65 /* M_Account.h */,
+				4920AEDD23B085B900FE7A65 /* M_Account.m */,
 			);
 			path = Define;
 			sourceTree = "<group>";
@@ -193,6 +201,8 @@
 			children = (
 				4920AEA023AD2CC100FE7A65 /* I_Base.h */,
 				4920AEA123AD2CC100FE7A65 /* I_Base.m */,
+				4920AED923B0598D00FE7A65 /* I_Account.h */,
+				4920AEDA23B0598D00FE7A65 /* I_Account.m */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -378,6 +388,7 @@
 				4920AED623AD33AB00FE7A65 /* KeyNotification.m in Sources */,
 				4920AECF23AD32D800FE7A65 /* ThemeProvider.m in Sources */,
 				4920AEAB23AD2CC100FE7A65 /* BaseNavgationController.m in Sources */,
+				4920AEDB23B0598D00FE7A65 /* I_Account.m in Sources */,
 				4920AEAA23AD2CC100FE7A65 /* M_Base.m in Sources */,
 				4920AEAD23AD2CC100FE7A65 /* BaseTableViewController.m in Sources */,
 				4920AEAC23AD2CC100FE7A65 /* I_Base.m in Sources */,
@@ -387,6 +398,7 @@
 				4920AEA823AD2CC100FE7A65 /* BaseCollectionViewController.m in Sources */,
 				4920AED023AD32D800FE7A65 /* Network.m in Sources */,
 				496DA08023AD114500DDB905 /* main.m in Sources */,
+				4920AEDE23B085B900FE7A65 /* M_Account.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

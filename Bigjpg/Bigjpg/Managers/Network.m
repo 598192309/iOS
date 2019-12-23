@@ -87,30 +87,9 @@
     _manager.responseSerializer = [AFJSONResponseSerializer serializer];
     // 设置接受文本类型
     _manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"text/html",@"application/json",nil];
-
-    //客户端类型
-    [_manager.requestSerializer setValue:@"ios" forHTTPHeaderField:@"platform"];
-    //客户端版本
-//    [_manager.requestSerializer setValue:[LqToolKit appVersionNo] forHTTPHeaderField:@"appVersion"];
-    //操作系统版本
-    [_manager.requestSerializer setValue:[[UIDevice currentDevice] systemVersion] forHTTPHeaderField:@"osVersion"];
-    //手机型号
-//    [_manager.requestSerializer setValue:[KKUUID getDeviceModel] forHTTPHeaderField:@"mode"];
-    //渠道
-    [_manager.requestSerializer setValue:@"appstore" forHTTPHeaderField:@"channel"];
-    //手机品牌
-    [_manager.requestSerializer setValue:@"iphone" forHTTPHeaderField:@"brand"];
-    //deviceID
-//    [_manager.requestSerializer setValue:[KKUUID getUUID] forHTTPHeaderField:@"deviceId"];
-    
     //超时
     _manager.requestSerializer.timeoutInterval = 15;
-    //idfa
-//
-//    [_manager.requestSerializer setValue:[KKUUID getIDFA] forHTTPHeaderField:@"idfa"];
-    
-    //appid
-    [_manager.requestSerializer setValue:SignAPPID forHTTPHeaderField:@"appid"];
+
 }
 
 - (void)changeHost:(NSNotification *)noti
@@ -128,19 +107,8 @@
                  criticalValue:(nullable NSDictionary*)criticalValue
                        success:(nullable void (^)(NSURLSessionDataTask *task, id resultObject))success
                        failure:(nullable void (^)(NSURLSessionDataTask *task, NSError *error))failure{
-//    if (![Toolkit isNetworkConnect]) {
-//        NSError *netError = [NSError errorWithMsg:@"网络不给力，点击重试" domain:@"" code:NetErrorCode];
-//        failure(nil,netError);
-//        return nil;
-//    }
-    
-//    if ([KHOST isEqualToString:@"https://api.donkeyplay.com"]) {
-//        URLString = [@"/test" stringByAppendingString:URLString];
-//    }
-    URLString=[URLString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-    [self signHeaderWithParams:parameters];
-    [self _refreshHeaderWithCriticalValue:criticalValue];
 
+    URLString=[URLString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     NSURLSessionDataTask *t = [_manager POST:URLString parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [self _handdleSuccessWithTask:task responseObject:responseObject success:success failure:failure];
@@ -189,34 +157,6 @@
 
 - (void)signHeaderWithParams:(id)parameters
 {
-    long long time = [[NSDate date] timeIntervalSince1970]*1000;
-    [_manager.requestSerializer setValue:[NSString stringWithFormat:@"%lld",time] forHTTPHeaderField:@"clienttime"];
-    
-    NSString *body = @"";
-    if ([parameters isKindOfClass:[NSDictionary class]]) {
-        NSDictionary *dic = parameters;
-        NSError *parseError = nil;
-        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:&parseError];
-        NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-        NSMutableString *mutStr = [NSMutableString stringWithString:jsonStr];
-        
-        NSRange range = {0,jsonStr.length};
-        //去掉字符串中的空格
-        [mutStr replaceOccurrencesOfString:@" " withString:@"" options:NSLiteralSearch range:range];
-        NSRange range2 = {0,mutStr.length};
-        //去掉字符串中的换行符
-        [mutStr replaceOccurrencesOfString:@"\n" withString:@"" options:NSLiteralSearch range:range2];
-        
-        body = mutStr;
-    } else if ([parameters isKindOfClass:[NSString class]]) {
-        body = parameters;
-    }
-    
-    
-    
-    NSString *sign = [NSString stringWithFormat:@"%@%@fullshare%lld%@",body,SignAPPID,time*10,SignAppSecurityKey];
-    NSString *md5sign = [RSAEncryptor MD5WithString:sign];
-    [_manager.requestSerializer setValue:md5sign forHTTPHeaderField:@"requestsign"];
 }
 
 /**

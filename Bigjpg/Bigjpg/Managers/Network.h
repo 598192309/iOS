@@ -9,9 +9,8 @@
 #import <Foundation/Foundation.h>
 
 
-#define KHOST    @"https://api.cloudfighting.com"      //正式环境
-//#define KHOST    @"https://api.donkeyplay.com"      //测试环境
-//#define KHOST    @"http://192.168.124.13:8202"      //测试环境
+#define KHOST    @"https://bigjpg.com"      //正式环境
+
 
 
 

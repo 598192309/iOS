@@ -9,6 +9,8 @@
 #ifndef PrefixHeader_pch
 #define PrefixHeader_pch
 
+#import "Network.h"
+
 #import <LqTool/LqTool.h>
 
 #endif /* PrefixHeader_pch */
