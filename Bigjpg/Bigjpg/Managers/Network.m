@@ -77,16 +77,19 @@
     _manager.securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
     _manager.securityPolicy.allowInvalidCertificates = YES;
     [_manager.securityPolicy setValidatesDomainName:NO];
+    
     // 二进制格式
-    _manager.requestSerializer=[AFJSONRequestSerializer serializer];
+    _manager.requestSerializer=[AFHTTPRequestSerializer serializer];
     // 设置接受文本类型
     [_manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    // 设置接受文本类型
-    [_manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-type"];
+    // 设置接受文本类型Content-Type
+    [_manager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    
     // 二进制格式
-    _manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    _manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     // 设置接受文本类型
-    _manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json",nil];
+     
+
     //超时
     _manager.requestSerializer.timeoutInterval = 15;
 
@@ -111,9 +114,10 @@
     URLString=[URLString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     NSURLSessionDataTask *t = [_manager POST:URLString parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
         [self _handdleSuccessWithTask:task responseObject:responseObject success:success failure:failure];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [self _handdleFailureWithTask:task error:error failure:failure];
+//        [self _handdleFailureWithTask:task error:error failure:failure];
     }];
     
     return [NetworkTask netWorkWithSessionDataTask:t];
@@ -135,7 +139,7 @@
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [self _handdleSuccessWithTask:task responseObject:responseObject success:success failure:failure];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [self _handdleFailureWithTask:task error:error failure:failure];
+//        [self _handdleFailureWithTask:task error:error failure:failure];
     }];
     
     return [NetworkTask netWorkWithSessionDataTask:t];
