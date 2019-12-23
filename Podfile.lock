@@ -17,11 +17,13 @@ PODS:
   - AliyunOSSiOS (2.10.7)
   - JSONModel (1.8.0)
   - Masonry (1.1.0)
+  - MJExtension (3.2.1)
   - Reachability (3.2)
   - SAMKeychain (1.5.3)
   - SDWebImage (5.4.0):
     - SDWebImage/Core (= 5.4.0)
   - SDWebImage/Core (5.4.0)
+  - SVProgressHUD (2.2.5)
   - ZLPhotoBrowser (3.1.2):
     - SDWebImage
 
@@ -30,9 +32,11 @@ DEPENDENCIES:
   - AliyunOSSiOS
   - JSONModel
   - Masonry
+  - MJExtension
   - Reachability
   - SAMKeychain
   - SDWebImage
+  - SVProgressHUD
   - ZLPhotoBrowser
 
 SPEC REPOS:
@@ -41,9 +45,11 @@ SPEC REPOS:
     - AliyunOSSiOS
     - JSONModel
     - Masonry
+    - MJExtension
     - Reachability
     - SAMKeychain
     - SDWebImage
+    - SVProgressHUD
     - ZLPhotoBrowser
 
 SPEC CHECKSUMS:
@@ -51,11 +57,13 @@ SPEC CHECKSUMS:
   AliyunOSSiOS: 602b6a4e70e62a5f0a6431c20496343141d7e66f
   JSONModel: 02ab723958366a3fd27da57ea2af2113658762e9
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  MJExtension: 635f2c663dcb1bf76fa4b715b2570a5710aec545
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
   SDWebImage: 5bf6aec6481ae2a062bdc59f9d6c1d1e552090e0
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   ZLPhotoBrowser: 7e88434918366af98f8ebbaf5b94206985812ed6
 
-PODFILE CHECKSUM: 8f1789bd64571df21d284e285b6d7e75b1f75aca
+PODFILE CHECKSUM: 57585de0889cd45bd5335cd32cccbeb2b82c0506
 
 COCOAPODS: 1.8.4
