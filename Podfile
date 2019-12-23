@@ -20,5 +20,6 @@ target 'Bigjpg' do
   pod 'AliyunOSSiOS'
   pod 'JSONModel'
   pod 'SAMKeychain'
-  #pod 'MJExtension'
+  pod 'MJExtension'
+  pod 'SVProgressHUD'
 end
