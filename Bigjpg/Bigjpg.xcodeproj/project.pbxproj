@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		11790BF323B1B902003E6792 /* NewFeatureScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11790BE023B1B902003E6792 /* NewFeatureScrollView.m */; };
+		11790BF423B1B902003E6792 /* LaunchingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11790BE123B1B902003E6792 /* LaunchingViewController.m */; };
+		11790BF523B1B902003E6792 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11790BE223B1B902003E6792 /* MainTabBarController.m */; };
+		11790BF623B1B902003E6792 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11790BE623B1B902003E6792 /* SettingViewController.m */; };
+		11790BF723B1B902003E6792 /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11790BE823B1B902003E6792 /* HistoryViewController.m */; };
+		11790BF823B1B902003E6792 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11790BEB23B1B902003E6792 /* LoginViewController.m */; };
+		11790BF923B1B902003E6792 /* LoginCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11790BEE23B1B902003E6792 /* LoginCustomView.m */; };
+		11790BFA23B1B902003E6792 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11790BF123B1B902003E6792 /* HomeViewController.m */; };
+		118FED4323B20D360055E56C /* SettingCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 118FED4223B20D360055E56C /* SettingCustomView.m */; };
+		118FED4723B215CB0055E56C /* SettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 118FED4623B215CB0055E56C /* SettingCell.m */; };
 		4920AEA723AD2CC100FE7A65 /* BaseTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4920AE9A23AD2CC100FE7A65 /* BaseTabBarController.m */; };
 		4920AEA823AD2CC100FE7A65 /* BaseCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4920AE9C23AD2CC100FE7A65 /* BaseCollectionViewController.m */; };
 		4920AEA923AD2CC100FE7A65 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4920AE9D23AD2CC100FE7A65 /* BaseViewController.m */; };
@@ -14,9 +24,6 @@
 		4920AEAB23AD2CC100FE7A65 /* BaseNavgationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4920AE9F23AD2CC100FE7A65 /* BaseNavgationController.m */; };
 		4920AEAC23AD2CC100FE7A65 /* I_Base.m in Sources */ = {isa = PBXBuildFile; fileRef = 4920AEA123AD2CC100FE7A65 /* I_Base.m */; };
 		4920AEAD23AD2CC100FE7A65 /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4920AEA623AD2CC100FE7A65 /* BaseTableViewController.m */; };
-		4920AEC423AD32B000FE7A65 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4920AEC323AD32B000FE7A65 /* Home.storyboard */; };
-		4920AEC623AD32B800FE7A65 /* History.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4920AEC523AD32B800FE7A65 /* History.storyboard */; };
-		4920AEC823AD32C000FE7A65 /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4920AEC723AD32C000FE7A65 /* Setting.storyboard */; };
 		4920AECF23AD32D800FE7A65 /* ThemeProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 4920AEC923AD32D800FE7A65 /* ThemeProvider.m */; };
 		4920AED023AD32D800FE7A65 /* Network.m in Sources */ = {isa = PBXBuildFile; fileRef = 4920AECD23AD32D800FE7A65 /* Network.m */; };
 		4920AED123AD32D800FE7A65 /* RunInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4920AECE23AD32D800FE7A65 /* RunInfo.m */; };
@@ -34,6 +41,26 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		11790BDE23B1B902003E6792 /* NewFeatureScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewFeatureScrollView.h; sourceTree = "<group>"; };
+		11790BDF23B1B902003E6792 /* LaunchingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchingViewController.h; sourceTree = "<group>"; };
+		11790BE023B1B902003E6792 /* NewFeatureScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewFeatureScrollView.m; sourceTree = "<group>"; };
+		11790BE123B1B902003E6792 /* LaunchingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchingViewController.m; sourceTree = "<group>"; };
+		11790BE223B1B902003E6792 /* MainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
+		11790BE323B1B902003E6792 /* MainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
+		11790BE523B1B902003E6792 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		11790BE623B1B902003E6792 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		11790BE823B1B902003E6792 /* HistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryViewController.m; sourceTree = "<group>"; };
+		11790BE923B1B902003E6792 /* HistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryViewController.h; sourceTree = "<group>"; };
+		11790BEB23B1B902003E6792 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		11790BED23B1B902003E6792 /* LoginCustomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginCustomView.h; sourceTree = "<group>"; };
+		11790BEE23B1B902003E6792 /* LoginCustomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginCustomView.m; sourceTree = "<group>"; };
+		11790BEF23B1B902003E6792 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		11790BF123B1B902003E6792 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		11790BF223B1B902003E6792 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		118FED4123B20D360055E56C /* SettingCustomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingCustomView.h; sourceTree = "<group>"; };
+		118FED4223B20D360055E56C /* SettingCustomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingCustomView.m; sourceTree = "<group>"; };
+		118FED4523B215CB0055E56C /* SettingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingCell.h; sourceTree = "<group>"; };
+		118FED4623B215CB0055E56C /* SettingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingCell.m; sourceTree = "<group>"; };
 		4920AE9523AD2AE500FE7A65 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		4920AE9923AD2CC100FE7A65 /* BaseTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTabBarController.h; sourceTree = "<group>"; };
 		4920AE9A23AD2CC100FE7A65 /* BaseTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTabBarController.m; sourceTree = "<group>"; };
@@ -49,9 +76,6 @@
 		4920AEA423AD2CC100FE7A65 /* M_Base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M_Base.h; sourceTree = "<group>"; };
 		4920AEA523AD2CC100FE7A65 /* BaseNavgationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNavgationController.h; sourceTree = "<group>"; };
 		4920AEA623AD2CC100FE7A65 /* BaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTableViewController.m; sourceTree = "<group>"; };
-		4920AEC323AD32B000FE7A65 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
-		4920AEC523AD32B800FE7A65 /* History.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = History.storyboard; sourceTree = "<group>"; };
-		4920AEC723AD32C000FE7A65 /* Setting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Setting.storyboard; sourceTree = "<group>"; };
 		4920AEC923AD32D800FE7A65 /* ThemeProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThemeProvider.m; sourceTree = "<group>"; };
 		4920AECA23AD32D800FE7A65 /* ThemeProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemeProvider.h; sourceTree = "<group>"; };
 		4920AECB23AD32D800FE7A65 /* RunInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunInfo.h; sourceTree = "<group>"; };
@@ -94,6 +118,83 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		11790BDD23B1B902003E6792 /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				11790BDE23B1B902003E6792 /* NewFeatureScrollView.h */,
+				11790BE023B1B902003E6792 /* NewFeatureScrollView.m */,
+				11790BDF23B1B902003E6792 /* LaunchingViewController.h */,
+				11790BE123B1B902003E6792 /* LaunchingViewController.m */,
+			);
+			path = Launch;
+			sourceTree = "<group>";
+		};
+		11790BE423B1B902003E6792 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				11790BE523B1B902003E6792 /* SettingViewController.h */,
+				11790BE623B1B902003E6792 /* SettingViewController.m */,
+				118FED4023B20CBA0055E56C /* View */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		11790BE723B1B902003E6792 /* History */ = {
+			isa = PBXGroup;
+			children = (
+				11790BE823B1B902003E6792 /* HistoryViewController.m */,
+				11790BE923B1B902003E6792 /* HistoryViewController.h */,
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
+		11790BEA23B1B902003E6792 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				11790BEF23B1B902003E6792 /* LoginViewController.h */,
+				11790BEB23B1B902003E6792 /* LoginViewController.m */,
+				11790BEC23B1B902003E6792 /* View */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		11790BEC23B1B902003E6792 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				11790BED23B1B902003E6792 /* LoginCustomView.h */,
+				11790BEE23B1B902003E6792 /* LoginCustomView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		11790BF023B1B902003E6792 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				11790BF123B1B902003E6792 /* HomeViewController.m */,
+				11790BF223B1B902003E6792 /* HomeViewController.h */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		118FED4023B20CBA0055E56C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				118FED4423B20D3E0055E56C /* Setting */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		118FED4423B20D3E0055E56C /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				118FED4123B20D360055E56C /* SettingCustomView.h */,
+				118FED4223B20D360055E56C /* SettingCustomView.m */,
+				118FED4523B215CB0055E56C /* SettingCell.h */,
+				118FED4623B215CB0055E56C /* SettingCell.m */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
 		4920AE9823AD2C9B00FE7A65 /* Base */ = {
 			isa = PBXGroup;
 			children = (
@@ -114,9 +215,13 @@
 		4920AEAE23AD305800FE7A65 /* Module */ = {
 			isa = PBXGroup;
 			children = (
-				4920AEC223AD32A400FE7A65 /* Setting */,
-				4920AEC123AD329C00FE7A65 /* History */,
-				4920AEC023AD329600FE7A65 /* Home */,
+				11790BE723B1B902003E6792 /* History */,
+				11790BF023B1B902003E6792 /* Home */,
+				11790BDD23B1B902003E6792 /* Launch */,
+				11790BEA23B1B902003E6792 /* Login */,
+				11790BE323B1B902003E6792 /* MainTabBarController.h */,
+				11790BE223B1B902003E6792 /* MainTabBarController.m */,
+				11790BE423B1B902003E6792 /* Setting */,
 			);
 			path = Module;
 			sourceTree = "<group>";
@@ -149,30 +254,6 @@
 				4920AED223AD33A000FE7A65 /* Constants */,
 			);
 			path = Utils;
-			sourceTree = "<group>";
-		};
-		4920AEC023AD329600FE7A65 /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				4920AEC323AD32B000FE7A65 /* Home.storyboard */,
-			);
-			path = Home;
-			sourceTree = "<group>";
-		};
-		4920AEC123AD329C00FE7A65 /* History */ = {
-			isa = PBXGroup;
-			children = (
-				4920AEC523AD32B800FE7A65 /* History.storyboard */,
-			);
-			path = History;
-			sourceTree = "<group>";
-		};
-		4920AEC223AD32A400FE7A65 /* Setting */ = {
-			isa = PBXGroup;
-			children = (
-				4920AEC723AD32C000FE7A65 /* Setting.storyboard */,
-			);
-			path = Setting;
 			sourceTree = "<group>";
 		};
 		4920AED223AD33A000FE7A65 /* Constants */ = {
@@ -328,9 +409,6 @@
 				496DA07D23AD114500DDB905 /* LaunchScreen.storyboard in Resources */,
 				496DA07A23AD114500DDB905 /* Assets.xcassets in Resources */,
 				496DA07823AD114400DDB905 /* Main.storyboard in Resources */,
-				4920AEC623AD32B800FE7A65 /* History.storyboard in Resources */,
-				4920AEC423AD32B000FE7A65 /* Home.storyboard in Resources */,
-				4920AEC823AD32C000FE7A65 /* Setting.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,20 +463,30 @@
 			files = (
 				4920AEA723AD2CC100FE7A65 /* BaseTabBarController.m in Sources */,
 				4920AEA923AD2CC100FE7A65 /* BaseViewController.m in Sources */,
+				11790BF923B1B902003E6792 /* LoginCustomView.m in Sources */,
 				4920AED623AD33AB00FE7A65 /* KeyNotification.m in Sources */,
+				11790BF323B1B902003E6792 /* NewFeatureScrollView.m in Sources */,
+				11790BF423B1B902003E6792 /* LaunchingViewController.m in Sources */,
+				11790BF723B1B902003E6792 /* HistoryViewController.m in Sources */,
 				4920AECF23AD32D800FE7A65 /* ThemeProvider.m in Sources */,
 				4920AEAB23AD2CC100FE7A65 /* BaseNavgationController.m in Sources */,
 				4920AEDB23B0598D00FE7A65 /* I_Account.m in Sources */,
+				118FED4723B215CB0055E56C /* SettingCell.m in Sources */,
 				4920AEAA23AD2CC100FE7A65 /* M_Base.m in Sources */,
 				4920AEAD23AD2CC100FE7A65 /* BaseTableViewController.m in Sources */,
 				4920AEAC23AD2CC100FE7A65 /* I_Base.m in Sources */,
 				496DA07523AD114400DDB905 /* ViewController.m in Sources */,
+				11790BF523B1B902003E6792 /* MainTabBarController.m in Sources */,
 				4920AED123AD32D800FE7A65 /* RunInfo.m in Sources */,
 				496DA06F23AD114400DDB905 /* AppDelegate.m in Sources */,
 				4920AEA823AD2CC100FE7A65 /* BaseCollectionViewController.m in Sources */,
 				4920AED023AD32D800FE7A65 /* Network.m in Sources */,
 				496DA08023AD114500DDB905 /* main.m in Sources */,
 				4920AEDE23B085B900FE7A65 /* M_Account.m in Sources */,
+				11790BF823B1B902003E6792 /* LoginViewController.m in Sources */,
+				11790BF623B1B902003E6792 /* SettingViewController.m in Sources */,
+				118FED4323B20D360055E56C /* SettingCustomView.m in Sources */,
+				11790BFA23B1B902003E6792 /* HomeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -540,7 +628,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = RBSX9MVBF6;
+				DEVELOPMENT_TEAM = ATBJJ8434Q;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(TARGET_NAME)/PrefixHeader.pch";
 				INFOPLIST_FILE = Bigjpg/Info.plist;
@@ -596,7 +684,7 @@
 					"\"ZLPhotoBrowser\"",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = bigjpg.Bigjpg;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lqlq;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -608,7 +696,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = RBSX9MVBF6;
+				DEVELOPMENT_TEAM = ATBJJ8434Q;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(TARGET_NAME)/PrefixHeader.pch";
 				INFOPLIST_FILE = Bigjpg/Info.plist;
@@ -664,7 +752,7 @@
 					"\"ZLPhotoBrowser\"",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = bigjpg.Bigjpg;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lqlq;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
