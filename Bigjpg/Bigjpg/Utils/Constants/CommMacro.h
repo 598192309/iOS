@@ -113,13 +113,16 @@
 #define AdaptedFontSize(R)    CHINESE_SYSTEMRegular(AdaptedWidth(R))
 #define AdaptedBoldFontSize(R) CHINESE_SYSTEMBold(AdaptedWidth(R))
 
-
 //颜色
-#define TitleBlackColor   [UIColor lq_colorWithHexString:@"303030"]
-#define BackGroundColor   [UIColor lq_colorWithHexString:@"ffffff"]
-#define TitleGrayColor   [UIColor lq_colorWithHexString:@"5f6568"]
-#define LineGrayColor   [UIColor lq_colorWithHexString:@"f4f4f4"]
+#define TitleBlackColor   RGB(50,50,50)
+#define BackGroundColor    RI.isNight ? RGB(0,0,0) : [UIColor lq_colorWithHexString:@"ffffff"]
+#define TitleGrayColor   RGB(175,175,175)
+#define TabbarGrayColor   RGB(247,247,247)
+#define LineGrayColor    RGB(240,240,240)
 #define BackGrayColor   [UIColor lq_colorWithHexString:@"f8f8f8"]
+#define DeepGreenColor   RGB(20,118,103)
+#define LihgtGreenColor   RGB(30,161,20)
+#define RedColor   RGB(220,44,50)
 
 
 //国际化

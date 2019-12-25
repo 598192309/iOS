@@ -259,8 +259,8 @@
     if (!_navigationTextLabel) {
         _navigationTextLabel = [UILabel new];
         _navigationTextLabel.font = AdaptedBoldFontSize(17);
-        _navigationTextLabel.textColor = [UIColor whiteColor];
-
+        _navigationTextLabel.textColor = TitleBlackColor;
+       
     }
     return _navigationTextLabel;
 }
@@ -269,7 +269,7 @@
     if (!_navigationTextTopLabel) {
         _navigationTextTopLabel = [UILabel new];
         _navigationTextTopLabel.font = AdaptedBoldFontSize(15);
-        _navigationTextTopLabel.textColor = [UIColor whiteColor];
+        _navigationTextTopLabel.textColor = TitleBlackColor;
         
     }
     return _navigationTextTopLabel;
@@ -346,8 +346,7 @@
     //判断网络状态
     switch (self.hostReach.currentReachabilityStatus) {
         case NotReachable:
-            //            [MBProgressHUD showInfo:NSLocalizedString(@"当前网络连接失败，请查看设置", nil) ToView:self.view];
-//            [LSVProgressHUD showInfoWithStatus:NSLocalizedString(@"当前网络连接失败，请查看设置", nil)];
+            [LSVProgressHUD showInfoWithStatus:NSLocalizedString(@"当前网络连接失败，请查看设置", nil)];
             break;
         case ReachableViaWiFi:
             NSLog(NSLocalizedString(@"wifi上网2", nil));

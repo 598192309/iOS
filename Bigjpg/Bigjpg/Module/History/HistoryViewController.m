@@ -7,26 +7,235 @@
 //
 
 #import "HistoryViewController.h"
+#import "HistoryCustomView.h"
+#import "HistoryCell.h"
 
-@interface HistoryViewController ()
+@interface HistoryViewController ()<UITableViewDelegate,UITableViewDataSource>
+@property (strong, nonatomic) UITableView  *customTableView;
+@property (nonatomic,strong)HistoryCustomView *historyCustomView;
 
+@property (nonatomic,strong)UIView *unloginFooter;
+@property (nonatomic,strong)UIButton *unloginCheckBtn;
 @end
 
 @implementation HistoryViewController
+#pragma mark - 重写
 
+#pragma mark - 生命周期
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+
+    
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
+    [self configUI];
+
+    
+    if (@available(iOS 11.0, *)) {
+        _customTableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    } else {
+        // Fallback on earlier versions
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
+
+    //监听用户登录成功
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyRequestData) name:kUserSignIn object:nil];
+    //监听用户退出登录
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyRequestData) name:kUserSignOut object:nil];
+
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)dealloc{
+    NSLog(@"dealloc -- %@",NSStringFromClass([self class]));
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-*/
+#pragma mark - ui
+- (void)configUI{
+    [self.view addSubview:self.customTableView];
+    __weak __typeof(self) weakSelf = self;
+    [self.customTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.bottom.right.top.mas_equalTo(weakSelf.view);
+    }];
+    self.customTableView.contentInset = UIEdgeInsetsMake(0, 0, TabbarH, 0);
+    UIView *tableHeaderView = [[UIView alloc] init];
+    [tableHeaderView addSubview:self.historyCustomView];
+    [self.historyCustomView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(tableHeaderView);
+    }];
+    CGFloat H = [tableHeaderView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+    tableHeaderView.lq_height = H;
+    self.customTableView.tableHeaderView = tableHeaderView;
+    self.customTableView.tableHeaderView.lq_height = H;
+
+    [self changeUIWithLoginStatus];
+    
+    [self historyCustomViewAct];
+}
+
+#pragma mark - refresh ui
+- (void)changeUIWithLoginStatus{
+    if (RI.is_logined) {
+        if (_unloginFooter) {
+            [_unloginFooter removeFromSuperview];
+            _unloginFooter = nil;
+            self.customTableView.tableFooterView = [UIView new];
+
+        }
+    }else{
+        //footer
+        if (!_unloginFooter) {
+            UIView *tableFooterView = [[UIView alloc] init];
+            [tableFooterView addSubview:self.unloginFooter];
+            [self.unloginFooter mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.edges.equalTo(tableFooterView);
+            }];
+            CGFloat H = [self.historyCustomView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+            tableFooterView.lq_height = LQScreemH - H -TabbarH;
+            self.customTableView.tableFooterView = tableFooterView;
+            self.customTableView.tableFooterView.lq_height =LQScreemH - H -TabbarH*2;
+        }
+
+    }
+    [self.customTableView reloadData];
+}
+
+#pragma mark - act
+
+- (void)historyCustomViewAct{
+    __weak __typeof(self) weakSelf = self;
+   
+    
+}
+
+- (void)unloginCheckBtnClick:(UIButton *)sender{
+       self.tabBarController.selectedIndex = 2;
+    RI.is_logined = YES;
+}
+#pragma mark - net
+- (void)requestData{
+    
+}
+- (void)notifyRequestData{
+    [self changeUIWithLoginStatus];
+    if (RI.is_logined) {
+        [self requestData];
+    }else{
+        
+    }
+}
+#pragma mark -  UITableViewDataSource
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+
+    return RI.is_logined ? 5 : 0;
+
+}
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    HistoryCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([HistoryCell class]) forIndexPath:indexPath];
+
+  
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return Adaptor_Value(120);
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 0.01;
+    
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *view = [UIView new];
+    view.backgroundColor  = [UIColor clearColor];
+    return view;
+
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 0.01;
+}
+
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    UIView *view = [UIView new];
+    view.backgroundColor  = [UIColor clearColor];
+    return view;
+}
+
+
+#pragma  mark - lazy
+- (UITableView *)customTableView
+{
+    if (_customTableView == nil) {
+        _customTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0,LQScreemW, LQScreemH) style:UITableViewStylePlain];
+        _customTableView.delegate = self;
+        _customTableView.dataSource = self;
+        _customTableView.showsVerticalScrollIndicator = NO;
+        _customTableView.showsHorizontalScrollIndicator = NO;
+        _customTableView.backgroundColor = BackGroundColor;
+        //高度自适应
+        _customTableView.estimatedRowHeight=60;
+        _customTableView.rowHeight=UITableViewAutomaticDimension;
+        
+        [_customTableView registerClass:[HistoryCell class] forCellReuseIdentifier:NSStringFromClass([HistoryCell class])];
+        
+        _customTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+
+//        [_customTableView addHeaderWithRefreshingTarget:self refreshingAction:@selector(requestData)];
+//        [_customTableView beginHeaderRefreshing];
+        
+        
+    }
+    return _customTableView;
+}
+- (HistoryCustomView *)historyCustomView{
+    if (!_historyCustomView) {
+        _historyCustomView = [HistoryCustomView new];
+    }
+    return _historyCustomView;
+}
+
+
+- (UIView *)unloginFooter{
+    if (!_unloginFooter) {
+        _unloginFooter = [UIView new];
+        
+        UIView *contentV = [UIView new];
+        contentV.backgroundColor = BackGroundColor;
+        [_unloginFooter addSubview:contentV];
+        __weak __typeof(self) weakSelf = self;
+        
+        [contentV mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(weakSelf.unloginFooter);
+        }];
+        
+      
+        _unloginCheckBtn = [[UIButton alloc] init];
+        [_unloginCheckBtn setTitle:lqStrings(@"点击登录查看放大记录") forState:UIControlStateNormal];
+        _unloginCheckBtn.titleLabel.font = AdaptedFontSize(16);
+        [_unloginCheckBtn setTitleColor:TitleBlackColor forState:UIControlStateNormal];
+        [_unloginCheckBtn addTarget:self action:@selector(unloginCheckBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [contentV addSubview:_unloginCheckBtn];
+        [_unloginCheckBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.center.mas_equalTo(contentV);
+            make.width.mas_equalTo(Adaptor_Value(200));
+            make.height.mas_equalTo(Adaptor_Value(50));
+        }];
+        ViewBorderRadius(_unloginCheckBtn, Adaptor_Value(2.5), kOnePX*2, LineGrayColor);
+        _unloginCheckBtn.backgroundColor = TabbarGrayColor;
+        
+        
+    }
+    return _unloginFooter;
+}
 
 @end

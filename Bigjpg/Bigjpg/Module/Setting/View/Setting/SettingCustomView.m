@@ -51,15 +51,6 @@
     }];
 }
 
-- (void)layoutSubviews{
-    //添加圆角
-    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.textFBackView.bounds byRoundingCorners:UIRectCornerTopLeft | UIRectCornerBottomLeft cornerRadii:CGSizeMake(20, 20)];
-    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
-    maskLayer.frame = self.textFBackView.bounds;
-    maskLayer.path = maskPath.CGPath;
-    self.textFBackView.layer.mask = maskLayer;
-
-}
 
 #pragma mark - 刷新ui
 - (void)configUIWithItem:(NSObject *)item finishi:(void(^)())finishBlock{
@@ -136,7 +127,7 @@
             make.left.mas_equalTo(Adaptor_Value(10));
             make.right.mas_equalTo(contentV).offset(-Adaptor_Value(10));
             make.height.mas_equalTo(Adaptor_Value(120));
-            make.top.mas_equalTo(TopAdaptor_Value(40));
+            make.top.mas_equalTo(Adaptor_Value(30));
         }];
         ViewRadius(_tipView, Adaptor_Value(10));
         
@@ -163,7 +154,7 @@
             make.left.mas_equalTo(weakSelf.tipView.mas_centerX).offset(Adaptor_Value(10));
             
         }];
-        _updateBtn.backgroundColor = [UIColor greenColor];
+        _updateBtn.backgroundColor = LihgtGreenColor;
         ViewRadius(_updateBtn, Adaptor_Value(5));
         
         
@@ -196,7 +187,7 @@
 
         
         UIView *rowLine1 =  [UIView new];
-        rowLine1.backgroundColor = [UIColor greenColor];
+        rowLine1.backgroundColor = LihgtGreenColor;
         [_textFBackView addSubview:rowLine1];
         [rowLine1 mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(kOnePX *2);
@@ -212,10 +203,10 @@
             make.left.mas_equalTo(weakSelf.emailTextF);
             make.height.mas_equalTo(Adaptor_Value(35));
             make.top.mas_equalTo(weakSelf.emailTextF.mas_bottom).offset(Adaptor_Value(10));
-            make.right.mas_equalTo(Adaptor_Value(200));
+            make.right.mas_equalTo(weakSelf.textFBackView);
             make.bottom.mas_equalTo(weakSelf.textFBackView).offset(-Adaptor_Value(5));
         }];
-        _pwdTF.textColor = [UIColor whiteColor];
+        _pwdTF.textColor = TitleBlackColor;
         _pwdTF.secureTextEntry = YES;
         [_pwdTF addTarget:self action:@selector(textFDidChange:) forControlEvents:UIControlEventEditingChanged];
         _pwdTF.placeholder = lqStrings(@"密码");
@@ -224,11 +215,13 @@
         [_pwdTF setPlaceholderColor:TitleGrayColor font:nil];
 
         UIView *rowLine2 =  [UIView new];
-        rowLine2.backgroundColor = [UIColor greenColor];
+        rowLine2.backgroundColor = LihgtGreenColor;
         [_textFBackView addSubview:rowLine2];
         [rowLine2 mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(kOnePX *2);
-            make.left.right.bottom.mas_equalTo(weakSelf.textFBackView);
+            make.bottom.mas_equalTo(weakSelf.textFBackView);
+            make.left.right.mas_equalTo(rowLine1);
+
         }];
         
         UIView *zhuceView = [UIView new];
@@ -246,7 +239,7 @@
         [_zhuceChooseBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
         [_zhuceChooseBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateSelected];
         [_zhuceChooseBtn addTarget:self action:@selector(zhuceChooseBtnClick:) forControlEvents:UIControlEventTouchDown];
-        [_textFBackView addSubview:_zhuceChooseBtn];
+        [zhuceView addSubview:_zhuceChooseBtn];
         [_zhuceChooseBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.left.bottom.mas_equalTo(zhuceView);
             make.height.width.mas_equalTo(Adaptor_Value(20));
@@ -269,7 +262,7 @@
         [_confirmBtn setTitleColor:BackGroundColor forState:UIControlStateNormal];
         _confirmBtn.titleLabel.font = AdaptedFontSize(17);
 
-        _confirmBtn.backgroundColor = [UIColor greenColor];
+        _confirmBtn.backgroundColor = LihgtGreenColor;
         [contentV addSubview:_confirmBtn];
         [_confirmBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(weakSelf.textFBackView);
@@ -300,14 +293,14 @@
         [rowLine3 mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(kOnePX);
             make.left.right.mas_equalTo(weakSelf.textFBackView);
-            make.top.mas_equalTo(weakSelf.forgetBtn.mas_bottom).offset(30);
+            make.top.mas_equalTo(weakSelf.forgetBtn.mas_bottom).offset(20);
         }];
         
         _erweimaImageV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"wechat_qr"]];
         [contentV addSubview:_erweimaImageV];
         [_erweimaImageV mas_makeConstraints:^(MASConstraintMaker *make) {
             make.width.height.mas_equalTo(Adaptor_Value(80));
-            make.top.mas_equalTo(weakSelf.forgetBtn.mas_bottom).offset(Adaptor_Value(50));
+            make.top.mas_equalTo(weakSelf.forgetBtn.mas_bottom).offset(Adaptor_Value(40));
             make.left.mas_equalTo(weakSelf.textFBackView);
             make.bottom.mas_equalTo(contentV).offset(-Adaptor_Value(20));
         }];

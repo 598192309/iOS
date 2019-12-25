@@ -15,7 +15,7 @@
     return self.frame.origin.x;
 }
 
-- (void)setLq_eft:(CGFloat)lq_left {
+- (void)setLq_left:(CGFloat)lq_left {
     CGRect frame = self.frame;
     frame.origin.x = lq_left;
     self.frame = frame;
