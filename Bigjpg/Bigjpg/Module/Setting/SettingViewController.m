@@ -9,10 +9,12 @@
 #import "SettingViewController.h"
 #import "SettingCustomView.h"
 #import "SettingCell.h"
+#import "CustomActivity.h"
+#import "SetConfigViewController.h"
+
 @interface SettingViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) UITableView  *customTableView;
 @property (nonatomic,strong)SettingCustomView *settingCustomView;
-@property (nonatomic,strong)NSMutableArray *typeArr;
 
 @end
 
@@ -71,11 +73,6 @@
     [self settingCustomViewAct];
 }
 
-//改换主题  红涨绿跌 或者语言  都在这里变
-- (void)changeTheme{
-    
-}
-
 
 #pragma mark - act
 
@@ -84,98 +81,49 @@
    
     
 }
-
-//
-//- (void)umengShare{
-//
-//
-//    [[UIApplication sharedApplication].keyWindow addSubview:self.shareView];
-//    [self.shareView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.right.bottom.top.mas_equalTo([UIApplication sharedApplication].keyWindow);
-//    }];
-//    __weak __typeof(self) weakSelf = self;
-//    self.shareView.umShareViewcellClick = ^(NSInteger index) {
-//        [weakSelf requestInviteFriendsData:index];
-//    };
-//    self.shareView.umShareViewCloseBtnClick = ^(UIButton * _Nonnull sender) {
-//        [weakSelf.shareView removeFromSuperview];
-//        weakSelf.shareView = nil;
-//    };
-//
-//    [self.shareView show];
-//
-//}
-//- (void)shareToPlatform:(UMSocialPlatformType)type  inviteData:(InviteFriendsItem *)item{
-//    BOOL hadInstalledWeixin = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"weixin://"]];
-//    BOOL hadInstalledQQ = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"mqq://"]];
-//    BOOL hadInstalledWeibo = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"sinaweibo://"]];
-//
-//
-//
-//    // 根据获取的platformType确定所选平台进行下一步操作
-//    //创建分享消息对象
-//    //创建分享消息对象
-//    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
-//    //创建图文内容对象
-//    UMShareWebpageObject *shareObject = [[UMShareWebpageObject alloc] init];
-//    InviteFriendsDetailItem *detailItem ;
-//    if (type == UMSocialPlatformType_WechatSession) {
-//        if (!hadInstalledWeixin) {
-//            [LSVProgressHUD showInfoWithStatus:@"未安装微信"];
-//            return;
-//        }
-//        detailItem = item.weixin;
-//    }else if (type == UMSocialPlatformType_WechatTimeLine){
-//        if (!hadInstalledWeixin) {
-//            [LSVProgressHUD showInfoWithStatus:@"未安装微信"];
-//            return;
-//        }
-//
-//        detailItem = item.friend_circle;
-//
-//    }else if (type == UMSocialPlatformType_QQ){
-//        if (!hadInstalledQQ) {
-//            [LSVProgressHUD showInfoWithStatus:@"未安装QQ"];
-//            return;
-//        }
-//
-//        detailItem = item.qq;
-//
-//    }else if (type == UMSocialPlatformType_Sina){
-//        if (!hadInstalledWeibo) {
-//            [LSVProgressHUD showInfoWithStatus:@"未安装微博"];
-//            return;
-//        }
-//
-//        detailItem = item.weibo;
-//
-//    }
-//
-//    shareObject.webpageUrl =detailItem.link;
-//    shareObject.title = detailItem.title;
-//
-//    shareObject.descr = detailItem.content;
-//    shareObject.thumbImage = detailItem.thumb;
-//
-//    messageObject.shareObject = shareObject;
-//    __weak __typeof(self) weakSelf = self;
-//    //调用分享接口
-//    [[UMSocialManager defaultManager] shareToPlatform:type messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
-//        if (error) {
-//            NSLog(@"************Share fail with error %@*********",error);
-//            [LSVProgressHUD showInfoWithStatus:NSLocalizedString(@"分享失败", nil)];
-//
-//        }else{
-//            NSLog(@"response data is %@",data);
-//            [LSVProgressHUD showInfoWithStatus:NSLocalizedString(@"分享成功", nil)];
-//
-//        }
-//        [weakSelf.shareView removeFromSuperview];
-//        weakSelf.shareView = nil;
-//    }];
-//}
-
-
+//系统分享
+- (void)activityShare{
+    // 1、设置分享的内容，并将内容添加到数组中
+    NSString *shareText = @"分享的标题";
+    UIImage *shareImage = [UIImage imageNamed:@"ic_launch_screen"];
+    NSURL *shareUrl = [NSURL URLWithString:@"https://www.baidu.com"];
+    NSArray *activityItemsArray = @[shareText,shareImage,shareUrl];
+    
+    // 自定义的CustomActivity，继承自UIActivity
+    CustomActivity *customActivity = [[CustomActivity alloc]initWithTitle:shareText ActivityImage:[UIImage imageNamed:@"custom.png"] URL:shareUrl ActivityType:@"Custom"];
+    NSArray *activityArray = @[customActivity];
+    
+    // 2、初始化控制器，添加分享内容至控制器
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc]initWithActivityItems:activityItemsArray applicationActivities:activityArray];
+    activityVC.modalInPopover = YES;
+    // 3、设置回调
+    if ([UIDevice currentDevice].systemVersion.floatValue >= 8.0) {
+        // ios8.0 之后用此方法回调
+        UIActivityViewControllerCompletionWithItemsHandler itemsBlock = ^(UIActivityType __nullable activityType, BOOL completed, NSArray * __nullable returnedItems, NSError * __nullable activityError){
+            NSLog(@"activityType == %@",activityType);
+            if (completed == YES) {
+                NSLog(@"completed");
+            }else{
+                NSLog(@"cancel");
+            }
+        };
+        activityVC.completionWithItemsHandler = itemsBlock;
+    }else{
+        // ios8.0 之前用此方法回调
+        UIActivityViewControllerCompletionHandler handlerBlock = ^(UIActivityType __nullable activityType, BOOL completed){
+            NSLog(@"activityType == %@",activityType);
+            if (completed == YES) {
+                NSLog(@"completed");
+            }else{
+                NSLog(@"cancel");
+            }
+        };
+        activityVC.completionHandler = handlerBlock;
+    }
+    // 4、调用控制器
+    [self presentViewController:activityVC animated:YES completion:nil];
+    
+}
 #pragma mark - net
 - (void)requestData{
     
@@ -200,13 +148,13 @@
         [cell refreshUIWithTitle:lqStrings(@"设置")];
         
     }else if (indexPath.row == 1) {
-        [cell refreshUIWithTitle:lqStrings(@"设置")];
+        [cell refreshUIWithTitle:lqStrings(@"分享bigjpg.com")];
 
     }else if (indexPath.row == 2) {
-        [cell refreshUIWithTitle:lqStrings(@"设置")];
+        [cell refreshUIWithTitle:lqStrings(@"访问bigjpg.com官网")];
 
     }else if (indexPath.row == 3) {
-        [cell refreshUIWithTitle:lqStrings(@"设置")];
+        [cell refreshUIWithTitle:lqStrings(@"反馈&客服i@bigjpg.com")];
 
     }else if (indexPath.row == 4) {
         [cell refreshUIWithTitle:lqStrings(@"设置")];
@@ -214,6 +162,44 @@
     }
   
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    switch (indexPath.row) {
+        case 0:{
+            SetConfigViewController *vc = [[SetConfigViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            
+            break;
+        case 1:{//系统分享
+            [self activityShare];
+        }
+            
+            break;
+        case 2:{
+            
+        }
+            
+            break;
+        case 3:{
+            
+        }
+            
+            break;
+        case 4:{
+            
+        }
+            
+            b54:{
+            
+        }
+            
+            break;
+            
+        default:
+            break;
+    }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return Adaptor_Value(60);
@@ -239,21 +225,7 @@
     view.backgroundColor  = [UIColor clearColor];
     return view;
 }
-#pragma mark - UMSocialShareMenuViewDelegate
-- (void)UMSocialShareMenuViewDidAppear
-{
-    NSLog(@"UMSocialShareMenuViewDidAppear");
-}
-- (void)UMSocialShareMenuViewDidDisappear
-{
-    NSLog(@"UMSocialShareMenuViewDidDisappear");
-}
 
-//不需要改变父窗口则不需要重写此协议
-- (UIView*)UMSocialParentView:(UIView*)defaultSuperView
-{
-    return defaultSuperView;
-}
 
 #pragma  mark - lazy
 - (UITableView *)customTableView

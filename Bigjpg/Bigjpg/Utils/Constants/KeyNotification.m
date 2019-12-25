@@ -14,6 +14,7 @@ NSString* const kURL_Reachability__Address = @"www.baidu.com";
 NSString* const kUserSignIn = @"kUserSignIn";
 NSString* const kUserSignOut = @"kUserSignOut";
 
+NSString* const kIsNight = @"kIsNight";
 
 
 

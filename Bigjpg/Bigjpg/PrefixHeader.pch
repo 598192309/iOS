@@ -22,5 +22,8 @@
 #import "BaseNavgationController.h"
 #import "BaseTableViewController.h"
 #import "MainTabBarController.h"
+#import "LSVProgressHUD.h"
+#import "RunInfo.h"
+
 
 #endif /* PrefixHeader_pch */

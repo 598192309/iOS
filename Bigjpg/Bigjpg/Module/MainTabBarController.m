@@ -57,7 +57,7 @@
 
 -(void)setupBasic {
     
-    self.tabBar.barTintColor = TitleGrayColor;
+    self.tabBar.barTintColor = TabbarGrayColor;
     [UIApplication sharedApplication].applicationSupportsShakeToEdit = YES;
     [self becomeFirstResponder];
 
@@ -78,8 +78,8 @@
     [nav.tabBarItem setImage:image];
     [nav.tabBarItem setSelectedImage:selectImage];
 
-    [nav.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName:TitleBlackColor,NSFontAttributeName:AdaptedFontSize(10)} forState:UIControlStateSelected];
-    [nav.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName:TitleGrayColor,NSFontAttributeName:AdaptedFontSize(10)} forState:UIControlStateNormal];
+    [nav.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName:TitleBlackColor,NSFontAttributeName:AdaptedFontSize(13)} forState:UIControlStateSelected];
+    [nav.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName:RGB(212, 212, 212),NSFontAttributeName:AdaptedFontSize(13)} forState:UIControlStateNormal];
 
 
 

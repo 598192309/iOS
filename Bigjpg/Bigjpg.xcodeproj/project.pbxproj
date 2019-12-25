@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1118103F23B30A4400BEE5EF /* CustomActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1118103E23B30A4400BEE5EF /* CustomActivity.m */; };
+		1118104223B30BB400BEE5EF /* SetConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1118104123B30BB400BEE5EF /* SetConfigViewController.m */; };
+		1118104523B30E5D00BEE5EF /* SetConfigChooseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1118104423B30E5D00BEE5EF /* SetConfigChooseCell.m */; };
+		1118104D23B33C2500BEE5EF /* CustomTableAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1118104C23B33C2500BEE5EF /* CustomTableAlertView.m */; };
+		1118105023B33DDD00BEE5EF /* CustomAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1118104F23B33DDD00BEE5EF /* CustomAlertView.m */; };
+		1118105323B3432F00BEE5EF /* LSVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 1118105223B3432F00BEE5EF /* LSVProgressHUD.m */; };
 		11790BF323B1B902003E6792 /* NewFeatureScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11790BE023B1B902003E6792 /* NewFeatureScrollView.m */; };
 		11790BF423B1B902003E6792 /* LaunchingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11790BE123B1B902003E6792 /* LaunchingViewController.m */; };
 		11790BF523B1B902003E6792 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11790BE223B1B902003E6792 /* MainTabBarController.m */; };
@@ -41,6 +47,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1118103D23B30A4300BEE5EF /* CustomActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomActivity.h; sourceTree = "<group>"; };
+		1118103E23B30A4400BEE5EF /* CustomActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomActivity.m; sourceTree = "<group>"; };
+		1118104023B30BB400BEE5EF /* SetConfigViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetConfigViewController.h; sourceTree = "<group>"; };
+		1118104123B30BB400BEE5EF /* SetConfigViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetConfigViewController.m; sourceTree = "<group>"; };
+		1118104323B30E5D00BEE5EF /* SetConfigChooseCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetConfigChooseCell.h; sourceTree = "<group>"; };
+		1118104423B30E5D00BEE5EF /* SetConfigChooseCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetConfigChooseCell.m; sourceTree = "<group>"; };
+		1118104B23B33C2500BEE5EF /* CustomTableAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomTableAlertView.h; sourceTree = "<group>"; };
+		1118104C23B33C2500BEE5EF /* CustomTableAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomTableAlertView.m; sourceTree = "<group>"; };
+		1118104E23B33DDD00BEE5EF /* CustomAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAlertView.h; sourceTree = "<group>"; };
+		1118104F23B33DDD00BEE5EF /* CustomAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAlertView.m; sourceTree = "<group>"; };
+		1118105123B3432F00BEE5EF /* LSVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSVProgressHUD.h; sourceTree = "<group>"; };
+		1118105223B3432F00BEE5EF /* LSVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSVProgressHUD.m; sourceTree = "<group>"; };
 		11790BDE23B1B902003E6792 /* NewFeatureScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewFeatureScrollView.h; sourceTree = "<group>"; };
 		11790BDF23B1B902003E6792 /* LaunchingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchingViewController.h; sourceTree = "<group>"; };
 		11790BE023B1B902003E6792 /* NewFeatureScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewFeatureScrollView.m; sourceTree = "<group>"; };
@@ -118,6 +136,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1118104623B3359500BEE5EF /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				1118105123B3432F00BEE5EF /* LSVProgressHUD.h */,
+				1118105223B3432F00BEE5EF /* LSVProgressHUD.m */,
+				1118104B23B33C2500BEE5EF /* CustomTableAlertView.h */,
+				1118104C23B33C2500BEE5EF /* CustomTableAlertView.m */,
+				1118104E23B33DDD00BEE5EF /* CustomAlertView.h */,
+				1118104F23B33DDD00BEE5EF /* CustomAlertView.m */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		11790BDD23B1B902003E6792 /* Launch */ = {
 			isa = PBXGroup;
 			children = (
@@ -134,6 +165,8 @@
 			children = (
 				11790BE523B1B902003E6792 /* SettingViewController.h */,
 				11790BE623B1B902003E6792 /* SettingViewController.m */,
+				1118104023B30BB400BEE5EF /* SetConfigViewController.h */,
+				1118104123B30BB400BEE5EF /* SetConfigViewController.m */,
 				118FED4023B20CBA0055E56C /* View */,
 			);
 			path = Setting;
@@ -191,6 +224,10 @@
 				118FED4223B20D360055E56C /* SettingCustomView.m */,
 				118FED4523B215CB0055E56C /* SettingCell.h */,
 				118FED4623B215CB0055E56C /* SettingCell.m */,
+				1118103D23B30A4300BEE5EF /* CustomActivity.h */,
+				1118103E23B30A4400BEE5EF /* CustomActivity.m */,
+				1118104323B30E5D00BEE5EF /* SetConfigChooseCell.h */,
+				1118104423B30E5D00BEE5EF /* SetConfigChooseCell.m */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -215,12 +252,13 @@
 		4920AEAE23AD305800FE7A65 /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				11790BE323B1B902003E6792 /* MainTabBarController.h */,
+				11790BE223B1B902003E6792 /* MainTabBarController.m */,
+				1118104623B3359500BEE5EF /* Common */,
 				11790BE723B1B902003E6792 /* History */,
 				11790BF023B1B902003E6792 /* Home */,
 				11790BDD23B1B902003E6792 /* Launch */,
 				11790BEA23B1B902003E6792 /* Login */,
-				11790BE323B1B902003E6792 /* MainTabBarController.h */,
-				11790BE223B1B902003E6792 /* MainTabBarController.m */,
 				11790BE423B1B902003E6792 /* Setting */,
 			);
 			path = Module;
@@ -474,17 +512,23 @@
 				118FED4723B215CB0055E56C /* SettingCell.m in Sources */,
 				4920AEAA23AD2CC100FE7A65 /* M_Base.m in Sources */,
 				4920AEAD23AD2CC100FE7A65 /* BaseTableViewController.m in Sources */,
+				1118104D23B33C2500BEE5EF /* CustomTableAlertView.m in Sources */,
+				1118104223B30BB400BEE5EF /* SetConfigViewController.m in Sources */,
 				4920AEAC23AD2CC100FE7A65 /* I_Base.m in Sources */,
 				496DA07523AD114400DDB905 /* ViewController.m in Sources */,
 				11790BF523B1B902003E6792 /* MainTabBarController.m in Sources */,
+				1118105023B33DDD00BEE5EF /* CustomAlertView.m in Sources */,
 				4920AED123AD32D800FE7A65 /* RunInfo.m in Sources */,
 				496DA06F23AD114400DDB905 /* AppDelegate.m in Sources */,
 				4920AEA823AD2CC100FE7A65 /* BaseCollectionViewController.m in Sources */,
+				1118105323B3432F00BEE5EF /* LSVProgressHUD.m in Sources */,
 				4920AED023AD32D800FE7A65 /* Network.m in Sources */,
+				1118104523B30E5D00BEE5EF /* SetConfigChooseCell.m in Sources */,
 				496DA08023AD114500DDB905 /* main.m in Sources */,
 				4920AEDE23B085B900FE7A65 /* M_Account.m in Sources */,
 				11790BF823B1B902003E6792 /* LoginViewController.m in Sources */,
 				11790BF623B1B902003E6792 /* SettingViewController.m in Sources */,
+				1118103F23B30A4400BEE5EF /* CustomActivity.m in Sources */,
 				118FED4323B20D360055E56C /* SettingCustomView.m in Sources */,
 				11790BFA23B1B902003E6792 /* HomeViewController.m in Sources */,
 			);
