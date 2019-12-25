@@ -69,4 +69,37 @@
            
     }];
 }
+
+
++ (NetworkTask *)createEnlargeTask:(int )x2
+     style:(NSString *)style
+     noise:(int)noise
+  fileName:(NSString *)fileName
+  fileSize:(long)fileSize
+fileHeight:(long)fileHeight
+ fileWidth:(long)filetWidth
+     input:(NSString *)input
+   success:(void(^)(void))successBlock
+   failure:(ErrorBlock)failureBlock {
+    
+    NSDictionary *jsonDic = @{@"x2":@(x2),@"style":SAFE_NIL_STRING(style),@"noise":@(noise),@"file_name":SAFE_NIL_STRING(fileName),@"files_size":@(fileSize),@"file_height":@(fileHeight),@"file_width":@(filetWidth),@"input":SAFE_NIL_STRING(input)};
+    
+    NSString *value = [jsonDic mj_JSONString];
+    NSDictionary *params = @{@"conf":SAFE_NIL_STRING(value)};
+    return [NET POST:@"task" parameters:params criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
+        
+    } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error) {
+        
+    }];
+}
+
+
++ (NetworkTask *)requestConfOnSuccess:(void(^)(void))successBlock failure:(ErrorBlock)failureBlock
+{
+    return [NET GET:@"conf" parameters:nil criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
+        
+    } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error) {
+        
+    }];
+}
 @end

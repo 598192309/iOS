@@ -23,6 +23,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NetworkTask *)deleteEnlargeTasks:(NSArray *)fids success:(void(^)(void))successBlock failure:(ErrorBlock)failureBlock;
 
++ (NetworkTask *)createEnlargeTask:(int )x2
+                             style:(NSString *)style
+                             noise:(int)noise
+                          fileName:(NSString *)fileName
+                          fileSize:(long)fileSize
+                        fileHeight:(long)fileHeight
+                         fileWidth:(long)filetWidth
+                             input:(NSString *)input
+                           success:(void(^)(void))successBlock
+                           failure:(ErrorBlock)failureBlock;
+
+
++ (NetworkTask *)requestConfOnSuccess:(void(^)(void))successBlock failure:(ErrorBlock)failureBlock;
 
 @end
 
