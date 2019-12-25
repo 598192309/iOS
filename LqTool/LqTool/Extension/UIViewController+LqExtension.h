@@ -11,6 +11,7 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
+typedef void(^PopBlock)(UIBarButtonItem *backItem);
 
 @interface UIViewController (LqExtension)
 - (void)lq_setBackButtonWithImageName:(NSString *)imageName;
@@ -26,6 +27,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)lq_popControllers:(NSArray *)controllers delayTime:(CGFloat)delayTime;
 
 - (BOOL)needHideNav;
+@property(nonatomic,copy)PopBlock popBlock;
+
+
++ (UIViewController*)topViewController;
++(UIViewController*)topViewControllerWithRootViewController:(UIViewController*)rootViewController;
 @end
 
 NS_ASSUME_NONNULL_END

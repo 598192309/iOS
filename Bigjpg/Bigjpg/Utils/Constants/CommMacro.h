@@ -69,6 +69,84 @@
 
 
 
+// 是否iPad
+#define isPad                   (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+/*************** 尺寸 *******************/
+#define LQScreemW [UIScreen mainScreen].bounds.size.width
+#define LQScreemH [UIScreen mainScreen].bounds.size.height
+#define IS_IPHONE_4 (fabs((double)[[UIScreen mainScreen] bounds].size.height - (double )480) < DBL_EPSILON )
+#define IS_IPHONE_5 (fabs((double)[[UIScreen mainScreen] bounds].size.height - (double )568) < DBL_EPSILON )
+#define IS_IPHONE_6 (fabs((double)[[UIScreen mainScreen] bounds].size.height - (double )667) < DBL_EPSILON )
+#define IS_IPHONE_6_PLUS (fabs((double)[[UIScreen mainScreen] bounds].size.height - (double )736) < DBL_EPSILON )
+#define IS_IPHONEX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125,2436), [[UIScreen mainScreen] currentMode].size) : NO)
+//判断iPhoneXr
+#define IS_IPHONE_Xr ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(828, 1792), [[UIScreen mainScreen] currentMode].size) && !isPad : NO)
+//判断iPhoneXsMax
+#define IS_IPHONE_Xs_Max ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242, 2688), [[UIScreen mainScreen] currentMode].size)&& !isPad : NO)
+
+//判断iPhoneX所有系列
+#define IS_PhoneXAll (IS_IPHONEX || IS_IPHONE_Xr || IS_IPHONE_Xs_Max)
+//判断是iPhone
+#define IS_Phone UI_USER_INTERFACE_IDIOM()==UIUserInterfaceIdiomPhone
+#define TabbarH  (IS_PhoneXAll ? 83 : 49)
+#define NavMaxY  (IS_PhoneXAll ? 88 : 64)
+#define SafeAreaTopHeight  (IS_PhoneXAll ? 24 : 0) //导航栏 粪叉显示栏多了24
+#define SafeAreaBottomHeight  (IS_PhoneXAll ? 34 : 0) //导航栏 粪叉显示栏多了24
+#define TitleViewH Adaptor_Value(45)
+
+
+//不同屏幕尺寸字体适配（375，667是因为效果图为IPHONE6 如果不是则根据实际情况修改）
+#define kScreenWidthRatio  (LQScreemW / 375.0)
+#define kScreenHeightRatio (LQScreemH / 667.0)
+#define AdaptedWidth(x)  ceilf((x) * kScreenWidthRatio)
+#define Adaptor_Value(v)        (v)*kScreenWidthRatio
+#define BottomAdaptor_Value(v)        (v + SafeAreaBottomHeight)*kScreenWidthRatio
+#define TopAdaptor_Value(v)       (v + SafeAreaTopHeight)*kScreenWidthRatio
+//字体
+//中文字体
+#define Regular_FONT_NAME  @"PingFangSC-Regular"
+#define Bold_FONT_NAME  @"PingFangSC-Semibold"
+
+#define CHINESE_SYSTEMRegular(x) [UIFont fontWithName:Regular_FONT_NAME size:x]
+#define CHINESE_SYSTEMBold(x) [UIFont fontWithName:Bold_FONT_NAME size:x]
+
+#define AdaptedFontSize(R)    CHINESE_SYSTEMRegular(AdaptedWidth(R))
+#define AdaptedBoldFontSize(R) CHINESE_SYSTEMBold(AdaptedWidth(R))
+
+
+//颜色
+#define TitleBlackColor   [UIColor lq_colorWithHexString:@"303030"]
+#define BackGroundColor   [UIColor lq_colorWithHexString:@"ffffff"]
+#define TitleGrayColor   [UIColor lq_colorWithHexString:@"5f6568"]
+#define LineGrayColor   [UIColor lq_colorWithHexString:@"f4f4f4"]
+#define BackGrayColor   [UIColor lq_colorWithHexString:@"f8f8f8"]
+
+
+//国际化
+#define lqLocalized(key,comment) NSLocalizedStringFromTable(key, @"lqlocal", comment)
+#define lqStrings(string) NSLocalizedStringFromTable(string, @"lqlocal", nil)
+
+//number转String
+#define IntTranslateStr(int_str) [NSString stringWithFormat:@"%ld",(long)int_str]
+#define FloatTranslateStr(float_str) [NSString stringWithFormat:@"%.2d",float_str]
+
+#define APPDelegate     [UIApplication sharedApplication].delegate
+
+
+// View 圆角
+#define ViewRadius(View, Radius)\
+\
+[View.layer setCornerRadius:(Radius)];\
+[View.layer setMasksToBounds:YES]
+
+
+// View 圆角和加边框
+#define ViewBorderRadius(View, Radius, Width, Color)\
+\
+[View.layer setCornerRadius:(Radius)];\
+[View.layer setMasksToBounds:YES];\
+[View.layer setBorderWidth:(Width)];\
+[View.layer setBorderColor:[Color CGColor]]
 
 
 #endif

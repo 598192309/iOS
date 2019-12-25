@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		11790C0323B1BB0B003E6792 /* UIButton+LqExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 11790C0123B1BB0A003E6792 /* UIButton+LqExtension.m */; };
+		11790C0423B1BB0B003E6792 /* UIButton+LqExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = 11790C0223B1BB0A003E6792 /* UIButton+LqExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11790C0723B1BC35003E6792 /* UILabel+LqExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = 11790C0523B1BC35003E6792 /* UILabel+LqExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11790C0823B1BC35003E6792 /* UILabel+LqExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 11790C0623B1BC35003E6792 /* UILabel+LqExtension.m */; };
+		11790C0B23B1BE40003E6792 /* UITextField+LqExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = 11790C0923B1BE40003E6792 /* UITextField+LqExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11790C0C23B1BE40003E6792 /* UITextField+LqExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 11790C0A23B1BE40003E6792 /* UITextField+LqExtension.m */; };
+		118FED4A23B217AA0055E56C /* UIScrollView+LQRefresh.h in Headers */ = {isa = PBXBuildFile; fileRef = 118FED4823B217AA0055E56C /* UIScrollView+LQRefresh.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		118FED4B23B217AA0055E56C /* UIScrollView+LQRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 118FED4923B217AA0055E56C /* UIScrollView+LQRefresh.m */; };
 		4920AE7E23AD221B00FE7A65 /* UIViewController+LqExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = 4920AE7C23AD221B00FE7A65 /* UIViewController+LqExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4920AE7F23AD221B00FE7A65 /* UIViewController+LqExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4920AE7D23AD221B00FE7A65 /* UIViewController+LqExtension.m */; };
 		4920AE8323AD252A00FE7A65 /* LqSandBox.h in Headers */ = {isa = PBXBuildFile; fileRef = 4920AE8123AD252A00FE7A65 /* LqSandBox.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -46,6 +54,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		11790C0123B1BB0A003E6792 /* UIButton+LqExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+LqExtension.m"; sourceTree = "<group>"; };
+		11790C0223B1BB0A003E6792 /* UIButton+LqExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+LqExtension.h"; sourceTree = "<group>"; };
+		11790C0523B1BC35003E6792 /* UILabel+LqExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UILabel+LqExtension.h"; sourceTree = "<group>"; };
+		11790C0623B1BC35003E6792 /* UILabel+LqExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UILabel+LqExtension.m"; sourceTree = "<group>"; };
+		11790C0923B1BE40003E6792 /* UITextField+LqExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITextField+LqExtension.h"; sourceTree = "<group>"; };
+		11790C0A23B1BE40003E6792 /* UITextField+LqExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITextField+LqExtension.m"; sourceTree = "<group>"; };
+		118FED4823B217AA0055E56C /* UIScrollView+LQRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+LQRefresh.h"; sourceTree = "<group>"; };
+		118FED4923B217AA0055E56C /* UIScrollView+LQRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+LQRefresh.m"; sourceTree = "<group>"; };
 		4920AE7C23AD221B00FE7A65 /* UIViewController+LqExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+LqExtension.h"; sourceTree = "<group>"; };
 		4920AE7D23AD221B00FE7A65 /* UIViewController+LqExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+LqExtension.m"; sourceTree = "<group>"; };
 		4920AE8123AD252A00FE7A65 /* LqSandBox.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LqSandBox.h; sourceTree = "<group>"; };
@@ -118,8 +134,16 @@
 				496DA0A923AD1FE100DDB905 /* UIImageView+LqExtension.m */,
 				496DA0AC23AD202500DDB905 /* UIScrollView+LqExtension.h */,
 				496DA0AD23AD202500DDB905 /* UIScrollView+LqExtension.m */,
+				118FED4823B217AA0055E56C /* UIScrollView+LQRefresh.h */,
+				118FED4923B217AA0055E56C /* UIScrollView+LQRefresh.m */,
 				4920AE7C23AD221B00FE7A65 /* UIViewController+LqExtension.h */,
 				4920AE7D23AD221B00FE7A65 /* UIViewController+LqExtension.m */,
+				11790C0223B1BB0A003E6792 /* UIButton+LqExtension.h */,
+				11790C0123B1BB0A003E6792 /* UIButton+LqExtension.m */,
+				11790C0523B1BC35003E6792 /* UILabel+LqExtension.h */,
+				11790C0623B1BC35003E6792 /* UILabel+LqExtension.m */,
+				11790C0923B1BE40003E6792 /* UITextField+LqExtension.h */,
+				11790C0A23B1BE40003E6792 /* UITextField+LqExtension.m */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -180,12 +204,15 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				118FED4A23B217AA0055E56C /* UIScrollView+LQRefresh.h in Headers */,
+				11790C0723B1BC35003E6792 /* UILabel+LqExtension.h in Headers */,
 				496DA0A223AD1E3700DDB905 /* NSFileManager+LqExtension.h in Headers */,
 				4920AE8323AD252A00FE7A65 /* LqSandBox.h in Headers */,
 				4920AE8723AD26B900FE7A65 /* LqWGS84TOGCJ02.h in Headers */,
 				4920AE9423AD289700FE7A65 /* SafeControl.h in Headers */,
 				496DA0A623AD1F1300DDB905 /* NSString+LqExtension.h in Headers */,
 				4920AEBA23AD319900FE7A65 /* LqNoPasteTextField.h in Headers */,
+				11790C0B23B1BE40003E6792 /* UITextField+LqExtension.h in Headers */,
 				496DA09223AD1B5A00DDB905 /* UIStoryboard+LqExtension.h in Headers */,
 				4920AE7E23AD221B00FE7A65 /* UIViewController+LqExtension.h in Headers */,
 				4920AE8B23AD273F00FE7A65 /* RSAEncryptor.h in Headers */,
@@ -198,6 +225,7 @@
 				496DA09A23AD1BFD00DDB905 /* UIView+LqExtension.h in Headers */,
 				496DA0AA23AD1FE100DDB905 /* UIImageView+LqExtension.h in Headers */,
 				4920AE9723AD2B2800FE7A65 /* PrefixHeader.pch in Headers */,
+				11790C0423B1BB0B003E6792 /* UIButton+LqExtension.h in Headers */,
 				4920AEBE23AD31DC00FE7A65 /* LqTextView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -270,7 +298,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11790C0C23B1BE40003E6792 /* UITextField+LqExtension.m in Sources */,
 				496DA09F23AD1DC300DDB905 /* NSError+LqExtension.m in Sources */,
+				118FED4B23B217AA0055E56C /* UIScrollView+LQRefresh.m in Sources */,
 				4920AEBF23AD31DC00FE7A65 /* LqTextView.m in Sources */,
 				4920AE7F23AD221B00FE7A65 /* UIViewController+LqExtension.m in Sources */,
 				4920AE8823AD26B900FE7A65 /* LqWGS84TOGCJ02.m in Sources */,
@@ -280,6 +310,7 @@
 				496DA09B23AD1BFD00DDB905 /* UIView+LqExtension.m in Sources */,
 				4920AE9323AD289700FE7A65 /* SafeControl.m in Sources */,
 				4920AEBB23AD319900FE7A65 /* LqNoPasteTextField.m in Sources */,
+				11790C0823B1BC35003E6792 /* UILabel+LqExtension.m in Sources */,
 				496DA08F23AD18A500DDB905 /* UIImage+LqExtension.m in Sources */,
 				4920AE8423AD252A00FE7A65 /* LqSandBox.m in Sources */,
 				496DA0AB23AD1FE100DDB905 /* UIImageView+LqExtension.m in Sources */,
@@ -287,6 +318,7 @@
 				496DA0A323AD1E3700DDB905 /* NSFileManager+LqExtension.m in Sources */,
 				4920AE8C23AD273F00FE7A65 /* RSAEncryptor.m in Sources */,
 				4920AE9023AD279600FE7A65 /* LqToolKit.m in Sources */,
+				11790C0323B1BB0B003E6792 /* UIButton+LqExtension.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,7 +446,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = RBSX9MVBF6;
+				DEVELOPMENT_TEAM = ATBJJ8434Q;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -429,7 +461,7 @@
 					"@loader_path/Frameworks",
 				);
 				MACH_O_TYPE = staticlib;
-				PRODUCT_BUNDLE_IDENTIFIER = bigjpg.LqTool;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lqlq;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -441,7 +473,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = RBSX9MVBF6;
+				DEVELOPMENT_TEAM = ATBJJ8434Q;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -456,7 +488,7 @@
 					"@loader_path/Frameworks",
 				);
 				MACH_O_TYPE = staticlib;
-				PRODUCT_BUNDLE_IDENTIFIER = bigjpg.LqTool;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lqlq;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";

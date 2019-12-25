@@ -8,12 +8,10 @@
 
 #import "UIViewController+LqExtension.h"
 #import "UIImage+LqExtension.h"
+#import <objc/runtime.h>
+static char popBlockKey;
 
 @implementation UIViewController (LqExtension)
-
-
-
-
 -(void)lq_setBackButtonWithImageName:(NSString *)imageName
 {
     if (self.navigationController.viewControllers.count < 2) {
@@ -78,5 +76,34 @@
 - (BOOL)needHideNav {
     return NO;
 }
-
+/**
+ 获取最顶层的视图控制器
+ 不论中间采用了 push->push->present还是present->push->present,或是其它交互
+ */
++ (UIViewController*)topViewController {
+    return [self topViewControllerWithRootViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
+}
++ (UIViewController*)topViewControllerWithRootViewController:(UIViewController*)rootViewController {
+    if ([rootViewController isKindOfClass:[UITabBarController class]]) {
+        UITabBarController* tabBarController = (UITabBarController*)rootViewController;
+        return [self topViewControllerWithRootViewController:tabBarController.selectedViewController];
+    } else if ([rootViewController isKindOfClass:[UINavigationController class]]) {
+        UINavigationController* nav = (UINavigationController*)rootViewController;
+        return [self topViewControllerWithRootViewController:nav.visibleViewController];
+    } else if (rootViewController.presentedViewController) {
+        UIViewController* presentedViewController = rootViewController.presentedViewController;
+        return [self topViewControllerWithRootViewController:presentedViewController];
+    } else {
+        return rootViewController;
+    }
+}
+-(void)setPopBlock:(PopBlock)popBlock{
+    objc_setAssociatedObject(self, &popBlockKey, popBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
+}
+-(PopBlock)popBlock{
+    
+    PopBlock popBlock = objc_getAssociatedObject(self, &popBlockKey);
+    
+    return popBlock;
+}
 @end

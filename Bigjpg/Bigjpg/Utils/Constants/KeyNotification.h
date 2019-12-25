@@ -7,5 +7,9 @@
 //
 
 
+//网络状态监控地址
+extern NSString* const kURL_Reachability__Address;
 
 
+extern NSString* const kUserSignIn;
+extern NSString* const kUserSignOut;
