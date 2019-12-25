@@ -20,10 +20,28 @@
 }
 
 - (IBAction)action:(id)sender {
-    [I_Account loginOrRegistWithUserName:@"454140866@qq.com" pwd:@"123456" notReg:NO success:^(M_Account * _Nonnull account) {
-        
-    } :^(NSError *error) {
-        
+//    [I_Account loginOrRegistWithUserName:@"454140866@qq.com" pwd:@"123456" notReg:NO success:^(M_Account * _Nonnull account) {
+//
+//    } :^(NSError *error) {
+//
+//    }];
+    
+//    [I_Account getUserInfoOnSuccess:^(NSDictionary * _Nonnull result) {
+//
+//    } failure:^(NSError *error) {
+//
+//    }];
+    
+//    [I_Account retryEnlargeFids:@[@"8015a325f9994eedaef8f5b6b9829665"] success:^{
+//
+//    } failure:^(NSError *error) {
+//
+//    }];
+    
+    [I_Account deleteEnlargeTasks:@[@"8015a325f9994eedaef8f5b6b9829665"] success:^{
+
+    } failure:^(NSError *error) {
+
     }];
 }
 

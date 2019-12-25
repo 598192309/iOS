@@ -114,10 +114,9 @@
     URLString=[URLString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     NSURLSessionDataTask *t = [_manager POST:URLString parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
         [self _handdleSuccessWithTask:task responseObject:responseObject success:success failure:failure];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//        [self _handdleFailureWithTask:task error:error failure:failure];
+        [self _handdleFailureWithTask:task error:error failure:failure];
     }];
     
     return [NetworkTask netWorkWithSessionDataTask:t];
@@ -132,16 +131,30 @@
 {
 
     URLString=[URLString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-    [self signHeaderWithParams:parameters];
-    [self _refreshHeaderWithCriticalValue:criticalValue];
     
     NSURLSessionDataTask *t = [_manager GET:URLString parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+         [self _handdleSuccessWithTask:task responseObject:responseObject success:success failure:failure];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [self _handdleFailureWithTask:task error:error failure:failure];
+    }];
+    return [NetworkTask netWorkWithSessionDataTask:t];
+}
+
+- (nullable NetworkTask *)DELETE:(NSString *)URLString
+                   parameters:(nullable id)parameters
+                criticalValue:(nullable NSDictionary*)criticalValue
+                      success:(nullable void (^)(NSURLSessionDataTask *task, id resultObject))success
+                      failure:(nullable void (^)(NSURLSessionDataTask *task, NSError *error))failure
+{
+
+    URLString=[URLString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    
+    NSURLSessionDataTask *t =[_manager DELETE:URLString parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [self _handdleSuccessWithTask:task responseObject:responseObject success:success failure:failure];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//        [self _handdleFailureWithTask:task error:error failure:failure];
+        [self _handdleFailureWithTask:task error:error failure:failure];
     }];
-    
     return [NetworkTask netWorkWithSessionDataTask:t];
 }
 
@@ -170,24 +183,37 @@
                 responseObject:(id)responseObject
                        success:(nullable void (^)(NSURLSessionDataTask *task, id resultObject))success
                        failure:(nullable void (^)(NSURLSessionDataTask *task, NSError *error))failure{
+    NSDictionary *obj;
     if (![responseObject isKindOfClass:[NSDictionary class]] ) {
-//        failure(task,[NSError errorWithMsg:@"服务器在开小差，请稍后再试。" domain:@"Server Error" code:505]);
-    }else{
-        
-        NSInteger resCode = [SAFE_VALUE_FOR_KEY(responseObject, @"code") integerValue];//200代表成功
-        if(resCode != 200){
-            NSString *errorMsgString=SAFE_VALUE_FOR_KEY(responseObject, @"msg");
-            if([errorMsgString length]==0){
-                errorMsgString  =@"未知错误";
-                resCode = -100;
-            }
-            
-      
-//            failure(task,[NSError errorWithMsg:errorMsgString domain:@"Request Error" code:resCode]);
-            
-        }else{
-            success(task,responseObject);
+        NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
+        if (jsonDict) {
+            obj = jsonDict;
+        } else {
+            failure(task,[NSError lq_errorWithMsg:@"数据格式错误" domain:@"Response Error" code:10000]);
+            return;
         }
+//        NSArray*cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
+    }else{
+        obj = responseObject;
+    }
+    
+            
+    NSString *status = SAFE_VALUE_FOR_KEY(obj, @"status");//ok代表成功
+    if([status isEqualToString:@"ok"]){
+        success(task,obj);
+    }else{
+        NSString *errroMsg = status;
+        if ([status isEqualToString:@"error"]) {
+            errroMsg = @"参数错误";
+        } else if ([status isEqualToString:@"not_exist"]) {
+            errroMsg = @"用户不存在";
+        } else if ([status isEqualToString:@"password_error"]) {
+            errroMsg = @"密码错误";
+        } else if ([status isEqualToString:@"no_login"]) {
+            errroMsg = @"没有登陆";
+        }
+          
+        failure(task,[NSError lq_errorWithMsg:errroMsg domain:@"Response Error" code:10000]);
     }
 }
 
@@ -197,27 +223,7 @@
 -(void)_handdleFailureWithTask:(NSURLSessionDataTask*)task
                          error:(NSError*)error
                        failure:(nullable void (^)(NSURLSessionDataTask *task, NSError *error))failure{
-    NSString *errorMsgString=nil;
-    NSData *errorData=SAFE_VALUE_FOR_KEY(error.userInfo, AFNetworkingOperationFailingURLResponseDataErrorKey);
-    NSInteger errorCode=-99999;
-    if([errorData isKindOfClass:[NSData class]]){
-        id errorMsg=[NSJSONSerialization JSONObjectWithData:SAFE_VALUE_FOR_KEY(error.userInfo, AFNetworkingOperationFailingURLResponseDataErrorKey) options:NSJSONReadingAllowFragments error:&error];
-        if([errorMsg isKindOfClass:[NSDictionary class]]){
-            errorMsgString=SAFE_VALUE_FOR_KEY(errorMsg, @"message");
-            errorCode=[SAFE_VALUE_FOR_KEY(errorMsg, @"status") integerValue];
-        }else if ([errorMsg isKindOfClass:[NSString class]]){
-            errorMsgString=errorMsg;
-        }
-    }else{
-        errorMsgString=[error localizedDescription];
-    }
-    if(![errorMsgString isKindOfClass:[NSString class]]||[errorMsgString length]==0){
-        errorMsgString=@"网络不给力，点击重试";
-    }
-    if ([errorMsgString containsString:@"似乎已断开与互联网的连接"] || [errorMsgString containsString:@"未能读取数据"]) {
-        errorMsgString = @"网络不给力，点击重试";
-    }
-//    failure(task,[NSError errorWithMsg:errorMsgString domain:error.domain code:errorCode==-99999?error.code:errorCode]);
+    failure(task,[NSError lq_errorWithMsg:@"网络不给力" domain:error.domain code:-99999]);
 }
 
 -(void)setCookie:(NSString*)key
@@ -243,13 +249,6 @@
 }
 
 
-- (NSString *)h5host
-{
-    if ([KHOST isEqualToString:@"https://api.cloudfighting.com"]) {
-        return @"http://m.cloudfighting.com";
-    }
-    return @"http://m.donkeyplay.com";
-}
 
 
 @end

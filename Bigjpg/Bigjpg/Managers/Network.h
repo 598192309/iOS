@@ -12,9 +12,6 @@
 #define KHOST    @"https://bigjpg.com"      //正式环境
 
 
-
-
-
 #define NET [Network shareInstance]
 
 #define NetErrorCode   -9999
@@ -56,13 +53,19 @@ NS_ASSUME_NONNULL_BEGIN
                        success:(nullable void (^)(NSURLSessionDataTask *task, id resultObject))success
                        failure:(nullable void (^)(NSURLSessionDataTask *task, NSError *error))failure;
 
+- (nullable NetworkTask *)DELETE:(NSString *)URLString
+   parameters:(nullable id)parameters
+criticalValue:(nullable NSDictionary*)criticalValue
+      success:(nullable void (^)(NSURLSessionDataTask *task, id resultObject))success
+                         failure:(nullable void (^)(NSURLSessionDataTask *task, NSError *error))failure;
+
 -(void)instannceManagerWithHost:(NSString*)host;
 
 @property (nonatomic, strong) NSString *servePath;
 
 -(void)setCookie:(NSString*)key
            value:(NSString*)value;
-@property (nonatomic, readonly) NSString *h5host;//
+
 
 
 NS_ASSUME_NONNULL_END

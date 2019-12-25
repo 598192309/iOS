@@ -10,7 +10,7 @@
 #define PrefixHeader_pch
 
 #import "Network.h"
-
+#import <MJExtension/MJExtension.h>
 #import <LqTool/LqTool.h>
 
 #endif /* PrefixHeader_pch */
