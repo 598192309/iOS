@@ -21,7 +21,9 @@
     self.window.rootViewController = [LaunchingViewController new];
 
     [self.window makeKeyAndVisible];
-
+    
+    NSLog(@"%@",LanguageStrings(@"donate"));
+    
     return YES;
 }
 

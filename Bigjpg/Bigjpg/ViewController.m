@@ -38,10 +38,16 @@
 //
 //    }];
     
-    [I_Account deleteEnlargeTasks:@[@"8015a325f9994eedaef8f5b6b9829665"] success:^{
-
+//    [I_Account deleteEnlargeTasks:@[@"8015a325f9994eedaef8f5b6b9829665"] success:^{
+//
+//    } failure:^(NSError *error) {
+//
+//    }];
+    
+    [I_Account requestConfOnSuccess:^{
+        
     } failure:^(NSError *error) {
-
+        
     }];
 }
 

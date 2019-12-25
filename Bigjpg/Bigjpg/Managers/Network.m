@@ -135,6 +135,7 @@
     NSURLSessionDataTask *t = [_manager GET:URLString parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
          [self _handdleSuccessWithTask:task responseObject:responseObject success:success failure:failure];
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [self _handdleFailureWithTask:task error:error failure:failure];
     }];
@@ -215,6 +216,12 @@
           
         failure(task,[NSError lq_errorWithMsg:errroMsg domain:@"Response Error" code:10000]);
     }
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+           [defaults setObject:obj forKey:@"Conf"];
+           [defaults synchronize];
+           NSString *a = NSHomeDirectory();
+    
+    
 }
 
 /**

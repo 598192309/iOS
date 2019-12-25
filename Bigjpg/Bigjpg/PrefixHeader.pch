@@ -24,6 +24,6 @@
 #import "MainTabBarController.h"
 #import "LSVProgressHUD.h"
 #import "RunInfo.h"
-
+#import "ConfManager.h"
 
 #endif /* PrefixHeader_pch */

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		095CB7CD23B3B0E0003CF4C6 /* ConfManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 095CB7CC23B3B0E0003CF4C6 /* ConfManager.m */; };
+		095CB7D023B3B749003CF4C6 /* Conf.plist in Resources */ = {isa = PBXBuildFile; fileRef = 095CB7CF23B3B749003CF4C6 /* Conf.plist */; };
 		1118103F23B30A4400BEE5EF /* CustomActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1118103E23B30A4400BEE5EF /* CustomActivity.m */; };
 		1118104223B30BB400BEE5EF /* SetConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1118104123B30BB400BEE5EF /* SetConfigViewController.m */; };
 		1118104523B30E5D00BEE5EF /* SetConfigChooseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1118104423B30E5D00BEE5EF /* SetConfigChooseCell.m */; };
@@ -49,6 +51,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		095CB7CB23B3B0E0003CF4C6 /* ConfManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConfManager.h; sourceTree = "<group>"; };
+		095CB7CC23B3B0E0003CF4C6 /* ConfManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConfManager.m; sourceTree = "<group>"; };
+		095CB7CF23B3B749003CF4C6 /* Conf.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Conf.plist; sourceTree = "<group>"; };
 		1118103D23B30A4300BEE5EF /* CustomActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomActivity.h; sourceTree = "<group>"; };
 		1118103E23B30A4400BEE5EF /* CustomActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomActivity.m; sourceTree = "<group>"; };
 		1118104023B30BB400BEE5EF /* SetConfigViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetConfigViewController.h; sourceTree = "<group>"; };
@@ -142,6 +147,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		095CB7CE23B3B738003CF4C6 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				095CB7CF23B3B749003CF4C6 /* Conf.plist */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
 		1118104623B3359500BEE5EF /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -289,6 +302,8 @@
 				4920AECD23AD32D800FE7A65 /* Network.m */,
 				4920AECB23AD32D800FE7A65 /* RunInfo.h */,
 				4920AECE23AD32D800FE7A65 /* RunInfo.m */,
+				095CB7CB23B3B0E0003CF4C6 /* ConfManager.h */,
+				095CB7CC23B3B0E0003CF4C6 /* ConfManager.m */,
 				4920AECA23AD32D800FE7A65 /* ThemeProvider.h */,
 				4920AEC923AD32D800FE7A65 /* ThemeProvider.m */,
 			);
@@ -380,6 +395,7 @@
 				496DA07B23AD114500DDB905 /* LaunchScreen.storyboard */,
 				496DA07E23AD114500DDB905 /* Info.plist */,
 				496DA07F23AD114500DDB905 /* main.m */,
+				095CB7CE23B3B738003CF4C6 /* Resource */,
 			);
 			path = Bigjpg;
 			sourceTree = "<group>";
@@ -464,6 +480,7 @@
 			files = (
 				496DA07D23AD114500DDB905 /* LaunchScreen.storyboard in Resources */,
 				496DA07A23AD114500DDB905 /* Assets.xcassets in Resources */,
+				095CB7D023B3B749003CF4C6 /* Conf.plist in Resources */,
 				496DA07823AD114400DDB905 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -540,6 +557,7 @@
 				1118105023B33DDD00BEE5EF /* CustomAlertView.m in Sources */,
 				4920AED123AD32D800FE7A65 /* RunInfo.m in Sources */,
 				496DA06F23AD114400DDB905 /* AppDelegate.m in Sources */,
+				095CB7CD23B3B0E0003CF4C6 /* ConfManager.m in Sources */,
 				4920AEA823AD2CC100FE7A65 /* BaseCollectionViewController.m in Sources */,
 				1118105323B3432F00BEE5EF /* LSVProgressHUD.m in Sources */,
 				4920AED023AD32D800FE7A65 /* Network.m in Sources */,

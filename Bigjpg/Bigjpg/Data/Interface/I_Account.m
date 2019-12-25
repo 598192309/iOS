@@ -97,7 +97,7 @@ fileHeight:(long)fileHeight
 + (NetworkTask *)requestConfOnSuccess:(void(^)(void))successBlock failure:(ErrorBlock)failureBlock
 {
     return [NET GET:@"conf" parameters:nil criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
-        
+        [ConfManager.shared updateConf:resultObject];
     } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error) {
         
     }];

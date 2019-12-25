@@ -129,6 +129,9 @@
 #define lqLocalized(key,comment) NSLocalizedStringFromTable(key, @"lqlocal", comment)
 #define lqStrings(string) NSLocalizedStringFromTable(string, @"lqlocal", nil)
 
+#define LanguageStrings(string) [ConfManager.shared contentWith:string]
+
+
 //number转String
 #define IntTranslateStr(int_str) [NSString stringWithFormat:@"%ld",(long)int_str]
 #define FloatTranslateStr(float_str) [NSString stringWithFormat:@"%.2d",float_str]
