@@ -17,8 +17,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-//    self.window.rootViewController = [MainTabBarController new];
-    self.window.rootViewController = [LaunchingViewController new];
+    self.window.rootViewController = [MainTabBarController new];
+//    self.window.rootViewController = [LaunchingViewController new];
 
     [self.window makeKeyAndVisible];
     
