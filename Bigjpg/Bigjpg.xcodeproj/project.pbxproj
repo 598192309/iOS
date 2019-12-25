@@ -13,6 +13,8 @@
 		1118104D23B33C2500BEE5EF /* CustomTableAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1118104C23B33C2500BEE5EF /* CustomTableAlertView.m */; };
 		1118105023B33DDD00BEE5EF /* CustomAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1118104F23B33DDD00BEE5EF /* CustomAlertView.m */; };
 		1118105323B3432F00BEE5EF /* LSVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 1118105223B3432F00BEE5EF /* LSVProgressHUD.m */; };
+		1118105723B347DF00BEE5EF /* HistoryCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1118105623B347DF00BEE5EF /* HistoryCustomView.m */; };
+		1118105A23B36FD700BEE5EF /* HistoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1118105923B36FD700BEE5EF /* HistoryCell.m */; };
 		11790BF323B1B902003E6792 /* NewFeatureScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11790BE023B1B902003E6792 /* NewFeatureScrollView.m */; };
 		11790BF423B1B902003E6792 /* LaunchingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11790BE123B1B902003E6792 /* LaunchingViewController.m */; };
 		11790BF523B1B902003E6792 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11790BE223B1B902003E6792 /* MainTabBarController.m */; };
@@ -59,6 +61,10 @@
 		1118104F23B33DDD00BEE5EF /* CustomAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAlertView.m; sourceTree = "<group>"; };
 		1118105123B3432F00BEE5EF /* LSVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSVProgressHUD.h; sourceTree = "<group>"; };
 		1118105223B3432F00BEE5EF /* LSVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSVProgressHUD.m; sourceTree = "<group>"; };
+		1118105523B347DF00BEE5EF /* HistoryCustomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HistoryCustomView.h; sourceTree = "<group>"; };
+		1118105623B347DF00BEE5EF /* HistoryCustomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HistoryCustomView.m; sourceTree = "<group>"; };
+		1118105823B36FD700BEE5EF /* HistoryCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HistoryCell.h; sourceTree = "<group>"; };
+		1118105923B36FD700BEE5EF /* HistoryCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HistoryCell.m; sourceTree = "<group>"; };
 		11790BDE23B1B902003E6792 /* NewFeatureScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewFeatureScrollView.h; sourceTree = "<group>"; };
 		11790BDF23B1B902003E6792 /* LaunchingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchingViewController.h; sourceTree = "<group>"; };
 		11790BE023B1B902003E6792 /* NewFeatureScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewFeatureScrollView.m; sourceTree = "<group>"; };
@@ -149,6 +155,17 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		1118105423B347B800BEE5EF /* History */ = {
+			isa = PBXGroup;
+			children = (
+				1118105523B347DF00BEE5EF /* HistoryCustomView.h */,
+				1118105623B347DF00BEE5EF /* HistoryCustomView.m */,
+				1118105823B36FD700BEE5EF /* HistoryCell.h */,
+				1118105923B36FD700BEE5EF /* HistoryCell.m */,
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
 		11790BDD23B1B902003E6792 /* Launch */ = {
 			isa = PBXGroup;
 			children = (
@@ -175,8 +192,9 @@
 		11790BE723B1B902003E6792 /* History */ = {
 			isa = PBXGroup;
 			children = (
-				11790BE823B1B902003E6792 /* HistoryViewController.m */,
 				11790BE923B1B902003E6792 /* HistoryViewController.h */,
+				11790BE823B1B902003E6792 /* HistoryViewController.m */,
+				1118105423B347B800BEE5EF /* History */,
 			);
 			path = History;
 			sourceTree = "<group>";
@@ -502,12 +520,14 @@
 				4920AEA723AD2CC100FE7A65 /* BaseTabBarController.m in Sources */,
 				4920AEA923AD2CC100FE7A65 /* BaseViewController.m in Sources */,
 				11790BF923B1B902003E6792 /* LoginCustomView.m in Sources */,
+				1118105723B347DF00BEE5EF /* HistoryCustomView.m in Sources */,
 				4920AED623AD33AB00FE7A65 /* KeyNotification.m in Sources */,
 				11790BF323B1B902003E6792 /* NewFeatureScrollView.m in Sources */,
 				11790BF423B1B902003E6792 /* LaunchingViewController.m in Sources */,
 				11790BF723B1B902003E6792 /* HistoryViewController.m in Sources */,
 				4920AECF23AD32D800FE7A65 /* ThemeProvider.m in Sources */,
 				4920AEAB23AD2CC100FE7A65 /* BaseNavgationController.m in Sources */,
+				1118105A23B36FD700BEE5EF /* HistoryCell.m in Sources */,
 				4920AEDB23B0598D00FE7A65 /* I_Account.m in Sources */,
 				118FED4723B215CB0055E56C /* SettingCell.m in Sources */,
 				4920AEAA23AD2CC100FE7A65 /* M_Base.m in Sources */,

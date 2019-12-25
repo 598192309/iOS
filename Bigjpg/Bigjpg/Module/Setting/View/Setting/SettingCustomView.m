@@ -154,7 +154,7 @@
             make.left.mas_equalTo(weakSelf.tipView.mas_centerX).offset(Adaptor_Value(10));
             
         }];
-        _updateBtn.backgroundColor = [UIColor greenColor];
+        _updateBtn.backgroundColor = LihgtGreenColor;
         ViewRadius(_updateBtn, Adaptor_Value(5));
         
         
@@ -187,7 +187,7 @@
 
         
         UIView *rowLine1 =  [UIView new];
-        rowLine1.backgroundColor = [UIColor greenColor];
+        rowLine1.backgroundColor = LihgtGreenColor;
         [_textFBackView addSubview:rowLine1];
         [rowLine1 mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(kOnePX *2);
@@ -206,7 +206,7 @@
             make.right.mas_equalTo(weakSelf.textFBackView);
             make.bottom.mas_equalTo(weakSelf.textFBackView).offset(-Adaptor_Value(5));
         }];
-        _pwdTF.textColor = [UIColor whiteColor];
+        _pwdTF.textColor = TitleBlackColor;
         _pwdTF.secureTextEntry = YES;
         [_pwdTF addTarget:self action:@selector(textFDidChange:) forControlEvents:UIControlEventEditingChanged];
         _pwdTF.placeholder = lqStrings(@"密码");
@@ -215,7 +215,7 @@
         [_pwdTF setPlaceholderColor:TitleGrayColor font:nil];
 
         UIView *rowLine2 =  [UIView new];
-        rowLine2.backgroundColor = [UIColor greenColor];
+        rowLine2.backgroundColor = LihgtGreenColor;
         [_textFBackView addSubview:rowLine2];
         [rowLine2 mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(kOnePX *2);
@@ -262,7 +262,7 @@
         [_confirmBtn setTitleColor:BackGroundColor forState:UIControlStateNormal];
         _confirmBtn.titleLabel.font = AdaptedFontSize(17);
 
-        _confirmBtn.backgroundColor = [UIColor greenColor];
+        _confirmBtn.backgroundColor = LihgtGreenColor;
         [contentV addSubview:_confirmBtn];
         [_confirmBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(weakSelf.textFBackView);
