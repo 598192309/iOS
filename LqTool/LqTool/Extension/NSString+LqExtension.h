@@ -78,6 +78,17 @@ NS_ASSUME_NONNULL_BEGIN
  *  @return 富文本
  */
 -(NSAttributedString*)lq_getAttributedStringWithLineSpace:(CGFloat)lineSpace kern:(CGFloat)kern;
+
+
+/**
+ *  设置行间距和字间距
+ *
+ *  @param lineSpace 行间距
+ *  @param kern      字间距
+ *
+ *  @return 富文本
+ */
+-(NSAttributedString*)lq_getAttributedStringWithLineSpace:(CGFloat)lineSpace kern:(CGFloat)kern aliment:(NSTextAlignment)alignment;
 @end
 
 NS_ASSUME_NONNULL_END

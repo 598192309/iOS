@@ -65,12 +65,16 @@
     [self.settingCustomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(tableHeaderView);
     }];
+    [self.settingCustomView configUIWithItem:nil finishi:^{
+        
+    }];
     CGFloat H = [tableHeaderView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
     tableHeaderView.lq_height = H;
     self.customTableView.tableHeaderView = tableHeaderView;
     self.customTableView.tableHeaderView.lq_height = H;
 
     [self settingCustomViewAct];
+
 }
 
 
@@ -78,8 +82,37 @@
 
 - (void)settingCustomViewAct{
     __weak __typeof(self) weakSelf = self;
-   
-    
+    //登录 退出
+    self.settingCustomView.settingCustomViewConfirmBtnClickBlock = ^(NSDictionary * _Nonnull dict, UIButton * _Nonnull sender) {
+        NSString *email = [dict safeObjectForKey:@"email"];
+        NSString *pwd = [dict safeObjectForKey:@"pwd"];
+        if ([[sender titleForState:UIControlStateNormal] isEqualToString:LanguageStrings(@"login_reg")]) {
+            RI.is_logined = YES;
+        }else{
+            RI.is_logined = NO;
+
+        }
+       //登录成功 刷新一下settingCustomView
+        [weakSelf.settingCustomView configUIWithItem:nil finishi:^{
+            UIView *tableHeaderView = [[UIView alloc] init];
+            [tableHeaderView addSubview:weakSelf.settingCustomView];
+            [weakSelf.settingCustomView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.edges.equalTo(tableHeaderView);
+            }];
+            CGFloat H = [tableHeaderView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+            tableHeaderView.lq_height = H;
+            weakSelf.customTableView.tableHeaderView = tableHeaderView;
+            weakSelf.customTableView.tableHeaderView.lq_height = H;
+        }];
+    };
+    //升级
+    self.settingCustomView.settingCustomViewUpdateBtnClickBlock = ^(NSDictionary * _Nonnull dict) {
+        
+    };
+    //忘记密码
+    self.settingCustomView.settingCustomViewForgetBtnClickBlock = ^(NSDictionary * _Nonnull dict) {
+        
+    };
 }
 //系统分享
 - (void)activityShare{

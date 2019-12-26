@@ -172,7 +172,7 @@
         [_contentView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.mas_equalTo(weakSelf.alertView);
             make.width.mas_greaterThanOrEqualTo(Adaptor_Value(225));
-            make.height.mas_greaterThanOrEqualTo(Adaptor_Value(150));
+            make.height.mas_greaterThanOrEqualTo(Adaptor_Value(120));
         }];
 
     }
@@ -189,7 +189,7 @@
             make.edges.mas_equalTo(weakSelf.alertView);
             make.width.mas_greaterThanOrEqualTo(Adaptor_Value(225));
             make.width.mas_lessThanOrEqualTo(Adaptor_Value(300));
-            make.height.mas_greaterThanOrEqualTo(Adaptor_Value(150));
+            make.height.mas_greaterThanOrEqualTo(Adaptor_Value(120));
         }];
         _contentView = contentV;
         _titlelabel = [UILabel lableWithText:@"" textColor:[UIColor lq_colorWithHexString:@"ffffff"] fontSize:AdaptedFontSize(15) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];

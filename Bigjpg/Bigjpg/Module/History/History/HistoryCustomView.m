@@ -20,6 +20,7 @@
 @property (nonatomic,strong)UILabel *dowloadTipLable;
 
 
+
 @end
 @implementation HistoryCustomView
 
@@ -52,13 +53,23 @@
 }
 #pragma mark - act
 - (void)downloadBtnClick:(UIButton *)sender{
-
+    if (RI.is_logined) {
+        
+    }else{
+        self.downloadBtn.hidden = YES;
+        self.cancleBtn.hidden = NO;
+        self.confrimBtn.hidden = NO;
+    }
 }
 - (void)cancleBtnClick:(UIButton *)sender{
-
+    self.downloadBtn.hidden = NO;
+    self.cancleBtn.hidden = YES;
+    self.confrimBtn.hidden = YES;
 }
 - (void)confirmBtnClick:(UIButton *)sender{
-
+    if (self.historyCustomViewConfirmBtnClickBlock) {
+        self.historyCustomViewConfirmBtnClickBlock(@{},sender);
+    }
 }
 
 
@@ -100,25 +111,24 @@
         [contentV addSubview:_cancleBtn];
         [_cancleBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(weakSelf.downloadBtn);
-            make.width.mas_equalTo(Adaptor_Value(100));
-            make.right.mas_equalTo(contentV.mas_centerX).offset(-Adaptor_Value(10));
+            make.width.mas_equalTo(Adaptor_Value(80));
+            make.left.mas_equalTo(contentV.mas_centerX).offset(Adaptor_Value(20));
             
         }];
         _cancleBtn.titleLabel.font = AdaptedFontSize(15);
-
-        _cancleBtn.backgroundColor = LihgtGreenColor;
-        ViewRadius(_cancleBtn, Adaptor_Value(5));
+        ViewBorderRadius(_cancleBtn, Adaptor_Value(5), kOnePX, LineGrayColor);
+        _cancleBtn.backgroundColor = TabbarGrayColor;
         _cancleBtn.hidden = YES;
         
         _confrimBtn = [[UIButton alloc] init];
         [_confrimBtn setTitle:lqStrings(@"确定") forState:UIControlStateNormal];
         [_confrimBtn addTarget:self action:@selector(confirmBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-        [_confrimBtn setTitleColor:TitleBlackColor forState:UIControlStateNormal];
+        [_confrimBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [contentV addSubview:_confrimBtn];
         [_confrimBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(weakSelf.downloadBtn);
-            make.width.mas_equalTo(Adaptor_Value(100));
-            make.right.mas_equalTo(contentV.mas_centerX).offset(-Adaptor_Value(10));
+            make.width.mas_equalTo(Adaptor_Value(80));
+            make.right.mas_equalTo(contentV.mas_centerX).offset(-Adaptor_Value(20));
             
         }];
         _confrimBtn.titleLabel.font = AdaptedFontSize(15);

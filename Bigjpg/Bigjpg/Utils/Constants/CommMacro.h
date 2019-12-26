@@ -123,13 +123,15 @@
 #define DeepGreenColor   RGB(20,118,103)
 #define LihgtGreenColor   RGB(30,161,20)
 #define RedColor   RGB(220,44,50)
+#define YellowBackColor   RGB(247,189,19)
+#define BlueBackColor   RGB(30,128,240)
 
 
 //国际化
 #define lqLocalized(key,comment) NSLocalizedStringFromTable(key, @"lqlocal", comment)
 #define lqStrings(string) NSLocalizedStringFromTable(string, @"lqlocal", nil)
 
-#define LanguageStrings(string) [ConfManager.shared contentWith:string]
+#define LanguageStrings(string) [ConfManager.shared strContentWith:string]
 
 
 //number转String

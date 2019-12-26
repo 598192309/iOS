@@ -13,6 +13,7 @@
 @property (nonatomic,strong)   UIImageView *iconImageV;
 @property (strong, nonatomic)  UILabel *imageTipLable;
 @property (strong, nonatomic)  UILabel *titleLabel;
+@property (nonatomic,strong)   UIButton *retryOrDownloadBtn;
 @property (nonatomic,strong)   UIButton *removeBtn;
 
 
@@ -42,6 +43,41 @@
 
 - (void)configUIWithItem:(NSObject *)item{
     self.titleLabel.text = @"aaaaa";
+    __weak __typeof(self) weakSelf = self;
+    [_retryOrDownloadBtn setTitle:LanguageStrings(@"retry") forState:UIControlStateNormal];
+
+    if (0) {
+        
+        [_retryOrDownloadBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(Adaptor_Value(0));
+        }];
+        
+        [_removeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(Adaptor_Value(35));
+            make.width.mas_equalTo(Adaptor_Value(80));
+            make.right.mas_equalTo(weakSelf.removeBtn.superview).offset(-Adaptor_Value(10));
+            make.centerY.mas_equalTo(weakSelf.removeBtn.superview);
+        }];
+        
+        [_retryOrDownloadBtn setTitle:LanguageStrings(@"download") forState:UIControlStateNormal];
+
+    }else{
+        [_retryOrDownloadBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+
+               make.height.mas_equalTo(Adaptor_Value(35));
+               make.width.mas_equalTo(Adaptor_Value(80));
+               make.right.mas_equalTo(weakSelf.retryOrDownloadBtn.superview).offset(-Adaptor_Value(10));
+               make.bottom.mas_equalTo(weakSelf.retryOrDownloadBtn.superview.mas_centerY).offset(-Adaptor_Value(5));
+           }];
+           
+           [_removeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+
+               make.height.mas_equalTo(Adaptor_Value(35));
+               make.width.mas_equalTo(Adaptor_Value(80));
+               make.right.mas_equalTo(weakSelf.removeBtn.superview).offset(-Adaptor_Value(10));
+               make.top.mas_equalTo(weakSelf.removeBtn.superview.mas_centerY).offset(Adaptor_Value(5));
+           }];
+    }
 }
 
 #pragma mark - act
@@ -70,6 +106,8 @@
             make.left.mas_equalTo(Adaptor_Value(10));
             make.centerY.mas_equalTo(contentV);
         }];
+        _iconImageV.backgroundColor = LihgtGreenColor;
+        
         
         _imageTipLable = [UILabel lableWithText:lqLocalized(@"",nil) textColor:[UIColor whiteColor] fontSize:AdaptedFontSize(13) lableSize:CGRectZero textAliment:NSTextAlignmentRight numberofLines:0];
          [contentV addSubview:_imageTipLable];
@@ -77,27 +115,50 @@
              make.center.mas_equalTo(weakSelf.iconImageV);
          }];
         
-        _titleLabel = [UILabel lableWithText:lqLocalized(@"",nil) textColor:TitleGrayColor fontSize:AdaptedFontSize(15) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
+        _titleLabel = [UILabel lableWithText:lqLocalized(@"",nil) textColor:TitleGrayColor fontSize:AdaptedFontSize(15) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
         [contentV addSubview:_titleLabel];
         [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.width.mas_equalTo(LQScreemW - Adaptor_Value(220));
             make.center.mas_equalTo(contentV);
         }];
-        
+        _retryOrDownloadBtn = [[UIButton alloc] init];
+        [_retryOrDownloadBtn setTitle:@"" forState:UIControlStateNormal];
+        [_retryOrDownloadBtn addTarget:self action:@selector(removeBtnClick:) forControlEvents:UIControlEventTouchDown];
+        [contentV addSubview:_retryOrDownloadBtn];
+        [_retryOrDownloadBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+
+            make.height.mas_equalTo(Adaptor_Value(35));
+            make.width.mas_equalTo(Adaptor_Value(80));
+            make.right.mas_equalTo(contentV).offset(-Adaptor_Value(10));
+            make.bottom.mas_equalTo(contentV.mas_centerY).offset(-Adaptor_Value(5));
+        }];
+        _retryOrDownloadBtn.backgroundColor = YellowBackColor;
+        ViewRadius(_retryOrDownloadBtn, Adaptor_Value(3));
 
         _removeBtn = [[UIButton alloc] init];
-        [_removeBtn setTitle:lqStrings(@"删除") forState:UIControlStateNormal];
+        [_removeBtn setTitle:LanguageStrings(@"del") forState:UIControlStateNormal];
         [_removeBtn addTarget:self action:@selector(removeBtnClick:) forControlEvents:UIControlEventTouchDown];
         [contentV addSubview:_removeBtn];
         [_removeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
 
-            make.height.mas_equalTo(Adaptor_Value(40));
+            make.height.mas_equalTo(Adaptor_Value(35));
             make.width.mas_equalTo(Adaptor_Value(80));
             make.right.mas_equalTo(contentV).offset(-Adaptor_Value(10));
-            make.centerY.mas_equalTo(contentV);
+            make.top.mas_equalTo(contentV.mas_centerY).offset(Adaptor_Value(5));
         }];
         _removeBtn.backgroundColor = RedColor;
         ViewRadius(_removeBtn, Adaptor_Value(3));
+        
+        
+        UIView *lineView = [UIView new];
+        lineView.backgroundColor = LineGrayColor;
+        [contentV addSubview:lineView];
+        [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(Adaptor_Value(10));
+            make.right.mas_equalTo(contentV).offset(-Adaptor_Value(10));
+            make.bottom.mas_equalTo(contentV);
+            make.height.mas_equalTo(kOnePX);
+        }];
         
     }
     return _cellBackgroundView;

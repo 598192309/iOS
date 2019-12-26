@@ -25,5 +25,5 @@
 #import "LSVProgressHUD.h"
 #import "RunInfo.h"
 #import "ConfManager.h"
-
+#import "CustomAlertView.h"
 #endif /* PrefixHeader_pch */

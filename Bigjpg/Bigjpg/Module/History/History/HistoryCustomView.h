@@ -11,6 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HistoryCustomView : UIView
+/**点击升级*/
+@property(nonatomic,copy)void(^historyCustomViewConfirmBtnClickBlock)(NSDictionary *dict,UIButton *sender);
 
 @end
 

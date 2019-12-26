@@ -21,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**点击注册*/
 @property(nonatomic,copy)void(^settingCustomViewZhuceClickBlock)(NSDictionary *dict);
+
+- (void)configUIWithItem:(NSObject *)item finishi:(void(^)())finishBlock;
 @end
 
 NS_ASSUME_NONNULL_END

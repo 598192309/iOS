@@ -13,16 +13,21 @@
 @property (nonatomic,strong)UIView *header;
 @property (nonatomic,strong)UIView *tipView;
 @property (nonatomic,strong)UIButton *tipBtn;
+@property (nonatomic,strong)UIButton *timeBtn;
 @property (nonatomic,strong)UIButton *updateBtn;
+@property (nonatomic,strong)UILabel *totalTipLabel;
 
 @property (nonatomic,strong)UIView *textFBackView;
 
 @property (nonatomic,strong)UITextField *emailTextF;
+@property (nonatomic,strong)UIView *lineview1;
 @property (nonatomic,strong)UITextField *pwdTF;
+@property (nonatomic,strong)UIView *lineview2;
 
 @property (nonatomic,strong)UIButton *forgetBtn;
 @property (nonatomic,strong)UIButton *confirmBtn;
 
+@property (nonatomic,strong)UIButton *zhuceView;
 @property (nonatomic,strong)UIButton *zhuceChooseBtn;
 @property (nonatomic,strong)UILabel *zhuceTipLabel;
 
@@ -52,8 +57,66 @@
 }
 
 
+
 #pragma mark - 刷新ui
 - (void)configUIWithItem:(NSObject *)item finishi:(void(^)())finishBlock{
+    __weak __typeof(self) weakSelf = self;
+
+    if (RI.is_logined) {
+        self.tipView.backgroundColor = BlueBackColor;
+        
+        [_textFBackView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(Adaptor_Value(0));
+        }];
+        self.emailTextF.hidden = YES;
+        self.pwdTF.hidden = YES;
+        self.lineview1.hidden = YES;
+        self.lineview2.hidden = YES;
+
+        [self.zhuceChooseBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(0);
+        }];
+        self.zhuceTipLabel.text = nil;
+        
+        [self.confirmBtn setTitle:[NSString stringWithFormat:@"%@ %@",LanguageStrings(@"logout"),@"123445"] forState:UIControlStateNormal];
+         [self.confirmBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+             make.top.mas_equalTo(weakSelf.zhuceView.mas_bottom).offset(Adaptor_Value(-20));
+         }];
+        
+        self.totalTipLabel.text = LanguageStrings(@"used");
+        [self.timeBtn setTitle:@"" forState:UIControlStateNormal];
+        NSArray *arr = [ConfManager.shared contentWith:@"version"];
+        [self.tipBtn setTitle:[arr safeObjectAtIndex:0] forState:UIControlStateNormal];
+        [self.tipBtn setTitleColor:TitleGrayColor forState:UIControlStateNormal];
+
+    }else{
+        self.tipView.backgroundColor = BackGrayColor;
+ 
+        [_textFBackView mas_updateConstraints:^(MASConstraintMaker *make) {
+              make.height.mas_equalTo(Adaptor_Value(90));
+          }];
+        self.emailTextF.hidden = NO;
+        self.pwdTF.hidden = NO;
+        self.lineview1.hidden = NO;
+        self.lineview2.hidden = NO;
+        
+        [self.zhuceChooseBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+              make.height.mas_equalTo(20);
+          }];
+        self.zhuceTipLabel.text = LanguageStrings(@"reg_new");
+        
+        [self.confirmBtn setTitle:LanguageStrings(@"login_reg") forState:UIControlStateNormal];
+         [self.confirmBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+             make.top.mas_equalTo(weakSelf.zhuceView.mas_bottom).offset(Adaptor_Value(25));
+         }];
+        
+        self.totalTipLabel.text = @"";
+        [self.timeBtn setTitle:@"" forState:UIControlStateNormal];
+        NSArray *arr = [ConfManager.shared contentWith:@"version"];
+        [self.tipBtn setTitle:[arr safeObjectAtIndex:0] forState:UIControlStateNormal];
+        [self.tipBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+
+    }
     
     
     
@@ -77,7 +140,7 @@
 
 - (void)confirmBtnClick:(UIButton *)sender{
     if (self.settingCustomViewConfirmBtnClickBlock) {
-        self.settingCustomViewConfirmBtnClickBlock(@{@"mobile":SAFE_NIL_STRING(self.emailTextF.text),@"pwd":SAFE_NIL_STRING(self.pwdTF.text)}, sender);
+        self.settingCustomViewConfirmBtnClickBlock(@{@"email":SAFE_NIL_STRING(self.emailTextF.text),@"pwd":SAFE_NIL_STRING(self.pwdTF.text)}, sender);
     }
 }
 
@@ -127,9 +190,21 @@
             make.left.mas_equalTo(Adaptor_Value(10));
             make.right.mas_equalTo(contentV).offset(-Adaptor_Value(10));
             make.height.mas_equalTo(Adaptor_Value(120));
-            make.top.mas_equalTo(Adaptor_Value(30));
+            make.top.mas_equalTo(Adaptor_Value(45));
         }];
         ViewRadius(_tipView, Adaptor_Value(10));
+        
+        _timeBtn = [[UIButton alloc] init];
+        [_timeBtn setTitle:lqStrings(@"") forState:UIControlStateNormal];
+        [_timeBtn setTitleColor:TitleBlackColor forState:UIControlStateNormal];
+        [_tipView addSubview:_timeBtn];
+        [_timeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(weakSelf.tipView);
+            make.centerX.mas_equalTo(weakSelf.tipView);
+            
+        }];
+        _tipBtn.enabled = NO;
+        
         
         _tipBtn = [[UIButton alloc] init];
         [_tipBtn setTitle:lqStrings(@"免费版") forState:UIControlStateNormal];
@@ -138,7 +213,7 @@
         [_tipBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(weakSelf.tipView);
             make.width.mas_equalTo(Adaptor_Value(80));
-            make.right.mas_equalTo(weakSelf.tipView.mas_centerX).offset(-Adaptor_Value(10));
+            make.right.mas_equalTo(weakSelf.timeBtn.mas_left).offset(-Adaptor_Value(10));
             
         }];
         _tipBtn.enabled = NO;
@@ -146,18 +221,23 @@
         _updateBtn = [[UIButton alloc] init];
         [_updateBtn setTitle:lqStrings(@"升级") forState:UIControlStateNormal];
         [_updateBtn addTarget:self action:@selector(updateBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-        [_updateBtn setTitleColor:TitleBlackColor forState:UIControlStateNormal];
+        [_updateBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_tipView addSubview:_updateBtn];
         [_updateBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(weakSelf.tipView);
-            make.width.mas_equalTo(Adaptor_Value(80));
-            make.left.mas_equalTo(weakSelf.tipView.mas_centerX).offset(Adaptor_Value(10));
+            make.width.mas_equalTo(Adaptor_Value(50));
+            make.left.mas_equalTo(weakSelf.timeBtn.mas_right).offset(Adaptor_Value(10));
             
         }];
         _updateBtn.backgroundColor = LihgtGreenColor;
         ViewRadius(_updateBtn, Adaptor_Value(5));
         
-        
+        _totalTipLabel = [UILabel lableWithText:LanguageStrings(@"used") textColor:[UIColor lq_colorWithHexString:@"#616161"] fontSize:AdaptedFontSize(13) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
+        [_tipView addSubview:_totalTipLabel];
+        [_totalTipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.mas_equalTo(weakSelf.tipView);
+            make.top.mas_equalTo(weakSelf.updateBtn.mas_bottom).offset(Adaptor_Value(20));
+        }];
         
         _textFBackView = [UIView new];
         _textFBackView.backgroundColor = BackGroundColor;
@@ -166,6 +246,7 @@
             make.top.mas_equalTo(weakSelf.tipView.mas_bottom).offset(Adaptor_Value(25));
             make.left.mas_equalTo(weakSelf.tipView);
             make.right.mas_equalTo(contentV).offset(-Adaptor_Value(10));
+            make.height.mas_equalTo(Adaptor_Value(90));
         }];
       
         _emailTextF = [[UITextField alloc] init];
@@ -187,6 +268,7 @@
 
         
         UIView *rowLine1 =  [UIView new];
+        _lineview1 = rowLine1;
         rowLine1.backgroundColor = LihgtGreenColor;
         [_textFBackView addSubview:rowLine1];
         [rowLine1 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -204,7 +286,7 @@
             make.height.mas_equalTo(Adaptor_Value(35));
             make.top.mas_equalTo(weakSelf.emailTextF.mas_bottom).offset(Adaptor_Value(10));
             make.right.mas_equalTo(weakSelf.textFBackView);
-            make.bottom.mas_equalTo(weakSelf.textFBackView).offset(-Adaptor_Value(5));
+//            make.bottom.mas_equalTo(weakSelf.textFBackView).offset(-Adaptor_Value(5));
         }];
         _pwdTF.textColor = TitleBlackColor;
         _pwdTF.secureTextEntry = YES;
@@ -215,6 +297,7 @@
         [_pwdTF setPlaceholderColor:TitleGrayColor font:nil];
 
         UIView *rowLine2 =  [UIView new];
+        _lineview2 = rowLine2;
         rowLine2.backgroundColor = LihgtGreenColor;
         [_textFBackView addSubview:rowLine2];
         [rowLine2 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -225,6 +308,7 @@
         }];
         
         UIView *zhuceView = [UIView new];
+        _zhuceView = zhuceView;
         [contentV addSubview:zhuceView];
         [zhuceView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(weakSelf.textFBackView.mas_bottom).offset(Adaptor_Value(20));
@@ -247,7 +331,7 @@
         
         
         
-        _zhuceTipLabel = [UILabel lableWithText:lqStrings(@"注册一个新用户") textColor:[UIColor lq_colorWithHexString:@"#616161"] fontSize:AdaptedFontSize(13) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
+        _zhuceTipLabel = [UILabel lableWithText:LanguageStrings(@"reg_new") textColor:[UIColor lq_colorWithHexString:@"#616161"] fontSize:AdaptedFontSize(13) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
         [zhuceView addSubview:_zhuceTipLabel];
         [_zhuceTipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.right.mas_equalTo(zhuceView);
@@ -271,7 +355,6 @@
             
         }];
         ViewRadius(_confirmBtn, Adaptor_Value(5));
-        _confirmBtn.enabled = NO;
         
         
 

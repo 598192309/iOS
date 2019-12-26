@@ -241,4 +241,15 @@
     
     return attributedString;
 }
+
+-(NSAttributedString*)lq_getAttributedStringWithLineSpace:(CGFloat)lineSpace kern:(CGFloat)kern aliment:(NSTextAlignment)alignment{
+    NSMutableParagraphStyle*paragraphStyle = [NSMutableParagraphStyle new];
+     //调整行间距
+    paragraphStyle.lineSpacing= lineSpace;
+    paragraphStyle.alignment = alignment;
+    NSDictionary*attriDict =@{NSParagraphStyleAttributeName:paragraphStyle,NSKernAttributeName:@(kern)};
+    NSMutableAttributedString*attributedString = [[NSMutableAttributedString   alloc]initWithString:self attributes:attriDict];
+     
+    return attributedString;
+}
 @end

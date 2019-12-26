@@ -16,6 +16,9 @@
 
 @property (nonatomic,strong)UIView *unloginFooter;
 @property (nonatomic,strong)UIButton *unloginCheckBtn;
+
+@property (nonatomic,strong)CustomAlertView *infoAlert;
+
 @end
 
 @implementation HistoryViewController
@@ -24,7 +27,9 @@
 #pragma mark - 生命周期
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-
+    if (!self.isFirstViewDidAppear) {
+        [self requestData];
+    }
     
 }
 - (void)viewDidLoad {
@@ -45,6 +50,7 @@
     //监听用户退出登录
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyRequestData) name:kUserSignOut object:nil];
 
+    [self requestData];
 }
 
 - (void)dealloc{
@@ -105,17 +111,30 @@
 
 - (void)historyCustomViewAct{
     __weak __typeof(self) weakSelf = self;
-   
+    self.historyCustomView.historyCustomViewConfirmBtnClickBlock = ^(NSDictionary * _Nonnull dict, UIButton * _Nonnull sender) {
+        [weakSelf remindShow:nil msgColor:TitleBlackColor msgFont:AdaptedFontSize(15) subMsg:LanguageStrings(@"no_upgrade") submsgColor:nil submsgFont:AdaptedFontSize(17) firstBtnTitle:LanguageStrings(@"cancel") secBtnTitle:LanguageStrings(@"ok") singeBtnTitle:@"" removeBtnHidden:YES];
+    };
     
 }
 
 - (void)unloginCheckBtnClick:(UIButton *)sender{
-       self.tabBarController.selectedIndex = 2;
+    self.tabBarController.selectedIndex = 2;
     RI.is_logined = YES;
+}
+
+- (void)remindShow:(NSString *)msg msgColor:(UIColor *)msgColor msgFont:(UIFont *)msgFont subMsg:(NSString *)subMsg submsgColor:(UIColor *)submsgColor submsgFont:(UIFont *)submsgFont firstBtnTitle:(NSString *)firstBtnTitle secBtnTitle:(NSString *)secBtnTitle singeBtnTitle:(NSString *)singeBtnTitle removeBtnHidden:(BOOL)removeBtnHidden{
+    NSAttributedString *attr = [msg lq_getAttributedStringWithLineSpace:Adaptor_Value(5) kern:Adaptor_Value(2)  ];
+
+    [self.infoAlert refreshUIWithAttributeTitle:attr titleColor:msgColor titleFont:msgFont titleAliment:NSTextAlignmentCenter attributeSubTitle:[[NSAttributedString alloc]initWithString:SAFE_NIL_STRING(subMsg) ] subTitleColor:submsgColor subTitleFont:submsgFont subTitleAliment:NSTextAlignmentCenter firstBtnTitle:firstBtnTitle firstBtnTitleColor:TitleGrayColor secBtnTitle:secBtnTitle secBtnTitleColor:TitleBlackColor singleBtnHidden:singeBtnTitle.length == 0 singleBtnTitle:singeBtnTitle singleBtnTitleColor:nil removeBtnHidden:removeBtnHidden];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.infoAlert];
+    
+    [self.infoAlert mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo([UIApplication sharedApplication].keyWindow);
+    }];
 }
 #pragma mark - net
 - (void)requestData{
-    
+    [self.customTableView reloadData];
 }
 - (void)notifyRequestData{
     [self changeUIWithLoginStatus];
@@ -139,7 +158,7 @@
 {
     HistoryCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([HistoryCell class]) forIndexPath:indexPath];
 
-  
+    [cell configUIWithItem:nil];
     return cell;
 }
 
@@ -238,4 +257,32 @@
     return _unloginFooter;
 }
 
+- (CustomAlertView *)infoAlert{
+    if (_infoAlert == nil) {
+        _infoAlert = [[CustomAlertView alloc] init];
+
+        __weak __typeof(self) weakSelf = self;
+        UITabBarController *rootVC  = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+        NSInteger a = rootVC.selectedIndex;
+        UINavigationController *mineVC = [rootVC.childViewControllers safeObjectAtIndex:rootVC.selectedIndex];
+        UIViewController *currentVc = mineVC.viewControllers.lastObject;
+    
+        _infoAlert.CustomAlertViewBlock = ^(NSInteger index,NSString *str){
+            if (index == 1) {//取消
+                
+            }else if(index == 2){//确定
+                self.tabBarController.selectedIndex = 2;
+
+            }else if(index == 4){
+                
+            }
+            [weakSelf.infoAlert removeFromSuperview];
+            weakSelf.infoAlert = nil;
+            
+        };
+    }
+    
+    return _infoAlert;
+    
+}
 @end
