@@ -25,5 +25,6 @@
 #import "LSVProgressHUD.h"
 #import "RunInfo.h"
 #import "ConfManager.h"
+#import "OSSManager.h"
 
 #endif /* PrefixHeader_pch */

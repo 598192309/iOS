@@ -19,7 +19,9 @@
         NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
         NSDictionary *conf = [def objectForKey:@"Conf"];
         if (conf == nil) {
-            conf = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Conf" ofType:@"plist"]];
+            NSDictionary *defaultDic = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Conf" ofType:@"plist"]];
+            conf = [defaultDic safeObjectForKey:@"Conf"];
+            
         }
         //初始化设置conf
         sharedInstance.conf = conf;
