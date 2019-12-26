@@ -83,8 +83,12 @@
              make.top.mas_equalTo(weakSelf.zhuceView.mas_bottom).offset(Adaptor_Value(-20));
          }];
         
+        [self.timeBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+              make.centerX.mas_equalTo(weakSelf.tipView).offset(-Adaptor_Value(20));
+              
+          }];
         self.totalTipLabel.text = LanguageStrings(@"used");
-        [self.timeBtn setTitle:@"" forState:UIControlStateNormal];
+        [self.timeBtn setTitle:@"202020202" forState:UIControlStateNormal];
         NSArray *arr = [ConfManager.shared contentWith:@"version"];
         [self.tipBtn setTitle:[arr safeObjectAtIndex:0] forState:UIControlStateNormal];
         [self.tipBtn setTitleColor:TitleGrayColor forState:UIControlStateNormal];
@@ -110,6 +114,10 @@
              make.top.mas_equalTo(weakSelf.zhuceView.mas_bottom).offset(Adaptor_Value(25));
          }];
         
+        [self.timeBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.centerX.mas_equalTo(weakSelf.tipView);
+                     
+        }];
         self.totalTipLabel.text = @"";
         [self.timeBtn setTitle:@"" forState:UIControlStateNormal];
         NSArray *arr = [ConfManager.shared contentWith:@"version"];
@@ -232,11 +240,11 @@
         _updateBtn.backgroundColor = LihgtGreenColor;
         ViewRadius(_updateBtn, Adaptor_Value(5));
         
-        _totalTipLabel = [UILabel lableWithText:LanguageStrings(@"used") textColor:[UIColor lq_colorWithHexString:@"#616161"] fontSize:AdaptedFontSize(13) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
+        _totalTipLabel = [UILabel lableWithText:LanguageStrings(@"used") textColor:[UIColor whiteColor] fontSize:AdaptedFontSize(13) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
         [_tipView addSubview:_totalTipLabel];
         [_totalTipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(weakSelf.tipView);
-            make.top.mas_equalTo(weakSelf.updateBtn.mas_bottom).offset(Adaptor_Value(20));
+            make.top.mas_equalTo(weakSelf.updateBtn.mas_bottom).offset(Adaptor_Value(15));
         }];
         
         _textFBackView = [UIView new];
