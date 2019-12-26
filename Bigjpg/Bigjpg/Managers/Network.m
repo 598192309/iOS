@@ -193,35 +193,10 @@
             failure(task,[NSError lq_errorWithMsg:@"数据格式错误" domain:@"Response Error" code:10000]);
             return;
         }
-//        NSArray*cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
     }else{
         obj = responseObject;
     }
-    
-            
-    NSString *status = SAFE_VALUE_FOR_KEY(obj, @"status");//ok代表成功
-    if([status isEqualToString:@"ok"]){
-        success(task,obj);
-    }else{
-        NSString *errroMsg = status;
-        if ([status isEqualToString:@"error"]) {
-            errroMsg = @"参数错误";
-        } else if ([status isEqualToString:@"not_exist"]) {
-            errroMsg = @"用户不存在";
-        } else if ([status isEqualToString:@"password_error"]) {
-            errroMsg = @"密码错误";
-        } else if ([status isEqualToString:@"no_login"]) {
-            errroMsg = @"没有登陆";
-        }
-          
-        failure(task,[NSError lq_errorWithMsg:errroMsg domain:@"Response Error" code:10000]);
-    }
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-           [defaults setObject:obj forKey:@"Conf"];
-           [defaults synchronize];
-           NSString *a = NSHomeDirectory();
-    
-    
+    success(task,obj);
 }
 
 /**

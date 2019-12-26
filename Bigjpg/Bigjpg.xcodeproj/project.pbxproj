@@ -39,7 +39,9 @@
 		4920AED123AD32D800FE7A65 /* RunInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4920AECE23AD32D800FE7A65 /* RunInfo.m */; };
 		4920AED623AD33AB00FE7A65 /* KeyNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 4920AED323AD33AB00FE7A65 /* KeyNotification.m */; };
 		4920AEDB23B0598D00FE7A65 /* I_Account.m in Sources */ = {isa = PBXBuildFile; fileRef = 4920AEDA23B0598D00FE7A65 /* I_Account.m */; };
-		4920AEDE23B085B900FE7A65 /* M_Account.m in Sources */ = {isa = PBXBuildFile; fileRef = 4920AEDD23B085B900FE7A65 /* M_Account.m */; };
+		4920AEDE23B085B900FE7A65 /* M_User.m in Sources */ = {isa = PBXBuildFile; fileRef = 4920AEDD23B085B900FE7A65 /* M_User.m */; };
+		495435C423B4AAD2008CCB60 /* M_Enlarge.m in Sources */ = {isa = PBXBuildFile; fileRef = 495435C323B4AAD2008CCB60 /* M_Enlarge.m */; };
+		495435C723B4BE66008CCB60 /* I_Enlarge.m in Sources */ = {isa = PBXBuildFile; fileRef = 495435C623B4BE66008CCB60 /* I_Enlarge.m */; };
 		496DA06F23AD114400DDB905 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 496DA06E23AD114400DDB905 /* AppDelegate.m */; };
 		496DA07523AD114400DDB905 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 496DA07423AD114400DDB905 /* ViewController.m */; };
 		496DA07823AD114400DDB905 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 496DA07623AD114400DDB905 /* Main.storyboard */; };
@@ -116,8 +118,12 @@
 		4920AED523AD33AB00FE7A65 /* KeyNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyNotification.h; sourceTree = "<group>"; };
 		4920AED923B0598D00FE7A65 /* I_Account.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = I_Account.h; sourceTree = "<group>"; };
 		4920AEDA23B0598D00FE7A65 /* I_Account.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = I_Account.m; sourceTree = "<group>"; };
-		4920AEDC23B085B900FE7A65 /* M_Account.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = M_Account.h; sourceTree = "<group>"; };
-		4920AEDD23B085B900FE7A65 /* M_Account.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = M_Account.m; sourceTree = "<group>"; };
+		4920AEDC23B085B900FE7A65 /* M_User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = M_User.h; sourceTree = "<group>"; };
+		4920AEDD23B085B900FE7A65 /* M_User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = M_User.m; sourceTree = "<group>"; };
+		495435C223B4AAD2008CCB60 /* M_Enlarge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = M_Enlarge.h; sourceTree = "<group>"; };
+		495435C323B4AAD2008CCB60 /* M_Enlarge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = M_Enlarge.m; sourceTree = "<group>"; };
+		495435C523B4BE66008CCB60 /* I_Enlarge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = I_Enlarge.h; sourceTree = "<group>"; };
+		495435C623B4BE66008CCB60 /* I_Enlarge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = I_Enlarge.m; sourceTree = "<group>"; };
 		496DA06A23AD114400DDB905 /* Bigjpg.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bigjpg.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		496DA06D23AD114400DDB905 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		496DA06E23AD114400DDB905 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -234,8 +240,8 @@
 		11790BF023B1B902003E6792 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				11790BF123B1B902003E6792 /* HomeViewController.m */,
 				11790BF223B1B902003E6792 /* HomeViewController.h */,
+				11790BF123B1B902003E6792 /* HomeViewController.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -342,8 +348,10 @@
 			children = (
 				4920AEA423AD2CC100FE7A65 /* M_Base.h */,
 				4920AE9E23AD2CC100FE7A65 /* M_Base.m */,
-				4920AEDC23B085B900FE7A65 /* M_Account.h */,
-				4920AEDD23B085B900FE7A65 /* M_Account.m */,
+				4920AEDC23B085B900FE7A65 /* M_User.h */,
+				4920AEDD23B085B900FE7A65 /* M_User.m */,
+				495435C223B4AAD2008CCB60 /* M_Enlarge.h */,
+				495435C323B4AAD2008CCB60 /* M_Enlarge.m */,
 			);
 			path = Define;
 			sourceTree = "<group>";
@@ -355,6 +363,8 @@
 				4920AEA123AD2CC100FE7A65 /* I_Base.m */,
 				4920AED923B0598D00FE7A65 /* I_Account.h */,
 				4920AEDA23B0598D00FE7A65 /* I_Account.m */,
+				495435C523B4BE66008CCB60 /* I_Enlarge.h */,
+				495435C623B4BE66008CCB60 /* I_Enlarge.m */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -546,6 +556,7 @@
 				4920AEAB23AD2CC100FE7A65 /* BaseNavgationController.m in Sources */,
 				1118105A23B36FD700BEE5EF /* HistoryCell.m in Sources */,
 				4920AEDB23B0598D00FE7A65 /* I_Account.m in Sources */,
+				495435C423B4AAD2008CCB60 /* M_Enlarge.m in Sources */,
 				118FED4723B215CB0055E56C /* SettingCell.m in Sources */,
 				4920AEAA23AD2CC100FE7A65 /* M_Base.m in Sources */,
 				4920AEAD23AD2CC100FE7A65 /* BaseTableViewController.m in Sources */,
@@ -558,12 +569,13 @@
 				4920AED123AD32D800FE7A65 /* RunInfo.m in Sources */,
 				496DA06F23AD114400DDB905 /* AppDelegate.m in Sources */,
 				095CB7CD23B3B0E0003CF4C6 /* ConfManager.m in Sources */,
+				495435C723B4BE66008CCB60 /* I_Enlarge.m in Sources */,
 				4920AEA823AD2CC100FE7A65 /* BaseCollectionViewController.m in Sources */,
 				1118105323B3432F00BEE5EF /* LSVProgressHUD.m in Sources */,
 				4920AED023AD32D800FE7A65 /* Network.m in Sources */,
 				1118104523B30E5D00BEE5EF /* SetConfigChooseCell.m in Sources */,
 				496DA08023AD114500DDB905 /* main.m in Sources */,
-				4920AEDE23B085B900FE7A65 /* M_Account.m in Sources */,
+				4920AEDE23B085B900FE7A65 /* M_User.m in Sources */,
 				11790BF823B1B902003E6792 /* LoginViewController.m in Sources */,
 				11790BF623B1B902003E6792 /* SettingViewController.m in Sources */,
 				1118103F23B30A4400BEE5EF /* CustomActivity.m in Sources */,

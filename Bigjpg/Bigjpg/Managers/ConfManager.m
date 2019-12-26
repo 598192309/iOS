@@ -127,7 +127,7 @@
         } else if ([currentLanguage containsString:@"ru"]) {
             return @"ru";
         } else {
-            return @"zh";
+            return @"en";
         }
     }
     return language;
