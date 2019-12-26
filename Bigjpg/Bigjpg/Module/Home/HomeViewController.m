@@ -46,7 +46,15 @@
         __weak typeof(self) weakSelf = self;
         [actionSheet setSelectImageBlock:^(NSArray<UIImage *> * _Nullable images, NSArray<PHAsset *> * _Nonnull assets, BOOL isOriginal) {
             [ZLPhotoManager anialysisAssets:assets original:YES completion:^(NSArray<UIImage *> * _Nonnull images) {
-                
+                [OSSManager asyncUploadImage:images[0] objectKey:@"aaa" progress:^(int64_t bytesSent, int64_t totalByteSent, int64_t totalBytesExpectedToSend) {
+                    
+                } success:^(OSSTask * _Nonnull task) {
+                    OSSPutObjectResult *result = task.result;
+                    
+                    NSLog(@"%@",result);
+                } failure:^(NSError * _Nonnull error) {
+                    
+                }];
             }];
             
 //            [AV showLoading:@"正在上传"];
