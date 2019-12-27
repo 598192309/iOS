@@ -69,4 +69,10 @@ failure:(void (^)(NSError *error))failure {
         }];
     });
 }
+
++ (NSString *)getOSSUrl{
+//    https://oss-accelerate.aliyuncs.com
+    NSArray *arr = [[ConfManager.shared oss_endpoint] componentsSeparatedByString:@"//"];
+    return [NSString stringWithFormat:@"%@//%@.%@",[arr safeObjectAtIndex:0],[ConfManager.shared oss_bucket],[arr safeObjectAtIndex:1]];
+}
 @end

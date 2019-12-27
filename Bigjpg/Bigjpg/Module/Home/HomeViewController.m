@@ -8,6 +8,7 @@
 
 #import "HomeViewController.h"
 #import <ZLPhotoBrowser/ZLPhotoBrowser.h>
+#import "I_Enlarge.h"
 @interface HomeViewController ()
 
 @end
@@ -45,13 +46,42 @@
         
         __weak typeof(self) weakSelf = self;
         [actionSheet setSelectImageBlock:^(NSArray<UIImage *> * _Nullable images, NSArray<PHAsset *> * _Nonnull assets, BOOL isOriginal) {
+            
+            
+            for (PHAsset *ass in assets) {
+                [[PHImageManager defaultManager] requestImageDataForAsset:ass options:nil resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, UIImageOrientation orientation, NSDictionary * _Nullable info) {
+                    
+                }];
+            }
+            
+            return ;
             [ZLPhotoManager anialysisAssets:assets original:YES completion:^(NSArray<UIImage *> * _Nonnull images) {
-                [OSSManager asyncUploadImage:images[0] objectKey:@"aaa" progress:^(int64_t bytesSent, int64_t totalByteSent, int64_t totalBytesExpectedToSend) {
+                NSMutableArray *arr = [NSMutableArray array];
+                for (UIImage * img in images) {
+                    M_EnlargeConf *conf = [[M_EnlargeConf alloc] init];
+                    NSData *data = UIImagePNGRepresentation(img);
+                    conf.files_size = data.length;
+                    conf.file_width = img.size.width;
+                    conf.file_height = img.size.height;
+                    conf.file_name = [NSString stringWithFormat:@"ios-%@",[NSDate date].description];
+                    conf.x2 = 3;
+                    conf.noise =3;
+                    conf.style = @"art";
+                    
+                    
+                }
+                
+                
+                NSString *objectKey = @"afsa";
+                [OSSManager asyncUploadImage:images[0] objectKey:objectKey progress:^(int64_t bytesSent, int64_t totalByteSent, int64_t totalBytesExpectedToSend) {
                     
                 } success:^(OSSTask * _Nonnull task) {
-                    OSSPutObjectResult *result = task.result;
+//                    OSSPutObjectResult *result = task.result;
+                    NSString *input = [NSString stringWithFormat:@"%@/%@",[OSSManager getOSSUrl],objectKey];
                     
-                    NSLog(@"%@",result);
+//                    [I_Enlarge createEnlargeTask:1 style:@"art" noise:4 fileName:@"" fileSize:<#(long)#> fileHeight:<#(long)#> fileWidth:<#(long)#> input:<#(nonnull NSString *)#> success:<#^(NSString * _Nonnull fid, NSInteger time)successBlock#> failure:<#^(NSError *error)failureBlock#>]
+                    
+                    
                 } failure:^(NSError * _Nonnull error) {
                     
                 }];

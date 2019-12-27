@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)asyncUploadImage:(UIImage *)image objectKey:(NSString *)objectKey progress:(void(^)(int64_t bytesSent, int64_t totalByteSent, int64_t totalBytesExpectedToSend))progress success:(void (^)(OSSTask *task))success
 failure:(void (^)(NSError *error))failure;
 
++ (NSString *)getOSSUrl;
+
 @end
 
 NS_ASSUME_NONNULL_END

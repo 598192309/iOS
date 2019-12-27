@@ -510,7 +510,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		5F5C5B7EC2E1E5FCD5A69ECE /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputFileListPaths = (
@@ -520,7 +520,7 @@
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Bigjpg/Pods-Bigjpg-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Bigjpg/Pods-Bigjpg-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
@@ -734,7 +734,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ATBJJ8434Q;
+				DEVELOPMENT_TEAM = RBSX9MVBF6;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(TARGET_NAME)/PrefixHeader.pch";
 				INFOPLIST_FILE = Bigjpg/Info.plist;
@@ -790,7 +790,7 @@
 					"\"ZLPhotoBrowser\"",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lqlq;
+				PRODUCT_BUNDLE_IDENTIFIER = lqqvslq;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -802,7 +802,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ATBJJ8434Q;
+				DEVELOPMENT_TEAM = RBSX9MVBF6;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(TARGET_NAME)/PrefixHeader.pch";
 				INFOPLIST_FILE = Bigjpg/Info.plist;
@@ -858,7 +858,7 @@
 					"\"ZLPhotoBrowser\"",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lqlq;
+				PRODUCT_BUNDLE_IDENTIFIER = lqqvslq;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
