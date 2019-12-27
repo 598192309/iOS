@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 //图片oss地址
 @property (nonatomic, copy) NSString *input;
 //消耗时间 （放大完成后历史l记录会有)
-@property (nonatomic, assign) NSInteger time;
+//@property (nonatomic, assign) NSInteger time;
 @end
 
 

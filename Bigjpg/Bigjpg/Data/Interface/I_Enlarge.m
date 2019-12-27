@@ -75,7 +75,7 @@ fileHeight:(long)fileHeight
    success:(void(^)(NSString *fid, NSInteger time))successBlock
    failure:(ErrorBlock)failureBlock {
     
-    NSDictionary *jsonDic = @{@"x2":@(x2),@"style":SAFE_NIL_STRING(style),@"noise":@(noise),@"file_name":SAFE_NIL_STRING(fileName),@"files_size":@(fileSize),@"file_height":@(fileHeight),@"file_width":@(filetWidth),@"input":SAFE_NIL_STRING(input)};
+    NSDictionary *jsonDic = @{@"x2":@"1",@"style":SAFE_NIL_STRING(style),@"noise":@"1",@"file_name":SAFE_NIL_STRING(fileName),@"files_size":@(fileSize),@"file_height":@(fileHeight),@"file_width":@(filetWidth),@"input":SAFE_NIL_STRING(input)};
     
     NSString *value = [jsonDic mj_JSONString];
     NSDictionary *params = @{@"conf":SAFE_NIL_STRING(value)};
@@ -98,19 +98,6 @@ fileHeight:(long)fileHeight
 success:(void(^)(NSString *fid, NSInteger time))successBlock
 failure:(ErrorBlock)failureBlock
 {
-    NSString *value = [conf mj_JSONString];
-    NSDictionary *params = @{@"conf":SAFE_NIL_STRING(value)};
-    return [NET POST:@"task" parameters:params criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
-        NSString *status = SAFE_VALUE_FOR_KEY(resultObject, @"status");//ok代表成功
-        if([status isEqualToString:@"ok"]){
-            NSString *fid = SAFE_VALUE_FOR_KEY(resultObject, @"info");
-            NSInteger time = [SAFE_VALUE_FOR_KEY(resultObject, @"time") integerValue];
-            successBlock(fid,time);
-        }else{
-            failureBlock([NSError lq_errorWithMsg:status domain:@"Response Error" code:10000]);
-        }
-    } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error) {
-        failureBlock(error);
-    }];
+    return [self createEnlargeTask:conf.x2 style:conf.style noise:conf.noise fileName:conf.file_name fileSize:conf.files_size fileHeight:conf.file_height fileWidth:conf.file_width input:conf.input success:successBlock failure:failureBlock];
 }
 @end

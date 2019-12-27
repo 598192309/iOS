@@ -36,7 +36,7 @@
 
 }
 
-+ (void)asyncUploadImage:(UIImage *)image objectKey:(NSString *)objectKey progress:(void(^)(int64_t bytesSent, int64_t totalByteSent, int64_t totalBytesExpectedToSend))progress success:(void (^)(OSSTask *task))success
++ (void)asyncUploadData:(NSData *)data objectKey:(NSString *)objectKey progress:(void(^)(int64_t bytesSent, int64_t totalByteSent, int64_t totalBytesExpectedToSend))progress success:(void (^)(OSSTask *task))success
 failure:(void (^)(NSError *error))failure {
     if (![objectKey oss_isNotEmpty]) {
         NSError *error = [NSError errorWithDomain:NSInvalidArgumentException code:0 userInfo:@{NSLocalizedDescriptionKey: @"objectKey should not be nil"}];
@@ -47,7 +47,7 @@ failure:(void (^)(NSError *error))failure {
     OSSPutObjectRequest * put = [OSSPutObjectRequest new];
     put.bucketName = [ConfManager.shared oss_bucket];
     put.objectKey = objectKey;
-    put.uploadingData = UIImagePNGRepresentation(image);
+    put.uploadingData = data;
     put.uploadProgress = ^(int64_t bytesSent, int64_t totalByteSent, int64_t totalBytesExpectedToSend) {
         progress(bytesSent,totalByteSent,totalBytesExpectedToSend);
         float pro = 1.f * totalByteSent / totalBytesExpectedToSend;

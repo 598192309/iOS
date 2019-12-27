@@ -14,8 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface OSSManager : NSObject
 + (OSSManager *)shared;
 
-+ (void)asyncUploadImage:(UIImage *)image objectKey:(NSString *)objectKey progress:(void(^)(int64_t bytesSent, int64_t totalByteSent, int64_t totalBytesExpectedToSend))progress success:(void (^)(OSSTask *task))success
-failure:(void (^)(NSError *error))failure;
++ (void)asyncUploadData:(NSData *)data objectKey:(NSString *)objectKey progress:(void(^)(int64_t bytesSent, int64_t totalByteSent, int64_t totalBytesExpectedToSend))progress success:(void (^)(OSSTask *task))success
+                failure:(void (^)(NSError *error))failure;
 
 + (NSString *)getOSSUrl;
 

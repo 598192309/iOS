@@ -510,7 +510,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		5F5C5B7EC2E1E5FCD5A69ECE /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
+			buildActionMask = 12;
 			files = (
 			);
 			inputFileListPaths = (
@@ -520,7 +520,7 @@
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Bigjpg/Pods-Bigjpg-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Bigjpg/Pods-Bigjpg-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;

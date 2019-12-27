@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 获取语言配置、oss配置
 /// @param successBlock 成功回调
 /// @param failureBlock 失败回调
-+ (NetworkTask *)requestConfOnSuccess:(void(^)(void))successBlock failure:(ErrorBlock)failureBlock;
++ (NetworkTask *)requestConfOnSuccess:(void(^)(NSDictionary *confDic))successBlock failure:(ErrorBlock)failureBlock;
 
 @end
 
