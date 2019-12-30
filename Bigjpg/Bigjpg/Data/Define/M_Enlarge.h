@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 //图片oss地址
 @property (nonatomic, copy) NSString *input;
 //消耗时间 （放大完成后历史l记录会有)
-//@property (nonatomic, assign) NSInteger time;
+@property (nonatomic, assign) NSInteger time;
 @end
 
 
@@ -49,6 +49,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) M_EnlargeConf *conf;
 //创建时间
 @property (nonatomic, copy) NSString *createTime;
+@end
+
+@interface M_EnlargeUpload : M_EnlargeHistory
+//上传图片数据
+@property (nonatomic, strong) NSData *imageData;
+//size是否超出限制
+@property (nonatomic, assign) BOOL isOverSize;
+//图片尺寸
+@property (nonatomic, strong) NSString *imageSizeStr;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -19,3 +19,8 @@
 @implementation M_EnlargeHistory
 
 @end
+
+@implementation M_EnlargeUpload
+
+
+@end
