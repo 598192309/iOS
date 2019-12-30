@@ -48,16 +48,29 @@ NS_ASSUME_NONNULL_BEGIN
 //放大参数
 @property (nonatomic, strong) M_EnlargeConf *conf;
 //创建时间
-@property (nonatomic, copy) NSString *createTime;
+@property (nonatomic, copy) NSDate *createTime;
 @end
+
+//上传步骤
+typedef NS_ENUM(NSInteger, EnlargeUploadStep) {
+    EnlargeUploadStepInitialize = 0,//初始化
+    EnlargeUploadStepOverSize,//size超出限制
+    EnlargeUploadStepDataUploading,//Data上传中
+    EnlargeUploadStepDataUploadFail ,//Data上传失败
+    EnlargeUploadStepEnlargeingNew,//放大状态new
+    EnlargeUploadStepEnlargeingProcess,//放大状态process
+    EnlargeUploadStepEnlargeError,//放大失败error
+    EnlargeUploadStepEnlargeSuccess,//放大成功sucess
+    
+};
 
 @interface M_EnlargeUpload : M_EnlargeHistory
 //上传图片数据
 @property (nonatomic, strong) NSData *imageData;
-//size是否超出限制
-@property (nonatomic, assign) BOOL isOverSize;
 //图片尺寸
 @property (nonatomic, strong) NSString *imageSizeStr;
+//上传步骤
+@property (nonatomic, assign) EnlargeUploadStep uploadStep;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -11,9 +11,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HomeTableViewCell : UITableViewCell
-
-
-
 @property (nonatomic, strong) M_EnlargeUpload *upload;
 @end
 

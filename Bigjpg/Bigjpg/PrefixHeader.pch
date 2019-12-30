@@ -12,7 +12,7 @@
 #import "Network.h"
 #import <MJExtension/MJExtension.h>
 #import <LqTool/LqTool.h>
-
+#import "ThemeProvider.h"
 #import <Masonry.h>
 
 #import "CommMacro.h"

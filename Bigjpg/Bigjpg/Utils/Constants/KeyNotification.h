@@ -15,3 +15,6 @@ extern NSString* const kUserSignIn;
 extern NSString* const kUserSignOut;
 
 extern NSString* const kIsNight;//夜间模式
+
+
+extern NSString *const  kEnlargeConfigarationFinishNoti;//配置好放大配置通知

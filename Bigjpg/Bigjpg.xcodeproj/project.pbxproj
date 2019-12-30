@@ -41,6 +41,7 @@
 		4920AED623AD33AB00FE7A65 /* KeyNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 4920AED323AD33AB00FE7A65 /* KeyNotification.m */; };
 		4920AEDB23B0598D00FE7A65 /* I_Account.m in Sources */ = {isa = PBXBuildFile; fileRef = 4920AEDA23B0598D00FE7A65 /* I_Account.m */; };
 		4920AEDE23B085B900FE7A65 /* M_User.m in Sources */ = {isa = PBXBuildFile; fileRef = 4920AEDD23B085B900FE7A65 /* M_User.m */; };
+		494CBA0623BA443B00931405 /* EnlargeConfViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 494CBA0523BA443B00931405 /* EnlargeConfViewController.m */; };
 		495435C423B4AAD2008CCB60 /* M_Enlarge.m in Sources */ = {isa = PBXBuildFile; fileRef = 495435C323B4AAD2008CCB60 /* M_Enlarge.m */; };
 		495435C723B4BE66008CCB60 /* I_Enlarge.m in Sources */ = {isa = PBXBuildFile; fileRef = 495435C623B4BE66008CCB60 /* I_Enlarge.m */; };
 		496DA06F23AD114400DDB905 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 496DA06E23AD114400DDB905 /* AppDelegate.m */; };
@@ -125,6 +126,8 @@
 		4920AEDA23B0598D00FE7A65 /* I_Account.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = I_Account.m; sourceTree = "<group>"; };
 		4920AEDC23B085B900FE7A65 /* M_User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = M_User.h; sourceTree = "<group>"; };
 		4920AEDD23B085B900FE7A65 /* M_User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = M_User.m; sourceTree = "<group>"; };
+		494CBA0423BA443B00931405 /* EnlargeConfViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnlargeConfViewController.h; sourceTree = "<group>"; };
+		494CBA0523BA443B00931405 /* EnlargeConfViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EnlargeConfViewController.m; sourceTree = "<group>"; };
 		495435C223B4AAD2008CCB60 /* M_Enlarge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = M_Enlarge.h; sourceTree = "<group>"; };
 		495435C323B4AAD2008CCB60 /* M_Enlarge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = M_Enlarge.m; sourceTree = "<group>"; };
 		495435C523B4BE66008CCB60 /* I_Enlarge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = I_Enlarge.h; sourceTree = "<group>"; };
@@ -253,6 +256,8 @@
 				11790BF123B1B902003E6792 /* HomeViewController.m */,
 				49113ED523B65E5600F3407C /* HomeTableViewCell.h */,
 				49113ED623B65E5600F3407C /* HomeTableViewCell.m */,
+				494CBA0423BA443B00931405 /* EnlargeConfViewController.h */,
+				494CBA0523BA443B00931405 /* EnlargeConfViewController.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -575,6 +580,7 @@
 				4920AEAA23AD2CC100FE7A65 /* M_Base.m in Sources */,
 				4920AEAD23AD2CC100FE7A65 /* BaseTableViewController.m in Sources */,
 				1118104D23B33C2500BEE5EF /* CustomTableAlertView.m in Sources */,
+				494CBA0623BA443B00931405 /* EnlargeConfViewController.m in Sources */,
 				1118104223B30BB400BEE5EF /* SetConfigViewController.m in Sources */,
 				4920AEAC23AD2CC100FE7A65 /* I_Base.m in Sources */,
 				496DA07523AD114400DDB905 /* ViewController.m in Sources */,

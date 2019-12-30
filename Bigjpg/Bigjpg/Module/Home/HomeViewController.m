@@ -16,6 +16,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *describerLabel;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray<M_EnlargeUpload *> *dataSource;
+
+@property (nonatomic, strong) NSMutableArray *pollingFids;
+@property (nonatomic, strong) NSTimer *timer;
 @end
 
 @implementation HomeViewController
@@ -30,9 +33,70 @@
 #pragma mark LifeCircle
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _pollingFids = [NSMutableArray array];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(enlargeConfSuccess:) name:kEnlargeConfigarationFinishNoti object:nil];
     _dataSource = [NSMutableArray<M_EnlargeUpload *> array];
     
+    
 
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    if (_timer == nil) {
+        self.timer = [NSTimer timerWithTimeInterval:3 target:self selector:@selector(polling) userInfo:nil repeats:YES];
+        [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
+        [self.timer setFireDate:[NSDate date]];
+    }
+}
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [self.timer invalidate];
+    self.timer = nil;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)polling
+{
+    if (self.pollingFids.count == 0) {
+        [self.tableView reloadData];
+        return;
+   }
+    if (self.isVisible) {
+        __weak __typeof(self) weakSelf = self;
+       
+        [I_Enlarge getEnlargeTasksStatus:self.pollingFids success:^(NSMutableArray<M_Enlarge *> * _Nonnull taskList) {
+            for (M_Enlarge *task in taskList) {
+                for (M_EnlargeUpload *upload in self.dataSource) {
+                    if ([task.fid isEqualToString:upload.fid]) {
+                        upload.status = task.status;
+                        if ([task.status isEqualToString:@"new"]) {
+                            upload.uploadStep = EnlargeUploadStepEnlargeingNew;
+                        } else if ([task.status isEqualToString:@"process"]) {
+                            upload.uploadStep = EnlargeUploadStepEnlargeingProcess;
+                        } else if ([task.status isEqualToString:@"error"]) {
+                            upload.uploadStep = EnlargeUploadStepEnlargeError;
+                        } else if ([task.status isEqualToString:@"success"]) {
+                            upload.uploadStep = EnlargeUploadStepEnlargeingProcess;
+                             [weakSelf.pollingFids removeObject:task.fid];
+                        }
+
+                    }
+                }
+            }
+            
+            [weakSelf.tableView reloadData];
+        } failure:^(NSError *error) {
+            
+        }];
+    }
 }
 
 #pragma mark Action
@@ -63,24 +127,23 @@
                 upload.imageData = imageData;
                 NSString *sizeStr = @"";
                 if (imageData.length < 1024) {
-                    sizeStr = [NSString stringWithFormat:@"%dbytes",imageData.length];
+                    sizeStr = [NSString stringWithFormat:@"%dbytes",(NSInteger)imageData.length];
                 } else if (imageData.length / 1024.0 < 1024) {
                     sizeStr = [NSString stringWithFormat:@"%.1fkb",imageData.length/1024.0];
                 } else {
                     sizeStr = [NSString stringWithFormat:@"%.1fM",imageData.length/1024.0/1024.0];
                 }
-                upload.imageSizeStr = [NSString stringWithFormat:@"%@,%dx%dpx",sizeStr,image.size.width,image.size.height];
+                CGFloat imageWidth = image.size.width;
+                CGFloat imageHeight = image.size.height;
+                upload.imageSizeStr = [NSString stringWithFormat:@"%@,%.0fx%.0fpx",sizeStr,imageWidth,imageHeight];
                 if (imageData.length / 1024.0 / 1024.0 > 10 || image.size.width > 3000 || image.size.height > 3000) {
-                    upload.isOverSize = YES;
+                    upload.uploadStep = EnlargeUploadStepOverSize;
                 }
                 M_EnlargeConf *conf = [[M_EnlargeConf alloc] init];
                 conf.files_size = imageData.length;
-                conf.file_width = image.size.width;
-                conf.file_height = image.size.height;
+                conf.file_width = imageWidth;
+                conf.file_height = imageHeight;
                 conf.file_name = [NSString stringWithFormat:@"ios/%@/%@",[LqToolKit stringFromDate:[NSDate date] formatterString:@"yyyy-MM-dd/hh-mm-ss"],name];
-                conf.x2 = 3;
-                conf.noise =3;
-                conf.style = @"art";
                 upload.conf = conf;
                 
                 [weakSelf.dataSource insertObject:upload atIndex:0];
@@ -94,6 +157,74 @@
 
     }];
     [actionSheet showPhotoLibrary];
+}
+
+
+#pragma mark Noti
+- (void)enlargeConfSuccess:(NSNotification *)noti
+{
+    NSDictionary *info = noti.object;
+    BOOL enlargeAll = [[info safeObjectForKey:@"enlargeAll"]boolValue];
+    M_EnlargeConf *conf = [info safeObjectForKey:@"conf"];
+    
+    NSMutableArray *list = [NSMutableArray array];
+    if (enlargeAll) {
+        for (M_EnlargeUpload *upload in self.dataSource) {
+            if (upload.uploadStep == EnlargeUploadStepInitialize) {
+                upload.conf.x2 = conf.x2;
+                upload.conf.style = conf.style;
+                upload.conf.noise = conf.noise;
+                [list addObject:upload];
+            }
+        }
+    } else {
+        M_EnlargeUpload *upload = [info safeObjectForKey:@"upload"];
+        upload.conf.x2 = conf.x2;
+        upload.conf.style = conf.style;
+        upload.conf.noise = conf.noise;
+        [list addObject:upload];
+    }
+    __weak __typeof(self) weakSelf = self;
+    for (M_EnlargeUpload *upload in list) {
+        //OSS上传中
+        upload.uploadStep = EnlargeUploadStepDataUploading;
+        [weakSelf.tableView reloadData];
+        [OSSManager asyncUploadData:upload.imageData objectKey:upload.conf.file_name progress:^(int64_t bytesSent, int64_t totalByteSent, int64_t totalBytesExpectedToSend) {
+            
+        } success:^(OSSTask * _Nonnull task) {
+            if (task.error) {
+                //OSS上传失败
+                upload.uploadStep = EnlargeUploadStepDataUploadFail;
+                [weakSelf.tableView reloadData];
+            } else {
+                NSString *input = [NSString stringWithFormat:@"%@/%@",[OSSManager  getOSSUrl],upload.conf.file_name];
+                
+                upload.conf.input = input;
+                //放大数据上传中
+                upload.uploadStep = EnlargeUploadStepDataUploading;
+                [weakSelf.tableView reloadData];
+                [I_Enlarge createEnlargeTaskWith:upload.conf success:^(NSString * _Nonnull fid, NSInteger time) {
+                    //放大数据上传成功
+                    upload.uploadStep = EnlargeUploadStepEnlargeingNew;
+                    upload.fid = fid;
+                    upload.conf.time = time;
+                    upload.createTime = [NSDate date];
+                    [weakSelf.pollingFids addObject:upload.fid];
+                    [weakSelf.tableView reloadData];
+                } failure:^(NSError *error) {
+                    //放大数据上传失败
+                    upload.uploadStep = EnlargeUploadStepDataUploadFail;
+                    [weakSelf.tableView reloadData];
+                }];
+                
+            }
+        } failure:^(NSError * _Nonnull error) {
+            //OSS上传失败
+            upload.uploadStep = EnlargeUploadStepDataUploadFail;
+            [weakSelf.tableView reloadData];
+        }];
+    }
+    
 }
 
 
