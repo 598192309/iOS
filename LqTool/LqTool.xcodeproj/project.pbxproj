@@ -32,6 +32,8 @@
 		4920AEBB23AD319900FE7A65 /* LqNoPasteTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4920AEB923AD319900FE7A65 /* LqNoPasteTextField.m */; };
 		4920AEBE23AD31DC00FE7A65 /* LqTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4920AEBC23AD31DC00FE7A65 /* LqTextView.h */; };
 		4920AEBF23AD31DC00FE7A65 /* LqTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4920AEBD23AD31DC00FE7A65 /* LqTextView.m */; };
+		4958EA0223BB1A21000C495B /* SystemAlertViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4958EA0023BB1A21000C495B /* SystemAlertViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4958EA0323BB1A21000C495B /* SystemAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4958EA0123BB1A21000C495B /* SystemAlertViewController.m */; };
 		496DA05B23AD111900DDB905 /* LqTool.h in Headers */ = {isa = PBXBuildFile; fileRef = 496DA05923AD111900DDB905 /* LqTool.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		496DA08823AD170E00DDB905 /* UIColor+LqExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = 496DA08623AD170E00DDB905 /* UIColor+LqExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		496DA08923AD170E00DDB905 /* UIColor+LqExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 496DA08723AD170E00DDB905 /* UIColor+LqExtension.m */; };
@@ -79,6 +81,8 @@
 		4920AEB923AD319900FE7A65 /* LqNoPasteTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LqNoPasteTextField.m; sourceTree = "<group>"; };
 		4920AEBC23AD31DC00FE7A65 /* LqTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LqTextView.h; sourceTree = "<group>"; };
 		4920AEBD23AD31DC00FE7A65 /* LqTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LqTextView.m; sourceTree = "<group>"; };
+		4958EA0023BB1A21000C495B /* SystemAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemAlertViewController.h; sourceTree = "<group>"; };
+		4958EA0123BB1A21000C495B /* SystemAlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemAlertViewController.m; sourceTree = "<group>"; };
 		496DA05623AD111900DDB905 /* LqTool.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LqTool.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		496DA05923AD111900DDB905 /* LqTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LqTool.h; sourceTree = "<group>"; };
 		496DA05A23AD111900DDB905 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -190,6 +194,8 @@
 				4920AE8A23AD273F00FE7A65 /* RSAEncryptor.m */,
 				4920AE9223AD289700FE7A65 /* SafeControl.h */,
 				4920AE9123AD289700FE7A65 /* SafeControl.m */,
+				4958EA0023BB1A21000C495B /* SystemAlertViewController.h */,
+				4958EA0123BB1A21000C495B /* SystemAlertViewController.m */,
 				4920AEB323AD30F900FE7A65 /* Widget */,
 				4920AE8023AD24F700FE7A65 /* Extension */,
 				496DA05A23AD111900DDB905 /* Info.plist */,
@@ -209,6 +215,7 @@
 				496DA0A223AD1E3700DDB905 /* NSFileManager+LqExtension.h in Headers */,
 				4920AE8323AD252A00FE7A65 /* LqSandBox.h in Headers */,
 				4920AE8723AD26B900FE7A65 /* LqWGS84TOGCJ02.h in Headers */,
+				4958EA0223BB1A21000C495B /* SystemAlertViewController.h in Headers */,
 				4920AE9423AD289700FE7A65 /* SafeControl.h in Headers */,
 				496DA0A623AD1F1300DDB905 /* NSString+LqExtension.h in Headers */,
 				4920AEBA23AD319900FE7A65 /* LqNoPasteTextField.h in Headers */,
@@ -314,6 +321,7 @@
 				496DA08F23AD18A500DDB905 /* UIImage+LqExtension.m in Sources */,
 				4920AE8423AD252A00FE7A65 /* LqSandBox.m in Sources */,
 				496DA0AB23AD1FE100DDB905 /* UIImageView+LqExtension.m in Sources */,
+				4958EA0323BB1A21000C495B /* SystemAlertViewController.m in Sources */,
 				496DA08923AD170E00DDB905 /* UIColor+LqExtension.m in Sources */,
 				496DA0A323AD1E3700DDB905 /* NSFileManager+LqExtension.m in Sources */,
 				4920AE8C23AD273F00FE7A65 /* RSAEncryptor.m in Sources */,

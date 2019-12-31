@@ -196,6 +196,7 @@
     }else{
         obj = responseObject;
     }
+    NSLog(@"%@",obj);
     success(task,obj);
 }
 
@@ -205,7 +206,7 @@
 -(void)_handdleFailureWithTask:(NSURLSessionDataTask*)task
                          error:(NSError*)error
                        failure:(nullable void (^)(NSURLSessionDataTask *task, NSError *error))failure{
-    failure(task,[NSError lq_errorWithMsg:@"网络不给力" domain:error.domain code:-99999]);
+    failure(task,[NSError lq_errorWithMsg:LanguageStrings(@"error") domain:error.domain code:-99999]);
 }
 
 -(void)setCookie:(NSString*)key

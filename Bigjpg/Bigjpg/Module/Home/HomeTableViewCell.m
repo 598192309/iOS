@@ -13,7 +13,6 @@
 @property (weak, nonatomic) IBOutlet UIProgressView *progressView;
 @property (weak, nonatomic) IBOutlet UILabel *imageDetailLabel;
 @property (weak, nonatomic) IBOutlet UIButton *firstBtn;
-@property (weak, nonatomic) IBOutlet UIButton *secondBtn;
 @property (weak, nonatomic) IBOutlet UIView *statusBackView;
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 @end
@@ -28,49 +27,28 @@
     _statusBackView.layer.cornerRadius = 4;
     _firstBtn.layer.cornerRadius = 4;
     _firstBtn.layer.masksToBounds  = YES;
-    _secondBtn.layer.cornerRadius = 4;
-    _secondBtn.layer.masksToBounds = YES;
 }
 - (IBAction)firstBtnEvent:(id)sender {
+    
     switch (self.upload.uploadStep) {
            case EnlargeUploadStepInitialize:
-           {
+           {//开始
                EnlargeConfViewController *confVC = [EnlargeConfViewController controllerWithEnlargeUpload:self.upload];
                [[self lq_getCurrentViewController].navigationController pushViewController:confVC animated:YES];
            }
                break;
-           case EnlargeUploadStepOverSize:
-           {
-               
-           }
-               break;
-        case EnlargeUploadStepDataUploading:
-           {
-               
-           }
-               break;
         case EnlargeUploadStepDataUploadFail:
-           {
-               
-           }
-               break;
-           case EnlargeUploadStepEnlargeingNew:
-           {
-               
-           }
-               break;
-           case EnlargeUploadStepEnlargeingProcess:
-           {
-               
+        case EnlargeUploadStepEnlargeError:
+           {//重试
+               NSDictionary *dic = @{@"conf":self.upload.conf,
+                                     @"enlargeAll":@(NO),
+                                     @"upload":self.upload
+               };
+               [[NSNotificationCenter defaultCenter] postNotificationName:kEnlargeConfigarationFinishNoti object:dic];
            }
                break;
            case EnlargeUploadStepEnlargeSuccess:
-           {
-               
-           }
-               break;
-           case EnlargeUploadStepEnlargeError:
-           {
+           {//下载
                
            }
                break;
@@ -80,8 +58,6 @@
        }
     
 }
-- (IBAction)secondBtnEvent:(id)sender {
-}
 
 - (void)setUpload:(M_EnlargeUpload *)upload
 {
@@ -90,102 +66,106 @@
     self.imageDetailLabel.text = upload.imageSizeStr;
     switch (upload.uploadStep) {
         case EnlargeUploadStepInitialize:
-        {
+        {//初始化
+            //statusView
             self.statusBackView.hidden = YES;
+            //进度条
             self.progressView.progress = 0;
+            //按钮
+            _firstBtn.hidden = NO;
             [_firstBtn setTitle:LanguageStrings(@"begin") forState:UIControlStateNormal];
             [_firstBtn setBackgroundColor:TP.greenColor];
-            
-            _secondBtn.hidden = NO;
-            [_secondBtn setTitle:LanguageStrings(@"del") forState:UIControlStateNormal];
-            [_secondBtn setBackgroundColor:TP.redColor];
         }
             break;
         case EnlargeUploadStepOverSize:
-        {
+        {//超出限制
+            //statusView
             self.statusBackView.hidden = NO;
             self.statusLabel.text = LanguageStrings(@"over");
+            self.statusLabel.textColor = TP.redColor;
+            //进度条
             self.progressView.progress = 0;
             
-            [_firstBtn setTitle:LanguageStrings(@"del") forState:UIControlStateNormal];
-            [_firstBtn setBackgroundColor:TP.redColor];
-            
-            _secondBtn.hidden = YES;
+            //按钮
+            _firstBtn.hidden = YES;
         }
             break;
         case EnlargeUploadStepDataUploading:
-        {
+        {//数据上传中
+            //statusView
             self.statusBackView.hidden = NO;
             self.statusLabel.text = LanguageStrings(@"process");
-            self.progressView.progress = 0.1;
-            [_firstBtn setTitle:LanguageStrings(@"del") forState:UIControlStateNormal];
-            [_firstBtn setBackgroundColor:TP.redColor];
-            
-            _secondBtn.hidden = YES;
+            self.statusLabel.textColor = TP.whiteColor;
+            //进度条
+            self.progressView.progress = 0.03;
+            //按钮
+            _firstBtn.hidden = YES;
         }
             break;
         case EnlargeUploadStepDataUploadFail:
-        {
+        {//数据上传失败
+             //statusView
             self.statusBackView.hidden = NO;
             self.statusLabel.text = LanguageStrings(@"fail");
+            self.statusLabel.textColor = TP.redColor;
+            //进度条
             self.progressView.progress = 0;
+            //按钮
+            _firstBtn.hidden = NO;
             [_firstBtn setTitle:LanguageStrings(@"retry") forState:UIControlStateNormal];
             [_firstBtn setBackgroundColor:TP.yellowColor];
-            
-            _secondBtn.hidden = NO;
-            [_secondBtn setTitle:LanguageStrings(@"del") forState:UIControlStateNormal];
-            [_secondBtn setBackgroundColor:TP.redColor];
         }
             break;
         case EnlargeUploadStepEnlargeingNew:
         case EnlargeUploadStepEnlargeingProcess:
-        {
+        {//放大中
+            //statusView
             self.statusBackView.hidden = NO;
             self.statusLabel.text = LanguageStrings(@"process");
-            self.progressView.progress = 0.1;
-            [_firstBtn setTitle:LanguageStrings(@"del") forState:UIControlStateNormal];
-            [_firstBtn setBackgroundColor:TP.redColor];
-            _secondBtn.hidden = YES;
+            self.statusLabel.textColor = TP.whiteColor;
             
+            //进度条
             NSTimeInterval nowInte = [[NSDate date] timeIntervalSince1970];
              NSTimeInterval createInte = [upload.createTime timeIntervalSince1970];
              NSInteger seconds = upload.conf.time * 60;
             
             CGFloat progress = (nowInte - createInte) / seconds;
             
-            if (progress < 0.1) {
-                progress = 0.1;
-            }else if (progress > 0.9) {
+            if (progress > 0.9) {
                 progress = 0.9;
             }
             _progressView.progress = progress;
             
+            //按钮
+            _firstBtn.hidden = YES;
         }
             break;
         case EnlargeUploadStepEnlargeSuccess:
-        {
+        {//放大成功
+            //statusView
             self.statusBackView.hidden = NO;
             self.statusLabel.text = LanguageStrings(@"succ");
+            self.statusLabel.textColor = TP.whiteColor;
+            //进度条
             self.progressView.progress = 1;
+            //按钮
+            _firstBtn.hidden = NO;
             [_firstBtn setTitle:LanguageStrings(@"download") forState:UIControlStateNormal];
             [_firstBtn setBackgroundColor:TP.greenColor];
-            
-            _secondBtn.hidden = NO;
-            [_secondBtn setTitle:LanguageStrings(@"del") forState:UIControlStateNormal];
-            [_secondBtn setBackgroundColor:TP.redColor];
         }
             break;
         case EnlargeUploadStepEnlargeError:
-        {
+        {//放大失败
+            //statusView
             self.statusBackView.hidden = NO;
             self.statusLabel.text = LanguageStrings(@"fail");
+            self.statusLabel.textColor = TP.redColor;
+            //进度条
             self.progressView.progress = 0;
+            //按钮
+            _firstBtn.hidden = NO;
             [_firstBtn setTitle:LanguageStrings(@"retry") forState:UIControlStateNormal];
             [_firstBtn setBackgroundColor:TP.yellowColor];
-            
-            _secondBtn.hidden = NO;
-            [_secondBtn setTitle:LanguageStrings(@"del") forState:UIControlStateNormal];
-            [_secondBtn setBackgroundColor:TP.redColor];
         }
             break;
             
@@ -193,4 +173,5 @@
             break;
     }
 }
+
 @end

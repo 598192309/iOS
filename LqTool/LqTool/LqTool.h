@@ -21,7 +21,7 @@ FOUNDATION_EXPORT const unsigned char LqToolVersionString[];
 #import <LqTool/LqWGS84TOGCJ02.h>
 #import <LqTool/RSAEncryptor.h>
 #import <LqTool/SafeControl.h>
-
+#import <LqTool/SystemAlertViewController.h>
 
 //Widget
 #import <LqTool/LqNoPasteTextField.h>

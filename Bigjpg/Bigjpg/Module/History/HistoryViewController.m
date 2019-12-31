@@ -9,7 +9,7 @@
 #import "HistoryViewController.h"
 #import "HistoryCustomView.h"
 #import "HistoryCell.h"
-
+#import "I_Account.h"
 @interface HistoryViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) UITableView  *customTableView;
 @property (nonatomic,strong)HistoryCustomView *historyCustomView;
@@ -19,19 +19,16 @@
 
 @property (nonatomic,strong)CustomAlertView *infoAlert;
 
+@property (nonatomic, strong) M_User *userInfo;
+@property (nonatomic, strong) NSTimer *timer;
+
 @end
 
 @implementation HistoryViewController
 #pragma mark - 重写
 
 #pragma mark - 生命周期
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    if (!self.isFirstViewDidAppear) {
-        [self requestData];
-    }
-    
-}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -51,6 +48,22 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyRequestData) name:kUserSignOut object:nil];
 
     [self requestData];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    if (_timer == nil) {
+        self.timer = [NSTimer timerWithTimeInterval:10 target:self selector:@selector(requestData) userInfo:nil repeats:YES];
+        [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
+        [self.timer setFireDate:[NSDate date]];
+    }
+}
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [self.timer invalidate];
+    self.timer = nil;
 }
 
 - (void)dealloc{
@@ -134,7 +147,18 @@
 }
 #pragma mark - net
 - (void)requestData{
-    [self.customTableView reloadData];
+    if (RI.is_logined) {
+        __weak __typeof(self) weakSelf = self;
+        [I_Account getUserInfoOnSuccess:^(M_User * _Nonnull userInfo) {
+            weakSelf.userInfo = userInfo;
+             [weakSelf.customTableView reloadData];
+        } failure:^(NSError *error) {
+            if (weakSelf.userInfo == nil) {
+                [LSVProgressHUD showErrorWithStatus:LanguageStrings(error.lq_errorMsg)];
+            }
+        }];
+    }
+   
 }
 - (void)notifyRequestData{
     [self changeUIWithLoginStatus];
@@ -151,14 +175,14 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 
-    return RI.is_logined ? 5 : 0;
+    return RI.is_logined ? self.userInfo.historyList.count : 0;
 
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     HistoryCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([HistoryCell class]) forIndexPath:indexPath];
 
-    [cell configUIWithItem:nil];
+    [cell configUIWithItem:self.userInfo.historyList[indexPath.row]];
     return cell;
 }
 

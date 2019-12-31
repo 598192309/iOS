@@ -7,7 +7,7 @@
 //
 
 #import "HistoryCell.h"
-
+#import <SDWebImage/SDWebImage.h>
 @interface HistoryCell()
 @property (nonatomic,strong) UIView * cellBackgroundView;
 @property (nonatomic,strong)   UIImageView *iconImageV;
@@ -41,8 +41,11 @@
 }
 
 
-- (void)configUIWithItem:(NSObject *)item{
-    self.titleLabel.text = @"aaaaa";
+- (void)configUIWithItem:(M_EnlargeHistory *)item{
+    //设置图片
+    NSString *smallImagesStr = [NSString stringWithFormat:@"%@?x-oss-process=image/resize,m_fill,w_%d,h_%d",item.conf.input,100,100];
+    [_iconImageV sd_setImageWithURL:[NSURL URLWithString:smallImagesStr]];
+    self.titleLabel.text = LanguageStrings(item.status);
     __weak __typeof(self) weakSelf = self;
     [_retryOrDownloadBtn setTitle:LanguageStrings(@"retry") forState:UIControlStateNormal];
 

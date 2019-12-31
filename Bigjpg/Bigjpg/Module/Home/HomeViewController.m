@@ -37,9 +37,6 @@
     _pollingFids = [NSMutableArray array];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(enlargeConfSuccess:) name:kEnlargeConfigarationFinishNoti object:nil];
     _dataSource = [NSMutableArray<M_EnlargeUpload *> array];
-    
-    
-
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -50,6 +47,7 @@
         [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
         [self.timer setFireDate:[NSDate date]];
     }
+    [self configUI];
 }
 - (void)viewDidDisappear:(BOOL)animated
 {
@@ -61,6 +59,13 @@
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)configUI{
+    _choiceImageBtn.layer.cornerRadius = 4;
+    _choiceImageBtn.layer.masksToBounds = YES;
+    [_choiceImageBtn setTitle:LanguageStrings(@"fileupload") forState:UIControlStateNormal];
+    _describerLabel.text = LanguageStrings(@"limit");
 }
 
 - (void)polling
@@ -215,6 +220,7 @@
                     //放大数据上传失败
                     upload.uploadStep = EnlargeUploadStepDataUploadFail;
                     [weakSelf.tableView reloadData];
+                    [LSVProgressHUD showErrorWithStatus:LanguageStrings(@"upload_error")];
                 }];
                 
             }
@@ -222,6 +228,7 @@
             //OSS上传失败
             upload.uploadStep = EnlargeUploadStepDataUploadFail;
             [weakSelf.tableView reloadData];
+            [LSVProgressHUD showErrorWithStatus:LanguageStrings(@"upload_error")];
         }];
     }
     
@@ -243,6 +250,24 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 100;
+    return 110;
+}
+
+-(NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return LanguageStrings(@"del");
+}
+-(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleDelete;
+}
+
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [SystemAlertViewController alertViewControllerWithTitle:nil message:LanguageStrings(@"sure") cancleButtonTitle:LanguageStrings(@"cancel") commitButtonTitle:LanguageStrings(@"ok") cancleBlock:^{
+          
+      } commitBlock:^{
+          
+      }];
 }
 @end
