@@ -8,6 +8,7 @@
 
 #import "HomeTableViewCell.h"
 #import "EnlargeConfViewController.h"
+#import "I_Enlarge.h"
 @interface HomeTableViewCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *confImageView;
 @property (weak, nonatomic) IBOutlet UIProgressView *progressView;
@@ -40,16 +41,35 @@
         case EnlargeUploadStepDataUploadFail:
         case EnlargeUploadStepEnlargeError:
            {//重试
-               NSDictionary *dic = @{@"conf":self.upload.conf,
-                                     @"enlargeAll":@(NO),
-                                     @"upload":self.upload
-               };
-               [[NSNotificationCenter defaultCenter] postNotificationName:kEnlargeConfigarationFinishNoti object:dic];
+               if (_upload.fid.length > 0) {//bigjpg重试
+                   _upload.uploadStep = EnlargeUploadStepEnlargeingProcess;
+                   __weak __typeof(self) weakSelf = self;
+                   _upload.createTime = [NSDate date];
+                   [I_Enlarge retryEnlargeTasks:@[_upload.fid] success:^{
+                       
+                   } failure:^(NSError *error) {
+                       weakSelf.upload.uploadStep = EnlargeUploadStepEnlargeError;
+                       [LSVProgressHUD showErrorWithStatus:LanguageStrings(error.lq_errorMsg)];
+                   }];
+               } else {//重新上传
+                   NSDictionary *dic = @{@"conf":self.upload.conf,
+                                         @"enlargeAll":@(NO),
+                                         @"upload":self.upload
+                   };
+                   [[NSNotificationCenter defaultCenter] postNotificationName:kEnlargeConfigarationFinishNoti object:dic];
+               }
            }
                break;
            case EnlargeUploadStepEnlargeSuccess:
            {//下载
-               
+               [SVProgressHUD show];
+               [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:_upload.output] completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
+                   if (error) {
+//                       save_to
+                   } else {
+                       UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), (__bridge void *)self);
+                   }
+               }];
            }
                break;
                
@@ -57,6 +77,18 @@
                break;
        }
     
+}
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+    if (error) {
+        [SVProgressHUD showErrorWithStatus:@"保存相册失败"];
+        
+    } else {
+       [SVProgressHUD showSuccessWithStatus:@"保存相册成功"];
+
+    }
+    [SVProgressHUD dismissWithDelay:2];
 }
 
 - (void)setUpload:(M_EnlargeUpload *)upload

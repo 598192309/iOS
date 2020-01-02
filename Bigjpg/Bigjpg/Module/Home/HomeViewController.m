@@ -89,7 +89,8 @@
                         } else if ([task.status isEqualToString:@"error"]) {
                             upload.uploadStep = EnlargeUploadStepEnlargeError;
                         } else if ([task.status isEqualToString:@"success"]) {
-                            upload.uploadStep = EnlargeUploadStepEnlargeingProcess;
+                            upload.output = task.output;
+                            upload.uploadStep = EnlargeUploadStepEnlargeSuccess;
                              [weakSelf.pollingFids removeObject:task.fid];
                         }
 
@@ -126,13 +127,11 @@
         for (PHAsset *ass in assets) {
             [[PHImageManager defaultManager] requestImageDataForAsset:ass options:nil resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, UIImageOrientation orientation, NSDictionary * _Nullable info) {
                 UIImage *image = [UIImage imageWithData:imageData];
-                NSURL *fileUrl = [info safeObjectForKey:@"PHImageFileURLKey"];
-                NSString *name = [fileUrl.absoluteString componentsSeparatedByString:@"/"].lastObject;
                 M_EnlargeUpload *upload =  [[M_EnlargeUpload alloc] init];
                 upload.imageData = imageData;
                 NSString *sizeStr = @"";
                 if (imageData.length < 1024) {
-                    sizeStr = [NSString stringWithFormat:@"%dbytes",(NSInteger)imageData.length];
+                    sizeStr = [NSString stringWithFormat:@"%ldbytes",(long)imageData.length];
                 } else if (imageData.length / 1024.0 < 1024) {
                     sizeStr = [NSString stringWithFormat:@"%.1fkb",imageData.length/1024.0];
                 } else {
@@ -148,7 +147,8 @@
                 conf.files_size = imageData.length;
                 conf.file_width = imageWidth;
                 conf.file_height = imageHeight;
-                conf.file_name = [NSString stringWithFormat:@"ios/%@/%@",[LqToolKit stringFromDate:[NSDate date] formatterString:@"yyyy-MM-dd/hh-mm-ss"],name];
+                long nowTime = [[NSDate date] timeIntervalSince1970];;
+                conf.file_name = [NSString stringWithFormat:@"upload/%@/%ld%@.png",[LqToolKit stringFromDate:[NSDate date] formatterString:@"yyyy-MM-dd"],nowTime,[NSUUID UUID]];
                 upload.conf = conf;
                 
                 [weakSelf.dataSource insertObject:upload atIndex:0];
