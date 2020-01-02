@@ -22,4 +22,5 @@ target 'Bigjpg' do
   pod 'SAMKeychain'
   pod 'MJExtension'
   pod 'SVProgressHUD'
+  pod 'QMUIKit'
 end
