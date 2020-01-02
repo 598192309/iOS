@@ -27,5 +27,5 @@
 #import "ConfManager.h"
 #import "CustomAlertView.h"
 #import "OSSManager.h"
-
+#import <QMUIKit/QMUIKit.h>
 #endif /* PrefixHeader_pch */
