@@ -88,4 +88,15 @@
         failureBlock(error);
     }];
 }
+
++ (void)loginOutOnSuccessOnSuccess:(void(^)(void))successBlock
+{
+    NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    NSArray *tmpArrey = [NSArray arrayWithArray:[cookieJar cookies]];
+    for (id obj in tmpArrey) {
+        [cookieJar deleteCookie:obj];
+    }
+    successBlock();
+
+}
 @end
