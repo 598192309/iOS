@@ -77,7 +77,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CustomTableAlertCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([CustomTableAlertCell class])];
-    [cell refreshUIWithTitle:[NSString stringWithFormat:@"中文%ld",indexPath.row]];
+    [cell refreshUIWithTitle:[self.dataArr safeObjectAtIndex:indexPath.row]];
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

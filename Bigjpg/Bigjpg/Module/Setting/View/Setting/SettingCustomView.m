@@ -7,33 +7,44 @@
 //
 
 #import "SettingCustomView.h"
+#import "M_User.h"
 
-@interface SettingCustomView()
+@interface SettingCustomView()<UITextFieldDelegate>
 //头部view
 @property (nonatomic,strong)UIView *header;
 @property (nonatomic,strong)UIView *tipView;
 @property (nonatomic,strong)UIButton *tipBtn;
-@property (nonatomic,strong)UIButton *timeBtn;
 @property (nonatomic,strong)UIButton *updateBtn;
-@property (nonatomic,strong)UILabel *totalTipLabel;
+
+@property (nonatomic,strong)UIView *lorginTipView;
+@property (nonatomic,strong)UIButton *lorgintipBtn;
+@property (nonatomic,strong)UIButton *lorgintimeBtn;
+@property (nonatomic,strong)UIButton *lorginupdateBtn;
+@property (nonatomic,strong)UILabel *lorgintotalTipLabel;
+
 
 @property (nonatomic,strong)UIView *textFBackView;
 
 @property (nonatomic,strong)UITextField *emailTextF;
 @property (nonatomic,strong)UIView *lineview1;
+@property (nonatomic,strong)UIView *greenlineview1;
+
 @property (nonatomic,strong)UITextField *pwdTF;
 @property (nonatomic,strong)UIView *lineview2;
+@property (nonatomic,strong)UIView *greenlineview2;
 
 @property (nonatomic,strong)UIButton *forgetBtn;
 @property (nonatomic,strong)UIButton *confirmBtn;
 
-@property (nonatomic,strong)UIButton *zhuceView;
+@property (nonatomic,strong)UIView *zhuceView;
 @property (nonatomic,strong)UIButton *zhuceChooseBtn;
 @property (nonatomic,strong)UILabel *zhuceTipLabel;
 
 
 @property (nonatomic,strong)UIImageView *erweimaImageV;
 @property (nonatomic,strong)UILabel *erweimaTipLable;
+
+
 @end
 @implementation SettingCustomView
 
@@ -59,11 +70,10 @@
 
 
 #pragma mark - 刷新ui
-- (void)configUIWithItem:(NSObject *)item finishi:(void(^)())finishBlock{
+- (void)configUIWithItem:(M_User *)item finishi:(void(^)())finishBlock{
     __weak __typeof(self) weakSelf = self;
 
     if (RI.is_logined) {
-        self.tipView.backgroundColor = BlueBackColor;
         
         [_textFBackView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(Adaptor_Value(0));
@@ -78,23 +88,13 @@
         }];
         self.zhuceTipLabel.text = nil;
         
-        [self.confirmBtn setTitle:[NSString stringWithFormat:@"%@ %@",LanguageStrings(@"logout"),@"123445"] forState:UIControlStateNormal];
+        [self.confirmBtn setTitle:[NSString stringWithFormat:@"%@ %@",LanguageStrings(@"logout"),item.username] forState:UIControlStateNormal];
          [self.confirmBtn mas_updateConstraints:^(MASConstraintMaker *make) {
              make.top.mas_equalTo(weakSelf.zhuceView.mas_bottom).offset(Adaptor_Value(-20));
          }];
-        
-        [self.timeBtn mas_updateConstraints:^(MASConstraintMaker *make) {
-              make.centerX.mas_equalTo(weakSelf.tipView).offset(-Adaptor_Value(20));
-              
-          }];
-        self.totalTipLabel.text = LanguageStrings(@"used");
-        [self.timeBtn setTitle:@"202020202" forState:UIControlStateNormal];
-        NSArray *arr = [ConfManager.shared contentWith:@"version"];
-        [self.tipBtn setTitle:[arr safeObjectAtIndex:0] forState:UIControlStateNormal];
-        [self.tipBtn setTitleColor:TitleGrayColor forState:UIControlStateNormal];
-
+      
+    
     }else{
-        self.tipView.backgroundColor = BackGrayColor;
  
         [_textFBackView mas_updateConstraints:^(MASConstraintMaker *make) {
               make.height.mas_equalTo(Adaptor_Value(90));
@@ -113,23 +113,34 @@
          [self.confirmBtn mas_updateConstraints:^(MASConstraintMaker *make) {
              make.top.mas_equalTo(weakSelf.zhuceView.mas_bottom).offset(Adaptor_Value(25));
          }];
-        
-        [self.timeBtn mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.centerX.mas_equalTo(weakSelf.tipView);
-                     
-        }];
-        self.totalTipLabel.text = @"";
-        [self.timeBtn setTitle:@"" forState:UIControlStateNormal];
-        NSArray *arr = [ConfManager.shared contentWith:@"version"];
-        [self.tipBtn setTitle:[arr safeObjectAtIndex:0] forState:UIControlStateNormal];
-        [self.tipBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-
+    
     }
+    NSArray *arr = [ConfManager.shared contentWith:@"version"];
+    NSString *typestr;
+    if ([item.version isEqualToString:@"free"]) {
+        typestr = [arr safeObjectAtIndex:0];
+    }else if ([item.version isEqualToString:@"basic"]) {
+        typestr = [arr safeObjectAtIndex:1];
+    }else if ([item.version isEqualToString:@"std"]) {
+        typestr = [arr safeObjectAtIndex:2];
+    }else{
+        typestr = [arr safeObjectAtIndex:3];
+    }
+    NSArray *typeArr = [typestr componentsSeparatedByString:@":"];
+
+    [self.lorgintipBtn setTitle:typeArr.lastObject forState:UIControlStateNormal];
+    NSString *time = [item.expire lq_dealTimeFormarter:@"yyyy-MM-dd HH:mm:ss" changeFormater:@"yyyy-MM-dd"];
+    [self.lorgintimeBtn setTitle:time forState:UIControlStateNormal];
+    self.lorgintotalTipLabel.text = [NSString stringWithFormat:@"%@%lu",LanguageStrings(@"used"),(unsigned long)item.historyList.count];
+    self.lorginTipView.hidden = !RI.is_logined;
     
     
     
     finishBlock();
 }
+
+
+
 #pragma mark - act
 - (void)updateBtnClick:(UIButton *)sender{
     if (self.settingCustomViewUpdateBtnClickBlock) {
@@ -137,7 +148,7 @@
     }
 }
 - (void)zhuceChooseBtnClick:(UIButton *)sender{
-
+    sender.selected = !sender.selected;
 }
 
 - (void)fogetBtnClick:(UIButton *)sender{
@@ -148,24 +159,17 @@
 
 - (void)confirmBtnClick:(UIButton *)sender{
     if (self.settingCustomViewConfirmBtnClickBlock) {
-        self.settingCustomViewConfirmBtnClickBlock(@{@"email":SAFE_NIL_STRING(self.emailTextF.text),@"pwd":SAFE_NIL_STRING(self.pwdTF.text)}, sender);
+        self.settingCustomViewConfirmBtnClickBlock(@{@"email":SAFE_NIL_STRING(self.emailTextF.text),@"pwd":SAFE_NIL_STRING(self.pwdTF.text),@"zhuce":@(self.zhuceChooseBtn.selected)}, sender);
     }
 }
 
 - (void)zhuceTap:(UITapGestureRecognizer *)gest{
-    if (self.settingCustomViewZhuceClickBlock) {
-        self.settingCustomViewZhuceClickBlock(nil);
-    }
+    [self zhuceChooseBtnClick:self.zhuceChooseBtn];
 }
 
 
 #pragma  mark - UITextField delegate
 - (void)textFDidChange:(UITextField *)textf{
-    
-    //限制输入字数
-    if (self.emailTextF.text.length >= 11) {
-        self.emailTextF.text = [self.emailTextF.text substringToIndex:11];
-    }
     
     if (self.emailTextF.text.length > 0 && self.pwdTF.text.length > 0 ) {
         self.confirmBtn.enabled = YES;
@@ -173,6 +177,18 @@
         self.confirmBtn.enabled = NO;
     }
     
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    if ([textField isEqual:self.emailTextF]) {
+        self.greenlineview1.hidden = NO;
+        self.greenlineview2.hidden = YES;
+
+    }else{
+        self.greenlineview1.hidden = YES;
+        self.greenlineview2.hidden = NO;
+    }
+    return YES;
 }
 
 
@@ -201,51 +217,43 @@
             make.top.mas_equalTo(Adaptor_Value(45));
         }];
         ViewRadius(_tipView, Adaptor_Value(10));
-        
-        _timeBtn = [[UIButton alloc] init];
-        [_timeBtn setTitle:lqStrings(@"") forState:UIControlStateNormal];
-        [_timeBtn setTitleColor:TitleBlackColor forState:UIControlStateNormal];
-        [_tipView addSubview:_timeBtn];
-        [_timeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.mas_equalTo(weakSelf.tipView);
-            make.centerX.mas_equalTo(weakSelf.tipView);
-            
-        }];
-        _tipBtn.enabled = NO;
-        
+                
         
         _tipBtn = [[UIButton alloc] init];
-        [_tipBtn setTitle:lqStrings(@"免费版") forState:UIControlStateNormal];
+        NSArray *arr = [ConfManager.shared contentWith:@"version"];
+        [_tipBtn setTitle:[arr safeObjectAtIndex:0] forState:UIControlStateNormal];
         [_tipBtn setTitleColor:TitleBlackColor forState:UIControlStateNormal];
         [_tipView addSubview:_tipBtn];
         [_tipBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(weakSelf.tipView);
-            make.width.mas_equalTo(Adaptor_Value(80));
-            make.right.mas_equalTo(weakSelf.timeBtn.mas_left).offset(-Adaptor_Value(10));
-            
-        }];
+            make.right.mas_equalTo(weakSelf.tipView.mas_centerX).offset(-Adaptor_Value(10));
+       }];
         _tipBtn.enabled = NO;
         
         _updateBtn = [[UIButton alloc] init];
-        [_updateBtn setTitle:lqStrings(@"升级") forState:UIControlStateNormal];
+        [_updateBtn setTitle:LanguageStrings(@"upgrade") forState:UIControlStateNormal];
         [_updateBtn addTarget:self action:@selector(updateBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [_updateBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _updateBtn.titleLabel.font = AdaptedFontSize(15);
         [_tipView addSubview:_updateBtn];
+        CGFloat w = [LanguageStrings(@"upgrade") boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:AdaptedFontSize(17)} context:nil].size.width + Adaptor_Value(15);
+
         [_updateBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(weakSelf.tipView);
-            make.width.mas_equalTo(Adaptor_Value(50));
-            make.left.mas_equalTo(weakSelf.timeBtn.mas_right).offset(Adaptor_Value(10));
+            make.left.mas_equalTo(weakSelf.tipView.mas_centerX).offset(Adaptor_Value(10));
+            make.width.mas_equalTo(w);
             
         }];
         _updateBtn.backgroundColor = LihgtGreenColor;
         ViewRadius(_updateBtn, Adaptor_Value(5));
         
-        _totalTipLabel = [UILabel lableWithText:LanguageStrings(@"used") textColor:[UIColor whiteColor] fontSize:AdaptedFontSize(13) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
-        [_tipView addSubview:_totalTipLabel];
-        [_totalTipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.mas_equalTo(weakSelf.tipView);
-            make.top.mas_equalTo(weakSelf.updateBtn.mas_bottom).offset(Adaptor_Value(15));
+        [contentV addSubview:self.lorginTipView];
+        [self.lorginTipView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(weakSelf.tipView);
         }];
+        self.lorginTipView.hidden = !RI.is_logined;
+        
+
         
         _textFBackView = [UIView new];
         _textFBackView.backgroundColor = BackGroundColor;
@@ -265,14 +273,17 @@
             make.height.mas_equalTo(Adaptor_Value(35));
             make.top.mas_equalTo(Adaptor_Value(5));
         }];
-        _emailTextF.keyboardType = UIKeyboardTypeNumberPad;
-        _emailTextF.textColor = [UIColor whiteColor];
+        NSArray *user_pass = [ConfManager.shared contentWith:@"user_pass"];
+
+        _emailTextF.keyboardType = UIKeyboardTypeEmailAddress;
+        _emailTextF.textColor = TitleBlackColor;
         [_emailTextF addTarget:self action:@selector(textFDidChange:) forControlEvents:UIControlEventEditingChanged];
-        _emailTextF.placeholder = lqStrings(@"邮箱");
+        _emailTextF.placeholder = [user_pass safeObjectAtIndex:0];
+        _emailTextF.delegate = self;
 
         // "通过KVC修改placeholder的颜色"
         [_emailTextF setPlaceholderColor:TitleGrayColor font:nil];
-
+        _emailTextF.text = [[NSUserDefaults standardUserDefaults] objectForKey:kUserName];
 
         
         UIView *rowLine1 =  [UIView new];
@@ -285,6 +296,15 @@
             make.top.mas_equalTo(weakSelf.emailTextF.mas_bottom).offset(5);
         }];
         
+        _greenlineview1 = [UIView new];
+        _greenlineview1.backgroundColor = [UIColor greenColor];
+        [_textFBackView addSubview:_greenlineview1];
+        [_greenlineview1 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(kOnePX *3);
+            make.left.right.mas_equalTo(weakSelf.lineview1);
+            make.centerY.mas_equalTo(weakSelf.lineview1);
+        }];
+        _greenlineview1.hidden = YES;
 
         
         _pwdTF = [[UITextField alloc] init];
@@ -299,7 +319,8 @@
         _pwdTF.textColor = TitleBlackColor;
         _pwdTF.secureTextEntry = YES;
         [_pwdTF addTarget:self action:@selector(textFDidChange:) forControlEvents:UIControlEventEditingChanged];
-        _pwdTF.placeholder = lqStrings(@"密码");
+        _pwdTF.placeholder = [user_pass safeObjectAtIndex:1];
+        _pwdTF.delegate = self;
 
         // "通过KVC修改placeholder的颜色"
         [_pwdTF setPlaceholderColor:TitleGrayColor font:nil];
@@ -315,6 +336,16 @@
 
         }];
         
+        _greenlineview2 = [UIView new];
+        _greenlineview2.backgroundColor = [UIColor greenColor];
+        [_textFBackView addSubview:_greenlineview2];
+        [_greenlineview2 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(kOnePX *3);
+            make.left.right.mas_equalTo(weakSelf.lineview2);
+            make.centerY.mas_equalTo(weakSelf.lineview2);
+        }];
+        _greenlineview2.hidden = YES;
+        
         UIView *zhuceView = [UIView new];
         _zhuceView = zhuceView;
         [contentV addSubview:zhuceView];
@@ -327,9 +358,8 @@
         
         
         _zhuceChooseBtn = [[UIButton alloc] init];
-        _zhuceChooseBtn.backgroundColor = [UIColor redColor];
-        [_zhuceChooseBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-        [_zhuceChooseBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateSelected];
+        [_zhuceChooseBtn setImage:[UIImage imageNamed:@"choose_nor"]  forState:UIControlStateNormal];
+        [_zhuceChooseBtn setImage:[[UIImage imageNamed:@"choose_sel"] qmui_imageWithTintColor:LihgtGreenColor] forState:UIControlStateSelected];
         [_zhuceChooseBtn addTarget:self action:@selector(zhuceChooseBtnClick:) forControlEvents:UIControlEventTouchDown];
         [zhuceView addSubview:_zhuceChooseBtn];
         [_zhuceChooseBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -345,6 +375,10 @@
             make.centerY.right.mas_equalTo(zhuceView);
             make.left.mas_equalTo(weakSelf.zhuceChooseBtn.mas_right).offset(Adaptor_Value(5));
         }];
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(zhuceTap:)];
+        _zhuceTipLabel.userInteractionEnabled = YES;
+        [_zhuceTipLabel addGestureRecognizer:tap];
 
 
         
@@ -352,7 +386,7 @@
         [_confirmBtn addTarget:self action:@selector(confirmBtnClick:) forControlEvents:UIControlEventTouchDown];
         [_confirmBtn setTitle:lqStrings(@"登录") forState:UIControlStateNormal];
         [_confirmBtn setTitleColor:BackGroundColor forState:UIControlStateNormal];
-        _confirmBtn.titleLabel.font = AdaptedFontSize(17);
+        _confirmBtn.titleLabel.font = AdaptedFontSize(16);
 
         _confirmBtn.backgroundColor = LihgtGreenColor;
         [contentV addSubview:_confirmBtn];
@@ -367,7 +401,7 @@
         
 
         _forgetBtn = [[UIButton alloc] init];
-        [_forgetBtn setTitle:lqStrings(@"忘记密码?") forState:UIControlStateNormal];
+        [_forgetBtn setTitle:LanguageStrings(@"reset") forState:UIControlStateNormal];
         [_forgetBtn setTitleColor:TitleBlackColor forState:UIControlStateNormal];
         [_forgetBtn addTarget:self action:@selector(fogetBtnClick:) forControlEvents:UIControlEventTouchDown];
         _forgetBtn.titleLabel.font = AdaptedFontSize(17);
@@ -377,6 +411,7 @@
             make.top.mas_equalTo(weakSelf.confirmBtn.mas_bottom).offset(Adaptor_Value(10));
             
         }];
+        BOOL iszh = [ConfManager.shared.localLanguage isEqualToString:@"zh"];
         
         UIView *rowLine3 =  [UIView new];
         rowLine3.backgroundColor = LineGrayColor;
@@ -385,6 +420,9 @@
             make.height.mas_equalTo(kOnePX);
             make.left.right.mas_equalTo(weakSelf.textFBackView);
             make.top.mas_equalTo(weakSelf.forgetBtn.mas_bottom).offset(20);
+            if (!iszh) {
+                make.bottom.mas_equalTo(contentV);
+            }
         }];
         
         _erweimaImageV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"wechat_qr"]];
@@ -393,8 +431,11 @@
             make.width.height.mas_equalTo(Adaptor_Value(80));
             make.top.mas_equalTo(weakSelf.forgetBtn.mas_bottom).offset(Adaptor_Value(40));
             make.left.mas_equalTo(weakSelf.textFBackView);
-            make.bottom.mas_equalTo(contentV).offset(-Adaptor_Value(20));
+            if (iszh) {
+                make.bottom.mas_equalTo(contentV).offset(-Adaptor_Value(20));
+            }
         }];
+        _erweimaImageV.hidden = !iszh;
         
         UIView *rowLine4 =  [UIView new];
         rowLine4.backgroundColor = LineGrayColor;
@@ -407,6 +448,8 @@
             make.bottom.mas_equalTo(weakSelf.erweimaImageV).offset(Adaptor_Value(5));
 
         }];
+        rowLine4.hidden = !iszh;
+
         
         _erweimaTipLable = [UILabel lableWithText:lqStrings(@"[bigjpg 人工智能] 微信公众号会定期推送超超超清美图壁纸插画和黑科技新功能") textColor:TitleBlackColor fontSize:AdaptedFontSize(15) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
         [contentV addSubview:_erweimaTipLable];
@@ -415,7 +458,73 @@
             make.left.mas_equalTo(rowLine4.mas_right).offset(Adaptor_Value(10));
             make.right.mas_equalTo(contentV).offset(-Adaptor_Value(25));
         }];
+        _erweimaTipLable.hidden = !iszh;
+
+        
     }
     return _header;
+}
+- (UIView *)lorginTipView{
+    if (!_lorginTipView) {
+        _lorginTipView = [UIView new];
+        UIView *contentV = [UIView new];
+        contentV.backgroundColor = BlueBackColor;
+        [_lorginTipView addSubview:contentV];
+        __weak __typeof(self) weakSelf = self;
+        
+        [contentV mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(weakSelf.lorginTipView);
+        }];
+        
+        _lorgintimeBtn = [[UIButton alloc] init];
+        [_lorgintimeBtn setTitle:lqStrings(@"") forState:UIControlStateNormal];
+        [_lorgintimeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [contentV addSubview:_lorgintimeBtn];
+        [_lorgintimeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.mas_equalTo(contentV.mas_centerY);
+            make.centerX.mas_equalTo(contentV);
+            
+        }];
+
+        _lorgintipBtn = [[UIButton alloc] init];
+        NSArray *arr = [ConfManager.shared contentWith:@"version"];
+        [_lorgintipBtn setTitle:[arr safeObjectAtIndex:0] forState:UIControlStateNormal];
+        [_lorgintipBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [contentV addSubview:_lorgintipBtn];
+        [_lorgintipBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(weakSelf.lorgintimeBtn);
+            make.right.mas_equalTo(weakSelf.lorgintimeBtn.mas_left).offset(-Adaptor_Value(10));
+            
+        }];
+        
+
+        
+        _lorginupdateBtn = [[UIButton alloc] init];
+        [_lorginupdateBtn setTitle:LanguageStrings(@"upgrade") forState:UIControlStateNormal];
+        [_lorginupdateBtn addTarget:self action:@selector(updateBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [_lorginupdateBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _lorginupdateBtn.titleLabel.font = AdaptedFontSize(15);
+        [contentV addSubview:_lorginupdateBtn];
+        CGFloat w = [LanguageStrings(@"upgrade") boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:AdaptedFontSize(17)} context:nil].size.width + Adaptor_Value(15);
+        
+        [_lorginupdateBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(weakSelf.lorgintimeBtn);
+            make.left.mas_equalTo(weakSelf.lorgintimeBtn.mas_right).offset(Adaptor_Value(10));
+            make.width.mas_equalTo(w);
+            
+        }];
+        _lorginupdateBtn.backgroundColor = LihgtGreenColor;
+        ViewRadius(_lorginupdateBtn, Adaptor_Value(5));
+        
+        _lorgintotalTipLabel = [UILabel lableWithText:LanguageStrings(@"used") textColor:[UIColor whiteColor] fontSize:AdaptedFontSize(13) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
+        [contentV addSubview:_lorgintotalTipLabel];
+        [_lorgintotalTipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.mas_equalTo(contentV);
+            make.top.mas_equalTo(weakSelf.lorginupdateBtn.mas_bottom).offset(Adaptor_Value(15));
+        }];
+        ViewRadius(_lorginTipView, Adaptor_Value(10));
+
+    }
+    return _lorginTipView;
 }
 @end

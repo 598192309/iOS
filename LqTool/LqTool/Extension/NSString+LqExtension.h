@@ -89,6 +89,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  @return 富文本
  */
 -(NSAttributedString*)lq_getAttributedStringWithLineSpace:(CGFloat)lineSpace kern:(CGFloat)kern aliment:(NSTextAlignment)alignment;
+
+//处理时间
+- (NSString *)lq_dealTimeFormarter:(NSString *)formater changeFormater:(NSString *)changeFormater;
 @end
 
 NS_ASSUME_NONNULL_END

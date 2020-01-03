@@ -252,4 +252,16 @@
      
     return attributedString;
 }
+
+//处理时间
+- (NSString *)lq_dealTimeFormarter:(NSString *)formater changeFormater:(NSString *)changeFormater{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = formater;
+    NSDate *date =  [formatter dateFromString:self];
+    
+    NSDateFormatter *dateFmt = [[NSDateFormatter alloc] init];
+    dateFmt.dateFormat = changeFormater;
+    NSString *datestr = [dateFmt stringFromDate:date];
+    return datestr;
+}
 @end

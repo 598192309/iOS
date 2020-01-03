@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SetConfigChooseCell : UITableViewCell
 
--(void)configUIWithItem:(NSObject *)item;
+-(void)configUIWithTitle:(NSString *)title;
 @end
 
 NS_ASSUME_NONNULL_END
