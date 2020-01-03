@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 #import "LaunchingViewController.h"
+#import "I_Account.h"
 @interface AppDelegate ()
 
 @end
@@ -19,7 +20,10 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.rootViewController = [MainTabBarController new];
 //    self.window.rootViewController = [LaunchingViewController new];
-
+    if (RI.is_logined) {
+        [self requestUserInfo];
+    }
+    
     [self.window makeKeyAndVisible];
     
     NSLog(@"%@",LanguageStrings(@"donate"));
@@ -36,4 +40,12 @@
     [del.window.rootViewController presentViewController:nav animated:YES completion:nil];
 }
 
+//获取用户信息
+- (void)requestUserInfo{
+    [I_Account getUserInfoOnSuccess:^(M_User * _Nonnull userInfo) {
+        RI.userInfo = userInfo;
+    } failure:^(NSError *error) {
+        
+    }];
+}
 @end

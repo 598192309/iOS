@@ -11,10 +11,13 @@
 #import "SettingCell.h"
 #import "CustomActivity.h"
 #import "SetConfigViewController.h"
+#import "I_Account.h"
 
 @interface SettingViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) UITableView  *customTableView;
 @property (nonatomic,strong)SettingCustomView *settingCustomView;
+@property (nonatomic,strong)UIView *footerView;
+@property (nonatomic,strong)UIButton *versionBtn;
 
 @end
 
@@ -74,26 +77,8 @@
     self.customTableView.tableHeaderView.lq_height = H;
 
     [self settingCustomViewAct];
-
-}
-
-
-#pragma mark - act
-
-- (void)settingCustomViewAct{
-    __weak __typeof(self) weakSelf = self;
-    //登录 退出
-    self.settingCustomView.settingCustomViewConfirmBtnClickBlock = ^(NSDictionary * _Nonnull dict, UIButton * _Nonnull sender) {
-        NSString *email = [dict safeObjectForKey:@"email"];
-        NSString *pwd = [dict safeObjectForKey:@"pwd"];
-        if ([[sender titleForState:UIControlStateNormal] isEqualToString:LanguageStrings(@"login_reg")]) {
-            RI.is_logined = YES;
-        }else{
-            RI.is_logined = NO;
-
-        }
-       //登录成功 刷新一下settingCustomView
-        [weakSelf.settingCustomView configUIWithItem:nil finishi:^{
+    if (RI.is_logined) {
+        [self.settingCustomView configUIWithItem:RI.userInfo finishi:^{
             UIView *tableHeaderView = [[UIView alloc] init];
             [tableHeaderView addSubview:weakSelf.settingCustomView];
             [weakSelf.settingCustomView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -104,6 +89,38 @@
             weakSelf.customTableView.tableHeaderView = tableHeaderView;
             weakSelf.customTableView.tableHeaderView.lq_height = H;
         }];
+    }
+
+    
+    //footer
+    UIView *tableFooterView = [[UIView alloc] init];
+    [tableFooterView addSubview:self.footerView];
+    [self.footerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(tableFooterView);
+    }];
+
+    CGFloat fH = [tableFooterView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+    tableFooterView.lq_height = fH;
+    self.customTableView.tableFooterView = tableFooterView;
+    self.customTableView.tableFooterView.lq_height = fH;
+    
+}
+
+
+#pragma mark - act
+
+- (void)settingCustomViewAct{
+    __weak __typeof(self) weakSelf = self;
+    //登录 退出
+    self.settingCustomView.settingCustomViewConfirmBtnClickBlock = ^(NSDictionary * _Nonnull dict, UIButton * _Nonnull sender){
+        NSString *email = [dict safeObjectForKey:@"email"];
+        NSString *pwd = [dict safeObjectForKey:@"pwd"];
+        BOOL zhuce = [[dict safeObjectForKey:@"zhuce"] boolValue];
+        if ([[sender titleForState:UIControlStateNormal] isEqualToString:LanguageStrings(@"login_reg")]) {//登录 或者注册
+            [weakSelf loginWithUserName:email pwd:pwd notReg:zhuce sender:sender];
+        }else{//退出
+            
+        }
     };
     //升级
     self.settingCustomView.settingCustomViewUpdateBtnClickBlock = ^(NSDictionary * _Nonnull dict) {
@@ -158,8 +175,45 @@
     
 }
 #pragma mark - net
-- (void)requestData{
-    
+//登录 注册
+- (void)loginWithUserName:(NSString *)usename pwd:(NSString *)pwd notReg:(BOOL)notReg sender:(UIButton *)sender{
+    __weak __typeof(self) weakSelf = self;
+    [LSVProgressHUD show];
+    sender.userInteractionEnabled = NO;
+    [I_Account loginOrRegistWithUserName:usename pwd:pwd notReg:notReg success:^(M_User * _Nonnull userInfo) {
+        [I_Account getUserInfoOnSuccess:^(M_User * _Nonnull userInfo) {
+            [LSVProgressHUD dismiss];
+            [weakSelf.settingCustomView configUIWithItem:userInfo finishi:^{
+                UIView *tableHeaderView = [[UIView alloc] init];
+                [tableHeaderView addSubview:weakSelf.settingCustomView];
+                [weakSelf.settingCustomView mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.edges.equalTo(tableHeaderView);
+                }];
+                CGFloat H = [tableHeaderView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+                tableHeaderView.lq_height = H;
+                weakSelf.customTableView.tableHeaderView = tableHeaderView;
+                weakSelf.customTableView.tableHeaderView.lq_height = H;
+            }];
+            sender.userInteractionEnabled = YES;
+            [[NSUserDefaults standardUserDefaults] setObject:usename forKey:kUserName];
+            
+        } failure:^(NSError *error) {
+            [LSVProgressHUD showError:error];
+            sender.userInteractionEnabled = YES;
+        }];
+
+
+    } failure:^(NSError *error) {
+        [LSVProgressHUD showError:error];
+        sender.userInteractionEnabled = YES;
+
+    }];
+}
+
+//退出登录
+- (void)logOut:(UIButton *)sender{
+    __weak __typeof(self) weakSelf = self;
+
 }
 
 #pragma mark -  UITableViewDataSource
@@ -169,7 +223,7 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 
-    return 5;
+    return 4;
 
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -178,19 +232,16 @@
 
     
     if (indexPath.row == 0) {
-        [cell refreshUIWithTitle:lqStrings(@"设置")];
+        [cell refreshUIWithTitle:LanguageStrings(@"conf")];
         
     }else if (indexPath.row == 1) {
-        [cell refreshUIWithTitle:lqStrings(@"分享bigjpg.com")];
+        [cell refreshUIWithTitle:LanguageStrings(@"share")];
 
     }else if (indexPath.row == 2) {
-        [cell refreshUIWithTitle:lqStrings(@"访问bigjpg.com官网")];
+        [cell refreshUIWithTitle:LanguageStrings(@"visit")];
 
     }else if (indexPath.row == 3) {
-        [cell refreshUIWithTitle:lqStrings(@"反馈&客服i@bigjpg.com")];
-
-    }else if (indexPath.row == 4) {
-        [cell refreshUIWithTitle:lqStrings(@"设置")];
+        [cell refreshUIWithTitle:LanguageStrings(@"feedback")];
 
     }
   
@@ -290,5 +341,24 @@
         _settingCustomView = [SettingCustomView new];
     }
     return _settingCustomView;
+}
+
+- (UIView *)footerView{
+    if (!_footerView) {
+        _footerView = [UIView new];
+        __weak __typeof(self) weakSelf = self;
+        _versionBtn = [[UIButton alloc] init];
+        NSString *version = [LqToolKit appVersionNo];
+        [_versionBtn setTitle:[NSString stringWithFormat:@"V%@",version] forState:UIControlStateNormal];
+        [_versionBtn setTitleColor:TitleGrayColor forState:UIControlStateNormal];
+        _versionBtn.titleLabel.font = AdaptedFontSize(15);
+        [_footerView addSubview:_versionBtn];
+        [_versionBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(weakSelf.footerView);
+            make.height.mas_equalTo(Adaptor_Value(40));
+            make.width.mas_equalTo(LQScreemW);
+        }];
+    }
+    return _footerView;
 }
 @end

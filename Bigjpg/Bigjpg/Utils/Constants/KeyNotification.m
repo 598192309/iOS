@@ -18,5 +18,6 @@ NSString* const kIsNight = @"kIsNight";
 
 NSString *const  kEnlargeConfigarationFinishNoti = @"kEnlargeConfigarationFinishNoti";
 
+NSString* const kUserName = @"kUserName";
 
 

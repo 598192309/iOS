@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class M_User;
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SettingCustomView : UIView
@@ -19,10 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 /**点击登录*/
 @property(nonatomic,copy)void(^settingCustomViewConfirmBtnClickBlock)(NSDictionary *dict,UIButton *sender);
 
-/**点击注册*/
-@property(nonatomic,copy)void(^settingCustomViewZhuceClickBlock)(NSDictionary *dict);
 
-- (void)configUIWithItem:(NSObject *)item finishi:(void(^)())finishBlock;
+- (void)configUIWithItem:(M_User *)item finishi:(void(^)())finishBlock;
 @end
 
 NS_ASSUME_NONNULL_END

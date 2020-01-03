@@ -34,15 +34,7 @@
 }
 
 + (void)show {
-    NSMutableArray *images = [NSMutableArray array];
-    
-    for (int i = 0 ; i < 26; i ++) {
-        [images addObject:[UIImage imageNamed:[NSString stringWithFormat:@"合成 1_000%02d",i]]];
-    }
-    
-    UIImage * animatedImage = [UIImage animatedImageWithImages:images duration:2.0];
-
-    [self showImage:animatedImage status:nil];
+    [SVProgressHUD show];
 }
 
 

@@ -72,7 +72,7 @@
 }
 - (void)setUpNav{
     [self addNavigationView];
-    self.navigationTextLabel.text = lqStrings(@"设置");
+    self.navigationTextLabel.text = LanguageStrings(@"conf");
 }
 
 #pragma mark - act
@@ -82,7 +82,7 @@
     [self.customTableAlertView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo([UIApplication sharedApplication].keyWindow);
     }];
-    [self.customTableAlertView configUIWithArr:@[@"1",@"1",@"1",@"1",@"1"]];
+    [self.customTableAlertView configUIWithArr:@[@"简体中文",@"繁體中文",@"日本語",@"English",@"Русский",@"Türkçe"]];
     self.customTableAlertView.CustomTableAlertChooseBlock = ^(NSInteger index, NSString * _Nonnull str) {
         [LSVProgressHUD showInfoWithStatus:str];
         [weakSelf.customTableAlertView removeFromSuperview];
@@ -112,7 +112,11 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SetConfigChooseCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([SetConfigChooseCell class]) forIndexPath:indexPath];
-    [cell configUIWithItem:nil];
+    if (indexPath.row ==0) {
+        [cell configUIWithTitle:lqStrings(@"自动下载放大的图片")];
+    }else{
+        [cell configUIWithTitle:lqStrings(@"夜间模式")];
+    }
     return cell;
 }
 
@@ -193,7 +197,7 @@
         }];
         
         _languageBtn = [[UIButton alloc] init];
-        [_languageBtn setTitle:lqStrings(@"简体中文") forState:UIControlStateNormal];
+        [_languageBtn setTitle:LanguageStrings(@"lng") forState:UIControlStateNormal];
         [_languageBtn setTitleColor:TitleBlackColor forState:UIControlStateNormal];
         [_languageBtn addTarget:self action:@selector(languageBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [contentV addSubview:_languageBtn];

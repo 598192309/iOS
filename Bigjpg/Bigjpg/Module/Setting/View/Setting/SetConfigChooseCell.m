@@ -38,11 +38,8 @@
     
 }
 
--(void)configUIWithItem:(NSObject *)item{
-//    self.titleLabel.text = item.title;
-//    self.titleLabel.textColor = item.is_selected ? [UIColor whiteColor] : TitleGrayColor;
-//    self.chooseBtn.selected = item.is_selected;
-    self.titleLabel.text = @"自动";
+-(void)configUIWithTitle:(NSString *)title{
+    self.titleLabel.text = title;
     self.chooseBtn.selected =!self.chooseBtn.selected;
 }
 
@@ -68,15 +65,14 @@
         
         _chooseBtn = [[UIButton alloc] init];
 
-        [_chooseBtn setBackgroundImage:[UIImage imageNamed:@"ic_uncheck"] forState:UIControlStateNormal];
-        [_chooseBtn setBackgroundImage:[UIImage imageNamed:@"ic_check"] forState:UIControlStateSelected];
+        [_chooseBtn setBackgroundImage:[UIImage imageNamed:@"choose_nor"] forState:UIControlStateNormal];
+        [_chooseBtn setBackgroundImage:[UIImage imageNamed:@"choose_sel"] forState:UIControlStateSelected];
         [contentV addSubview:_chooseBtn];
         [_chooseBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.width.height.mas_equalTo(Adaptor_Value(20));
             make.left.mas_equalTo(Adaptor_Value(20));
             make.centerY.mas_equalTo(contentV);
         }];
-        _chooseBtn.backgroundColor = DeepGreenColor;
         
         _titleLabel = [UILabel lableWithText:lqLocalized(@"",nil) textColor:TitleGrayColor fontSize:AdaptedFontSize(15) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
         [contentV addSubview:_titleLabel];

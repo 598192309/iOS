@@ -22,6 +22,7 @@
         NSString *status = SAFE_VALUE_FOR_KEY(resultObject, @"status");//ok代表成功
          if([status isEqualToString:@"ok"]){
              M_User *account = [M_User mj_objectWithKeyValues:resultObject];
+             RI.is_logined = YES;
              successBlock(account);
          }else{
              failureBlock([NSError lq_errorWithMsg:status domain:@"Response Error" code:10000]);
