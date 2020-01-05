@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		094C433623C238310007B800 /* ForgetPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 094C433523C238310007B800 /* ForgetPwdViewController.m */; };
+		094C433923C23FFD0007B800 /* ModifyPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 094C433823C23FFD0007B800 /* ModifyPwdViewController.m */; };
 		095CB7CD23B3B0E0003CF4C6 /* ConfManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 095CB7CC23B3B0E0003CF4C6 /* ConfManager.m */; };
 		095CB7D023B3B749003CF4C6 /* Conf.plist in Resources */ = {isa = PBXBuildFile; fileRef = 095CB7CF23B3B749003CF4C6 /* Conf.plist */; };
 		1118103F23B30A4400BEE5EF /* CustomActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1118103E23B30A4400BEE5EF /* CustomActivity.m */; };
@@ -60,6 +61,8 @@
 /* Begin PBXFileReference section */
 		094C433423C238310007B800 /* ForgetPwdViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ForgetPwdViewController.h; sourceTree = "<group>"; };
 		094C433523C238310007B800 /* ForgetPwdViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ForgetPwdViewController.m; sourceTree = "<group>"; };
+		094C433723C23FFD0007B800 /* ModifyPwdViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModifyPwdViewController.h; sourceTree = "<group>"; };
+		094C433823C23FFD0007B800 /* ModifyPwdViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModifyPwdViewController.m; sourceTree = "<group>"; };
 		095CB7CB23B3B0E0003CF4C6 /* ConfManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConfManager.h; sourceTree = "<group>"; };
 		095CB7CC23B3B0E0003CF4C6 /* ConfManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConfManager.m; sourceTree = "<group>"; };
 		095CB7CF23B3B749003CF4C6 /* Conf.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Conf.plist; sourceTree = "<group>"; };
@@ -219,6 +222,8 @@
 				1118104123B30BB400BEE5EF /* SetConfigViewController.m */,
 				094C433423C238310007B800 /* ForgetPwdViewController.h */,
 				094C433523C238310007B800 /* ForgetPwdViewController.m */,
+				094C433723C23FFD0007B800 /* ModifyPwdViewController.h */,
+				094C433823C23FFD0007B800 /* ModifyPwdViewController.m */,
 				118FED4023B20CBA0055E56C /* View */,
 			);
 			path = Setting;
@@ -594,6 +599,7 @@
 				1118105023B33DDD00BEE5EF /* CustomAlertView.m in Sources */,
 				4920AED123AD32D800FE7A65 /* RunInfo.m in Sources */,
 				496DA06F23AD114400DDB905 /* AppDelegate.m in Sources */,
+				094C433923C23FFD0007B800 /* ModifyPwdViewController.m in Sources */,
 				095CB7CD23B3B0E0003CF4C6 /* ConfManager.m in Sources */,
 				495435C723B4BE66008CCB60 /* I_Enlarge.m in Sources */,
 				4920AEA823AD2CC100FE7A65 /* BaseCollectionViewController.m in Sources */,

@@ -14,6 +14,9 @@ extern NSString* const kURL_Reachability__Address;
 extern NSString* const kUserSignIn;
 extern NSString* const kUserSignOut;
 
+extern NSString* const kUserIsLogin;
+
+
 extern NSString* const kIsNight;//夜间模式
 
 

@@ -13,6 +13,7 @@
 #import "SetConfigViewController.h"
 #import "I_Account.h"
 #import "ForgetPwdViewController.h"
+#import "ModifyPwdViewController.h"
 
 @interface SettingViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) UITableView  *customTableView;
@@ -29,7 +30,7 @@
 #pragma mark - 生命周期
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-
+    
     
 }
 - (void)viewDidLoad {
@@ -146,7 +147,8 @@
     self.settingCustomView.settingCustomViewForgetBtnClickBlock = ^(NSDictionary * _Nonnull dict, UIButton * _Nonnull sender) {
         if ([[sender titleForState:UIControlStateNormal] isEqualToString:LanguageStrings(@"change_password")]) {
             //修改密码
-            
+            ModifyPwdViewController *vc = [[ModifyPwdViewController alloc] init];
+            [weakSelf.navigationController pushViewController:vc animated:YES];
         }else{//忘记密码
             ForgetPwdViewController *vc = [[ForgetPwdViewController alloc] init];
             [weakSelf.navigationController pushViewController:vc animated:YES];
