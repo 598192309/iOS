@@ -358,8 +358,7 @@
         
         
         _zhuceChooseBtn = [[UIButton alloc] init];
-        [_zhuceChooseBtn setImage:[UIImage imageNamed:@"choose_nor"]  forState:UIControlStateNormal];
-        [_zhuceChooseBtn setImage:[[UIImage imageNamed:@"choose_sel"] qmui_imageWithTintColor:LihgtGreenColor] forState:UIControlStateSelected];
+        [_zhuceChooseBtn setImage:[UIImage imageNamed:@"ic_uncheck"]  forState:UIControlStateNormal];
         [_zhuceChooseBtn addTarget:self action:@selector(zhuceChooseBtnClick:) forControlEvents:UIControlEventTouchDown];
         [zhuceView addSubview:_zhuceChooseBtn];
         [_zhuceChooseBtn mas_makeConstraints:^(MASConstraintMaker *make) {

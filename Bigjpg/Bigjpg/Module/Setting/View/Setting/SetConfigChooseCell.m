@@ -65,11 +65,11 @@
         
         _chooseBtn = [[UIButton alloc] init];
 
-        [_chooseBtn setBackgroundImage:[UIImage imageNamed:@"choose_nor"] forState:UIControlStateNormal];
-        [_chooseBtn setBackgroundImage:[UIImage imageNamed:@"choose_sel"] forState:UIControlStateSelected];
+        [_chooseBtn setBackgroundImage:[[UIImage imageNamed:@"ic_uncheck"] qmui_imageWithTintColor:DeepGreenColor] forState:UIControlStateNormal];
+        [_chooseBtn setBackgroundImage:[UIImage imageNamed:@"ic_check"] forState:UIControlStateSelected];
         [contentV addSubview:_chooseBtn];
         [_chooseBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.width.height.mas_equalTo(Adaptor_Value(20));
+            make.width.height.mas_equalTo(Adaptor_Value(40));
             make.left.mas_equalTo(Adaptor_Value(20));
             make.centerY.mas_equalTo(contentV);
         }];

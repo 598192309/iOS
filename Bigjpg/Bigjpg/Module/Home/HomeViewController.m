@@ -118,8 +118,17 @@
     actionSheet.configuration.maxSelectCount = 10;
     actionSheet.configuration.navBarColor= [UIColor whiteColor];
     actionSheet.configuration.navTitleColor = [UIColor blackColor];
+    actionSheet.configuration.bottomViewBgColor = [UIColor whiteColor];
+//    actionSheet.configuration.previewTextColor = [UIColor redColor];
+    actionSheet.configuration.showSelectedMask = YES;
     actionSheet.configuration.bottomBtnsNormalTitleColor = [UIColor whiteColor];
-    actionSheet.configuration.bottomBtnsDisableBgColor = RGBA(58, 167, 255, 0.5);
+    actionSheet.configuration.bottomBtnsDisableTitleColor =  [UIColor whiteColor];
+    actionSheet.configuration.bottomBtnsNormalBgColor = LihgtGreenColor;
+    actionSheet.configuration.bottomBtnsDisableBgColor = RGBA(30,161,20,0.5);
+    actionSheet.configuration.indexLabelBgColor = LihgtGreenColor;
+    actionSheet.configuration.maxPreviewCount = 0;
+    actionSheet.configuration.customLanguageKeyValue = @{};
+    actionSheet.configuration.customImageNames = @[@"zl_navBack"];
     actionSheet.sender = self;
             
     __weak typeof(self) weakSelf = self;
