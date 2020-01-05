@@ -17,7 +17,7 @@
 @property (nonatomic,strong)HistoryCustomView *historyCustomView;
 
 @property (nonatomic,strong)UIView *unloginFooter;
-@property (nonatomic,strong)UIButton *unloginCheckBtn;
+@property (nonatomic,strong)UILabel *unloginCheckLable;
 
 @property (nonatomic,strong)CustomAlertView *infoAlert;
 
@@ -159,7 +159,7 @@
     
 }
 
-- (void)unloginCheckBtnClick:(UIButton *)sender{
+- (void)unloginTap:(UITapGestureRecognizer *)gest{
     self.tabBarController.selectedIndex = 2;
 }
 
@@ -339,19 +339,19 @@
         }];
         
       
-        _unloginCheckBtn = [[UIButton alloc] init];
-        [_unloginCheckBtn setTitle:lqStrings(@"点击登录查看放大记录") forState:UIControlStateNormal];
-        _unloginCheckBtn.titleLabel.font = AdaptedFontSize(16);
-        [_unloginCheckBtn setTitleColor:TitleBlackColor forState:UIControlStateNormal];
-        [_unloginCheckBtn addTarget:self action:@selector(unloginCheckBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-        [contentV addSubview:_unloginCheckBtn];
-        [_unloginCheckBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        _unloginCheckLable = [UILabel lableWithText:LanguageStrings(@"no_upgrade") textColor:TitleBlackColor fontSize:AdaptedFontSize(16) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
+        [contentV addSubview:_unloginCheckLable];
+        CGFloat w =  [LanguageStrings(@"no_upgrade") boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:AdaptedFontSize(17)} context:nil].size.width + Adaptor_Value(15);
+        [_unloginCheckLable mas_makeConstraints:^(MASConstraintMaker *make) {
             make.center.mas_equalTo(contentV);
-            make.width.mas_equalTo(Adaptor_Value(200));
+            make.width.mas_equalTo(w  > (LQScreemW - Adaptor_Value(20)) ? (LQScreemW - Adaptor_Value(20)) :w);
             make.height.mas_equalTo(Adaptor_Value(50));
         }];
-        ViewBorderRadius(_unloginCheckBtn, Adaptor_Value(2.5), kOnePX*2, LineGrayColor);
-        _unloginCheckBtn.backgroundColor = TabbarGrayColor;
+        ViewBorderRadius(_unloginCheckLable, Adaptor_Value(2.5), kOnePX*2, LineGrayColor);
+        _unloginCheckLable.backgroundColor = TabbarGrayColor;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(unloginTap:)];
+        _unloginCheckLable.userInteractionEnabled = YES;
+        [_unloginCheckLable addGestureRecognizer:tap];
         
         
     }

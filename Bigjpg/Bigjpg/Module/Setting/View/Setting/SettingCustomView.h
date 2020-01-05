@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**点击升级*/
 @property(nonatomic,copy)void(^settingCustomViewUpdateBtnClickBlock)(NSDictionary *dict);
 /**点击忘记密码*/
-@property(nonatomic,copy)void(^settingCustomViewForgetBtnClickBlock)(NSDictionary *dict);
+@property(nonatomic,copy)void(^settingCustomViewForgetBtnClickBlock)(NSDictionary *dict,UIButton *sender);
 
 /**点击登录*/
 @property(nonatomic,copy)void(^settingCustomViewConfirmBtnClickBlock)(NSDictionary *dict,UIButton *sender);
