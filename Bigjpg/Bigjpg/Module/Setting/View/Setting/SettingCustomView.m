@@ -111,6 +111,8 @@
         NSString *time = [item.expire lq_dealTimeFormarter:@"yyyy-MM-dd HH:mm:ss" changeFormater:@"yyyy-MM-dd"];
         [self.lorgintimeBtn setTitle:time forState:UIControlStateNormal];
         self.lorgintotalTipLabel.text = [NSString stringWithFormat:@"%@%lu",LanguageStrings(@"used"),(unsigned long)item.historyList.count];
+        
+        [_forgetBtn setTitle:LanguageStrings(@"change_password") forState:UIControlStateNormal];
     }else{
  
         [_textFBackView mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -130,6 +132,8 @@
          [self.confirmBtn mas_updateConstraints:^(MASConstraintMaker *make) {
              make.top.mas_equalTo(weakSelf.zhuceView.mas_bottom).offset(Adaptor_Value(25));
          }];
+        [_forgetBtn setTitle:LanguageStrings(@"reset") forState:UIControlStateNormal];
+
     
     }
 
@@ -154,7 +158,7 @@
 
 - (void)fogetBtnClick:(UIButton *)sender{
     if (self.settingCustomViewForgetBtnClickBlock) {
-        self.settingCustomViewForgetBtnClickBlock(nil);
+        self.settingCustomViewForgetBtnClickBlock(@{},sender);
     }
 }
 
