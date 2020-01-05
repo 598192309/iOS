@@ -40,6 +40,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param failureBlock 失败回调
 + (NetworkTask *)requestConfOnSuccess:(void(^)(NSDictionary *confDic))successBlock failure:(ErrorBlock)failureBlock;
 
+
+/// 登出
+/// @param successBlock 登出必然成功
++ (void)loginOutOnSuccessOnSuccess:(void(^)(void))successBlock;
 @end
 
 NS_ASSUME_NONNULL_END
