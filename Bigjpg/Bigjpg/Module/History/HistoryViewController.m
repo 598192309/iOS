@@ -49,6 +49,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyRequestData) name:kUserSignIn object:nil];
     //监听用户退出登录
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyRequestData) name:kUserSignOut object:nil];
+    //监听用户切换语言
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changLanguage) name:kChangeLanguageNotification object:nil];
+
 
     [self requestData];
 }
@@ -81,6 +84,13 @@
         make.left.bottom.right.top.mas_equalTo(weakSelf.view);
     }];
     self.customTableView.contentInset = UIEdgeInsetsMake(0, 0, TabbarH, 0);
+    [self setUpHeader];
+
+    [self changeUIWithLoginStatus];
+    
+    [self historyCustomViewAct];
+}
+- (void)setUpHeader{
     UIView *tableHeaderView = [[UIView alloc] init];
     [tableHeaderView addSubview:self.historyCustomView];
     [self.historyCustomView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -90,12 +100,7 @@
     tableHeaderView.lq_height = H;
     self.customTableView.tableHeaderView = tableHeaderView;
     self.customTableView.tableHeaderView.lq_height = H;
-
-    [self changeUIWithLoginStatus];
-    
-    [self historyCustomViewAct];
 }
-
 #pragma mark - refresh ui
 - (void)changeUIWithLoginStatus{
     if (RI.is_logined) {
@@ -122,7 +127,12 @@
     }
     [self.customTableView reloadData];
 }
-
+- (void)changLanguage{
+    [self.customTableView reloadData];
+    [self.historyCustomView removeFromSuperview];
+    [self setUpHeader];
+    self.unloginCheckLable.text = LanguageStrings(@"no_upgrade");
+}
 #pragma mark - act
 
 - (void)historyCustomViewAct{

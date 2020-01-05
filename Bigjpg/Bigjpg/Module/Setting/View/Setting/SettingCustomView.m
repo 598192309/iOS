@@ -105,7 +105,14 @@
         }else{
             typestr = [arr safeObjectAtIndex:3];
         }
-        NSArray *typeArr = [typestr componentsSeparatedByString:@":"];
+        NSArray *typeArr;
+        if ([typestr containsString:@":"]) {
+            typeArr =  [typestr componentsSeparatedByString:@":"];
+
+        }else{
+            typeArr =  [typestr componentsSeparatedByString:@"："];
+
+        }
 
         [self.lorgintipBtn setTitle:typeArr.lastObject forState:UIControlStateNormal];
         NSString *time = [item.expire lq_dealTimeFormarter:@"yyyy-MM-dd HH:mm:ss" changeFormater:@"yyyy-MM-dd"];
@@ -138,9 +145,7 @@
     }
 
     self.lorginTipView.hidden = !RI.is_logined;
-    
-    
-    
+        
     finishBlock();
 }
 

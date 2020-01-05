@@ -82,7 +82,7 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.CustomTableAlertChooseBlock) {
-        self.CustomTableAlertChooseBlock(indexPath.row, [NSString stringWithFormat:@"--%d",indexPath.row]);
+        self.CustomTableAlertChooseBlock(indexPath.row, [self.dataArr safeObjectAtIndex:indexPath.row ]);
     }
 }
 

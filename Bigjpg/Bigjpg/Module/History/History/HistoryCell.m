@@ -57,17 +57,24 @@
         [_retryOrDownloadBtn setTitle:LanguageStrings(@"download") forState:UIControlStateNormal];
         _retryOrDownloadBtn.backgroundColor = LihgtGreenColor;
         w = [LanguageStrings(@"download") boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:AdaptedFontSize(15)} context:nil].size.width + Adaptor_Value(10);
+        self.chooseBtn.hidden = !downAll;
+        self.retryOrDownloadBtn.hidden = downAll;
+        self.chooseBtn.selected = item.customSlected;
     }else if ([item.status isEqualToString:@"success"]) {
         _retryOrDownloadBtn.hidden = NO;
         [_retryOrDownloadBtn setTitle:LanguageStrings(@"retry") forState:UIControlStateNormal];
         _retryOrDownloadBtn.backgroundColor = YellowBackColor;
         w = [LanguageStrings(@"retry") boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:AdaptedFontSize(15)} context:nil].size.width + Adaptor_Value(10);
-
+        self.chooseBtn.hidden = !downAll;
+        self.retryOrDownloadBtn.hidden = downAll;
+        self.chooseBtn.selected = item.customSlected;
     } else {
         _retryOrDownloadBtn.hidden = YES;
+        self.chooseBtn.hidden = YES;
+
     }
     [_retryOrDownloadBtn mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(w);
+        make.width.mas_equalTo(w > Adaptor_Value(70) ? w : Adaptor_Value(70));
     }];
     NSString *noiseStr ;
     if (item.conf.noise == -1) {
@@ -111,9 +118,7 @@
     self.imageTipLable.hidden = [item.status isEqualToString:@"success"];
     self.iconImageVCoverView.hidden = [item.status isEqualToString:@"success"];
     
-    self.chooseBtn.hidden = !downAll;
-    self.retryOrDownloadBtn.hidden = downAll;
-    self.chooseBtn.selected = item.customSlected;
+    
 }
 
 #pragma mark - act

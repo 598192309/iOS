@@ -50,6 +50,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUI) name:kUserSignIn object:nil];
     //监听用户退出登录
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUI) name:kUserSignOut object:nil];
+    //监听用户切换语言
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changLanguage) name:kChangeLanguageNotification object:nil];
     
     [self refreshUI];
   
@@ -68,18 +70,7 @@
         make.left.bottom.right.top.mas_equalTo(weakSelf.view);
     }];
     self.customTableView.contentInset = UIEdgeInsetsMake(0, 0, TabbarH, 0);
-    UIView *tableHeaderView = [[UIView alloc] init];
-    [tableHeaderView addSubview:self.settingCustomView];
-    [self.settingCustomView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(tableHeaderView);
-    }];
-    
-    CGFloat H = [tableHeaderView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-    tableHeaderView.lq_height = H;
-    self.customTableView.tableHeaderView = tableHeaderView;
-    self.customTableView.tableHeaderView.lq_height = H;
-
-    [self settingCustomViewAct];
+    [self setUpHeader];
     if (RI.is_logined) {
         [self.settingCustomView configUIWithItem:RI.userInfo finishi:^{
             UIView *tableHeaderView = [[UIView alloc] init];
@@ -108,6 +99,20 @@
     self.customTableView.tableFooterView.lq_height = fH;
     
 }
+- (void)setUpHeader{
+    UIView *tableHeaderView = [[UIView alloc] init];
+    [tableHeaderView addSubview:self.settingCustomView];
+    [self.settingCustomView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(tableHeaderView);
+    }];
+    
+    CGFloat H = [tableHeaderView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+    tableHeaderView.lq_height = H;
+    self.customTableView.tableHeaderView = tableHeaderView;
+    self.customTableView.tableHeaderView.lq_height = H;
+
+    [self settingCustomViewAct];
+}
 
 - (void)refreshUI{
     __weak __typeof(self) weakSelf = self;
@@ -123,7 +128,12 @@
        weakSelf.customTableView.tableHeaderView.lq_height = H;
    }];
 }
-
+- (void)changLanguage{
+    [self.customTableView reloadData];
+    [self.settingCustomView removeFromSuperview];
+    [self setUpHeader];
+    [self refreshUI];
+}
 #pragma mark - act
 
 - (void)settingCustomViewAct{

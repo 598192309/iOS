@@ -111,7 +111,11 @@
             default:
                 break;
         }
-        [[ConfManager shared] changeLocalLanguage:str];
+        [[ConfManager shared] changeLocalLanguage:language];
+        [weakSelf.languageBtn setTitle:str forState:UIControlStateNormal];
+        [weakSelf.customTableView reloadData];
+        weakSelf.navigationTextLabel.text = LanguageStrings(@"conf");
+        
     };
     
     self.customTableAlertView.CustomTableAlertRemoveBlock = ^{
@@ -218,7 +222,7 @@
             make.edges.mas_equalTo(weakSelf.footer);
         }];
         
-        _tipLable = [UILabel lableWithText:lqLocalized(@"语言",nil) textColor:TitleGrayColor fontSize:AdaptedFontSize(17) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
+        _tipLable = [UILabel lableWithText:LanguageStrings(@"语言") textColor:TitleGrayColor fontSize:AdaptedFontSize(17) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
         [contentV addSubview:_tipLable];
         [_tipLable mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(Adaptor_Value(10));

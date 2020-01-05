@@ -45,12 +45,7 @@
 
 
 #pragma mark - 刷新ui
-- (void)configUIWithItem:(NSObject *)item finishi:(void(^)())finishBlock{
-    
-    
-    
-    finishBlock();
-}
+
 - (void)reset{
     self.downloadBtn.hidden = NO;
     self.cancleBtn.hidden = YES;
