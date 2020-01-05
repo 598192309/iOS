@@ -23,7 +23,10 @@
 @implementation MainTabBarController
 
 
-
++ (void)initialize
+{
+    [[UITabBar appearance] setTranslucent:NO];
+}
 
 // 是否支持自动转屏
 - (BOOL)shouldAutorotate {
@@ -32,15 +35,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.tabBar.tintColor = [UIColor blackColor];
     HomeViewController *vc1 = [HomeViewController controller];
-    [self addChildViewController:vc1 withImageName:@"home" selectedImageName:@"home_sel" withTittle:lqLocalized(@"开始",nil)];
+    [self addChildViewController:vc1 withImageName:@"add" selectedImageName:@"add" withTittle:LanguageStrings(@"begin")];
     
     HistoryViewController *vc2 = [[HistoryViewController alloc] init];
-    [self addChildViewController:vc2 withImageName:@"wallet" selectedImageName:@"history_sel" withTittle:lqStrings(@"放大历史")];
+    [self addChildViewController:vc2 withImageName:@"history" selectedImageName:@"history" withTittle:LanguageStrings(@"log")];
 
     SettingViewController *vc3 = [[SettingViewController alloc] init];
-    [self addChildViewController:vc3 withImageName:@"account" selectedImageName:@"account_sel" withTittle:lqLocalized(@"设置",nil)];
+    [self addChildViewController:vc3 withImageName:@"setting" selectedImageName:@"setting" withTittle:LanguageStrings(@"conf")];
     
     
     [self setupBasic];
@@ -72,19 +75,12 @@
 - (void)addChildViewController:(UIViewController *)controller withImageName:(NSString *)imageName selectedImageName:(NSString *)selectImageName withTittle:(NSString *)tittle{
     BaseNavgationController *nav = [[BaseNavgationController alloc] initWithRootViewController:controller];
     
-    UIImage * image = [[UIImage imageNamed:imageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    UIImage * selectImage = [[UIImage imageNamed:selectImageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIImage * image = [[[UIImage imageNamed:imageName] qmui_imageWithTintColor:[UIColor lq_colorWithHexString:@"d2d2d2"]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIImage * selectImage = [[[UIImage imageNamed:selectImageName] qmui_imageWithTintColor:[UIColor blackColor]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 
     [nav.tabBarItem setImage:image];
     [nav.tabBarItem setSelectedImage:selectImage];
 
-    [nav.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName:TitleBlackColor,NSFontAttributeName:AdaptedFontSize(13)} forState:UIControlStateSelected];
-    [nav.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName:RGB(212, 212, 212),NSFontAttributeName:AdaptedFontSize(13)} forState:UIControlStateNormal];
-
-
-
-    //取消设置半透明
-    self.tabBar.translucent = NO;
 
 
     
@@ -95,6 +91,8 @@
     nav.tabBarItem.titlePositionAdjustment = UIOffsetMake(0, 0);
     
     [self addChildViewController:nav];
+//    [nav.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor redColor]} forState:UIControlStateNormal];
+//    [nav.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blueColor]} forState:UIControlStateSelected];
 }
 
 

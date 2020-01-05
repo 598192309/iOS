@@ -111,7 +111,7 @@
 {
     NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
     NSString *language = [def objectForKey:@"localLanguage"];
-    if (language == nil) {
+//    if (language == nil) {
         NSArray *languages = [NSLocale preferredLanguages];
         NSString *currentLanguage = [languages objectAtIndex:0];
         if ([currentLanguage containsString:@"zh"]) {
@@ -122,7 +122,7 @@
             return @"tw";
         } else if ([currentLanguage containsString:@"tr"]) {
             return @"tr";
-        } else if ([currentLanguage containsString:@"jp"]) {
+        } else if ([currentLanguage containsString:@"ja"]) {
             return @"jp";
         } else if ([currentLanguage containsString:@"de"]) {
             return @"de";
@@ -131,7 +131,7 @@
         } else {
             return @"en";
         }
-    }
+//    }
     return language;
 }
 
