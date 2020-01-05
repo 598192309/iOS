@@ -51,17 +51,24 @@
     
     finishBlock();
 }
+- (void)reset{
+    self.downloadBtn.hidden = NO;
+    self.cancleBtn.hidden = YES;
+    self.confrimBtn.hidden = YES;
+}
 #pragma mark - act
 - (void)downloadBtnClick:(UIButton *)sender{
-    if (RI.is_logined) {
-        
-    }else{
-        self.downloadBtn.hidden = YES;
-        self.cancleBtn.hidden = NO;
-        self.confrimBtn.hidden = NO;
+    if (self.historyCustomViewDownAllBtnClickBlock) {
+        self.historyCustomViewDownAllBtnClickBlock(@{},sender);
     }
+    self.downloadBtn.hidden = YES;
+    self.cancleBtn.hidden = NO;
+    self.confrimBtn.hidden = NO;
 }
 - (void)cancleBtnClick:(UIButton *)sender{
+    if (self.historyCustomViewCancleBtnClickBlock) {
+        self.historyCustomViewCancleBtnClickBlock(@{},sender);
+    }
     self.downloadBtn.hidden = NO;
     self.cancleBtn.hidden = YES;
     self.confrimBtn.hidden = YES;
@@ -89,13 +96,16 @@
        
         
         _downloadBtn = [[UIButton alloc] init];
-        [_downloadBtn setTitle:lqStrings(@"批量下载") forState:UIControlStateNormal];
+        [_downloadBtn setTitle:LanguageStrings(@"batch_download") forState:UIControlStateNormal];
         [_downloadBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_downloadBtn addTarget:self action:@selector(downloadBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [contentV addSubview:_downloadBtn];
+        _downloadBtn.titleLabel.font = AdaptedFontSize(15);
+        CGFloat  dw = [LanguageStrings(@"batch_download") boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:AdaptedFontSize(15)} context:nil].size.width + Adaptor_Value(15);
+
         [_downloadBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(contentV);
-            make.width.mas_equalTo(Adaptor_Value(100));
+            make.width.mas_equalTo(dw);
             make.top.mas_equalTo(Adaptor_Value(60));
             
         }];
@@ -105,13 +115,15 @@
 
         
         _cancleBtn = [[UIButton alloc] init];
-        [_cancleBtn setTitle:lqStrings(@"取消") forState:UIControlStateNormal];
+        [_cancleBtn setTitle:LanguageStrings(@"cancel") forState:UIControlStateNormal];
         [_cancleBtn addTarget:self action:@selector(cancleBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [_cancleBtn setTitleColor:TitleBlackColor forState:UIControlStateNormal];
         [contentV addSubview:_cancleBtn];
+        _cancleBtn.titleLabel.font = AdaptedFontSize(15);
+        CGFloat  cw = [LanguageStrings(@"cancel") boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:AdaptedFontSize(15)} context:nil].size.width + Adaptor_Value(15);
         [_cancleBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(weakSelf.downloadBtn);
-            make.width.mas_equalTo(Adaptor_Value(80));
+            make.width.mas_equalTo(cw > Adaptor_Value(80) ? cw : Adaptor_Value(80));
             make.left.mas_equalTo(contentV.mas_centerX).offset(Adaptor_Value(20));
             
         }];
@@ -121,13 +133,15 @@
         _cancleBtn.hidden = YES;
         
         _confrimBtn = [[UIButton alloc] init];
-        [_confrimBtn setTitle:lqStrings(@"确定") forState:UIControlStateNormal];
+        [_confrimBtn setTitle:LanguageStrings(@"ok") forState:UIControlStateNormal];
         [_confrimBtn addTarget:self action:@selector(confirmBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [_confrimBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [contentV addSubview:_confrimBtn];
+        _confrimBtn.titleLabel.font = AdaptedFontSize(15);
+        CGFloat  confirmw = [LanguageStrings(@"ok") boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:AdaptedFontSize(15)} context:nil].size.width + Adaptor_Value(15);
         [_confrimBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(weakSelf.downloadBtn);
-            make.width.mas_equalTo(Adaptor_Value(80));
+            make.width.mas_equalTo(confirmw > Adaptor_Value(80) ? confirmw : Adaptor_Value(80));
             make.right.mas_equalTo(contentV.mas_centerX).offset(-Adaptor_Value(20));
             
         }];
@@ -137,15 +151,15 @@
         ViewRadius(_confrimBtn, Adaptor_Value(5));
         _confrimBtn.hidden = YES;
       
-        _wenjianTipLable = [UILabel lableWithText:lqStrings(@"文件") textColor:TitleBlackColor fontSize:AdaptedFontSize(15) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
+        NSArray *arr = [ConfManager.shared contentWith:@"log_head"];
+        _wenjianTipLable = [UILabel lableWithText:[arr safeObjectAtIndex:0] textColor:TitleBlackColor fontSize:AdaptedFontSize(15) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
         [contentV addSubview:_wenjianTipLable];
         [_wenjianTipLable mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(Adaptor_Value(10));
-            make.width.mas_equalTo(Adaptor_Value(80));
             make.top.mas_equalTo(weakSelf.downloadBtn.mas_bottom).offset(Adaptor_Value(30));
+            make.centerX.mas_equalTo(contentV.mas_left).offset(Adaptor_Value(50));
         }];
 
-        _canshuTipLable = [UILabel lableWithText:lqStrings(@"参数") textColor:TitleBlackColor fontSize:AdaptedFontSize(15) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
+        _canshuTipLable = [UILabel lableWithText:[arr safeObjectAtIndex:1] textColor:TitleBlackColor fontSize:AdaptedFontSize(15) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
         [contentV addSubview:_canshuTipLable];
         [_canshuTipLable mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(contentV);
@@ -153,13 +167,12 @@
         }];
         
 
-        _dowloadTipLable = [UILabel lableWithText:lqStrings(@"下载") textColor:TitleBlackColor fontSize:AdaptedFontSize(15) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
+        _dowloadTipLable = [UILabel lableWithText:[arr safeObjectAtIndex:3] textColor:TitleBlackColor fontSize:AdaptedFontSize(15) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
         [contentV addSubview:_dowloadTipLable];
         [_dowloadTipLable mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(contentV).offset(-Adaptor_Value(10));
-            make.width.mas_equalTo(Adaptor_Value(80));
             make.centerY.mas_equalTo(weakSelf.wenjianTipLable);
-            
+            make.width.mas_equalTo(Adaptor_Value(100));
             make.bottom.mas_equalTo(contentV).offset(-Adaptor_Value(10));
         }];
     }

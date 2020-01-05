@@ -18,6 +18,7 @@
 @property (nonatomic,strong)SettingCustomView *settingCustomView;
 @property (nonatomic,strong)UIView *footerView;
 @property (nonatomic,strong)UIButton *versionBtn;
+@property (nonatomic,strong)CustomAlertView *loginOutAlertView;
 
 @end
 
@@ -44,9 +45,11 @@
     }
 
     //监听用户登录成功
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestData) name:kUserSignIn object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUI) name:kUserSignIn object:nil];
     //监听用户退出登录
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestData) name:kUserSignOut object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUI) name:kUserSignOut object:nil];
+    
+    [self refreshUI];
   
 
 }
@@ -68,9 +71,7 @@
     [self.settingCustomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(tableHeaderView);
     }];
-    [self.settingCustomView configUIWithItem:nil finishi:^{
-        
-    }];
+    
     CGFloat H = [tableHeaderView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
     tableHeaderView.lq_height = H;
     self.customTableView.tableHeaderView = tableHeaderView;
@@ -106,6 +107,20 @@
     
 }
 
+- (void)refreshUI{
+    __weak __typeof(self) weakSelf = self;
+    [self.settingCustomView configUIWithItem:RI.userInfo finishi:^{
+       UIView *tableHeaderView = [[UIView alloc] init];
+       [tableHeaderView addSubview:weakSelf.settingCustomView];
+       [weakSelf.settingCustomView mas_makeConstraints:^(MASConstraintMaker *make) {
+           make.edges.equalTo(tableHeaderView);
+       }];
+       CGFloat H = [tableHeaderView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+       tableHeaderView.lq_height = H;
+       weakSelf.customTableView.tableHeaderView = tableHeaderView;
+       weakSelf.customTableView.tableHeaderView.lq_height = H;
+   }];
+}
 
 #pragma mark - act
 
@@ -119,7 +134,7 @@
         if ([[sender titleForState:UIControlStateNormal] isEqualToString:LanguageStrings(@"login_reg")]) {//登录 或者注册
             [weakSelf loginWithUserName:email pwd:pwd notReg:zhuce sender:sender];
         }else{//退出
-            
+            [weakSelf remindShow:nil msgColor:TitleBlackColor msgFont:AdaptedFontSize(15) subMsg:LanguageStrings(@"logout") submsgColor:nil submsgFont:AdaptedFontSize(17) firstBtnTitle:LanguageStrings(@"cancel") secBtnTitle:LanguageStrings(@"ok") singeBtnTitle:@"" removeBtnHidden:YES];
         }
     };
     //升级
@@ -174,6 +189,17 @@
     [self presentViewController:activityVC animated:YES completion:nil];
     
 }
+
+- (void)remindShow:(NSString *)msg msgColor:(UIColor *)msgColor msgFont:(UIFont *)msgFont subMsg:(NSString *)subMsg submsgColor:(UIColor *)submsgColor submsgFont:(UIFont *)submsgFont firstBtnTitle:(NSString *)firstBtnTitle secBtnTitle:(NSString *)secBtnTitle singeBtnTitle:(NSString *)singeBtnTitle removeBtnHidden:(BOOL)removeBtnHidden{
+    NSAttributedString *attr = [msg lq_getAttributedStringWithLineSpace:Adaptor_Value(5) kern:Adaptor_Value(2)  ];
+
+    [self.loginOutAlertView refreshUIWithAttributeTitle:attr titleColor:msgColor titleFont:msgFont titleAliment:NSTextAlignmentCenter attributeSubTitle:[[NSAttributedString alloc]initWithString:SAFE_NIL_STRING(subMsg) ] subTitleColor:submsgColor subTitleFont:submsgFont subTitleAliment:NSTextAlignmentCenter firstBtnTitle:firstBtnTitle firstBtnTitleColor:TitleGrayColor secBtnTitle:secBtnTitle secBtnTitleColor:TitleBlackColor singleBtnHidden:singeBtnTitle.length == 0 singleBtnTitle:singeBtnTitle singleBtnTitleColor:nil removeBtnHidden:removeBtnHidden];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.loginOutAlertView];
+    
+    [self.loginOutAlertView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo([UIApplication sharedApplication].keyWindow);
+    }];
+}
 #pragma mark - net
 //登录 注册
 - (void)loginWithUserName:(NSString *)usename pwd:(NSString *)pwd notReg:(BOOL)notReg sender:(UIButton *)sender{
@@ -213,7 +239,23 @@
 //退出登录
 - (void)logOut:(UIButton *)sender{
     __weak __typeof(self) weakSelf = self;
-
+    [LSVProgressHUD show];
+    sender.userInteractionEnabled = NO;
+    [I_Account loginOutOnSuccessOnSuccess:^{
+        sender.userInteractionEnabled = YES;
+        [LSVProgressHUD dismiss];
+        [weakSelf.settingCustomView configUIWithItem:RI.userInfo finishi:^{
+            UIView *tableHeaderView = [[UIView alloc] init];
+            [tableHeaderView addSubview:weakSelf.settingCustomView];
+            [weakSelf.settingCustomView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.edges.equalTo(tableHeaderView);
+            }];
+            CGFloat H = [tableHeaderView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+            tableHeaderView.lq_height = H;
+            weakSelf.customTableView.tableHeaderView = tableHeaderView;
+            weakSelf.customTableView.tableHeaderView.lq_height = H;
+        }];
+    }];
 }
 
 #pragma mark -  UITableViewDataSource
@@ -360,5 +402,24 @@
         }];
     }
     return _footerView;
+}
+
+- (CustomAlertView *)loginOutAlertView{
+    if (!_loginOutAlertView) {
+        _loginOutAlertView = [[CustomAlertView alloc] init];
+
+        __weak __typeof(self) weakSelf = self;
+        _loginOutAlertView.CustomAlertViewBlock = ^(NSInteger index,NSString *str){
+            if (index == 1) {//取消
+                
+            }else if(index == 2){//确定
+                [weakSelf logOut:nil];
+            }
+            [weakSelf.loginOutAlertView removeFromSuperview];
+            weakSelf.loginOutAlertView = nil;
+            
+         };
+    }
+    return _loginOutAlertView;
 }
 @end

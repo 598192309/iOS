@@ -23,6 +23,7 @@
          if([status isEqualToString:@"ok"]){
              M_User *account = [M_User mj_objectWithKeyValues:resultObject];
              RI.is_logined = YES;
+             [[NSNotificationCenter defaultCenter] postNotificationName:kUserSignIn object:nil];
              successBlock(account);
          }else{
              failureBlock([NSError lq_errorWithMsg:status domain:@"Response Error" code:10000]);
@@ -97,6 +98,10 @@
     for (id obj in tmpArrey) {
         [cookieJar deleteCookie:obj];
     }
+    RI.is_logined = NO;
+    RI.userInfo = nil;
+    [[NSNotificationCenter defaultCenter] postNotificationName:kUserSignOut object:nil];
+
     successBlock();
 
 }
