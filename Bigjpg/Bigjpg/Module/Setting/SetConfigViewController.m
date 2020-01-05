@@ -18,6 +18,7 @@
 @property (nonatomic,strong)UIButton *languageBtn;
 
 @property (nonatomic,strong)CustomTableAlertView *customTableAlertView;
+@property (nonatomic,strong)NSMutableArray  *seletedArr;
 @end
 
 @implementation SetConfigViewController
@@ -43,6 +44,7 @@
     }
 
     [self setUpNav];
+    _seletedArr = [NSMutableArray array];
 }
 
 - (void)dealloc{
@@ -113,15 +115,19 @@
 {
     SetConfigChooseCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([SetConfigChooseCell class]) forIndexPath:indexPath];
     if (indexPath.row ==0) {
-        [cell configUIWithTitle:lqStrings(@"自动下载放大的图片")];
+        [cell configUIWithTitle:lqStrings(@"自动下载放大的图片") selected:[self.seletedArr containsObject:@(indexPath.row)]];
     }else{
-        [cell configUIWithTitle:lqStrings(@"夜间模式")];
+        [cell configUIWithTitle:lqStrings(@"夜间模式") selected:[self.seletedArr containsObject:@(indexPath.row)]];
     }
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-
+    if ([self.seletedArr containsObject:@(indexPath.row)]) {
+        [self.seletedArr removeObject:@(indexPath.row)];
+    }else{
+        [self.seletedArr addObject:@(indexPath.row)];
+    }
     //改变数据源
     [self.customTableView reloadData];
 }
