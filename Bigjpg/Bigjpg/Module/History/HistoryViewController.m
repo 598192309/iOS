@@ -23,6 +23,7 @@
 
 @property (nonatomic, strong) M_User *userInfo;
 @property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, assign) BOOL downAll;
 
 @end
 
@@ -127,14 +128,39 @@
 - (void)historyCustomViewAct{
     __weak __typeof(self) weakSelf = self;
     self.historyCustomView.historyCustomViewConfirmBtnClickBlock = ^(NSDictionary * _Nonnull dict, UIButton * _Nonnull sender) {
-        [weakSelf remindShow:nil msgColor:TitleBlackColor msgFont:AdaptedFontSize(15) subMsg:LanguageStrings(@"no_upgrade") submsgColor:nil submsgFont:AdaptedFontSize(17) firstBtnTitle:LanguageStrings(@"cancel") secBtnTitle:LanguageStrings(@"ok") singeBtnTitle:@"" removeBtnHidden:YES];
+        if (RI.is_logined) {//批量下载
+            //for循环 拿到被选中的items
+            NSMutableArray *selectedArr = [NSMutableArray array];
+            for (M_EnlargeHistory *item in weakSelf.userInfo.historyList) {
+                if (item.customSlected) {
+                    [selectedArr addObject:item];
+                }
+            }
+            [weakSelf downAllWithArr:selectedArr sender:sender];
+            
+        }else{
+            [weakSelf remindShow:nil msgColor:TitleBlackColor msgFont:AdaptedFontSize(15) subMsg:LanguageStrings(@"no_upgrade") submsgColor:nil submsgFont:AdaptedFontSize(17) firstBtnTitle:LanguageStrings(@"cancel") secBtnTitle:LanguageStrings(@"ok") singeBtnTitle:@"" removeBtnHidden:YES];
+        }
+        
+    };
+    
+    //点击down ALL
+    self.historyCustomView.historyCustomViewDownAllBtnClickBlock = ^(NSDictionary * _Nonnull dict, UIButton * _Nonnull sender) {
+        weakSelf.downAll = YES;
+        [weakSelf.customTableView reloadData];
+    };
+    
+    //cancle
+    self.historyCustomView.historyCustomViewCancleBtnClickBlock = ^(NSDictionary * _Nonnull dict, UIButton * _Nonnull sender) {
+        weakSelf.downAll = NO;
+        [weakSelf.customTableView reloadData];
+
     };
     
 }
 
 - (void)unloginCheckBtnClick:(UIButton *)sender{
     self.tabBarController.selectedIndex = 2;
-    RI.is_logined = YES;
 }
 
 - (void)remindShow:(NSString *)msg msgColor:(UIColor *)msgColor msgFont:(UIFont *)msgFont subMsg:(NSString *)subMsg submsgColor:(UIColor *)submsgColor submsgFont:(UIFont *)submsgFont firstBtnTitle:(NSString *)firstBtnTitle secBtnTitle:(NSString *)secBtnTitle singeBtnTitle:(NSString *)singeBtnTitle removeBtnHidden:(BOOL)removeBtnHidden{
@@ -168,7 +194,7 @@
     if (RI.is_logined) {
         [self requestData];
     }else{
-        
+        [self.customTableView reloadData];
     }
 }
 //删除放大任务
@@ -182,6 +208,15 @@
     } failure:^(NSError *error) {
         [LSVProgressHUD showError:error];
     }];
+}
+
+//批量下载
+- (void)downAllWithArr:(NSMutableArray *)arr sender:(UIButton *)sender{
+    __weak __typeof(self) weakSelf = self;
+    sender.userInteractionEnabled = NO;
+    weakSelf.downAll = NO;
+    [weakSelf.customTableView reloadData];
+    [weakSelf.historyCustomView reset];
 }
 
 #pragma mark -  UITableViewDataSource
@@ -198,12 +233,17 @@
 {
     HistoryCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([HistoryCell class]) forIndexPath:indexPath];
 
-    [cell configUIWithItem:[self.userInfo.historyList safeObjectAtIndex:indexPath.row]];
+    [cell configUIWithItem:[self.userInfo.historyList safeObjectAtIndex:indexPath.row] downAll:self.downAll];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (self.downAll) {
+        M_EnlargeHistory *item = [self.userInfo.historyList safeObjectAtIndex:indexPath.row];
+        item.customSlected = !item.customSlected;
+        [self.customTableView reloadData];
 
+    }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return Adaptor_Value(120);
@@ -235,6 +275,9 @@
 }
 -(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (self.downAll) {
+        return UITableViewCellEditingStyleNone;
+    }
     return UITableViewCellEditingStyleDelete;
 }
 
@@ -329,7 +372,8 @@
             if (index == 1) {//取消
                 
             }else if(index == 2){//确定
-                self.tabBarController.selectedIndex = 2;
+                weakSelf.tabBarController.selectedIndex = 2;
+                [weakSelf.historyCustomView reset];
 
             }else if(index == 4){
                 

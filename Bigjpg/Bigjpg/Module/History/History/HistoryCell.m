@@ -18,6 +18,7 @@
 @property (strong, nonatomic)  UILabel *titleLabel;
 @property (nonatomic,strong)   UIButton *retryOrDownloadBtn;
 
+@property (nonatomic,strong)   UIButton *chooseBtn;
 
 
 @end
@@ -44,7 +45,7 @@
 }
 
 
-- (void)configUIWithItem:(M_EnlargeHistory *)item{
+- (void)configUIWithItem:(M_EnlargeHistory *)item downAll:(BOOL)downAll{
     //设置图片
     NSString *smallImagesStr = [NSString stringWithFormat:@"%@?x-oss-process=image/resize,m_fill,w_%d,h_%d",item.conf.input,100,100];
     [_iconImageV sd_setImageWithURL:[NSURL URLWithString:smallImagesStr]];
@@ -109,6 +110,10 @@
     self.imageTipLable.text = item.status;
     self.imageTipLable.hidden = [item.status isEqualToString:@"success"];
     self.iconImageVCoverView.hidden = [item.status isEqualToString:@"success"];
+    
+    self.chooseBtn.hidden = !downAll;
+    self.retryOrDownloadBtn.hidden = downAll;
+    self.chooseBtn.selected = item.customSlected;
 }
 
 #pragma mark - act
@@ -150,12 +155,7 @@
              make.center.mas_equalTo(weakSelf.iconImageV);
          }];
         
-        _titleLabel = [UILabel lableWithText:lqLocalized(@"",nil) textColor:TitleGrayColor fontSize:AdaptedFontSize(13) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
-        [contentV addSubview:_titleLabel];
-        [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.width.mas_equalTo(LQScreemW - Adaptor_Value(220));
-            make.center.mas_equalTo(contentV);
-        }];
+      
         _retryOrDownloadBtn = [[UIButton alloc] init];
         [_retryOrDownloadBtn setTitle:@"" forState:UIControlStateNormal];
         [_retryOrDownloadBtn addTarget:self action:@selector(removeBtnClick:) forControlEvents:UIControlEventTouchDown];
@@ -171,9 +171,29 @@
         }];
         _retryOrDownloadBtn.backgroundColor = YellowBackColor;
         ViewRadius(_retryOrDownloadBtn, Adaptor_Value(4));
-
-   
         
+        
+        _chooseBtn = [[UIButton alloc] init];
+        [_chooseBtn setImage:[[UIImage imageNamed:@"ic_uncheck"] qmui_imageWithTintColor:DeepGreenColor] forState:UIControlStateNormal];
+        [_chooseBtn setImage:[UIImage imageNamed:@"ic_check"] forState:UIControlStateSelected];
+        [_chooseBtn addTarget:self action:@selector(removeBtnClick:) forControlEvents:UIControlEventTouchDown];
+        [contentV addSubview:_chooseBtn];
+        [_chooseBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+
+            make.height.width.mas_equalTo(Adaptor_Value(40));
+            make.center.mas_equalTo(weakSelf.retryOrDownloadBtn);
+        }];
+        _chooseBtn.userInteractionEnabled = NO;
+   
+        _titleLabel = [UILabel lableWithText:lqLocalized(@"",nil) textColor:TitleGrayColor fontSize:AdaptedFontSize(13) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
+        [contentV addSubview:_titleLabel];
+        [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.width.mas_equalTo(LQScreemW - Adaptor_Value(220));
+//            make.center.mas_equalTo(contentV);
+            make.center.mas_equalTo(contentV);
+            make.left.mas_greaterThanOrEqualTo(weakSelf.iconImageV.mas_left).offset(Adaptor_Value(10));
+            make.right.mas_greaterThanOrEqualTo(weakSelf.retryOrDownloadBtn.mas_left).offset(-Adaptor_Value(10));
+        }];
         
         UIView *lineView = [UIView new];
         lineView.backgroundColor = LineGrayColor;

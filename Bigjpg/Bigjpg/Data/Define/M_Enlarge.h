@@ -40,6 +40,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *status;
 /// output放大后地址 status为success时有值
 @property (nonatomic, copy) NSString *output;
+
+@property (nonatomic, assign) BOOL customSlected;//自定义的
+
 @end
 
 
