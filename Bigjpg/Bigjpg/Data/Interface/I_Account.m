@@ -97,6 +97,8 @@
     for (id obj in tmpArrey) {
         [cookieJar deleteCookie:obj];
     }
+    RI.is_logined = NO;
+    RI.userInfo = nil;
     successBlock();
 
 }

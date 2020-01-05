@@ -10,6 +10,8 @@
 #import "HistoryCustomView.h"
 #import "HistoryCell.h"
 #import "I_Account.h"
+#import "I_Enlarge.h"
+
 @interface HistoryViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) UITableView  *customTableView;
 @property (nonatomic,strong)HistoryCustomView *historyCustomView;
@@ -160,6 +162,7 @@
     }
    
 }
+//接收通知 请求数据
 - (void)notifyRequestData{
     [self changeUIWithLoginStatus];
     if (RI.is_logined) {
@@ -168,6 +171,19 @@
         
     }
 }
+//删除放大任务
+- (void)removeTaskWithIdsArr:(NSArray*)ids withIndex:(NSInteger)index{
+    [LSVProgressHUD show];
+    __weak __typeof(self) weakSelf = self;
+    [I_Enlarge deleteEnlargeTasks:ids success:^{
+        [LSVProgressHUD showInfoWithStatus:LanguageStrings(@"succ")];
+        [weakSelf.userInfo.historyList removeObjectAtIndex:index];
+        [weakSelf.customTableView reloadData];
+    } failure:^(NSError *error) {
+        [LSVProgressHUD showError:error];
+    }];
+}
+
 #pragma mark -  UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
@@ -182,7 +198,7 @@
 {
     HistoryCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([HistoryCell class]) forIndexPath:indexPath];
 
-    [cell configUIWithItem:self.userInfo.historyList[indexPath.row]];
+    [cell configUIWithItem:[self.userInfo.historyList safeObjectAtIndex:indexPath.row]];
     return cell;
 }
 
@@ -213,7 +229,25 @@
     view.backgroundColor  = [UIColor clearColor];
     return view;
 }
+-(NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return LanguageStrings(@"del");
+}
+-(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleDelete;
+}
 
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    __weak __typeof(self) weakSelf = self;
+    [SystemAlertViewController alertViewControllerWithTitle:nil message:LanguageStrings(@"sure") cancleButtonTitle:LanguageStrings(@"cancel") commitButtonTitle:LanguageStrings(@"ok") cancleBlock:^{
+        
+      } commitBlock:^{
+          M_EnlargeHistory *item = [self.userInfo.historyList safeObjectAtIndex:indexPath.row];
+          [weakSelf removeTaskWithIdsArr:@[item.fid] withIndex:indexPath.row];
+      }];
+}
 
 #pragma  mark - lazy
 - (UITableView *)customTableView

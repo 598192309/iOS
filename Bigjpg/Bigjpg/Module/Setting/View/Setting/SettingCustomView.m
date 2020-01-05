@@ -80,6 +80,7 @@
         }];
         self.emailTextF.hidden = YES;
         self.pwdTF.hidden = YES;
+        self.pwdTF.text = @"";
         self.lineview1.hidden = YES;
         self.lineview2.hidden = YES;
 
@@ -93,7 +94,23 @@
              make.top.mas_equalTo(weakSelf.zhuceView.mas_bottom).offset(Adaptor_Value(-20));
          }];
       
-    
+        NSArray *arr = [ConfManager.shared contentWith:@"version"];
+        NSString *typestr;
+        if ([item.version isEqualToString:@"free"]) {
+            typestr = [arr safeObjectAtIndex:0];
+        }else if ([item.version isEqualToString:@"basic"]) {
+            typestr = [arr safeObjectAtIndex:1];
+        }else if ([item.version isEqualToString:@"std"]) {
+            typestr = [arr safeObjectAtIndex:2];
+        }else{
+            typestr = [arr safeObjectAtIndex:3];
+        }
+        NSArray *typeArr = [typestr componentsSeparatedByString:@":"];
+
+        [self.lorgintipBtn setTitle:typeArr.lastObject forState:UIControlStateNormal];
+        NSString *time = [item.expire lq_dealTimeFormarter:@"yyyy-MM-dd HH:mm:ss" changeFormater:@"yyyy-MM-dd"];
+        [self.lorgintimeBtn setTitle:time forState:UIControlStateNormal];
+        self.lorgintotalTipLabel.text = [NSString stringWithFormat:@"%@%lu",LanguageStrings(@"used"),(unsigned long)item.historyList.count];
     }else{
  
         [_textFBackView mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -115,23 +132,7 @@
          }];
     
     }
-    NSArray *arr = [ConfManager.shared contentWith:@"version"];
-    NSString *typestr;
-    if ([item.version isEqualToString:@"free"]) {
-        typestr = [arr safeObjectAtIndex:0];
-    }else if ([item.version isEqualToString:@"basic"]) {
-        typestr = [arr safeObjectAtIndex:1];
-    }else if ([item.version isEqualToString:@"std"]) {
-        typestr = [arr safeObjectAtIndex:2];
-    }else{
-        typestr = [arr safeObjectAtIndex:3];
-    }
-    NSArray *typeArr = [typestr componentsSeparatedByString:@":"];
 
-    [self.lorgintipBtn setTitle:typeArr.lastObject forState:UIControlStateNormal];
-    NSString *time = [item.expire lq_dealTimeFormarter:@"yyyy-MM-dd HH:mm:ss" changeFormater:@"yyyy-MM-dd"];
-    [self.lorgintimeBtn setTitle:time forState:UIControlStateNormal];
-    self.lorgintotalTipLabel.text = [NSString stringWithFormat:@"%@%lu",LanguageStrings(@"used"),(unsigned long)item.historyList.count];
     self.lorginTipView.hidden = !RI.is_logined;
     
     
