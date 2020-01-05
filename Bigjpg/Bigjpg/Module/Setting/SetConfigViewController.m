@@ -86,9 +86,32 @@
     }];
     [self.customTableAlertView configUIWithArr:@[@"简体中文",@"繁體中文",@"日本語",@"English",@"Русский",@"Türkçe"]];
     self.customTableAlertView.CustomTableAlertChooseBlock = ^(NSInteger index, NSString * _Nonnull str) {
-        [LSVProgressHUD showInfoWithStatus:str];
         [weakSelf.customTableAlertView removeFromSuperview];
         weakSelf.customTableAlertView = nil;
+        NSString *language;
+        switch (index) {
+            case 0:
+                language = @"zh";
+                break;
+            case 1:
+            language = @"tw";
+            break;
+            case 2:
+            language = @"jp";
+            break;
+            case 3:
+            language = @"en";
+            break;
+            case 4:
+            language = @"de";
+            break;
+            case 5:
+            language = @"tr";
+            
+            default:
+                break;
+        }
+        [[ConfManager shared] changeLocalLanguage:str];
     };
     
     self.customTableAlertView.CustomTableAlertRemoveBlock = ^{
