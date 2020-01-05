@@ -14,7 +14,7 @@
 @property (strong, nonatomic)  UILabel *imageTipLable;
 @property (strong, nonatomic)  UILabel *titleLabel;
 @property (nonatomic,strong)   UIButton *retryOrDownloadBtn;
-@property (nonatomic,strong)   UIButton *removeBtn;
+
 
 
 @end
@@ -49,37 +49,17 @@
     __weak __typeof(self) weakSelf = self;
     [_retryOrDownloadBtn setTitle:LanguageStrings(@"retry") forState:UIControlStateNormal];
 
-    if (0) {
-        
-        [_retryOrDownloadBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(Adaptor_Value(0));
-        }];
-        
-        [_removeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(Adaptor_Value(35));
-            make.width.mas_equalTo(Adaptor_Value(80));
-            make.right.mas_equalTo(weakSelf.removeBtn.superview).offset(-Adaptor_Value(10));
-            make.centerY.mas_equalTo(weakSelf.removeBtn.superview);
-        }];
-        
+    if ([item.status isEqualToString:@"success"]) {
+        _retryOrDownloadBtn.hidden = NO;
         [_retryOrDownloadBtn setTitle:LanguageStrings(@"download") forState:UIControlStateNormal];
+        _retryOrDownloadBtn.backgroundColor = LihgtGreenColor;
 
-    }else{
-        [_retryOrDownloadBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-
-               make.height.mas_equalTo(Adaptor_Value(35));
-               make.width.mas_equalTo(Adaptor_Value(80));
-               make.right.mas_equalTo(weakSelf.retryOrDownloadBtn.superview).offset(-Adaptor_Value(10));
-               make.bottom.mas_equalTo(weakSelf.retryOrDownloadBtn.superview.mas_centerY).offset(-Adaptor_Value(5));
-           }];
-           
-           [_removeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-
-               make.height.mas_equalTo(Adaptor_Value(35));
-               make.width.mas_equalTo(Adaptor_Value(80));
-               make.right.mas_equalTo(weakSelf.removeBtn.superview).offset(-Adaptor_Value(10));
-               make.top.mas_equalTo(weakSelf.removeBtn.superview.mas_centerY).offset(Adaptor_Value(5));
-           }];
+    }else if ([item.status isEqualToString:@"success"]) {
+        _retryOrDownloadBtn.hidden = NO;
+        [_retryOrDownloadBtn setTitle:LanguageStrings(@"retry") forState:UIControlStateNormal];
+        _retryOrDownloadBtn.backgroundColor = YellowBackColor;
+    } else {
+        _retryOrDownloadBtn.hidden = YES;
     }
 }
 
@@ -128,29 +108,18 @@
         [_retryOrDownloadBtn setTitle:@"" forState:UIControlStateNormal];
         [_retryOrDownloadBtn addTarget:self action:@selector(removeBtnClick:) forControlEvents:UIControlEventTouchDown];
         [contentV addSubview:_retryOrDownloadBtn];
+        _retryOrDownloadBtn.titleLabel.font = [UIFont systemFontOfSize:15];
         [_retryOrDownloadBtn mas_makeConstraints:^(MASConstraintMaker *make) {
 
-            make.height.mas_equalTo(Adaptor_Value(35));
+            make.height.mas_equalTo(Adaptor_Value(40));
             make.width.mas_equalTo(Adaptor_Value(80));
             make.right.mas_equalTo(contentV).offset(-Adaptor_Value(10));
-            make.bottom.mas_equalTo(contentV.mas_centerY).offset(-Adaptor_Value(5));
+            make.centerY.mas_equalTo(contentV.mas_centerY);
         }];
         _retryOrDownloadBtn.backgroundColor = YellowBackColor;
-        ViewRadius(_retryOrDownloadBtn, Adaptor_Value(3));
+        ViewRadius(_retryOrDownloadBtn, Adaptor_Value(4));
 
-        _removeBtn = [[UIButton alloc] init];
-        [_removeBtn setTitle:LanguageStrings(@"del") forState:UIControlStateNormal];
-        [_removeBtn addTarget:self action:@selector(removeBtnClick:) forControlEvents:UIControlEventTouchDown];
-        [contentV addSubview:_removeBtn];
-        [_removeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-
-            make.height.mas_equalTo(Adaptor_Value(35));
-            make.width.mas_equalTo(Adaptor_Value(80));
-            make.right.mas_equalTo(contentV).offset(-Adaptor_Value(10));
-            make.top.mas_equalTo(contentV.mas_centerY).offset(Adaptor_Value(5));
-        }];
-        _removeBtn.backgroundColor = RedColor;
-        ViewRadius(_removeBtn, Adaptor_Value(3));
+   
         
         
         UIView *lineView = [UIView new];
