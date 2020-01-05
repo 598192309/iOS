@@ -38,9 +38,9 @@
     
 }
 
--(void)configUIWithTitle:(NSString *)title{
+-(void)configUIWithTitle:(NSString *)title selected:(BOOL)selected{
     self.titleLabel.text = title;
-    self.chooseBtn.selected =!self.chooseBtn.selected;
+    self.chooseBtn.selected = selected;
 }
 
 
@@ -73,11 +73,12 @@
             make.left.mas_equalTo(Adaptor_Value(20));
             make.centerY.mas_equalTo(contentV);
         }];
+        _chooseBtn.userInteractionEnabled = NO;
         
         _titleLabel = [UILabel lableWithText:lqLocalized(@"",nil) textColor:TitleGrayColor fontSize:AdaptedFontSize(15) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
         [contentV addSubview:_titleLabel];
         [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(weakSelf.chooseBtn.mas_right).offset(Adaptor_Value(15));
+            make.left.mas_equalTo(weakSelf.chooseBtn.mas_right);
             make.centerY.mas_equalTo(contentV);
         }];
         

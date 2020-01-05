@@ -363,16 +363,16 @@
         
         
         _zhuceChooseBtn = [[UIButton alloc] init];
-        [_zhuceChooseBtn setImage:[UIImage imageNamed:@"ic_uncheck"]  forState:UIControlStateNormal];
+        [_zhuceChooseBtn setImage:[[UIImage imageNamed:@"ic_uncheck"] qmui_imageWithTintColor:DeepGreenColor] forState:UIControlStateNormal];
+        [_zhuceChooseBtn setImage:[UIImage imageNamed:@"ic_check"]  forState:UIControlStateSelected];
+
         [_zhuceChooseBtn addTarget:self action:@selector(zhuceChooseBtnClick:) forControlEvents:UIControlEventTouchDown];
         [zhuceView addSubview:_zhuceChooseBtn];
         [_zhuceChooseBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.left.bottom.mas_equalTo(zhuceView);
             make.height.width.mas_equalTo(Adaptor_Value(20));
         }];
-        
-        
-        
+                
         _zhuceTipLabel = [UILabel lableWithText:LanguageStrings(@"reg_new") textColor:[UIColor lq_colorWithHexString:@"#616161"] fontSize:AdaptedFontSize(13) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
         [zhuceView addSubview:_zhuceTipLabel];
         [_zhuceTipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
