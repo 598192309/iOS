@@ -34,8 +34,8 @@
                                             <action selector="choiceImageEvent:" destination="V3A-Tb-pfm" eventType="touchUpInside" id="fFB-E8-uO8"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="图片限制：文件大小&lt;10MB，尺寸小于3000x3000px" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hIt-BR-5UT">
-                                        <rect key="frame" x="38.5" y="84" width="337" height="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="图片限制：文件大小&lt;10MB，尺寸小于3000x3000px" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hIt-BR-5UT">
+                                        <rect key="frame" x="10" y="84" width="394" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="0.60392156862745094" green="0.60392156862745094" blue="0.60392156862745094" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -43,6 +43,8 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstItem="hIt-BR-5UT" firstAttribute="leading" secondItem="Hk5-Ls-cdQ" secondAttribute="leading" constant="10" id="IqD-qj-a2D"/>
+                                    <constraint firstAttribute="trailing" secondItem="hIt-BR-5UT" secondAttribute="trailing" constant="10" id="ONC-Yw-s8i"/>
                                     <constraint firstItem="Kbw-0f-7BT" firstAttribute="top" secondItem="Hk5-Ls-cdQ" secondAttribute="top" constant="20" id="YfG-96-run"/>
                                     <constraint firstItem="hIt-BR-5UT" firstAttribute="centerX" secondItem="Kbw-0f-7BT" secondAttribute="centerX" id="bxr-UT-xWn"/>
                                     <constraint firstItem="Kbw-0f-7BT" firstAttribute="centerX" secondItem="Hk5-Ls-cdQ" secondAttribute="centerX" id="mbM-hG-5cZ"/>
