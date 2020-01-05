@@ -22,7 +22,11 @@ NS_ASSUME_NONNULL_BEGIN
 //更新配置
 - (void)updateConf:(NSDictionary *)conf;
 //语言
-@property (nonatomic, copy) NSString *localLanguage;
+@property (nonatomic, copy, readonly) NSString *localLanguage;
+
+//修改语言
+- (void)changeLocalLanguage:(NSString *)language;
+
 //根据key来获取值
 - (id)contentWith:(NSString *)key;
 //确定是字符串时可以使用此方法

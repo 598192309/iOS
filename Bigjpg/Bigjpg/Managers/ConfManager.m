@@ -100,38 +100,45 @@
 -(void)setLocalLanguage:(NSString *)localLanguage
 {
     _localLanguage = localLanguage;
+}
+
+//修改语言
+- (void)changeLocalLanguage:(NSString *)language
+{
+    _localLanguage = language;
     NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
-    [def setObject:localLanguage forKey:@"localLanguage"];
+    [def setObject:language forKey:@"localLanguage"];
     [def synchronize];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kChangeLanguageNotification object:nil];
 }
 
+
 + (NSString *)defaultLocalLanguage
 {
     NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
     NSString *language = [def objectForKey:@"localLanguage"];
-//    if (language == nil) {
+    if (language == nil) {
         NSArray *languages = [NSLocale preferredLanguages];
         NSString *currentLanguage = [languages objectAtIndex:0];
-        if ([currentLanguage containsString:@"zh"]) {
-            return @"zh";
-        } else if ([currentLanguage containsString:@"en"]) {
-            return @"en";
-        } else if ([currentLanguage containsString:@"tw"]) {
+        if ([currentLanguage containsString:@"zh-Hant"]) {//繁体
             return @"tw";
-        } else if ([currentLanguage containsString:@"tr"]) {
+        } else if ([currentLanguage containsString:@"en"]) {//英语
+            return @"en";
+        } else if ([currentLanguage containsString:@"zh-Hans"]) {//简体中文
+            return @"zh";
+        } else if ([currentLanguage containsString:@"tr-"]) {//土耳其
             return @"tr";
-        } else if ([currentLanguage containsString:@"ja"]) {
+        } else if ([currentLanguage containsString:@"ja-"]) {//日本
             return @"jp";
-        } else if ([currentLanguage containsString:@"de"]) {
+        } else if ([currentLanguage containsString:@"de-"]) {//德国
             return @"de";
-        } else if ([currentLanguage containsString:@"ru"]) {
+        } else if ([currentLanguage containsString:@"ru-"]) {//俄罗斯
             return @"ru";
         } else {
             return @"en";
         }
-//    }
+    }
     return language;
 }
 

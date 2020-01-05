@@ -66,6 +66,7 @@
     _choiceImageBtn.layer.masksToBounds = YES;
     [_choiceImageBtn setTitle:LanguageStrings(@"fileupload") forState:UIControlStateNormal];
     _describerLabel.text = LanguageStrings(@"limit");
+    _describerLabel.adjustsFontSizeToFitWidth = YES;
 }
 
 - (void)polling
@@ -127,8 +128,11 @@
     actionSheet.configuration.bottomBtnsDisableBgColor = RGBA(30,161,20,0.5);
     actionSheet.configuration.indexLabelBgColor = LihgtGreenColor;
     actionSheet.configuration.maxPreviewCount = 0;
-    actionSheet.configuration.customLanguageKeyValue = @{};
+    actionSheet.configuration.customLanguageKeyValue = @{@"ZLPhotoBrowserCancelText":LanguageStrings(@"cancel"),@"ZLPhotoBrowserSaveImageErrorText":LanguageStrings(@"error"),@"ZLPhotoBrowserNoCameraAuthorityText":LanguageStrings(@"error"),@"ZLPhotoBrowserNoAblumAuthorityText":LanguageStrings(@"error"),@""ZLPhotoBrowserSaveText:LanguageStrings(@"ok"),@"ZLPhotoBrowserPreviewText":@""};
     actionSheet.configuration.customImageNames = @[@"zl_navBack"];
+//    if ([ConfManager.shared.localLanguage isEqualToString:@"zh"]) {
+//        actionSheet.configuration.languageType = ZLLanguageChineseSimplified;
+//    } else if (actionSheet.configuration)
     actionSheet.sender = self;
             
     __weak typeof(self) weakSelf = self;
