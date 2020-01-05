@@ -111,7 +111,7 @@
         }];
         _downloadBtn.titleLabel.font = AdaptedFontSize(15);
         _downloadBtn.backgroundColor = LihgtGreenColor;
-        ViewRadius(_downloadBtn, Adaptor_Value(5));
+        ViewRadius(_downloadBtn,4);
 
         
         _cancleBtn = [[UIButton alloc] init];
@@ -148,7 +148,7 @@
         _confrimBtn.titleLabel.font = AdaptedFontSize(15);
 
         _confrimBtn.backgroundColor = LihgtGreenColor;
-        ViewRadius(_confrimBtn, Adaptor_Value(5));
+        ViewRadius(_confrimBtn,4);
         _confrimBtn.hidden = YES;
       
         NSArray *arr = [ConfManager.shared contentWith:@"log_head"];
