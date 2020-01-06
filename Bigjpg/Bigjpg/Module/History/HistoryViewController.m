@@ -88,7 +88,6 @@
 
     [self changeUIWithLoginStatus];
     
-    [self historyCustomViewAct];
 }
 - (void)setUpHeader{
     UIView *tableHeaderView = [[UIView alloc] init];
@@ -100,6 +99,8 @@
     tableHeaderView.lq_height = H;
     self.customTableView.tableHeaderView = tableHeaderView;
     self.customTableView.tableHeaderView.lq_height = H;
+    [self historyCustomViewAct];
+
 }
 #pragma mark - refresh ui
 - (void)changeUIWithLoginStatus{
@@ -130,6 +131,7 @@
 - (void)changLanguage{
     [self.customTableView reloadData];
     [self.historyCustomView removeFromSuperview];
+    self.historyCustomView = nil;
     [self setUpHeader];
     self.unloginCheckLable.text = LanguageStrings(@"no_upgrade");
 }

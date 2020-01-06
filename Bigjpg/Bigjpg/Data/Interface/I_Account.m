@@ -55,6 +55,7 @@
                 [historyList safeAddObject:history];
             }
             account.historyList = historyList;
+            RI.userInfo = account;
             successBlock(account);
         }else{
             failureBlock([NSError lq_errorWithMsg:status domain:@"Response Error" code:10000]);

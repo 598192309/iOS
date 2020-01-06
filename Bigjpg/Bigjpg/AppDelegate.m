@@ -43,7 +43,6 @@
 //获取用户信息
 - (void)requestUserInfo{
     [I_Account getUserInfoOnSuccess:^(M_User * _Nonnull userInfo) {
-        RI.userInfo = userInfo;
     } failure:^(NSError *error) {
         
     }];

@@ -131,6 +131,7 @@
 - (void)changLanguage{
     [self.customTableView reloadData];
     [self.settingCustomView removeFromSuperview];
+    self.settingCustomView = nil;
     [self setUpHeader];
     [self refreshUI];
 }

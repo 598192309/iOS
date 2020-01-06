@@ -231,7 +231,16 @@
         
         _tipBtn = [[UIButton alloc] init];
         NSArray *arr = [ConfManager.shared contentWith:@"version"];
-        [_tipBtn setTitle:[arr safeObjectAtIndex:0] forState:UIControlStateNormal];
+        NSString *typestr = [arr safeObjectAtIndex:0];
+        NSArray *typeArr;
+        if ([typestr containsString:@":"]) {
+            typeArr =  [typestr componentsSeparatedByString:@":"];
+
+        }else{
+            typeArr =  [typestr componentsSeparatedByString:@"："];
+
+        }
+        [_tipBtn setTitle:typeArr.lastObject forState:UIControlStateNormal];
         [_tipBtn setTitleColor:TitleBlackColor forState:UIControlStateNormal];
         [_tipView addSubview:_tipBtn];
         [_tipBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -497,6 +506,7 @@
 
         _lorgintipBtn = [[UIButton alloc] init];
         NSArray *arr = [ConfManager.shared contentWith:@"version"];
+        
         [_lorgintipBtn setTitle:[arr safeObjectAtIndex:0] forState:UIControlStateNormal];
         [_lorgintipBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [contentV addSubview:_lorgintipBtn];
