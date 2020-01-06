@@ -10,7 +10,6 @@
 		094C433623C238310007B800 /* ForgetPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 094C433523C238310007B800 /* ForgetPwdViewController.m */; };
 		094C433923C23FFD0007B800 /* ModifyPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 094C433823C23FFD0007B800 /* ModifyPwdViewController.m */; };
 		095CB7CD23B3B0E0003CF4C6 /* ConfManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 095CB7CC23B3B0E0003CF4C6 /* ConfManager.m */; };
-		095CB7D023B3B749003CF4C6 /* Conf.plist in Resources */ = {isa = PBXBuildFile; fileRef = 095CB7CF23B3B749003CF4C6 /* Conf.plist */; };
 		1118103F23B30A4400BEE5EF /* CustomActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1118103E23B30A4400BEE5EF /* CustomActivity.m */; };
 		1118104223B30BB400BEE5EF /* SetConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1118104123B30BB400BEE5EF /* SetConfigViewController.m */; };
 		1118104523B30E5D00BEE5EF /* SetConfigChooseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1118104423B30E5D00BEE5EF /* SetConfigChooseCell.m */; };
@@ -44,6 +43,7 @@
 		4920AEDB23B0598D00FE7A65 /* I_Account.m in Sources */ = {isa = PBXBuildFile; fileRef = 4920AEDA23B0598D00FE7A65 /* I_Account.m */; };
 		4920AEDE23B085B900FE7A65 /* M_User.m in Sources */ = {isa = PBXBuildFile; fileRef = 4920AEDD23B085B900FE7A65 /* M_User.m */; };
 		494CBA0623BA443B00931405 /* EnlargeConfViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 494CBA0523BA443B00931405 /* EnlargeConfViewController.m */; };
+		494F1F3F23C3439200AFA639 /* Conf.plist in Resources */ = {isa = PBXBuildFile; fileRef = 494F1F3E23C3439100AFA639 /* Conf.plist */; };
 		495435C423B4AAD2008CCB60 /* M_Enlarge.m in Sources */ = {isa = PBXBuildFile; fileRef = 495435C323B4AAD2008CCB60 /* M_Enlarge.m */; };
 		495435C723B4BE66008CCB60 /* I_Enlarge.m in Sources */ = {isa = PBXBuildFile; fileRef = 495435C623B4BE66008CCB60 /* I_Enlarge.m */; };
 		496DA06F23AD114400DDB905 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 496DA06E23AD114400DDB905 /* AppDelegate.m */; };
@@ -65,7 +65,6 @@
 		094C433823C23FFD0007B800 /* ModifyPwdViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModifyPwdViewController.m; sourceTree = "<group>"; };
 		095CB7CB23B3B0E0003CF4C6 /* ConfManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConfManager.h; sourceTree = "<group>"; };
 		095CB7CC23B3B0E0003CF4C6 /* ConfManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConfManager.m; sourceTree = "<group>"; };
-		095CB7CF23B3B749003CF4C6 /* Conf.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Conf.plist; sourceTree = "<group>"; };
 		1118103D23B30A4300BEE5EF /* CustomActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomActivity.h; sourceTree = "<group>"; };
 		1118103E23B30A4400BEE5EF /* CustomActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomActivity.m; sourceTree = "<group>"; };
 		1118104023B30BB400BEE5EF /* SetConfigViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetConfigViewController.h; sourceTree = "<group>"; };
@@ -134,6 +133,7 @@
 		4920AEDD23B085B900FE7A65 /* M_User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = M_User.m; sourceTree = "<group>"; };
 		494CBA0423BA443B00931405 /* EnlargeConfViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnlargeConfViewController.h; sourceTree = "<group>"; };
 		494CBA0523BA443B00931405 /* EnlargeConfViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EnlargeConfViewController.m; sourceTree = "<group>"; };
+		494F1F3E23C3439100AFA639 /* Conf.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Conf.plist; sourceTree = "<group>"; };
 		495435C223B4AAD2008CCB60 /* M_Enlarge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = M_Enlarge.h; sourceTree = "<group>"; };
 		495435C323B4AAD2008CCB60 /* M_Enlarge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = M_Enlarge.m; sourceTree = "<group>"; };
 		495435C523B4BE66008CCB60 /* I_Enlarge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = I_Enlarge.h; sourceTree = "<group>"; };
@@ -173,7 +173,7 @@
 		095CB7CE23B3B738003CF4C6 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				095CB7CF23B3B749003CF4C6 /* Conf.plist */,
+				494F1F3E23C3439100AFA639 /* Conf.plist */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -519,7 +519,7 @@
 				496DA07D23AD114500DDB905 /* LaunchScreen.storyboard in Resources */,
 				49BB1C7023B64ED2002394DB /* Home.storyboard in Resources */,
 				496DA07A23AD114500DDB905 /* Assets.xcassets in Resources */,
-				095CB7D023B3B749003CF4C6 /* Conf.plist in Resources */,
+				494F1F3F23C3439200AFA639 /* Conf.plist in Resources */,
 				496DA07823AD114400DDB905 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

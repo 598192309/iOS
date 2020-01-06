@@ -36,6 +36,8 @@
     [def setObject:conf forKey:@"Conf"];
     [def synchronize];
     self.conf = conf;
+    NSLog(@"%@",[LqSandBox docPath]);
+    
 }
 
 

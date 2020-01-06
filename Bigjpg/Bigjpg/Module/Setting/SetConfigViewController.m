@@ -145,9 +145,9 @@
 {
     SetConfigChooseCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([SetConfigChooseCell class]) forIndexPath:indexPath];
     if (indexPath.row ==0) {
-        [cell configUIWithTitle:lqStrings(@"自动下载放大的图片") selected:[self.seletedArr containsObject:@(indexPath.row)]];
+        [cell configUIWithTitle:LanguageStrings(@"save_dir") selected:[self.seletedArr containsObject:@(indexPath.row)]];
     }else{
-        [cell configUIWithTitle:lqStrings(@"夜间模式") selected:[self.seletedArr containsObject:@(indexPath.row)]];
+        [cell configUIWithTitle:LanguageStrings(@"night_mode") selected:[self.seletedArr containsObject:@(indexPath.row)]];
     }
     return cell;
 }

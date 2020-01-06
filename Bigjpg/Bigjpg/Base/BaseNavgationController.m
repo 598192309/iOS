@@ -93,13 +93,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //处理全屏返回
-    UIGestureRecognizer *systemGes = self.interactivePopGestureRecognizer;
-    id target =  systemGes.delegate;
-    self.panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:target action:NSSelectorFromString(@"handleNavigationTransition:")];
-    [self.interactivePopGestureRecognizer.view addGestureRecognizer:self.panGesture];
-    self.panGesture.delegate = self;
-    systemGes.enabled = NO;
+    //默认都开启右划返回
+    if ([self respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.interactivePopGestureRecognizer.delegate = self;
+    }
 }
 
 -(void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated{
