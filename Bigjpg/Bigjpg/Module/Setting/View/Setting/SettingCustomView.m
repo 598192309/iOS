@@ -500,15 +500,20 @@
             make.edges.mas_equalTo(weakSelf.lorginTipView);
         }];
         
+        UIView *topBackView = [UIView new];
+//        topBackView.backgroundColor = [UIColor redColor];
+        [contentV addSubview:topBackView];
+        [topBackView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.mas_equalTo(contentV.mas_centerY);
+            make.centerX.mas_equalTo(contentV);
+        }];
         _lorgintimeBtn = [[UIButton alloc] init];
         [_lorgintimeBtn setTitle:lqStrings(@"") forState:UIControlStateNormal];
         [_lorgintimeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _lorgintimeBtn.titleLabel.font = [UIFont systemFontOfSize:16];
-        [contentV addSubview:_lorgintimeBtn];
+        [topBackView addSubview:_lorgintimeBtn];
         [_lorgintimeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.mas_equalTo(contentV.mas_centerY);
-            make.centerX.mas_equalTo(contentV);
-            
+            make.bottom.mas_equalTo(topBackView);
         }];
 
         _lorgintipBtn = [[UIButton alloc] init];
@@ -516,12 +521,12 @@
         
         [_lorgintipBtn setTitle:[arr safeObjectAtIndex:0] forState:UIControlStateNormal];
         [_lorgintipBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [contentV addSubview:_lorgintipBtn];
+        [topBackView addSubview:_lorgintipBtn];
         _lorgintipBtn.titleLabel.font = [UIFont systemFontOfSize:16 weight:UIFontWeightMedium];
         [_lorgintipBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(weakSelf.lorgintimeBtn);
             make.right.mas_equalTo(weakSelf.lorgintimeBtn.mas_left).offset(-Adaptor_Value(10));
-            
+            make.left.equalTo(topBackView);
         }];
         
 
@@ -531,13 +536,13 @@
         [_lorginupdateBtn addTarget:self action:@selector(updateBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [_lorginupdateBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _lorginupdateBtn.titleLabel.font = _lorgintimeBtn.titleLabel.font;
-        [contentV addSubview:_lorginupdateBtn];
+        [topBackView addSubview:_lorginupdateBtn];
         _lorginupdateBtn.contentEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5);
         
         [_lorginupdateBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(weakSelf.lorgintimeBtn);
             make.left.mas_equalTo(weakSelf.lorgintimeBtn.mas_right).offset(Adaptor_Value(10));
-            
+            make.top.right.equalTo(topBackView);
         }];
         _lorginupdateBtn.backgroundColor = LihgtGreenColor;
         ViewRadius(_lorginupdateBtn, 4);
