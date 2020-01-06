@@ -17,7 +17,7 @@
 @property (nonatomic,strong)HistoryCustomView *historyCustomView;
 
 @property (nonatomic,strong)UIView *unloginFooter;
-@property (nonatomic,strong)UILabel *unloginCheckLable;
+@property (nonatomic,strong)QMUILabel *unloginCheckLable;
 
 @property (nonatomic,strong)CustomAlertView *infoAlert;
 
@@ -367,13 +367,19 @@
         }];
         
       
-        _unloginCheckLable = [UILabel lableWithText:LanguageStrings(@"no_upgrade") textColor:TitleBlackColor fontSize:AdaptedFontSize(16) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
+    
+        _unloginCheckLable = [[QMUILabel alloc] init];
+        _unloginCheckLable.text = LanguageStrings(@"no_upgrade");
+        _unloginCheckLable.textColor = TitleBlackColor;
+        _unloginCheckLable.font = AdaptedFontSize(15);
+        _unloginCheckLable.textAlignment = NSTextAlignmentCenter;
+        _unloginCheckLable.numberOfLines = 0;
+        _unloginCheckLable.contentEdgeInsets = UIEdgeInsetsMake(10, 20, 10, 20);
         [contentV addSubview:_unloginCheckLable];
-        CGFloat w =  [LanguageStrings(@"no_upgrade") boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:AdaptedFontSize(17)} context:nil].size.width + Adaptor_Value(15);
+        
         [_unloginCheckLable mas_makeConstraints:^(MASConstraintMaker *make) {
             make.center.mas_equalTo(contentV);
-            make.width.mas_equalTo(w  > (LQScreemW - Adaptor_Value(20)) ? (LQScreemW - Adaptor_Value(20)) :w);
-            make.height.mas_equalTo(Adaptor_Value(50));
+            make.width.mas_lessThanOrEqualTo(LQScreemW - Adaptor_Value(50));
         }];
         ViewBorderRadius(_unloginCheckLable, Adaptor_Value(2.5), kOnePX*2, LineGrayColor);
         _unloginCheckLable.backgroundColor = TabbarGrayColor;

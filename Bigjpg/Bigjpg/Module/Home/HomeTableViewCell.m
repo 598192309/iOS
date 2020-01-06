@@ -28,7 +28,6 @@
     _statusBackView.layer.cornerRadius = 4;
     _firstBtn.layer.cornerRadius = 4;
     _firstBtn.layer.masksToBounds  = YES;
-    _imageDetailLabel.adjustsFontSizeToFitWidth = YES;
 }
 - (IBAction)firstBtnEvent:(id)sender {
     

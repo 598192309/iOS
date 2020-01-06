@@ -70,7 +70,7 @@
         [contentV addSubview:_chooseBtn];
         [_chooseBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.width.height.mas_equalTo(Adaptor_Value(40));
-            make.left.mas_equalTo(Adaptor_Value(20));
+            make.left.mas_equalTo(Adaptor_Value(10));
             make.centerY.mas_equalTo(contentV);
         }];
         _chooseBtn.userInteractionEnabled = NO;

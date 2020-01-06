@@ -134,7 +134,7 @@
         self.lineview2.hidden = NO;
         
         [self.zhuceChooseBtn mas_updateConstraints:^(MASConstraintMaker *make) {
-              make.height.mas_equalTo(20);
+              make.height.mas_equalTo(30);
           }];
         self.zhuceTipLabel.text = LanguageStrings(@"reg_new");
         
@@ -388,14 +388,14 @@
         [zhuceView addSubview:_zhuceChooseBtn];
         [_zhuceChooseBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.left.bottom.mas_equalTo(zhuceView);
-            make.height.width.mas_equalTo(Adaptor_Value(20));
+            make.height.width.mas_equalTo(Adaptor_Value(30));
         }];
                 
-        _zhuceTipLabel = [UILabel lableWithText:LanguageStrings(@"reg_new") textColor:[UIColor lq_colorWithHexString:@"#616161"] fontSize:AdaptedFontSize(13) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
+        _zhuceTipLabel = [UILabel lableWithText:LanguageStrings(@"reg_new") textColor:[UIColor lq_colorWithHexString:@"#616161"] fontSize:AdaptedFontSize(15) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
         [zhuceView addSubview:_zhuceTipLabel];
         [_zhuceTipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.right.mas_equalTo(zhuceView);
-            make.left.mas_equalTo(weakSelf.zhuceChooseBtn.mas_right).offset(Adaptor_Value(5));
+            make.left.mas_equalTo(weakSelf.zhuceChooseBtn.mas_right).offset(Adaptor_Value(0));
         }];
         
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(zhuceTap:)];
@@ -408,7 +408,7 @@
         [_confirmBtn addTarget:self action:@selector(confirmBtnClick:) forControlEvents:UIControlEventTouchDown];
         [_confirmBtn setTitle:lqStrings(@"登录") forState:UIControlStateNormal];
         [_confirmBtn setTitleColor:BackGroundColor forState:UIControlStateNormal];
-        _confirmBtn.titleLabel.font = AdaptedFontSize(16);
+        _confirmBtn.titleLabel.font = [UIFont systemFontOfSize:16 weight:UIFontWeightMedium];
 
         _confirmBtn.backgroundColor = LihgtGreenColor;
         [contentV addSubview:_confirmBtn];
@@ -426,11 +426,13 @@
         [_forgetBtn setTitle:LanguageStrings(@"reset") forState:UIControlStateNormal];
         [_forgetBtn setTitleColor:TitleBlackColor forState:UIControlStateNormal];
         [_forgetBtn addTarget:self action:@selector(fogetBtnClick:) forControlEvents:UIControlEventTouchDown];
-        _forgetBtn.titleLabel.font = AdaptedFontSize(17);
+        _forgetBtn.titleLabel.font = [UIFont systemFontOfSize:16 weight:UIFontWeightMedium];
         [contentV addSubview:_forgetBtn];
+
         [_forgetBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(contentV);
-            make.top.mas_equalTo(weakSelf.confirmBtn.mas_bottom).offset(Adaptor_Value(10));
+            make.top.mas_equalTo(weakSelf.confirmBtn.mas_bottom).offset(20);
+
             
         }];
         BOOL iszh = [ConfManager.shared.localLanguage isEqualToString:@"zh"];
@@ -501,6 +503,7 @@
         _lorgintimeBtn = [[UIButton alloc] init];
         [_lorgintimeBtn setTitle:lqStrings(@"") forState:UIControlStateNormal];
         [_lorgintimeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _lorgintimeBtn.titleLabel.font = [UIFont systemFontOfSize:16];
         [contentV addSubview:_lorgintimeBtn];
         [_lorgintimeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.bottom.mas_equalTo(contentV.mas_centerY);
@@ -514,6 +517,7 @@
         [_lorgintipBtn setTitle:[arr safeObjectAtIndex:0] forState:UIControlStateNormal];
         [_lorgintipBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [contentV addSubview:_lorgintipBtn];
+        _lorgintipBtn.titleLabel.font = [UIFont systemFontOfSize:16 weight:UIFontWeightMedium];
         [_lorgintipBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(weakSelf.lorgintimeBtn);
             make.right.mas_equalTo(weakSelf.lorgintimeBtn.mas_left).offset(-Adaptor_Value(10));
@@ -526,20 +530,19 @@
         [_lorginupdateBtn setTitle:LanguageStrings(@"upgrade") forState:UIControlStateNormal];
         [_lorginupdateBtn addTarget:self action:@selector(updateBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [_lorginupdateBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        _lorginupdateBtn.titleLabel.font = AdaptedFontSize(15);
+        _lorginupdateBtn.titleLabel.font = _lorgintimeBtn.titleLabel.font;
         [contentV addSubview:_lorginupdateBtn];
-        CGFloat w = [LanguageStrings(@"upgrade") boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:AdaptedFontSize(17)} context:nil].size.width + Adaptor_Value(15);
+        _lorginupdateBtn.contentEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5);
         
         [_lorginupdateBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(weakSelf.lorgintimeBtn);
             make.left.mas_equalTo(weakSelf.lorgintimeBtn.mas_right).offset(Adaptor_Value(10));
-            make.width.mas_equalTo(w);
             
         }];
         _lorginupdateBtn.backgroundColor = LihgtGreenColor;
-        ViewRadius(_lorginupdateBtn, Adaptor_Value(5));
+        ViewRadius(_lorginupdateBtn, 4);
         
-        _lorgintotalTipLabel = [UILabel lableWithText:LanguageStrings(@"used") textColor:[UIColor whiteColor] fontSize:AdaptedFontSize(13) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
+        _lorgintotalTipLabel = [UILabel lableWithText:LanguageStrings(@"used") textColor:[UIColor whiteColor] fontSize:AdaptedFontSize(14) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
         [contentV addSubview:_lorgintotalTipLabel];
         [_lorgintotalTipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(contentV);

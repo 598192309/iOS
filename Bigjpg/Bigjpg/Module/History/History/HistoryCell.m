@@ -46,17 +46,16 @@
 
 
 - (void)configUIWithItem:(M_EnlargeHistory *)item downAll:(BOOL)downAll{
+    
     _item = item;
     //设置图片
     NSString *smallImagesStr = [NSString stringWithFormat:@"%@?x-oss-process=image/resize,m_fill,w_%d,h_%d",item.output,100,100];
     [_iconImageV sd_setImageWithURL:[NSURL URLWithString:smallImagesStr]];
     [_retryOrDownloadBtn setTitle:LanguageStrings(@"retry") forState:UIControlStateNormal];
-    CGFloat w = 0;
     if ([item.status isEqualToString:@"success"]) {
         _retryOrDownloadBtn.hidden = NO;
         [_retryOrDownloadBtn setTitle:LanguageStrings(@"download") forState:UIControlStateNormal];
         _retryOrDownloadBtn.backgroundColor = LihgtGreenColor;
-        w = [LanguageStrings(@"download") boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:AdaptedFontSize(15)} context:nil].size.width + Adaptor_Value(10);
         self.chooseBtn.hidden = !downAll;
         self.retryOrDownloadBtn.hidden = downAll;
         self.chooseBtn.selected = item.customSlected;
@@ -64,7 +63,6 @@
         _retryOrDownloadBtn.hidden = NO;
         [_retryOrDownloadBtn setTitle:LanguageStrings(@"retry") forState:UIControlStateNormal];
         _retryOrDownloadBtn.backgroundColor = YellowBackColor;
-        w = [LanguageStrings(@"retry") boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:AdaptedFontSize(15)} context:nil].size.width + Adaptor_Value(10);
         self.chooseBtn.hidden = !downAll;
         self.retryOrDownloadBtn.hidden = downAll;
         self.chooseBtn.selected = item.customSlected;
@@ -73,9 +71,7 @@
         self.chooseBtn.hidden = YES;
 
     }
-    [_retryOrDownloadBtn mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(w > Adaptor_Value(70) ? w : Adaptor_Value(70));
-    }];
+
     NSString *noiseStr ;
     if (item.conf.noise == -1) {
         noiseStr = LanguageStrings(@"none");
@@ -156,7 +152,7 @@
         _iconImageV = [[UIImageView alloc] init];
         [contentV addSubview:_iconImageV];
         [_iconImageV mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.height.width.mas_equalTo(78);
+            make.height.width.mas_equalTo(80);
             make.left.mas_equalTo(15);
             make.centerY.mas_equalTo(contentV);
         }];
@@ -171,25 +167,26 @@
             make.edges.equalTo(weakSelf.iconImageV);
         }];
         
-        _imageTipLable = [UILabel lableWithText:lqLocalized(@"",nil) textColor:RedColor fontSize:AdaptedFontSize(13) lableSize:CGRectZero textAliment:NSTextAlignmentRight numberofLines:0];
-         [contentV addSubview:_imageTipLable];
+        _imageTipLable = [UILabel lableWithText:lqLocalized(@"",nil) textColor:RedColor fontSize:AdaptedFontSize(13) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
+         [_iconImageVCoverView addSubview:_imageTipLable];
          [_imageTipLable mas_makeConstraints:^(MASConstraintMaker *make) {
-             make.center.mas_equalTo(weakSelf.iconImageV);
+             make.edges.mas_equalTo(weakSelf.iconImageV);
          }];
         
       
         _retryOrDownloadBtn = [[UIButton alloc] init];
         [_retryOrDownloadBtn setTitle:@"" forState:UIControlStateNormal];
         [_retryOrDownloadBtn addTarget:self action:@selector(downloadOrRetryBtnClick:) forControlEvents:UIControlEventTouchDown];
-        _retryOrDownloadBtn.titleLabel.font = AdaptedFontSize(15);
         [contentV addSubview:_retryOrDownloadBtn];
-        _retryOrDownloadBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+        _retryOrDownloadBtn.titleLabel.font = [UIFont systemFontOfSize:16 weight:UIFontWeightMedium];
+        _retryOrDownloadBtn.contentEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 10);
+//        _retryOrDownloadBtn.titleLabel.adjustsFontSizeToFitWidth = YES;
         [_retryOrDownloadBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-
-            make.height.mas_equalTo(Adaptor_Value(32));
-            make.width.mas_equalTo(Adaptor_Value(70));
-            make.right.mas_equalTo(contentV).offset(-Adaptor_Value(10));
+            make.height.mas_equalTo(Adaptor_Value(40));
+            make.right.mas_equalTo(contentV).offset(-Adaptor_Value(15));
             make.centerY.mas_equalTo(contentV.mas_centerY);
+            make.width.mas_greaterThanOrEqualTo(70);
+            make.width.mas_lessThanOrEqualTo(100);
         }];
         _retryOrDownloadBtn.backgroundColor = YellowBackColor;
         ViewRadius(_retryOrDownloadBtn, Adaptor_Value(4));
@@ -209,14 +206,14 @@
    
         _titleLabel = [UILabel lableWithText:lqLocalized(@"",nil) textColor:TitleGrayColor fontSize:AdaptedFontSize(13) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
         [contentV addSubview:_titleLabel];
+       
+//        _titleLabel.backgroundColor = [UIColor redColor];
         [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.width.mas_equalTo(LQScreemW - Adaptor_Value(220));
-//            make.center.mas_equalTo(contentV);
             make.center.mas_equalTo(contentV);
-            make.left.mas_greaterThanOrEqualTo(weakSelf.iconImageV.mas_left).offset(Adaptor_Value(10));
-            make.right.mas_greaterThanOrEqualTo(weakSelf.retryOrDownloadBtn.mas_left).offset(-Adaptor_Value(10));
+            make.left.mas_greaterThanOrEqualTo(weakSelf.iconImageV.mas_right).offset(Adaptor_Value(10));
+            make.right.equalTo(weakSelf.retryOrDownloadBtn.mas_left).offset(-10);
         }];
-        
+        [_titleLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
         UIView *lineView = [UIView new];
         lineView.backgroundColor = LineGrayColor;
         [contentV addSubview:lineView];
