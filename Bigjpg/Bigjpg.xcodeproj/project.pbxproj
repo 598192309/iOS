@@ -44,6 +44,7 @@
 		4920AEDE23B085B900FE7A65 /* M_User.m in Sources */ = {isa = PBXBuildFile; fileRef = 4920AEDD23B085B900FE7A65 /* M_User.m */; };
 		494CBA0623BA443B00931405 /* EnlargeConfViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 494CBA0523BA443B00931405 /* EnlargeConfViewController.m */; };
 		494F1F3F23C3439200AFA639 /* Conf.plist in Resources */ = {isa = PBXBuildFile; fileRef = 494F1F3E23C3439100AFA639 /* Conf.plist */; };
+		494F1F4223C346FF00AFA639 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 494F1F4423C346FF00AFA639 /* InfoPlist.strings */; };
 		495435C423B4AAD2008CCB60 /* M_Enlarge.m in Sources */ = {isa = PBXBuildFile; fileRef = 495435C323B4AAD2008CCB60 /* M_Enlarge.m */; };
 		495435C723B4BE66008CCB60 /* I_Enlarge.m in Sources */ = {isa = PBXBuildFile; fileRef = 495435C623B4BE66008CCB60 /* I_Enlarge.m */; };
 		496DA06F23AD114400DDB905 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 496DA06E23AD114400DDB905 /* AppDelegate.m */; };
@@ -134,6 +135,14 @@
 		494CBA0423BA443B00931405 /* EnlargeConfViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnlargeConfViewController.h; sourceTree = "<group>"; };
 		494CBA0523BA443B00931405 /* EnlargeConfViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EnlargeConfViewController.m; sourceTree = "<group>"; };
 		494F1F3E23C3439100AFA639 /* Conf.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Conf.plist; sourceTree = "<group>"; };
+		494F1F4323C346FF00AFA639 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		494F1F4523C3471300AFA639 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		494F1F4623C3472900AFA639 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		494F1F4723C3473200AFA639 /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "zh-HK.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		494F1F4823C3473A00AFA639 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		494F1F4923C3474800AFA639 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		494F1F4A23C3475300AFA639 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		494F1F4B23C3477000AFA639 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		495435C223B4AAD2008CCB60 /* M_Enlarge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = M_Enlarge.h; sourceTree = "<group>"; };
 		495435C323B4AAD2008CCB60 /* M_Enlarge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = M_Enlarge.m; sourceTree = "<group>"; };
 		495435C523B4BE66008CCB60 /* I_Enlarge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = I_Enlarge.h; sourceTree = "<group>"; };
@@ -432,6 +441,7 @@
 				496DA07923AD114500DDB905 /* Assets.xcassets */,
 				496DA07B23AD114500DDB905 /* LaunchScreen.storyboard */,
 				496DA07E23AD114500DDB905 /* Info.plist */,
+				494F1F4423C346FF00AFA639 /* InfoPlist.strings */,
 				496DA07F23AD114500DDB905 /* main.m */,
 				095CB7CE23B3B738003CF4C6 /* Resource */,
 			);
@@ -500,6 +510,13 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
+				"zh-Hant",
+				"zh-HK",
+				ja,
+				tr,
+				ru,
+				de,
 			);
 			mainGroup = 496DA06123AD114400DDB905;
 			productRefGroup = 496DA06B23AD114400DDB905 /* Products */;
@@ -517,6 +534,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				496DA07D23AD114500DDB905 /* LaunchScreen.storyboard in Resources */,
+				494F1F4223C346FF00AFA639 /* InfoPlist.strings in Resources */,
 				49BB1C7023B64ED2002394DB /* Home.storyboard in Resources */,
 				496DA07A23AD114500DDB905 /* Assets.xcassets in Resources */,
 				494F1F3F23C3439200AFA639 /* Conf.plist in Resources */,
@@ -621,6 +639,21 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		494F1F4423C346FF00AFA639 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				494F1F4323C346FF00AFA639 /* en */,
+				494F1F4523C3471300AFA639 /* zh-Hans */,
+				494F1F4623C3472900AFA639 /* zh-Hant */,
+				494F1F4723C3473200AFA639 /* zh-HK */,
+				494F1F4823C3473A00AFA639 /* ja */,
+				494F1F4923C3474800AFA639 /* tr */,
+				494F1F4A23C3475300AFA639 /* ru */,
+				494F1F4B23C3477000AFA639 /* de */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		496DA07623AD114400DDB905 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -644,6 +677,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -702,6 +736,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
