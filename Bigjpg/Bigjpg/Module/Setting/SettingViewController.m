@@ -30,7 +30,9 @@
 #pragma mark - 生命周期
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
+    if (RI.is_logined) {
+        [self requestUserInfo];
+    }
     
 }
 - (void)viewDidLoad {
@@ -135,6 +137,8 @@
     [self setUpHeader];
     [self refreshUI];
 }
+
+
 #pragma mark - act
 
 - (void)settingCustomViewAct{
@@ -147,7 +151,12 @@
         if ([[sender titleForState:UIControlStateNormal] isEqualToString:LanguageStrings(@"login_reg")]) {//登录 或者注册
             [weakSelf loginWithUserName:email pwd:pwd notReg:zhuce sender:sender];
         }else{//退出
-            [weakSelf remindShow:nil msgColor:TitleBlackColor msgFont:AdaptedFontSize(15) subMsg:LanguageStrings(@"logout") submsgColor:nil submsgFont:AdaptedFontSize(17) firstBtnTitle:LanguageStrings(@"cancel") secBtnTitle:LanguageStrings(@"ok") singeBtnTitle:@"" removeBtnHidden:YES];
+            [SystemAlertViewController alertViewControllerWithTitle:nil message:LanguageStrings(@"logout") cancleButtonTitle:LanguageStrings(@"cancel") commitButtonTitle:LanguageStrings(@"ok") cancleBlock:^{
+              
+            } commitBlock:^{
+                [weakSelf logOut:nil];
+            }];
+
         }
     };
     //升级
@@ -226,29 +235,23 @@
     __weak __typeof(self) weakSelf = self;
     [LSVProgressHUD show];
     sender.userInteractionEnabled = NO;
+    [[NSUserDefaults standardUserDefaults] setObject:usename forKey:kUserName];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     [I_Account loginOrRegistWithUserName:usename pwd:pwd notReg:notReg success:^(M_User * _Nonnull userInfo) {
-        [I_Account getUserInfoOnSuccess:^(M_User * _Nonnull userInfo) {
-            [LSVProgressHUD dismiss];
-            [weakSelf.settingCustomView configUIWithItem:userInfo finishi:^{
-                UIView *tableHeaderView = [[UIView alloc] init];
-                [tableHeaderView addSubview:weakSelf.settingCustomView];
-                [weakSelf.settingCustomView mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.edges.equalTo(tableHeaderView);
-                }];
-                CGFloat H = [tableHeaderView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-                tableHeaderView.lq_height = H;
-                weakSelf.customTableView.tableHeaderView = tableHeaderView;
-                weakSelf.customTableView.tableHeaderView.lq_height = H;
+         [LSVProgressHUD dismiss];
+        sender.userInteractionEnabled = YES;
+        [weakSelf.settingCustomView configUIWithItem:userInfo finishi:^{
+            UIView *tableHeaderView = [[UIView alloc] init];
+            [tableHeaderView addSubview:weakSelf.settingCustomView];
+            [weakSelf.settingCustomView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.edges.equalTo(tableHeaderView);
             }];
-            sender.userInteractionEnabled = YES;
-            [[NSUserDefaults standardUserDefaults] setObject:usename forKey:kUserName];
-            
-        } failure:^(NSError *error) {
-            [LSVProgressHUD showError:error];
-            sender.userInteractionEnabled = YES;
+            CGFloat H = [tableHeaderView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+            tableHeaderView.lq_height = H;
+            weakSelf.customTableView.tableHeaderView = tableHeaderView;
+            weakSelf.customTableView.tableHeaderView.lq_height = H;
         }];
-
-
+        [weakSelf requestUserInfo];
     } failure:^(NSError *error) {
         [LSVProgressHUD showError:error];
         sender.userInteractionEnabled = YES;
@@ -256,14 +259,33 @@
     }];
 }
 
+
+- (void)requestUserInfo {
+    __weak __typeof(self) weakSelf = self;
+    [I_Account getUserInfoOnSuccess:^(M_User * _Nonnull userInfo) {
+              [weakSelf.settingCustomView configUIWithItem:userInfo finishi:^{
+                  UIView *tableHeaderView = [[UIView alloc] init];
+                  [tableHeaderView addSubview:weakSelf.settingCustomView];
+                  [weakSelf.settingCustomView mas_makeConstraints:^(MASConstraintMaker *make) {
+                      make.edges.equalTo(tableHeaderView);
+                  }];
+                  CGFloat H = [tableHeaderView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+                  tableHeaderView.lq_height = H;
+                  weakSelf.customTableView.tableHeaderView = tableHeaderView;
+                  weakSelf.customTableView.tableHeaderView.lq_height = H;
+              }];
+              
+              
+          } failure:^(NSError *error) {
+             
+          }];
+}
 //退出登录
 - (void)logOut:(UIButton *)sender{
     __weak __typeof(self) weakSelf = self;
-    [LSVProgressHUD show];
     sender.userInteractionEnabled = NO;
     [I_Account loginOutOnSuccessOnSuccess:^{
         sender.userInteractionEnabled = YES;
-        [LSVProgressHUD dismiss];
         [weakSelf.settingCustomView configUIWithItem:RI.userInfo finishi:^{
             UIView *tableHeaderView = [[UIView alloc] init];
             [tableHeaderView addSubview:weakSelf.settingCustomView];

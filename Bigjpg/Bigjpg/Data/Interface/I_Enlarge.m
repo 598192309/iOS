@@ -75,7 +75,7 @@ fileHeight:(long)fileHeight
    success:(void(^)(NSString *fid, NSInteger time))successBlock
    failure:(ErrorBlock)failureBlock {
     
-    NSDictionary *jsonDic = @{@"x2":@"1",@"style":SAFE_NIL_STRING(style),@"noise":@"1",@"file_name":SAFE_NIL_STRING(fileName),@"files_size":@(fileSize),@"file_height":@(fileHeight),@"file_width":@(filetWidth),@"input":SAFE_NIL_STRING(input)};
+    NSDictionary *jsonDic = @{@"x2":[NSString stringWithFormat:@"%d",x2],@"style":SAFE_NIL_STRING(style),@"noise":[NSString stringWithFormat:@"%d",noise],@"file_name":SAFE_NIL_STRING(fileName),@"files_size":@(fileSize),@"file_height":@(fileHeight),@"file_width":@(filetWidth),@"input":SAFE_NIL_STRING(input)};
     
     NSString *value = [jsonDic mj_JSONString];
     NSDictionary *params = @{@"conf":SAFE_NIL_STRING(value)};
@@ -99,5 +99,47 @@ success:(void(^)(NSString *fid, NSInteger time))successBlock
 failure:(ErrorBlock)failureBlock
 {
     return [self createEnlargeTask:conf.x2 style:conf.style noise:conf.noise fileName:conf.file_name fileSize:conf.files_size fileHeight:conf.file_height fileWidth:conf.file_width input:conf.input success:successBlock failure:failureBlock];
+}
+
+/// 批量下载
++ (void)downloadPictureWithUrls:(NSArray *)urlList
+{
+    if (urlList.count == 0) {
+        return;
+    }
+    [LSVProgressHUD show];
+    __block int count = 0;
+    for (NSString *output in urlList) {
+        [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:output] completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
+            if (error) {
+                NSLog(@"下载失败%@",output);
+            } else {
+                if (urlList.count == 1) {
+                    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), (__bridge void *)self);
+                } else {
+                    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+                }
+            }
+            count ++;
+            if (count == urlList.count) {
+                if (urlList.count  > 1) {
+                    [LSVProgressHUD showInfoWithStatus:@"保存相册成功"];
+                }
+                
+            }
+        }];
+    }
+    
+}
+
++ (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+    if (error) {
+        [LSVProgressHUD showInfoWithStatus:@"保存相册失败"];
+        
+    } else {
+       [LSVProgressHUD showInfoWithStatus:@"保存相册成功"];
+
+    }
 }
 @end

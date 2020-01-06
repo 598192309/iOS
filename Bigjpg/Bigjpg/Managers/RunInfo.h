@@ -13,7 +13,7 @@
 
 
 #import <UIKit/UIKit.h>
-@class M_User;
+#import "M_User.h"
 @interface RunInfo : NSObject
 
 + (RunInfo *)sharedInstance;

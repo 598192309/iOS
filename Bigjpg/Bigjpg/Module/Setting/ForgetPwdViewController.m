@@ -7,7 +7,7 @@
 //
 
 #import "ForgetPwdViewController.h"
-
+#import "I_Account.h"
 @interface ForgetPwdViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) UITableView  *customTableView;
 
@@ -84,7 +84,15 @@
 #pragma mark - net
 - (void)sendEmailWithEmail:(NSString *)email sender:(UIButton *)sender{
     __weak __typeof(self) weakSelf = self;
-
+    [SVProgressHUD show];
+    [I_Account resetPwd:email success:^{
+        [SVProgressHUD showSuccessWithStatus:LanguageStrings(@"check_email")];
+        [SVProgressHUD dismissWithDelay:2];
+        [weakSelf.navigationController popViewControllerAnimated:YES];
+    } failure:^(NSError *error) {
+        [SVProgressHUD showErrorWithStatus:LanguageStrings(error.lq_errorMsg)];
+        [SVProgressHUD dismissWithDelay:2];
+    }];
 }
 
 #pragma mark -  UITableViewDataSource

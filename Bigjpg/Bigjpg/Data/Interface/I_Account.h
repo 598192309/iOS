@@ -35,6 +35,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param failureBlock 失败回调
 + (NetworkTask *)updatePassword:(NSString *)password success:(void(^)(void))successBlock failure:(ErrorBlock)failureBlock;
 
+
+/// 重置密码
+/// @param userName 用户名
+/// @param successBlock 成功回调
+/// @param failureBlock 失败回调
++ (NetworkTask *)resetPwd:(NSString *)userName success:(void(^)(void))successBlock failure:(ErrorBlock)failureBlock;
+
 /// 获取语言配置、oss配置
 /// @param successBlock 成功回调
 /// @param failureBlock 失败回调

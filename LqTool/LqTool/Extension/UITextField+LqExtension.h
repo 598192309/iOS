@@ -12,7 +12,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UITextField (LqExtension)
-- (void)setPlaceholderColor:(UIColor *)color font:(UIFont *)font;
+- (void)setPlaceholderColor:(UIColor *)color font:(nullable UIFont *)font;
 
 @end
 

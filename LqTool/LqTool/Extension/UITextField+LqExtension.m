@@ -11,7 +11,7 @@
 
 
 @implementation UITextField (LqExtension)
-- (void)setPlaceholderColor:(UIColor *)color font:(UIFont *)font
+- (void)setPlaceholderColor:(UIColor *)color font:(nullable UIFont *)font
 {
     NSMutableAttributedString *arrStr;
     if (font) {

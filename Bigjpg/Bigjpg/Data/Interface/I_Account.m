@@ -22,7 +22,9 @@
         NSString *status = SAFE_VALUE_FOR_KEY(resultObject, @"status");//ok代表成功
          if([status isEqualToString:@"ok"]){
              M_User *account = [M_User mj_objectWithKeyValues:resultObject];
+             RI.userInfo = account;
              RI.is_logined = YES;
+             
              [[NSNotificationCenter defaultCenter] postNotificationName:kUserSignIn object:nil];
              successBlock(account);
          }else{
@@ -81,6 +83,19 @@
     }];
 }
 
++ (NetworkTask *)resetPwd:(NSString *)userName success:(void(^)(void))successBlock failure:(ErrorBlock)failureBlock
+{
+    return [NET POST:@"reset" parameters:@{@"username":SAFE_NIL_STRING(userName)} criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
+        NSString *status = SAFE_VALUE_FOR_KEY(resultObject, @"status");//ok代表成功
+        if([status isEqualToString:@"ok"]){
+            successBlock();
+        }else{
+            failureBlock([NSError lq_errorWithMsg:status domain:@"Response Error" code:10000]);
+        }
+    } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+}
 
 + (NetworkTask *)requestConfOnSuccess:(void(^)(NSDictionary *confDic))successBlock failure:(ErrorBlock)failureBlock
 {

@@ -344,19 +344,19 @@
 - (void)netStatusChange:(NSNotification *)noti{
     NSLog(@"-----%@",noti.userInfo);
     //判断网络状态
-    switch (self.hostReach.currentReachabilityStatus) {
-        case NotReachable:
-            [LSVProgressHUD showInfoWithStatus:NSLocalizedString(@"当前网络连接失败，请查看设置", nil)];
-            break;
-        case ReachableViaWiFi:
-            NSLog(NSLocalizedString(@"wifi上网2", nil));
-            break;
-        case ReachableViaWWAN:
-            NSLog(NSLocalizedString(@"手机上网2", nil));
-            break;
-        default:
-            break;
-    }
+//    switch (self.hostReach.currentReachabilityStatus) {
+//        case NotReachable:
+//            [LSVProgressHUD showInfoWithStatus:NSLocalizedString(@"当前网络连接失败，请查看设置", nil)];
+//            break;
+//        case ReachableViaWiFi:
+//            NSLog(NSLocalizedString(@"wifi上网2", nil));
+//            break;
+//        case ReachableViaWWAN:
+//            NSLog(NSLocalizedString(@"手机上网2", nil));
+//            break;
+//        default:
+//            break;
+//    }
 }
 
 @end

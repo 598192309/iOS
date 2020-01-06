@@ -39,13 +39,9 @@
 
 
 + (void)showError:(NSError *)error{
-    NSString *errStr = [error.userInfo safeObjectForKey:@"errorMsg"];
-    if (errStr.length > 0 && ![errStr isEqualToString:NSLocalizedString(@"任务被取消", nil)]  && ![errStr isEqualToString:NSLocalizedString(@"已取消", nil)] && ![errStr containsString:NSLocalizedString(@"如非本人操作", nil)]) {
-        [self showInfoWithStatus:[error.userInfo safeObjectForKey:@"errorMsg"]];
-        [self dismissTime];
-    }else{
-        [self dismiss];
-    }
+    NSString *errStr = error.lq_errorMsg;
+    [self showInfoWithStatus:LanguageStrings(errStr)];
+    [self dismissTime];
 }
 
 +(void)showInfoWithStatus:(NSString *)status{

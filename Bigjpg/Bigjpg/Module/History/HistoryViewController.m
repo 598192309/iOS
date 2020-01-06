@@ -51,7 +51,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyRequestData) name:kUserSignOut object:nil];
     //监听用户切换语言
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changLanguage) name:kChangeLanguageNotification object:nil];
-
+    
+    //监听重试放大任务成功
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(retrySuccess) name:kRetrySuccessNoti object:nil];
 
     [self requestData];
 }
@@ -135,6 +137,11 @@
     [self setUpHeader];
     self.unloginCheckLable.text = LanguageStrings(@"no_upgrade");
 }
+
+- (void)retrySuccess
+{
+    [self requestData];
+}
 #pragma mark - act
 
 - (void)historyCustomViewAct{
@@ -190,11 +197,13 @@
     if (RI.is_logined) {
         __weak __typeof(self) weakSelf = self;
         [I_Account getUserInfoOnSuccess:^(M_User * _Nonnull userInfo) {
-            weakSelf.userInfo = userInfo;
-             [weakSelf.customTableView reloadData];
+            if (!weakSelf.downAll) {
+                weakSelf.userInfo = userInfo;
+                 [weakSelf.customTableView reloadData];
+            }
         } failure:^(NSError *error) {
             if (weakSelf.userInfo == nil) {
-                [LSVProgressHUD showErrorWithStatus:LanguageStrings(error.lq_errorMsg)];
+                [LSVProgressHUD showError:error];
             }
         }];
     }
@@ -229,6 +238,13 @@
     weakSelf.downAll = NO;
     [weakSelf.customTableView reloadData];
     [weakSelf.historyCustomView reset];
+    
+    NSMutableArray *urlList = [NSMutableArray array];
+    for (M_EnlargeHistory *item in arr) {
+        [urlList safeAddObject:item.output];
+    }
+    
+    [I_Enlarge downloadPictureWithUrls:urlList];
 }
 
 #pragma mark -  UITableViewDataSource
@@ -258,7 +274,7 @@
     }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return Adaptor_Value(120);
+    return 110;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 0.01;

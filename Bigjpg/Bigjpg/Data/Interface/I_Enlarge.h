@@ -67,6 +67,10 @@ NS_ASSUME_NONNULL_BEGIN
 + (NetworkTask *)createEnlargeTaskWith:(M_EnlargeConf *)conf
                                success:(void(^)(NSString *fid, NSInteger time))successBlock
                                failure:(ErrorBlock)failureBlock;
+
+
+/// 批量下载
++ (void)downloadPictureWithUrls:(NSArray *)urlList;
 @end
 
 NS_ASSUME_NONNULL_END

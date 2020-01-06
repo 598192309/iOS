@@ -84,7 +84,7 @@
     [self.customTableAlertView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo([UIApplication sharedApplication].keyWindow);
     }];
-    [self.customTableAlertView configUIWithArr:@[@"简体中文",@"繁體中文",@"日本語",@"English",@"Русский",@"Türkçe"]];
+    [self.customTableAlertView configUIWithArr:@[@"简体中文",@"繁體中文",@"日本語",@"English",@"Русский",@"Türkçe",@"Deutsch"]];
     self.customTableAlertView.CustomTableAlertChooseBlock = ^(NSInteger index, NSString * _Nonnull str) {
         [weakSelf.customTableAlertView removeFromSuperview];
         weakSelf.customTableAlertView = nil;
@@ -94,20 +94,23 @@
                 language = @"zh";
                 break;
             case 1:
-            language = @"tw";
-            break;
+                language = @"tw";
+                break;
             case 2:
-            language = @"jp";
-            break;
+                language = @"jp";
+                break;
             case 3:
-            language = @"en";
-            break;
+                language = @"en";
+                break;
             case 4:
-            language = @"de";
-            break;
+                language = @"ru";
+                break;
             case 5:
-            language = @"tr";
-            
+                language = @"tr";
+                break;
+            case 6:
+                language = @"de";
+                break;
             default:
                 break;
         }

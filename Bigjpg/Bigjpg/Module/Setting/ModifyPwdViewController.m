@@ -103,18 +103,12 @@
     
     sender.userInteractionEnabled = NO;
     [I_Account updatePassword:pwd1 success:^{
-        //退出登录
-        [I_Account loginOutOnSuccessOnSuccess:^{
-            [weakSelf.navigationController popViewControllerAnimated:NO];
-            [LSVProgressHUD showInfoWithStatus:LanguageStrings(@"reset_success")];
-            sender.userInteractionEnabled = YES;
-        }];
-       
-        
+        sender.userInteractionEnabled = YES;
+       [weakSelf.navigationController popViewControllerAnimated:NO];
+        [LSVProgressHUD showInfoWithStatus:LanguageStrings(@"reset_success")];
     } failure:^(NSError *error) {
         [LSVProgressHUD showError:error];
         sender.userInteractionEnabled = YES;
-
     }];
 
 }

@@ -233,7 +233,7 @@
                     //放大数据上传失败
                     upload.uploadStep = EnlargeUploadStepDataUploadFail;
                     [weakSelf.tableView reloadData];
-                    [LSVProgressHUD showErrorWithStatus:LanguageStrings(@"upload_error")];
+                    [LSVProgressHUD showError:error];
                 }];
                 
             }
@@ -277,10 +277,12 @@
 
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    __weak __typeof(self) weakSelf = self;
     [SystemAlertViewController alertViewControllerWithTitle:nil message:LanguageStrings(@"sure") cancleButtonTitle:LanguageStrings(@"cancel") commitButtonTitle:LanguageStrings(@"ok") cancleBlock:^{
           
       } commitBlock:^{
-          
+          [weakSelf.dataSource removeObject:weakSelf.dataSource[indexPath.row]];
+          [weakSelf.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
       }];
 }
 @end

@@ -62,14 +62,7 @@
                break;
            case EnlargeUploadStepEnlargeSuccess:
            {//下载
-               [SVProgressHUD show];
-               [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:_upload.output] completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
-                   if (error) {
-//                       save_to
-                   } else {
-                       UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), (__bridge void *)self);
-                   }
-               }];
+               [I_Enlarge downloadPictureWithUrls:@[_upload.output]];
            }
                break;
                
@@ -79,17 +72,6 @@
     
 }
 
-- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
-{
-    if (error) {
-        [SVProgressHUD showErrorWithStatus:@"保存相册失败"];
-        
-    } else {
-       [SVProgressHUD showSuccessWithStatus:@"保存相册成功"];
-
-    }
-    [SVProgressHUD dismissWithDelay:2];
-}
 
 - (void)setUpload:(M_EnlargeUpload *)upload
 {

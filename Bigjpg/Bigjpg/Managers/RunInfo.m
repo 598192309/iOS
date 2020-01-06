@@ -34,7 +34,10 @@
         _is_logined = [[NSUserDefaults standardUserDefaults ] objectForKey:kUserIsLogin] ? [[[NSUserDefaults standardUserDefaults ] objectForKey:kUserIsLogin] boolValue] : false;
         _isNight = [[NSUserDefaults standardUserDefaults ] objectForKey:kIsNight] ? [[[NSUserDefaults standardUserDefaults ] objectForKey:kIsNight] boolValue] : false;
 
-
+        NSString *userInfoStr = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserInfoStr"];
+        if (userInfoStr.length > 0) {
+            _userInfo = [M_User mj_objectWithKeyValues:userInfoStr];
+        }
     }
     return self;
 }
@@ -51,5 +54,17 @@
     [[NSUserDefaults standardUserDefaults] setBool:isNight forKey:kIsNight];
     [[NSUserDefaults standardUserDefaults] synchronize];
 
+}
+
+- (void)setUserInfo:(M_User *)userInfo
+{
+    _userInfo = userInfo;
+    NSString *userInfoStr = @"";
+    if (userInfo != nil) {
+        userInfoStr = [userInfo mj_JSONString];
+    }
+    
+    [[NSUserDefaults standardUserDefaults] setObject:userInfoStr forKey:@"UserInfoStr"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 @end

@@ -202,7 +202,7 @@
         }];
         
         _removeBtn = [[UIButton alloc] init];
-        [_removeBtn addTarget:self action:@selector(removeBtnClick:) forControlEvents:UIControlEventTouchDown];
+        [_removeBtn addTarget:self action:@selector(downloadOrRetryBtnClick:) forControlEvents:UIControlEventTouchDown];
         [_removeBtn setImage:[UIImage imageNamed:@"alertClose"] forState:UIControlStateNormal];
         [contentV addSubview:_removeBtn];
         [_removeBtn mas_makeConstraints:^(MASConstraintMaker *make) {

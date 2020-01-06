@@ -96,10 +96,10 @@
 
 
 //不同屏幕尺寸字体适配（375，667是因为效果图为IPHONE6 如果不是则根据实际情况修改）
-#define kScreenWidthRatio  (LQScreemW / 375.0)
-#define kScreenHeightRatio (LQScreemH / 667.0)
+#define kScreenWidthRatio  1
+#define kScreenHeightRatio 1
 #define AdaptedWidth(x)  ceilf((x) * kScreenWidthRatio)
-#define Adaptor_Value(v)        (v)*kScreenWidthRatio
+#define Adaptor_Value(v)        v
 #define BottomAdaptor_Value(v)        (v + SafeAreaBottomHeight)*kScreenWidthRatio
 #define TopAdaptor_Value(v)       (v + SafeAreaTopHeight)*kScreenWidthRatio
 //字体

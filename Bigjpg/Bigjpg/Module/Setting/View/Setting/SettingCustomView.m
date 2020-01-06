@@ -83,27 +83,30 @@
         self.pwdTF.text = @"";
         self.lineview1.hidden = YES;
         self.lineview2.hidden = YES;
-
+        self.greenlineview1.hidden = YES;
+        self.greenlineview2.hidden = YES;
         [self.zhuceChooseBtn mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(0);
         }];
         self.zhuceTipLabel.text = nil;
         
-        [self.confirmBtn setTitle:[NSString stringWithFormat:@"%@ %@",LanguageStrings(@"logout"),item.username] forState:UIControlStateNormal];
+        NSString *name = [[NSUserDefaults standardUserDefaults] objectForKey:kUserName];
+        [self.confirmBtn setTitle:[NSString stringWithFormat:@"%@ %@",LanguageStrings(@"logout"),name] forState:UIControlStateNormal];
+        self.confirmBtn.backgroundColor = [UIColor lq_colorWithHexString:@"E54340"];
          [self.confirmBtn mas_updateConstraints:^(MASConstraintMaker *make) {
              make.top.mas_equalTo(weakSelf.zhuceView.mas_bottom).offset(Adaptor_Value(-20));
          }];
       
         NSArray *arr = [ConfManager.shared contentWith:@"version"];
         NSString *typestr;
-        if ([item.version isEqualToString:@"free"]) {
-            typestr = [arr safeObjectAtIndex:0];
+        if ([item.version isEqualToString:@"pro"]) {
+            typestr = [arr safeObjectAtIndex:3];
         }else if ([item.version isEqualToString:@"basic"]) {
             typestr = [arr safeObjectAtIndex:1];
         }else if ([item.version isEqualToString:@"std"]) {
             typestr = [arr safeObjectAtIndex:2];
         }else{
-            typestr = [arr safeObjectAtIndex:3];
+            typestr = [arr safeObjectAtIndex:0];
         }
         NSArray *typeArr;
         if ([typestr containsString:@":"]) {
@@ -117,7 +120,7 @@
         [self.lorgintipBtn setTitle:typeArr.lastObject forState:UIControlStateNormal];
         NSString *time = [item.expire lq_dealTimeFormarter:@"yyyy-MM-dd HH:mm:ss" changeFormater:@"yyyy-MM-dd"];
         [self.lorgintimeBtn setTitle:time forState:UIControlStateNormal];
-        self.lorgintotalTipLabel.text = [NSString stringWithFormat:@"%@%lu",LanguageStrings(@"used"),(unsigned long)item.historyList.count];
+        self.lorgintotalTipLabel.text = [NSString stringWithFormat:@"%@%lu",LanguageStrings(@"used"),(unsigned long)item.used];
         
         [_forgetBtn setTitle:LanguageStrings(@"change_password") forState:UIControlStateNormal];
     }else{
@@ -136,7 +139,8 @@
         self.zhuceTipLabel.text = LanguageStrings(@"reg_new");
         
         [self.confirmBtn setTitle:LanguageStrings(@"login_reg") forState:UIControlStateNormal];
-         [self.confirmBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+        self.confirmBtn.backgroundColor = LihgtGreenColor;
+        [self.confirmBtn mas_updateConstraints:^(MASConstraintMaker *make) {
              make.top.mas_equalTo(weakSelf.zhuceView.mas_bottom).offset(Adaptor_Value(25));
          }];
         [_forgetBtn setTitle:LanguageStrings(@"reset") forState:UIControlStateNormal];
@@ -253,9 +257,9 @@
         [_updateBtn setTitle:LanguageStrings(@"upgrade") forState:UIControlStateNormal];
         [_updateBtn addTarget:self action:@selector(updateBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [_updateBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        _updateBtn.titleLabel.font = AdaptedFontSize(15);
+        _updateBtn.titleLabel.font = [UIFont systemFontOfSize:16 weight:UIFontWeightMedium];
         [_tipView addSubview:_updateBtn];
-        CGFloat w = [LanguageStrings(@"upgrade") boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:AdaptedFontSize(17)} context:nil].size.width + Adaptor_Value(15);
+        CGFloat w = [LanguageStrings(@"upgrade") boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:_updateBtn.titleLabel.font} context:nil].size.width + Adaptor_Value(20);
 
         [_updateBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(weakSelf.tipView);

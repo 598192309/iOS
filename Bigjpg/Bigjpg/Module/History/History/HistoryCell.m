@@ -8,7 +8,7 @@
 
 #import "HistoryCell.h"
 #import <SDWebImage/SDWebImage.h>
-
+#import "I_Enlarge.h"
 @interface HistoryCell()
 @property (nonatomic,strong) UIView * cellBackgroundView;
 @property (nonatomic,strong)   UIImageView *iconImageV;
@@ -20,7 +20,7 @@
 
 @property (nonatomic,strong)   UIButton *chooseBtn;
 
-
+@property (nonatomic, strong) M_EnlargeHistory *item;
 @end
 @implementation HistoryCell
 
@@ -46,10 +46,10 @@
 
 
 - (void)configUIWithItem:(M_EnlargeHistory *)item downAll:(BOOL)downAll{
+    _item = item;
     //设置图片
     NSString *smallImagesStr = [NSString stringWithFormat:@"%@?x-oss-process=image/resize,m_fill,w_%d,h_%d",item.output,100,100];
     [_iconImageV sd_setImageWithURL:[NSURL URLWithString:smallImagesStr]];
-    __weak __typeof(self) weakSelf = self;
     [_retryOrDownloadBtn setTitle:LanguageStrings(@"retry") forState:UIControlStateNormal];
     CGFloat w = 0;
     if ([item.status isEqualToString:@"success"]) {
@@ -60,7 +60,7 @@
         self.chooseBtn.hidden = !downAll;
         self.retryOrDownloadBtn.hidden = downAll;
         self.chooseBtn.selected = item.customSlected;
-    }else if ([item.status isEqualToString:@"success"]) {
+    }else if ([item.status isEqualToString:@"error"]) {
         _retryOrDownloadBtn.hidden = NO;
         [_retryOrDownloadBtn setTitle:LanguageStrings(@"retry") forState:UIControlStateNormal];
         _retryOrDownloadBtn.backgroundColor = YellowBackColor;
@@ -114,7 +114,11 @@
         sizeStr = [NSString stringWithFormat:@"%.1fM",item.conf.files_size/1024.0/1024.0];
     }
     self.titleLabel.text = [NSString stringWithFormat:@"%@,%@,%@,\n%@:%@",x2Str,sizeStr,typeStr,LanguageStrings(@"noise"),noiseStr];
-    self.imageTipLable.text = item.status;
+    if ([item.status isEqualToString:@"new"] || [item.status isEqualToString:@"process"]) {
+        self.imageTipLable.text = LanguageStrings(@"process");
+    } else if ([item.status isEqualToString:@"error"]) {
+        self.imageTipLable.text = LanguageStrings(@"fail");
+    }
     self.imageTipLable.hidden = [item.status isEqualToString:@"success"];
     self.iconImageVCoverView.hidden = [item.status isEqualToString:@"success"];
     
@@ -122,8 +126,17 @@
 }
 
 #pragma mark - act
-- (void)removeBtnClick:(UIButton *)sender{
-
+- (void)downloadOrRetryBtnClick:(UIButton *)sender{
+    if ([_item.status isEqualToString:@"success"]) {
+        [I_Enlarge downloadPictureWithUrls:@[_item.output]];
+    } else if([_item.status isEqualToString:@"error"]) {
+        [I_Enlarge retryEnlargeTasks:@[_item.fid] success:^{
+            [LSVProgressHUD showInfoWithStatus:@"succ"];
+            POST_NOTIFY(kRetrySuccessNoti, nil);
+        } failure:^(NSError *error) {
+            [LSVProgressHUD showError:error];
+        }];
+    }
 }
 
 #pragma mark - lazy
@@ -136,15 +149,15 @@
         [_cellBackgroundView addSubview:contentV];
         [contentV mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.mas_equalTo(weakSelf.cellBackgroundView);
-            make.height.mas_equalTo(Adaptor_Value(120));
+            make.height.mas_equalTo(110);
         }];
         contentV.backgroundColor = BackGroundColor;
         
         _iconImageV = [[UIImageView alloc] init];
         [contentV addSubview:_iconImageV];
         [_iconImageV mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.height.width.mas_equalTo(Adaptor_Value(80));
-            make.left.mas_equalTo(Adaptor_Value(10));
+            make.height.width.mas_equalTo(78);
+            make.left.mas_equalTo(15);
             make.centerY.mas_equalTo(contentV);
         }];
         ViewRadius(_iconImageV,4);
@@ -167,7 +180,7 @@
       
         _retryOrDownloadBtn = [[UIButton alloc] init];
         [_retryOrDownloadBtn setTitle:@"" forState:UIControlStateNormal];
-        [_retryOrDownloadBtn addTarget:self action:@selector(removeBtnClick:) forControlEvents:UIControlEventTouchDown];
+        [_retryOrDownloadBtn addTarget:self action:@selector(downloadOrRetryBtnClick:) forControlEvents:UIControlEventTouchDown];
         _retryOrDownloadBtn.titleLabel.font = AdaptedFontSize(15);
         [contentV addSubview:_retryOrDownloadBtn];
         _retryOrDownloadBtn.titleLabel.font = [UIFont systemFontOfSize:15];
@@ -185,7 +198,7 @@
         _chooseBtn = [[UIButton alloc] init];
         [_chooseBtn setImage:[[UIImage imageNamed:@"ic_uncheck"] qmui_imageWithTintColor:DeepGreenColor] forState:UIControlStateNormal];
         [_chooseBtn setImage:[UIImage imageNamed:@"ic_check"] forState:UIControlStateSelected];
-        [_chooseBtn addTarget:self action:@selector(removeBtnClick:) forControlEvents:UIControlEventTouchDown];
+        [_chooseBtn addTarget:self action:@selector(downloadOrRetryBtnClick:) forControlEvents:UIControlEventTouchDown];
         [contentV addSubview:_chooseBtn];
         [_chooseBtn mas_makeConstraints:^(MASConstraintMaker *make) {
 
