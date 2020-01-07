@@ -18,7 +18,7 @@
 
 @property (nonatomic,strong)UIView *lorginTipView;
 @property (nonatomic,strong)UIButton *lorgintipBtn;
-@property (nonatomic,strong)UIButton *lorgintimeBtn;
+@property (nonatomic,strong)UILabel *lorgintimeLabel;
 @property (nonatomic,strong)UIButton *lorginupdateBtn;
 @property (nonatomic,strong)UILabel *lorgintotalTipLabel;
 
@@ -119,7 +119,7 @@
 
         [self.lorgintipBtn setTitle:typeArr.lastObject forState:UIControlStateNormal];
         NSString *time = [item.expire lq_dealTimeFormarter:@"yyyy-MM-dd HH:mm:ss" changeFormater:@"yyyy-MM-dd"];
-        [self.lorgintimeBtn setTitle:time forState:UIControlStateNormal];
+        self.lorgintimeLabel.text = time;
         self.lorgintotalTipLabel.text = [NSString stringWithFormat:@"%@%lu",LanguageStrings(@"used"),(unsigned long)item.used];
         
         [_forgetBtn setTitle:LanguageStrings(@"change_password") forState:UIControlStateNormal];
@@ -507,25 +507,24 @@
             make.bottom.mas_equalTo(contentV.mas_centerY);
             make.centerX.mas_equalTo(contentV);
         }];
-        _lorgintimeBtn = [[UIButton alloc] init];
-        [_lorgintimeBtn setTitle:lqStrings(@"") forState:UIControlStateNormal];
-        [_lorgintimeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        _lorgintimeBtn.titleLabel.font = [UIFont systemFontOfSize:16];
-        [topBackView addSubview:_lorgintimeBtn];
-        [_lorgintimeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        _lorgintimeLabel = [[UILabel alloc] init];
+        _lorgintimeLabel.textColor = [UIColor whiteColor];
+        _lorgintimeLabel.font = [UIFont systemFontOfSize:16];
+        [topBackView addSubview:_lorgintimeLabel];
+        [_lorgintimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.bottom.mas_equalTo(topBackView);
         }];
 
         _lorgintipBtn = [[UIButton alloc] init];
         NSArray *arr = [ConfManager.shared contentWith:@"version"];
-        
+        _lorgintipBtn.contentEdgeInsets = UIEdgeInsetsZero;
         [_lorgintipBtn setTitle:[arr safeObjectAtIndex:0] forState:UIControlStateNormal];
         [_lorgintipBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [topBackView addSubview:_lorgintipBtn];
         _lorgintipBtn.titleLabel.font = [UIFont systemFontOfSize:16 weight:UIFontWeightMedium];
         [_lorgintipBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.mas_equalTo(weakSelf.lorgintimeBtn);
-            make.right.mas_equalTo(weakSelf.lorgintimeBtn.mas_left).offset(-Adaptor_Value(10));
+            make.centerY.mas_equalTo(weakSelf.lorgintimeLabel);
+            make.right.mas_equalTo(weakSelf.lorgintimeLabel.mas_left).offset(-Adaptor_Value(10));
             make.left.equalTo(topBackView);
         }];
         
@@ -535,13 +534,13 @@
         [_lorginupdateBtn setTitle:LanguageStrings(@"upgrade") forState:UIControlStateNormal];
         [_lorginupdateBtn addTarget:self action:@selector(updateBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [_lorginupdateBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        _lorginupdateBtn.titleLabel.font = _lorgintimeBtn.titleLabel.font;
+        _lorginupdateBtn.titleLabel.font = _lorgintimeLabel.font;
         [topBackView addSubview:_lorginupdateBtn];
         _lorginupdateBtn.contentEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5);
         
         [_lorginupdateBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.mas_equalTo(weakSelf.lorgintimeBtn);
-            make.left.mas_equalTo(weakSelf.lorgintimeBtn.mas_right).offset(Adaptor_Value(10));
+            make.centerY.mas_equalTo(weakSelf.lorgintimeLabel);
+            make.left.mas_equalTo(weakSelf.lorgintimeLabel.mas_right).offset(Adaptor_Value(10));
             make.top.right.equalTo(topBackView);
         }];
         _lorginupdateBtn.backgroundColor = LihgtGreenColor;

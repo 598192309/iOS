@@ -118,6 +118,12 @@
         [weakSelf.languageBtn setTitle:str forState:UIControlStateNormal];
         [weakSelf.customTableView reloadData];
         weakSelf.navigationTextLabel.text = LanguageStrings(@"conf");
+        NSArray<UITabBarItem *> *items = weakSelf.tabBarController.tabBar.items;
+        NSArray *titles = @[LanguageStrings(@"begin"),LanguageStrings(@"log"),LanguageStrings(@"conf")];
+        for (int i = 0 ; i < 3; i++) {
+            UITabBarItem *item = [items safeObjectAtIndex:i];
+            item.title = [titles safeObjectAtIndex:i];
+        }
         
     };
     
