@@ -33,6 +33,9 @@
     if (self){
         _is_logined = [[NSUserDefaults standardUserDefaults ] objectForKey:kUserIsLogin] ? [[[NSUserDefaults standardUserDefaults ] objectForKey:kUserIsLogin] boolValue] : false;
         _isNight = [[NSUserDefaults standardUserDefaults ] objectForKey:kIsNight] ? [[[NSUserDefaults standardUserDefaults ] objectForKey:kIsNight] boolValue] : false;
+        
+        _isNight = [[NSUserDefaults standardUserDefaults ] objectForKey:kAutoDownImage] ? [[[NSUserDefaults standardUserDefaults ] objectForKey:kAutoDownImage] boolValue] : false;
+
 
         NSString *userInfoStr = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserInfoStr"];
         if (userInfoStr.length > 0) {
@@ -54,6 +57,11 @@
     [[NSUserDefaults standardUserDefaults] setBool:isNight forKey:kIsNight];
     [[NSUserDefaults standardUserDefaults] synchronize];
 
+}
+- (void)setAutoDownImage:(BOOL)autoDownImage{
+    _autoDownImage = autoDownImage;
+    [[NSUserDefaults standardUserDefaults] setBool:autoDownImage forKey:kAutoDownImage];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)setUserInfo:(M_User *)userInfo

@@ -74,12 +74,20 @@
 
 - (void)addChildViewController:(UIViewController *)controller withImageName:(NSString *)imageName selectedImageName:(NSString *)selectImageName withTittle:(NSString *)tittle{
     BaseNavgationController *nav = [[BaseNavgationController alloc] initWithRootViewController:controller];
-    
-    UIImage * image = [[[UIImage imageNamed:imageName] qmui_imageWithTintColor:[UIColor lq_colorWithHexString:@"d2d2d2"]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    UIImage * selectImage = [[[UIImage imageNamed:selectImageName] qmui_imageWithTintColor:[UIColor blackColor]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    if (RI.isNight) {
+        UIImage * image = [[[UIImage imageNamed:imageName] qmui_imageWithTintColor:[UIColor lq_colorWithHexString:@"d2d2d2"]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        UIImage * selectImage = [[[UIImage imageNamed:selectImageName] qmui_imageWithTintColor:[UIColor whiteColor]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 
-    [nav.tabBarItem setImage:image];
-    [nav.tabBarItem setSelectedImage:selectImage];
+        [nav.tabBarItem setImage:image];
+        [nav.tabBarItem setSelectedImage:selectImage];
+    }else{
+       UIImage * image = [[[UIImage imageNamed:imageName] qmui_imageWithTintColor:[UIColor lq_colorWithHexString:@"d2d2d2"]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+       UIImage * selectImage = [[[UIImage imageNamed:selectImageName] qmui_imageWithTintColor:[UIColor blackColor]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+
+       [nav.tabBarItem setImage:image];
+       [nav.tabBarItem setSelectedImage:selectImage];
+    }
+
     
     nav.tabBarItem.title = tittle;
  
@@ -99,8 +107,27 @@
 }
 
 -(void)changeNight:(NSNotification *)noti{
-//    self.tabBar.barTintColor = TabbarGrayColor;
-//    self.tabBar.tintColor = TitleBlackColor;
+    self.tabBar.barTintColor = TabbarGrayColor;
+    self.tabBar.tintColor = RI.isNight ? [UIColor whiteColor] : TitleBlackColor;
+    NSArray<UITabBarItem *> *items = self.tabBar.items;
+    NSArray *arr = @[@"add",@"history",@"setting"];
+    for (int i = 0 ; i < 3; i++) {
+        if (RI.isNight) {
+            UITabBarItem *item = [items safeObjectAtIndex:i];
+            UIImage * image = [[[UIImage imageNamed:[arr safeObjectAtIndex:i]] qmui_imageWithTintColor:[UIColor lq_colorWithHexString:@"d2d2d2"]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+            UIImage * selectImage = [[[UIImage imageNamed:[arr safeObjectAtIndex:i]] qmui_imageWithTintColor:[UIColor whiteColor]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 
+            [item setImage:image];
+            [item setSelectedImage:selectImage];
+        }else{
+            UITabBarItem *item = [items safeObjectAtIndex:i];
+            UIImage * image = [[[UIImage imageNamed:[arr safeObjectAtIndex:i]] qmui_imageWithTintColor:[UIColor lq_colorWithHexString:@"d2d2d2"]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+            UIImage * selectImage = [[[UIImage imageNamed:[arr safeObjectAtIndex:i]] qmui_imageWithTintColor:[UIColor blackColor]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+
+            [item setImage:image];
+            [item setSelectedImage:selectImage];
+        }
+
+    }
 }
 @end

@@ -18,7 +18,7 @@ extern NSString* const kUserIsLogin;
 
 
 extern NSString* const kIsNight;//夜间模式
-
+extern NSString* const kAutoDownImage;//自动下载放大的图片
 
 extern NSString *const  kEnlargeConfigarationFinishNoti;//配置好放大配置通知
 extern NSString* const kUserName;//默认填充

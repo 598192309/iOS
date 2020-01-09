@@ -19,6 +19,8 @@
 + (RunInfo *)sharedInstance;
 @property(nonatomic,assign)BOOL is_logined;//是否登录 以这个为标准判断 不以上面判断
 @property (nonatomic, assign)BOOL isNight;//夜间模式
+@property (nonatomic, assign)BOOL autoDownImage;//自动下载放大的图片
+
 @property (nonatomic, strong)M_User *userInfo;
 
 

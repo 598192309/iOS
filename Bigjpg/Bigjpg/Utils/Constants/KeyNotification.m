@@ -16,6 +16,8 @@ NSString* const kUserSignOut = @"kUserSignOut";
 NSString* const kUserIsLogin = @"kUserIsLogin";
 
 NSString* const kIsNight = @"kIsNight";
+NSString* const kAutoDownImage = @"kAutoDownImage";
+
 
 NSString *const  kEnlargeConfigarationFinishNoti = @"kEnlargeConfigarationFinishNoti";
 

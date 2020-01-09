@@ -18,7 +18,6 @@
 @property (nonatomic,strong)UIButton *languageBtn;
 
 @property (nonatomic,strong)CustomTableAlertView *customTableAlertView;
-@property (nonatomic,strong)NSMutableArray  *seletedArr;
 @end
 
 @implementation SetConfigViewController
@@ -44,9 +43,7 @@
         // Fallback on earlier versions
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
-
     [self setUpNav];
-    _seletedArr = [NSMutableArray array];
 }
 
 - (void)dealloc{
@@ -153,19 +150,15 @@
 {
     SetConfigChooseCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([SetConfigChooseCell class]) forIndexPath:indexPath];
     if (indexPath.row ==0) {
-        [cell configUIWithTitle:LanguageStrings(@"save_dir") selected:[self.seletedArr containsObject:@(indexPath.row)]];
+        [cell configUIWithTitle:LanguageStrings(@"save_dir") selected:RI.autoDownImage];
     }else{
-        [cell configUIWithTitle:LanguageStrings(@"night_mode") selected:[self.seletedArr containsObject:@(indexPath.row)]];
+        [cell configUIWithTitle:LanguageStrings(@"night_mode") selected:RI.isNight];
     }
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if ([self.seletedArr containsObject:@(indexPath.row)]) {
-        [self.seletedArr removeObject:@(indexPath.row)];
-    }else{
-        [self.seletedArr addObject:@(indexPath.row)];
-    }
+   
     if (indexPath.row == 1) {//开启关闭 night模式
         RI.isNight = !RI.isNight;
         [[NSNotificationCenter defaultCenter] postNotificationName:kChangeNightNotification object:nil];
@@ -175,7 +168,10 @@
         self.footer.backgroundColor = BackGroundColor;
         [self.languageBtn setTitleColor:TitleBlackColor forState:UIControlStateNormal];
         [self setNeedsStatusBarAppearanceUpdate];
+    }else{
+        RI.autoDownImage = !RI.autoDownImage;
     }
+    
     //改变数据源
     [self.customTableView reloadData];
 }
