@@ -175,7 +175,8 @@
 
 -(UIStatusBarStyle)preferredStatusBarStyle
 {
-    return UIStatusBarStyleDefault;
+    
+    return RI.isNight ? UIStatusBarStyleLightContent : UIStatusBarStyleDefault ;
 }
 
 @end

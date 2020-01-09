@@ -118,7 +118,9 @@
     self.imageTipLable.hidden = [item.status isEqualToString:@"success"];
     self.iconImageVCoverView.hidden = [item.status isEqualToString:@"success"];
     
-    
+    _iconImageV.backgroundColor = RI.isNight ? RGB(38,38,38) : LineGrayColor;
+    _cellBackgroundView.backgroundColor = BackGroundColor;
+
 }
 
 #pragma mark - act
@@ -139,7 +141,7 @@
 - (UIView *)cellBackgroundView{
     if (!_cellBackgroundView) {
         _cellBackgroundView = [UIView new];
-        _cellBackgroundView.backgroundColor = [UIColor clearColor];
+        _cellBackgroundView.backgroundColor = BackGroundColor;
         UIView *contentV = [UIView new];
         __weak __typeof(self) weakSelf = self;
         [_cellBackgroundView addSubview:contentV];
@@ -147,7 +149,7 @@
             make.edges.mas_equalTo(weakSelf.cellBackgroundView);
             make.height.mas_equalTo(110);
         }];
-        contentV.backgroundColor = BackGroundColor;
+        contentV.backgroundColor = [UIColor clearColor];
         
         _iconImageV = [[UIImageView alloc] init];
         [contentV addSubview:_iconImageV];
@@ -157,7 +159,7 @@
             make.centerY.mas_equalTo(contentV);
         }];
         ViewRadius(_iconImageV,4);
-        _iconImageV.backgroundColor = LineGrayColor;
+        _iconImageV.backgroundColor = RI.isNight ? RGB(38,38,38) : LineGrayColor;
         
         _iconImageVCoverView = [UIView new];
         _iconImageVCoverView.backgroundColor = [UIColor colorWithWhite:0.5 alpha:0.5];

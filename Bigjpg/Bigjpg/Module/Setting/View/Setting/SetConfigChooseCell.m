@@ -41,6 +41,9 @@
 -(void)configUIWithTitle:(NSString *)title selected:(BOOL)selected{
     self.titleLabel.text = title;
     self.chooseBtn.selected = selected;
+    _cellBackgroundView.backgroundColor = BackGroundColor;
+    _titleLabel.textColor = TitleBlackColor;
+
 }
 
 
@@ -52,7 +55,7 @@
 - (UIView *)cellBackgroundView{
     if (!_cellBackgroundView) {
         _cellBackgroundView = [UIView new];
-        _cellBackgroundView.backgroundColor = [UIColor clearColor];
+        _cellBackgroundView.backgroundColor = BackGroundColor;
         UIView *contentV = [UIView new];
         __weak __typeof(self) weakSelf = self;
         [_cellBackgroundView addSubview:contentV];
@@ -61,7 +64,7 @@
             make.height.mas_equalTo(Adaptor_Value(60));
             
         }];
-        contentV.backgroundColor = BackGroundColor;
+        contentV.backgroundColor = [UIColor clearColor];
         
         _chooseBtn = [[UIButton alloc] init];
 
@@ -75,7 +78,7 @@
         }];
         _chooseBtn.userInteractionEnabled = NO;
         
-        _titleLabel = [UILabel lableWithText:lqLocalized(@"",nil) textColor:TitleGrayColor fontSize:AdaptedFontSize(15) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
+        _titleLabel = [UILabel lableWithText:lqLocalized(@"",nil) textColor:TitleBlackColor fontSize:AdaptedFontSize(15) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
         [contentV addSubview:_titleLabel];
         [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(weakSelf.chooseBtn.mas_right);

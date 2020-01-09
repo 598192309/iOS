@@ -23,7 +23,9 @@
 
 @implementation SetConfigViewController
 #pragma mark - 重写
-
+-(UIStatusBarStyle)preferredStatusBarStyle {
+    return RI.isNight ? UIStatusBarStyleLightContent : UIStatusBarStyleDefault ;
+}
 #pragma mark - 生命周期
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -164,6 +166,16 @@
     }else{
         [self.seletedArr addObject:@(indexPath.row)];
     }
+    if (indexPath.row == 1) {//开启关闭 night模式
+        RI.isNight = !RI.isNight;
+        [[NSNotificationCenter defaultCenter] postNotificationName:kChangeNightNotification object:nil];
+        
+        [self.customTableView reloadData];
+        self.customTableView.backgroundColor = BackGroundColor;
+        self.footer.backgroundColor = BackGroundColor;
+        [self.languageBtn setTitleColor:TitleBlackColor forState:UIControlStateNormal];
+        [self setNeedsStatusBarAppearanceUpdate];
+    }
     //改变数据源
     [self.customTableView reloadData];
 }
@@ -221,9 +233,10 @@
 - (UIView *)footer{
     if (!_footer) {
         _footer = [UIView new];
-        
+        _footer.backgroundColor = BackGroundColor;
+
         UIView *contentV = [UIView new];
-        contentV.backgroundColor = BackGroundColor;
+        contentV.backgroundColor = [UIColor clearColor];
         [_footer addSubview:contentV];
         __weak __typeof(self) weakSelf = self;
         

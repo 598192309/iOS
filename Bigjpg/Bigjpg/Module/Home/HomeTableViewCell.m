@@ -186,6 +186,9 @@
         default:
             break;
     }
+    
+    self.backgroundColor = BackGroundColor;
+    self.imageDetailLabel.textColor = TitleBlackColor;
 }
 
 @end

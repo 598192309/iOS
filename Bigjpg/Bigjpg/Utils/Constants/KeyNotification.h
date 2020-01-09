@@ -24,3 +24,5 @@ extern NSString *const  kEnlargeConfigarationFinishNoti;//配置好放大配置�
 extern NSString* const kUserName;//默认填充
 
 extern NSString *const kRetrySuccessNoti;//重试放大c任务成功t通知
+
+extern NSString *const kChangeNightNotification;//切换夜间模式

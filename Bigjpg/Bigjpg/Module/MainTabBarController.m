@@ -35,7 +35,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tabBar.tintColor = [UIColor blackColor];
+    self.tabBar.tintColor = TitleBlackColor;
     HomeViewController *vc1 = [HomeViewController controller];
     [self addChildViewController:vc1 withImageName:@"add" selectedImageName:@"add" withTittle:LanguageStrings(@"begin")];
     
@@ -50,7 +50,7 @@
     self.delegate = self;
     
     //监听
-
+    [[NSNotificationCenter defaultCenter]addObserver:self  selector:@selector(changeNight:) name:kChangeNightNotification object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -80,19 +80,13 @@
 
     [nav.tabBarItem setImage:image];
     [nav.tabBarItem setSelectedImage:selectImage];
-
-
-
     
     nav.tabBarItem.title = tittle;
-    //        controller.navigationItem.title = tittle;
-    //    controller.title = tittle;//这句代码相当于上面两句代码
-    //    [nav.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor redColor]} forState:UIControlStateSelected];
+ 
     nav.tabBarItem.titlePositionAdjustment = UIOffsetMake(0, 0);
     
     [self addChildViewController:nav];
-//    [nav.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor redColor]} forState:UIControlStateNormal];
-//    [nav.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blueColor]} forState:UIControlStateSelected];
+
 }
 
 
@@ -104,5 +98,9 @@
     return YES;
 }
 
+-(void)changeNight:(NSNotification *)noti{
+//    self.tabBar.barTintColor = TabbarGrayColor;
+//    self.tabBar.tintColor = TitleBlackColor;
 
+}
 @end

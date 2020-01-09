@@ -38,6 +38,10 @@
     [[NSNotificationCenter defaultCenter]addObserver:self  selector:@selector(netStatusChange:) name:kReachabilityChangedNotification object:nil];
     //实现监听
     [reach startNotifier];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self  selector:@selector(changeNight:) name:kChangeNightNotification object:nil];
+
+    
 }
 
 
@@ -64,7 +68,7 @@
 
 
 -(NSString *)backItemImageName{
-    return @"back";
+    return  @"back";
 }
 
 
@@ -217,14 +221,14 @@
 -(UIView *)navigationView{
     if (!_navigationView) {
         _navigationView = [UIView new];
-        _navigationView.backgroundColor = BackGroundColor;
+        _navigationView.backgroundColor = TabbarGrayColor;
     }
     return _navigationView;
 }
 -(UIButton *)navigationBackButton{
     if (!_navigationBackButton) {
         _navigationBackButton = [UIButton new];
-        [_navigationBackButton setImage:[UIImage imageNamed:self.backItemImageName] forState:UIControlStateNormal];
+        [_navigationBackButton setImage:RI.isNight ? [[UIImage imageNamed:self.backItemImageName] qmui_imageWithTintColor:TitleGrayColor] : [UIImage imageNamed:self.backItemImageName] forState:UIControlStateNormal];
         [_navigationBackButton addTarget:self action:@selector(backClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _navigationBackButton;
@@ -357,6 +361,12 @@
 //        default:
 //            break;
 //    }
+}
+-(void)changeNight:(NSNotification *)noti{
+    [self.navigationBackButton setImage:RI.isNight ? [[UIImage imageNamed:self.backItemImageName] qmui_imageWithTintColor:TitleGrayColor] : [UIImage imageNamed:self.backItemImageName] forState:UIControlStateNormal];
+    self.navigationView.backgroundColor = TabbarGrayColor;
+    self.navigationTextLabel.textColor = TitleBlackColor;
+
 }
 
 @end

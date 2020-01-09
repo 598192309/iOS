@@ -54,7 +54,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUI) name:kUserSignOut object:nil];
     //监听用户切换语言
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changLanguage) name:kChangeLanguageNotification object:nil];
-    
+    //切换夜间模式
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changLanguage) name:kChangeNightNotification object:nil];
     [self refreshUI];
   
 
@@ -131,11 +132,14 @@
    }];
 }
 - (void)changLanguage{
+    self.view.backgroundColor = BackGroundColor;
+    self.customTableView.backgroundColor = BackGroundColor;
     [self.customTableView reloadData];
     [self.settingCustomView removeFromSuperview];
     self.settingCustomView = nil;
     [self setUpHeader];
     [self refreshUI];
+    
 }
 
 

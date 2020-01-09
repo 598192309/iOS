@@ -407,7 +407,7 @@
         _confirmBtn = [[UIButton alloc] init];
         [_confirmBtn addTarget:self action:@selector(confirmBtnClick:) forControlEvents:UIControlEventTouchDown];
         [_confirmBtn setTitle:lqStrings(@"登录") forState:UIControlStateNormal];
-        [_confirmBtn setTitleColor:BackGroundColor forState:UIControlStateNormal];
+        [_confirmBtn setTitleColor:[UIColor lq_colorWithHexString:@"ffffff"] forState:UIControlStateNormal];
         _confirmBtn.titleLabel.font = [UIFont systemFontOfSize:16 weight:UIFontWeightMedium];
 
         _confirmBtn.backgroundColor = LihgtGreenColor;

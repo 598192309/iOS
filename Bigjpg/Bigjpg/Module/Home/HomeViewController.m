@@ -37,6 +37,9 @@
     _pollingFids = [NSMutableArray array];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(enlargeConfSuccess:) name:kEnlargeConfigarationFinishNoti object:nil];
     _dataSource = [NSMutableArray<M_EnlargeUpload *> array];
+    //切换夜间模式
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeNight) name:kChangeNightNotification object:nil];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -67,6 +70,11 @@
     [_choiceImageBtn setTitle:LanguageStrings(@"fileupload") forState:UIControlStateNormal];
     _describerLabel.text = LanguageStrings(@"limit");
     _describerLabel.adjustsFontSizeToFitWidth = YES;
+    
+    self.view.backgroundColor = BackGroundColor;
+    self.tableView.backgroundColor = BackGroundColor;
+    self.headerBackView.backgroundColor = RI.isNight ? RGB(31, 31, 31) : RGB(238, 238, 238);
+    self.describerLabel.textColor = RI.isNight ? TitleGrayColor : [UIColor lq_colorWithHexString:@"9A9A9A"];
 }
 
 - (void)polling
@@ -246,7 +254,12 @@
     }
     
 }
-
+- (void)changeNight{
+    [self.tableView reloadData];
+    self.tableView.backgroundColor = BackGroundColor;
+    self.headerBackView.backgroundColor = RI.isNight ? RGB(31, 31, 31) : RGB(238, 238, 238);
+    self.describerLabel.textColor = RI.isNight ? TitleGrayColor : [UIColor lq_colorWithHexString:@"9A9A9A"];
+}
 
 #pragma mark UITableViewDelegate/UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

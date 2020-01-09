@@ -22,3 +22,4 @@ NSString *const  kEnlargeConfigarationFinishNoti = @"kEnlargeConfigarationFinish
 NSString* const kUserName = @"kUserName";
 
 NSString *const kRetrySuccessNoti = @"kRetrySuccessNoti";
+NSString *const kChangeNightNotification = @"kChangeNightNotification";

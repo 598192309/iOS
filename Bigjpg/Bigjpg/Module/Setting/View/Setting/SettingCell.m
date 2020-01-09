@@ -11,6 +11,7 @@
 @interface SettingCell()
 @property (nonatomic,strong) UIView * cellBackgroundView;
 @property (strong, nonatomic)  UILabel *titleLabel;
+@property (nonatomic,strong) UIView * cellBackgroundViewContentV;
 
 @end
 @implementation SettingCell
@@ -38,6 +39,9 @@
 #pragma mark - ui
 - (void)refreshUIWithTitle:(NSString *)title{
     self.titleLabel.text = title;
+    self.titleLabel.textColor = TitleBlackColor;
+    _cellBackgroundView.backgroundColor = BackGroundColor;
+    _cellBackgroundViewContentV.backgroundColor = RI.isNight ? RGB(20, 20, 20) : BackGrayColor;
 }
 
 #pragma mark - act
@@ -57,7 +61,8 @@
             make.top.mas_equalTo(Adaptor_Value(5));
             make.bottom.mas_equalTo(weakSelf.cellBackgroundView).offset(-Adaptor_Value(5));
         }];
-        contentV.backgroundColor = BackGrayColor;
+        contentV.backgroundColor = RI.isNight ? RGB(20, 20, 20) : BackGrayColor;
+        _cellBackgroundViewContentV = contentV;
         ViewBorderRadius(contentV, Adaptor_Value(5), kOnePX, TitleGrayColor);
         
         _titleLabel = [UILabel lableWithText:lqLocalized(@"",nil) textColor:TitleBlackColor fontSize:AdaptedFontSize(17) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];

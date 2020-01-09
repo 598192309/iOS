@@ -124,7 +124,7 @@
         }];
         
         ViewBorderRadius(_cancleBtn, Adaptor_Value(4), kOnePX, LineGrayColor);
-        _cancleBtn.backgroundColor = TabbarGrayColor;
+        _cancleBtn.backgroundColor = RI.isNight ? RGB(20,20,20) :RGB(247,247,247);
         _cancleBtn.hidden = YES;
         
         _confrimBtn = [[UIButton alloc] init];
