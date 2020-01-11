@@ -791,7 +791,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = RBSX9MVBF6;
+				DEVELOPMENT_TEAM = 9R3769TB7U;
+				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(TARGET_NAME)/PrefixHeader.pch";
 				INFOPLIST_FILE = Bigjpg/Info.plist;
@@ -847,7 +848,7 @@
 					"\"ZLPhotoBrowser\"",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = lqqvslq;
+				PRODUCT_BUNDLE_IDENTIFIER = ios.bigjpg.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -859,7 +860,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = RBSX9MVBF6;
+				DEVELOPMENT_TEAM = 9R3769TB7U;
+				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(TARGET_NAME)/PrefixHeader.pch";
 				INFOPLIST_FILE = Bigjpg/Info.plist;
@@ -915,7 +917,7 @@
 					"\"ZLPhotoBrowser\"",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = lqqvslq;
+				PRODUCT_BUNDLE_IDENTIFIER = ios.bigjpg.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
