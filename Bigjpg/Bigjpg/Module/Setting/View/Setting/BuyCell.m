@@ -50,7 +50,7 @@
 }
 #pragma mark - ui
 - (void)configUIWithArr:(NSArray *)arr color:(UIColor *)color{
-    self.titleLabel.text = [arr safeObjectAtIndex:0];
+    self.titleLabel.text = [NSString stringWithFormat:@"  %@",[arr safeObjectAtIndex:0]];
     self.timeLabel.text = [arr safeObjectAtIndex:1];
     self.countLabel.text = [arr safeObjectAtIndex:2];
     self.speedLabel.text = [arr safeObjectAtIndex:3];
@@ -195,6 +195,7 @@
             make.height.mas_equalTo(Adaptor_Value(50));
             make.bottom.mas_equalTo(contentV).offset(-Adaptor_Value(10));
         }];
+        ViewRadius(_buyBtn, 5);
 
     }
     return _cellBackgroundView;
