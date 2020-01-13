@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ForgetPwdViewController : BaseViewController
+@property (nonatomic,strong)NSString *email;
 
 @end
 

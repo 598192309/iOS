@@ -40,7 +40,7 @@
     
     UIFont *font = [UIFont systemFontOfSize:15];
     UIColor *selectColor = [UIColor whiteColor];
-    UIColor *normalColor = [UIColor blackColor];
+    UIColor *normalColor = RI.isNight ? TitleGrayColor : [UIColor blackColor];
     [_typeSegment setTitleTextAttributes:@{NSForegroundColorAttributeName:selectColor,NSFontAttributeName:font} forState:UIControlStateSelected];
     [_typeSegment setTitleTextAttributes:@{NSForegroundColorAttributeName:normalColor,NSFontAttributeName:font} forState:UIControlStateNormal];
     [_ennargeFactorSegment setTitleTextAttributes:@{NSForegroundColorAttributeName:selectColor,NSFontAttributeName:font} forState:UIControlStateSelected];
@@ -49,14 +49,18 @@
     [_denoiseSegment setTitleTextAttributes:@{NSForegroundColorAttributeName:normalColor,NSFontAttributeName:font} forState:UIControlStateNormal];
     
     _typeLabel.text = LanguageStrings(@"pic_type");
+    _typeLabel.textColor = RI.isNight ? TitleGrayColor : BackGroundColor;
     [_typeSegment setTitle:LanguageStrings(@"carton") forSegmentAtIndex:0];
     [_typeSegment setTitle:LanguageStrings(@"photo") forSegmentAtIndex:1];
 
     
     
     _enlargeFactorLabel.text = LanguageStrings(@"upscaling");
-    
+    _enlargeFactorLabel.textColor = RI.isNight ? TitleGrayColor : BackGroundColor;
+
     _denoiseLabel.text = LanguageStrings(@"noise");
+    _denoiseLabel.textColor = RI.isNight ? TitleGrayColor : BackGroundColor;
+
     [_denoiseSegment setTitle:LanguageStrings(@"none") forSegmentAtIndex:0];
     [_denoiseSegment setTitle:LanguageStrings(@"low") forSegmentAtIndex:1];
     [_denoiseSegment setTitle:LanguageStrings(@"mid") forSegmentAtIndex:2];
@@ -66,10 +70,13 @@
     [_comfirBtn setTitle:LanguageStrings(@"ok") forState:UIControlStateNormal];
     [_confimAllBtn setTitle:LanguageStrings(@"batch_btn") forState:UIControlStateNormal];
     
-    _comfirBtn.layer.cornerRadius = 4;
-    _comfirBtn.layer.masksToBounds = YES;
-    _confimAllBtn.layer.cornerRadius = 4;
-    _confimAllBtn.layer.masksToBounds = YES;
+   
+    ViewBorderRadius(_confimAllBtn, 4, kOnePX, RI.isNight ? TitleGrayColor : LineGrayColor);
+    [_confimAllBtn setTitleColor:RI.isNight ? TitleGrayColor : TitleBlackColor forState:UIControlStateNormal];
+    _confimAllBtn.backgroundColor = RI.isNight ? RGB(31, 31, 31) : RGB(238, 238, 238);
+
+    self.view.backgroundColor = BackGroundColor;
+    
     
 }
 

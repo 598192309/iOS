@@ -21,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 - (void)configUIWithItem:(M_User *)item finishi:(void(^)())finishBlock;
+
+- (NSString *)getemail;
 @end
 
 NS_ASSUME_NONNULL_END

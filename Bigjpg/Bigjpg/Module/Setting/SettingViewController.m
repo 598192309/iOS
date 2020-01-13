@@ -175,6 +175,7 @@
             [weakSelf.navigationController pushViewController:vc animated:YES];
         }else{//忘记密码
             ForgetPwdViewController *vc = [[ForgetPwdViewController alloc] init];
+            vc.email = [weakSelf.settingCustomView getemail];
             [weakSelf.navigationController pushViewController:vc animated:YES];
         }
     };
@@ -398,6 +399,10 @@
     return view;
 }
 
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [self.view endEditing:YES];
+}
 
 #pragma  mark - lazy
 - (UITableView *)customTableView

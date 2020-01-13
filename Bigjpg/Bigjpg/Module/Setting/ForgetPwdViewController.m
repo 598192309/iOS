@@ -187,10 +187,11 @@
         _emailTextF.keyboardType = UIKeyboardTypeEmailAddress;
         _emailTextF.textColor = TitleBlackColor;
         _emailTextF.placeholder = [user_pass safeObjectAtIndex:0];
+        _emailTextF.text = self.email;
 
         // "通过KVC修改placeholder的颜色"
         [_emailTextF setPlaceholderColor:TitleGrayColor font:nil];
-        _emailTextF.text = [[NSUserDefaults standardUserDefaults] objectForKey:kUserName];
+//        _emailTextF.text = [[NSUserDefaults standardUserDefaults] objectForKey:kUserName];
 
         
         _greenlineview = [UIView new];

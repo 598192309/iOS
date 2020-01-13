@@ -222,7 +222,7 @@
         }];
         
         _tipView = [UIView new];
-        _tipView.backgroundColor = RI.isNight ? RGB(31, 31, 31) : RGB(238, 238, 238);;
+        _tipView.backgroundColor = RI.isNight ? RGB(31, 31, 31) : RGB(238, 238, 238);
         [contentV addSubview:_tipView];
         [_tipView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(Adaptor_Value(10));
@@ -556,5 +556,8 @@
 
     }
     return _lorginTipView;
+}
+- (NSString *)getemail{
+    return self.emailTextF.text;
 }
 @end
