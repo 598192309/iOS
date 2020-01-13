@@ -114,14 +114,14 @@
     for (int i = 0 ; i < 3; i++) {
         if (RI.isNight) {
             UITabBarItem *item = [items safeObjectAtIndex:i];
-            UIImage * image = [[[UIImage imageNamed:[arr safeObjectAtIndex:i]] qmui_imageWithTintColor:[UIColor lq_colorWithHexString:@"d2d2d2"]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+            UIImage * image = [[[UIImage imageNamed:[arr safeObjectAtIndex:i]] qmui_imageWithTintColor:[UIColor lq_colorWithHexString:@"a2a2a2"]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
             UIImage * selectImage = [[[UIImage imageNamed:[arr safeObjectAtIndex:i]] qmui_imageWithTintColor:[UIColor whiteColor]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 
             [item setImage:image];
             [item setSelectedImage:selectImage];
         }else{
             UITabBarItem *item = [items safeObjectAtIndex:i];
-            UIImage * image = [[[UIImage imageNamed:[arr safeObjectAtIndex:i]] qmui_imageWithTintColor:[UIColor lq_colorWithHexString:@"d2d2d2"]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+            UIImage * image = [[[UIImage imageNamed:[arr safeObjectAtIndex:i]] qmui_imageWithTintColor:[UIColor lq_colorWithHexString:@"a2a2a2"]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
             UIImage * selectImage = [[[UIImage imageNamed:[arr safeObjectAtIndex:i]] qmui_imageWithTintColor:[UIColor blackColor]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 
             [item setImage:image];

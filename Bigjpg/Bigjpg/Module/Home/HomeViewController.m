@@ -125,9 +125,9 @@
     actionSheet.configuration.allowSelectOriginal = NO;
     actionSheet.configuration.shouldAnialysisAsset = NO;
     actionSheet.configuration.maxSelectCount = 10;
-    actionSheet.configuration.navBarColor= [UIColor whiteColor];
-    actionSheet.configuration.navTitleColor = [UIColor blackColor];
-    actionSheet.configuration.bottomViewBgColor = [UIColor whiteColor];
+    actionSheet.configuration.navBarColor=  RI.isNight ? RGB(31, 31, 31) : [UIColor whiteColor];
+    actionSheet.configuration.navTitleColor =  RI.isNight ?[UIColor whiteColor]: RGB(31, 31, 31) ;
+    actionSheet.configuration.bottomViewBgColor = RI.isNight ? RGB(31, 31, 31) : [UIColor whiteColor];
 //    actionSheet.configuration.previewTextColor = [UIColor redColor];
     actionSheet.configuration.showSelectedMask = YES;
     actionSheet.configuration.bottomBtnsNormalTitleColor = [UIColor whiteColor];
