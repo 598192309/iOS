@@ -140,6 +140,10 @@
     self.historyCustomView = nil;
     [self setUpHeader];
     self.unloginCheckLable.text = LanguageStrings(@"no_upgrade");
+    self.unloginFooter.backgroundColor = BackGroundColor;
+    self.unloginCheckLable.textColor = RI.isNight ? TitleGrayColor : TitleBlackColor;
+    self.unloginCheckLable.backgroundColor = RI.isNight ? BackGroundColor : TabbarGrayColor;
+
 }
 
 - (void)retrySuccess
@@ -360,9 +364,10 @@
 - (UIView *)unloginFooter{
     if (!_unloginFooter) {
         _unloginFooter = [UIView new];
-        
+        _unloginFooter.backgroundColor = BackGroundColor;
+
         UIView *contentV = [UIView new];
-        contentV.backgroundColor = BackGroundColor;
+        contentV.backgroundColor = [UIColor clearColor];
         [_unloginFooter addSubview:contentV];
         __weak __typeof(self) weakSelf = self;
         
@@ -386,7 +391,7 @@
             make.width.mas_lessThanOrEqualTo(LQScreemW - Adaptor_Value(50));
         }];
         ViewBorderRadius(_unloginCheckLable, Adaptor_Value(2.5), kOnePX*2, LineGrayColor);
-        _unloginCheckLable.backgroundColor = TabbarGrayColor;
+        _unloginCheckLable.backgroundColor =  RI.isNight ? BackGroundColor : TabbarGrayColor;
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(unloginTap:)];
         _unloginCheckLable.userInteractionEnabled = YES;
         [_unloginCheckLable addGestureRecognizer:tap];
