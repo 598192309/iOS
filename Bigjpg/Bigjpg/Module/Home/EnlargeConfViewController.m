@@ -73,7 +73,7 @@
    
     ViewBorderRadius(_confimAllBtn, 4, kOnePX, RI.isNight ? TitleGrayColor : LineGrayColor);
     [_confimAllBtn setTitleColor:RI.isNight ? TitleGrayColor : TitleBlackColor forState:UIControlStateNormal];
-    _confimAllBtn.backgroundColor = RI.isNight ? RGB(31, 31, 31) : RGB(238, 238, 238);
+    _confimAllBtn.backgroundColor = RI.isNight ? RGB(31, 31, 31) : TabbarGrayColor;
 
     self.view.backgroundColor = BackGroundColor;
     
