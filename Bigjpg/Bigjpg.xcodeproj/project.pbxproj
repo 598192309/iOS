@@ -43,6 +43,8 @@
 		4920AED623AD33AB00FE7A65 /* KeyNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 4920AED323AD33AB00FE7A65 /* KeyNotification.m */; };
 		4920AEDB23B0598D00FE7A65 /* I_Account.m in Sources */ = {isa = PBXBuildFile; fileRef = 4920AEDA23B0598D00FE7A65 /* I_Account.m */; };
 		4920AEDE23B085B900FE7A65 /* M_User.m in Sources */ = {isa = PBXBuildFile; fileRef = 4920AEDD23B085B900FE7A65 /* M_User.m */; };
+		49337E5D23CCCC8C00CDA2EA /* BuyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49337E5C23CCCC8C00CDA2EA /* BuyViewController.m */; };
+		49337E6023CCCCAB00CDA2EA /* BuyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49337E5F23CCCCAB00CDA2EA /* BuyCell.m */; };
 		494CBA0623BA443B00931405 /* EnlargeConfViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 494CBA0523BA443B00931405 /* EnlargeConfViewController.m */; };
 		494F1F3F23C3439200AFA639 /* Conf.plist in Resources */ = {isa = PBXBuildFile; fileRef = 494F1F3E23C3439100AFA639 /* Conf.plist */; };
 		494F1F4223C346FF00AFA639 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 494F1F4423C346FF00AFA639 /* InfoPlist.strings */; };
@@ -135,6 +137,10 @@
 		4920AEDA23B0598D00FE7A65 /* I_Account.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = I_Account.m; sourceTree = "<group>"; };
 		4920AEDC23B085B900FE7A65 /* M_User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = M_User.h; sourceTree = "<group>"; };
 		4920AEDD23B085B900FE7A65 /* M_User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = M_User.m; sourceTree = "<group>"; };
+		49337E5B23CCCC8C00CDA2EA /* BuyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BuyViewController.h; sourceTree = "<group>"; };
+		49337E5C23CCCC8C00CDA2EA /* BuyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BuyViewController.m; sourceTree = "<group>"; };
+		49337E5E23CCCCAB00CDA2EA /* BuyCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BuyCell.h; sourceTree = "<group>"; };
+		49337E5F23CCCCAB00CDA2EA /* BuyCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BuyCell.m; sourceTree = "<group>"; };
 		494CBA0423BA443B00931405 /* EnlargeConfViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnlargeConfViewController.h; sourceTree = "<group>"; };
 		494CBA0523BA443B00931405 /* EnlargeConfViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EnlargeConfViewController.m; sourceTree = "<group>"; };
 		494F1F3E23C3439100AFA639 /* Conf.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Conf.plist; sourceTree = "<group>"; };
@@ -236,6 +242,8 @@
 				094C433523C238310007B800 /* ForgetPwdViewController.m */,
 				094C433723C23FFD0007B800 /* ModifyPwdViewController.h */,
 				094C433823C23FFD0007B800 /* ModifyPwdViewController.m */,
+				49337E5B23CCCC8C00CDA2EA /* BuyViewController.h */,
+				49337E5C23CCCC8C00CDA2EA /* BuyViewController.m */,
 				118FED4023B20CBA0055E56C /* View */,
 			);
 			path = Setting;
@@ -303,6 +311,8 @@
 				1118103E23B30A4400BEE5EF /* CustomActivity.m */,
 				1118104323B30E5D00BEE5EF /* SetConfigChooseCell.h */,
 				1118104423B30E5D00BEE5EF /* SetConfigChooseCell.m */,
+				49337E5E23CCCCAB00CDA2EA /* BuyCell.h */,
+				49337E5F23CCCCAB00CDA2EA /* BuyCell.m */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -621,7 +631,9 @@
 				496DA07523AD114400DDB905 /* ViewController.m in Sources */,
 				11790BF523B1B902003E6792 /* MainTabBarController.m in Sources */,
 				1118105023B33DDD00BEE5EF /* CustomAlertView.m in Sources */,
+				49337E5D23CCCC8C00CDA2EA /* BuyViewController.m in Sources */,
 				4920AED123AD32D800FE7A65 /* RunInfo.m in Sources */,
+				49337E6023CCCCAB00CDA2EA /* BuyCell.m in Sources */,
 				496DA06F23AD114400DDB905 /* AppDelegate.m in Sources */,
 				094C433923C23FFD0007B800 /* ModifyPwdViewController.m in Sources */,
 				095CB7CD23B3B0E0003CF4C6 /* ConfManager.m in Sources */,

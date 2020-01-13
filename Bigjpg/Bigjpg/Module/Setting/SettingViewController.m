@@ -14,6 +14,7 @@
 #import "I_Account.h"
 #import "ForgetPwdViewController.h"
 #import "ModifyPwdViewController.h"
+#import "BuyViewController.h"
 
 @interface SettingViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) UITableView  *customTableView;
@@ -165,7 +166,8 @@
     };
     //升级
     self.settingCustomView.settingCustomViewUpdateBtnClickBlock = ^(NSDictionary * _Nonnull dict) {
-        
+        BuyViewController *vc = [[BuyViewController alloc] init];
+        [weakSelf.navigationController pushViewController:vc animated:YES];
     };
     //忘记密码 修改密码
     self.settingCustomView.settingCustomViewForgetBtnClickBlock = ^(NSDictionary * _Nonnull dict, UIButton * _Nonnull sender) {
