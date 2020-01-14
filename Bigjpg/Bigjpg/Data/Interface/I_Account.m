@@ -121,4 +121,22 @@
     successBlock();
 
 }
+
+
+/// 内购
+/// @param userName 用户名
+/// @param successBlock 成功回调
+/// @param failureBlock 失败回调
++ (NetworkTask *)buyWithUserName:(NSString *)userName product_id:(NSString *)product_id transaction_id:(NSString *)transaction_id receipt_data:(NSString *)receipt_data success:(void(^)(void))successBlock failure:(ErrorBlock)failureBlock{
+    return [NET POST:@"bigjpg.com/apple_verify" parameters:@{@"username":SAFE_NIL_STRING(userName),@"product_id":SAFE_NIL_STRING(product_id),@"transaction_id":SAFE_NIL_STRING(transaction_id),@"receipt_data":SAFE_NIL_STRING(receipt_data)} criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
+        NSString *status = SAFE_VALUE_FOR_KEY(resultObject, @"status");//ok代表成功
+        if([status isEqualToString:@"ok"]){
+            successBlock();
+        }else{
+            failureBlock([NSError lq_errorWithMsg:status domain:@"Response Error" code:10000]);
+        }
+    } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+}
 @end

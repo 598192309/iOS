@@ -8,6 +8,7 @@
 
 #import "BuyViewController.h"
 #import "BuyCell.h"
+#import "I_Account.h"
 
 @interface BuyViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) UITableView  *customTableView;
@@ -60,6 +61,20 @@
 
 #pragma mark - act
 
+#pragma mark - net
+- (void)buy:(UIButton *)sender{
+    [LSVProgressHUD show];
+    sender.userInteractionEnabled = NO;
+    [I_Account buyWithUserName:RI.userInfo.username product_id:@"" transaction_id:@"" receipt_data:@"" success:^{
+        [LSVProgressHUD dismiss];
+        sender.userInteractionEnabled = YES;
+
+     } failure:^(NSError *error) {
+         [LSVProgressHUD showError:error];
+         sender.userInteractionEnabled = YES;
+
+    }];
+}
 
 #pragma mark -  UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -89,6 +104,10 @@
         color = RGB(241, 56, 56);
     }
     [cell configUIWithArr:dataArr color:color];
+    __weak __typeof(self) weakSelf = self;
+    cell.buyCellConfirmBtnClickBlock = ^(NSDictionary * _Nonnull dict, UIButton * _Nonnull sender) {
+        [weakSelf buy:sender];
+    };
     return cell;
 }
 

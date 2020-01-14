@@ -12,6 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BuyCell : UITableViewCell
 - (void)configUIWithArr:(NSArray *)arr color:(UIColor *)color;
+
+/**点击购买*/
+@property(nonatomic,copy)void(^buyCellConfirmBtnClickBlock)(NSDictionary *dict,UIButton *sender);
 @end
 
 NS_ASSUME_NONNULL_END

@@ -102,7 +102,9 @@
 
 #pragma mark - act
 - (void)buyBtnClick:(UIButton *)sender{
-    
+    if (self.buyCellConfirmBtnClickBlock) {
+        self.buyCellConfirmBtnClickBlock(@{},sender);
+    }
 }
 #pragma mark - lazy
 - (UIView *)cellBackgroundView{
