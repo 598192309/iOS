@@ -51,8 +51,22 @@
 #pragma mark - ui
 - (void)configUIWithArr:(NSArray *)arr color:(UIColor *)color{
     self.titleLabel.text = [NSString stringWithFormat:@"  %@",[arr safeObjectAtIndex:0]];
-    self.timeLabel.text = [arr safeObjectAtIndex:1];
-    self.countLabel.text = [arr safeObjectAtIndex:2];
+    NSString *time = [arr safeObjectAtIndex:1];
+    NSRange start = [time rangeOfString:@"\">"];
+    NSRange end = [time rangeOfString:@"</"];
+    if (start.length > 0 && end.length > 0) {
+        time = [time substringWithRange:NSMakeRange(start.location + start.length,end.location - (start.location + start.length))];
+    }
+    self.timeLabel.text = time;
+    
+    NSString *count = [arr safeObjectAtIndex:2];
+    NSRange start2 = [count rangeOfString:@"\">"];
+    NSRange end2 = [count rangeOfString:@"</"];
+    if (start2.length > 0 && end2.length > 0) {
+        count = [count substringWithRange:NSMakeRange(start2.location + start2.length,end2.location - (start2.location + start2.length))];
+    }
+    __weak __typeof(self) weakSelf = self;
+    self.countLabel.text = count;
     self.speedLabel.text = [arr safeObjectAtIndex:3];
     self.serviceLabel.text = [arr safeObjectAtIndex:4];
     self.sizeLabel.text = [arr safeObjectAtIndex:5];
@@ -61,12 +75,14 @@
     self.sameTimeLabel.text = [arr safeObjectAtIndex:8];
     self.enlargeLabel.text = [arr safeObjectAtIndex:9];
     if ([color isEqual:TitleGrayColor]) {
-        self.titleLabel.textColor =TitleBlackColor;
+        self.titleLabel.textColor = RGB(50,50,50);
         self.titleLabel.backgroundColor = TitleGrayColor;
         self.timeLabel.textColor =TitleBlackColor ;
         self.countLabel.textColor =TitleBlackColor ;
         [self.buyBtn mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(0);
+            make.top.mas_equalTo(weakSelf.enlargeLabel.mas_bottom).offset(-Adaptor_Value(10));
+
         }];
     }else{
         self.titleLabel.textColor =[UIColor whiteColor];
@@ -76,6 +92,8 @@
         self.countLabel.textColor =color ;
         [self.buyBtn mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(Adaptor_Value(50));
+            make.top.mas_equalTo(weakSelf.enlargeLabel.mas_bottom).offset(Adaptor_Value(10));
+
         }];
     }
     [self.buyBtn setTitle:LanguageStrings(@"upgrade") forState:UIControlStateNormal];
