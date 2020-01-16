@@ -252,7 +252,7 @@
         [urlList safeAddObject:item.output];
     }
     
-    [I_Enlarge downloadPictureWithUrls:urlList];
+    [I_Enlarge downloadPictureWithUrls:urlList isAutoDown:NO];
 }
 
 #pragma mark -  UITableViewDataSource

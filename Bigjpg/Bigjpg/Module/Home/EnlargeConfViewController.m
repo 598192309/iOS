@@ -40,26 +40,30 @@
     
     UIFont *font = [UIFont systemFontOfSize:15];
     UIColor *selectColor = [UIColor whiteColor];
-    UIColor *normalColor = RI.isNight ? TitleGrayColor : [UIColor blackColor];
-    [_typeSegment setTitleTextAttributes:@{NSForegroundColorAttributeName:selectColor,NSFontAttributeName:font} forState:UIControlStateSelected];
-    [_typeSegment setTitleTextAttributes:@{NSForegroundColorAttributeName:normalColor,NSFontAttributeName:font} forState:UIControlStateNormal];
-    [_ennargeFactorSegment setTitleTextAttributes:@{NSForegroundColorAttributeName:selectColor,NSFontAttributeName:font} forState:UIControlStateSelected];
-    [_ennargeFactorSegment setTitleTextAttributes:@{NSForegroundColorAttributeName:normalColor,NSFontAttributeName:font} forState:UIControlStateNormal];
-    [_denoiseSegment setTitleTextAttributes:@{NSForegroundColorAttributeName:selectColor,NSFontAttributeName:font} forState:UIControlStateSelected];
-    [_denoiseSegment setTitleTextAttributes:@{NSForegroundColorAttributeName:normalColor,NSFontAttributeName:font} forState:UIControlStateNormal];
+    UIColor *normalColor = RI.isNight ? TitleGrayColor : [UIColor lq_colorWithHexString:@"4A4A4A"];
+
+    UIImage *selectImage = RI.isNight ? [UIImage qmui_imageWithColor:RGB(30,30,30) size:CGSizeMake(200, 32) cornerRadius:4] : [UIImage qmui_imageWithColor:[UIColor lq_colorWithHexString:@"EEEEEF"] size:CGSizeMake(200, 32) cornerRadius: 4];
+    NSArray<UISegmentedControl *> *arr = @[_typeSegment,_ennargeFactorSegment,_denoiseSegment];
+       for (UISegmentedControl *seg in arr) {
+           seg.tintColor = RI.isNight ? RGB(40,40,40) : RGB(220,220,220);
+            [seg setTitleTextAttributes:@{NSForegroundColorAttributeName:selectColor,NSFontAttributeName:font} forState:UIControlStateSelected];
+           [seg setTitleTextAttributes:@{NSForegroundColorAttributeName:normalColor,NSFontAttributeName:font} forState:UIControlStateNormal];
+           [seg setBackgroundImage:selectImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+           [seg setBackgroundImage:[UIImage qmui_imageWithColor:[UIColor lq_colorWithHexString:@"1AAC19"] size:CGSizeMake(200, 32) cornerRadius: 4] forState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
+       }
     
     _typeLabel.text = LanguageStrings(@"pic_type");
-    _typeLabel.textColor = RI.isNight ? TitleGrayColor : BackGroundColor;
+    _typeLabel.textColor = RI.isNight ? TitleGrayColor : [UIColor lq_colorWithHexString:@"4a4a4a"];
     [_typeSegment setTitle:LanguageStrings(@"carton") forSegmentAtIndex:0];
     [_typeSegment setTitle:LanguageStrings(@"photo") forSegmentAtIndex:1];
 
     
     
     _enlargeFactorLabel.text = LanguageStrings(@"upscaling");
-    _enlargeFactorLabel.textColor = RI.isNight ? TitleGrayColor : BackGroundColor;
+    _enlargeFactorLabel.textColor = RI.isNight ? TitleGrayColor : [UIColor lq_colorWithHexString:@"4a4a4a"];;
 
     _denoiseLabel.text = LanguageStrings(@"noise");
-    _denoiseLabel.textColor = RI.isNight ? TitleGrayColor : BackGroundColor;
+    _denoiseLabel.textColor = RI.isNight ? TitleGrayColor : [UIColor lq_colorWithHexString:@"4a4a4a"];;
 
     [_denoiseSegment setTitle:LanguageStrings(@"none") forSegmentAtIndex:0];
     [_denoiseSegment setTitle:LanguageStrings(@"low") forSegmentAtIndex:1];
@@ -70,10 +74,12 @@
     [_comfirBtn setTitle:LanguageStrings(@"ok") forState:UIControlStateNormal];
     [_confimAllBtn setTitle:LanguageStrings(@"batch_btn") forState:UIControlStateNormal];
     
-   
+    _comfirBtn.layer.cornerRadius = 4;
+    _comfirBtn.layer.masksToBounds = YES;
+    
     ViewBorderRadius(_confimAllBtn, 4, kOnePX, RI.isNight ? TitleGrayColor : LineGrayColor);
-    [_confimAllBtn setTitleColor:RI.isNight ? TitleGrayColor : TitleBlackColor forState:UIControlStateNormal];
-    _confimAllBtn.backgroundColor = RI.isNight ? RGB(31, 31, 31) : TabbarGrayColor;
+    [_confimAllBtn setTitleColor:RI.isNight ? TitleGrayColor : [UIColor lq_colorWithHexString:@"4a4a4a"] forState:UIControlStateNormal];
+    _confimAllBtn.backgroundColor = RI.isNight ? RGB(31, 31, 31) : [UIColor lq_colorWithHexString:@"EEEEEF"];;
 
     self.view.backgroundColor = BackGroundColor;
     

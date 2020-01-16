@@ -102,12 +102,14 @@ failure:(ErrorBlock)failureBlock
 }
 
 /// 批量下载
-+ (void)downloadPictureWithUrls:(NSArray *)urlList
++ (void)downloadPictureWithUrls:(NSArray *)urlList isAutoDown:(BOOL)autoDownLoad
 {
     if (urlList.count == 0) {
         return;
     }
-    [LSVProgressHUD show];
+    if (!autoDownLoad) {
+        [LSVProgressHUD show];
+    }
     __block int count = 0;
     for (NSString *output in urlList) {
         [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:output] completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
@@ -123,7 +125,7 @@ failure:(ErrorBlock)failureBlock
             count ++;
             if (count == urlList.count) {
                 if (urlList.count  > 1) {
-                    [LSVProgressHUD showInfoWithStatus:@"保存相册成功"];
+                    [LSVProgressHUD showInfoWithStatus:LanguageStrings(@"save_succ")];
                 }
                 
             }
@@ -135,10 +137,10 @@ failure:(ErrorBlock)failureBlock
 + (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
 {
     if (error) {
-        [LSVProgressHUD showInfoWithStatus:@"保存相册失败"];
+        [LSVProgressHUD showInfoWithStatus:LanguageStrings(@"save_fail")];
         
     } else {
-       [LSVProgressHUD showInfoWithStatus:@"保存相册成功"];
+       [LSVProgressHUD showInfoWithStatus:LanguageStrings(@"save_succ")];
 
     }
 }

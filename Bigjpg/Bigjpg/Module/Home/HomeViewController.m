@@ -101,6 +101,9 @@
                             upload.output = task.output;
                             upload.uploadStep = EnlargeUploadStepEnlargeSuccess;
                              [weakSelf.pollingFids removeObject:task.fid];
+                            if (RI.autoDownImage) {
+                                [I_Enlarge downloadPictureWithUrls:@[upload.output] isAutoDown:YES];
+                            }
                         }
 
                     }

@@ -126,7 +126,7 @@
 #pragma mark - act
 - (void)downloadOrRetryBtnClick:(UIButton *)sender{
     if ([_item.status isEqualToString:@"success"]) {
-        [I_Enlarge downloadPictureWithUrls:@[_item.output]];
+        [I_Enlarge downloadPictureWithUrls:@[_item.output] isAutoDown:NO];
     } else if([_item.status isEqualToString:@"error"]) {
         [I_Enlarge retryEnlargeTasks:@[_item.fid] success:^{
             [LSVProgressHUD showInfoWithStatus:@"succ"];

@@ -62,7 +62,7 @@
                break;
            case EnlargeUploadStepEnlargeSuccess:
            {//下载
-               [I_Enlarge downloadPictureWithUrls:@[_upload.output]];
+               [I_Enlarge downloadPictureWithUrls:@[_upload.output] isAutoDown:NO];
            }
                break;
                

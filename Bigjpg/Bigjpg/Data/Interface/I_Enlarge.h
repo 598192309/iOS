@@ -70,7 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /// 批量下载
-+ (void)downloadPictureWithUrls:(NSArray *)urlList;
++ (void)downloadPictureWithUrls:(NSArray *)urlList isAutoDown:(BOOL)autoDownLoad;
 @end
 
 NS_ASSUME_NONNULL_END
