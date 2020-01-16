@@ -116,6 +116,7 @@
         [[ConfManager shared] changeLocalLanguage:language];
         [weakSelf.languageBtn setTitle:str forState:UIControlStateNormal];
         [weakSelf.customTableView reloadData];
+        weakSelf.tipLable.text = LanguageStrings(@"language");
         weakSelf.navigationTextLabel.text = LanguageStrings(@"conf");
         NSArray<UITabBarItem *> *items = weakSelf.tabBarController.tabBar.items;
         NSArray *titles = @[LanguageStrings(@"begin"),LanguageStrings(@"log"),LanguageStrings(@"conf")];
@@ -240,10 +241,10 @@
             make.edges.mas_equalTo(weakSelf.footer);
         }];
         
-        _tipLable = [UILabel lableWithText:LanguageStrings(@"语言") textColor:TitleGrayColor fontSize:AdaptedFontSize(17) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
+        _tipLable = [UILabel lableWithText:LanguageStrings(@"language") textColor:TitleGrayColor fontSize:AdaptedFontSize(17) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
         [contentV addSubview:_tipLable];
         [_tipLable mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(Adaptor_Value(10));
+            make.left.mas_equalTo(Adaptor_Value(25));
             make.top.mas_equalTo(Adaptor_Value(10));
         }];
         

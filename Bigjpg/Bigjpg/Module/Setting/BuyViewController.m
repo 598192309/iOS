@@ -82,14 +82,14 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSArray *arr = [ConfManager.shared contentWith:@"func"];
+    NSArray *arr = [ConfManager.shared contentWith:@"ios_func"];
     return arr.count;
 
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     BuyCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([BuyCell class])];
-    NSArray *arr = [ConfManager.shared contentWith:@"func"];
+    NSArray *arr = [ConfManager.shared contentWith:@"ios_func"];
     NSArray *dataArr = [arr safeObjectAtIndex:indexPath.row];
     UIColor *color = TitleGrayColor;
     if (indexPath.row == 0) {
