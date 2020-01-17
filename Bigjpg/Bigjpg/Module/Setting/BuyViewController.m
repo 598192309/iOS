@@ -9,7 +9,7 @@
 #import "BuyViewController.h"
 #import "BuyCell.h"
 #import "I_Account.h"
-
+#import "RMStore.h"
 @interface BuyViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) UITableView  *customTableView;
 @end
@@ -62,17 +62,18 @@
 #pragma mark - act
 
 #pragma mark - net
-- (void)buy:(UIButton *)sender{
+- (void)buyProduct:(NSString *)productId{
+    if (!RI.is_logined && RI.userInfo.username.length <= 0) {
+        [LSVProgressHUD showWithStatus:@"plz_login"];
+        return;
+    }
     [LSVProgressHUD show];
-    sender.userInteractionEnabled = NO;
-    [I_Account buyWithUserName:RI.userInfo.username product_id:@"" transaction_id:@"" receipt_data:@"" success:^{
-        [LSVProgressHUD dismiss];
-        sender.userInteractionEnabled = YES;
-
-     } failure:^(NSError *error) {
-         [LSVProgressHUD showError:error];
-         sender.userInteractionEnabled = YES;
-
+    [[RMStore defaultStore] addPayment:productId user:RI.userInfo.username success:^(SKPaymentTransaction *transaction) {
+        NSLog(@"购买商品成功%@",productId);
+        [LSVProgressHUD showSuccessWithStatus:LanguageStrings(@"pay_succ")];
+    } failure:^(SKPaymentTransaction *transaction, NSError *error) {
+        NSLog(@"购买商品失败%@",productId);
+        [LSVProgressHUD showErrorWithStatus:LanguageStrings(@"no_succ")];
     }];
 }
 
@@ -92,21 +93,26 @@
     NSArray *arr = [ConfManager.shared contentWith:@"ios_func"];
     NSArray *dataArr = [arr safeObjectAtIndex:indexPath.row];
     UIColor *color = TitleGrayColor;
+    NSString *productId = @"";
     if (indexPath.row == 0) {
         color = TitleGrayColor;
     }else  if (indexPath.row == 1) {
         color = RGB(155, 48, 175);
+        productId = @"basic";
     }else  if (indexPath.row == 2) {
         color = RGB(31, 184, 34);
+        productId = @"std";
     }else  if (indexPath.row == 3) {
         color = RGB(44, 152, 240);
+        productId = @"pro";
     }else{
         color = RGB(241, 56, 56);
     }
     [cell configUIWithArr:dataArr color:color];
+    cell.productId = productId;
     __weak __typeof(self) weakSelf = self;
-    cell.buyCellConfirmBtnClickBlock = ^(NSDictionary * _Nonnull dict, UIButton * _Nonnull sender) {
-        [weakSelf buy:sender];
+    cell.buyCellConfirmBtnClickBlock = ^(NSString * productId, UIButton * _Nonnull sender) {
+        [weakSelf buyProduct:productId];
     };
     return cell;
 }

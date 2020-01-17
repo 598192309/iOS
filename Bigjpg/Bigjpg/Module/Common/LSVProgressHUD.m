@@ -28,7 +28,7 @@
 //
 //    [self setInfoImage:nil];
 //    
-////    [self setDefaultStyle:SVProgressHUDStyleDark];
+    
 
 
 }

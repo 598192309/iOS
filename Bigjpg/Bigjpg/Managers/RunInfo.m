@@ -33,7 +33,8 @@
     if (self){
         _is_logined = [[NSUserDefaults standardUserDefaults ] objectForKey:kUserIsLogin] ? [[[NSUserDefaults standardUserDefaults ] objectForKey:kUserIsLogin] boolValue] : false;
         _isNight = [[NSUserDefaults standardUserDefaults ] objectForKey:kIsNight] ? [[[NSUserDefaults standardUserDefaults ] objectForKey:kIsNight] boolValue] : false;
-        
+        [SVProgressHUD setDefaultStyle:_isNight?SVProgressHUDStyleLight:SVProgressHUDStyleDark];
+
         _autoDownImage = [[NSUserDefaults standardUserDefaults ] objectForKey:kAutoDownImage] ? [[[NSUserDefaults standardUserDefaults ] objectForKey:kAutoDownImage] boolValue] : false;
 
 

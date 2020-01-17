@@ -103,7 +103,7 @@
 #pragma mark - act
 - (void)buyBtnClick:(UIButton *)sender{
     if (self.buyCellConfirmBtnClickBlock) {
-        self.buyCellConfirmBtnClickBlock(@{},sender);
+        self.buyCellConfirmBtnClickBlock(_productId,sender);
     }
 }
 #pragma mark - lazy

@@ -169,6 +169,7 @@
         self.footer.backgroundColor = BackGroundColor;
         [self.languageBtn setTitleColor:TitleBlackColor forState:UIControlStateNormal];
         [self setNeedsStatusBarAppearanceUpdate];
+        [SVProgressHUD setDefaultStyle:RI.isNight?SVProgressHUDStyleLight:SVProgressHUDStyleDark];
     }else{
         RI.autoDownImage = !RI.autoDownImage;
     }

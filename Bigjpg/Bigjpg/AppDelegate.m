@@ -10,13 +10,29 @@
 #import "LoginViewController.h"
 #import "LaunchingViewController.h"
 #import "I_Account.h"
-@interface AppDelegate ()
+#import "RMStore.h"
+#import "RMStoreAppReceiptVerifier.h"
+#import "RMStoreKeychainPersistence.h"
+@interface AppDelegate () <RMStoreReceiptVerifier>
 
 @end
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    NSArray *products = @[@"basic",
+                  @"std",
+                  @"pro"];
+    [[RMStore defaultStore] requestProducts:[NSSet setWithArray:products] success:^(NSArray *products, NSArray *invalidProductIdentifiers) {
+        NSLog(@"请求商品列表成功");
+    } failure:^(NSError *error) {
+        NSLog(@"请求商品列表失败");
+    }];
+    
+    
+    [RMStore defaultStore].receiptVerifier = self;
+    
+    
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.rootViewController = [MainTabBarController new];
 //    self.window.rootViewController = [LaunchingViewController new];
@@ -29,6 +45,32 @@
     NSLog(@"%@",LanguageStrings(@"donate"));
     
     return YES;
+}
+- (void)verifyTransaction:(SKPaymentTransaction*)transaction success:(void (^)(void))successBlock failure:(void (^)(NSError *error))failureBlock
+{
+ 
+    if (RI.userInfo.username.length <= 0) {
+        failureBlock(nil);
+    } else {
+        //生成购买凭证
+        NSURL *receiptUrl = [[NSBundle mainBundle] appStoreReceiptURL];
+        NSData *receipt;
+        receipt = [NSData dataWithContentsOfURL:receiptUrl];
+        NSString* receipt_data = [receipt base64EncodedStringWithOptions:0];
+        NSString *productId = transaction.payment.productIdentifier;
+        NSString *transaction_id = transaction.transactionIdentifier;
+        [I_Account authWithUserName:RI.userInfo.username product_id:productId transaction_id:transaction_id receipt_data:receipt_data success:^{
+               successBlock();
+           } failure:^(NSError *error) {
+               failureBlock([NSError errorWithDomain:@"Net Error" code:RMStoreErrorCodeUnableToCompleteVerification userInfo:nil]);
+           }];
+    }
+    
+    
+    
+
+   
+    
 }
 
 #pragma mark - 自定义
