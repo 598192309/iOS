@@ -64,8 +64,11 @@
             NSString *status = SAFE_VALUE_FOR_KEY(resultObject, @"status");//ok代表成功
             if ([status isEqualToString:@"ok"]) {
                 [LSVProgressHUD showSuccessWithStatus:LanguageStrings(@"pay_succ")];
+                NSLog(@"服务器验证成功");
                 successBlock();
             } else {
+                NSLog(@"服务器验证失败");
+                [LSVProgressHUD dismiss];
                 long info = [SAFE_VALUE_FOR_KEY(resultObject, @"info")longValue];
                 if (info == 21005 || (info>= 21100 && info <= 21199)) {
                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -74,6 +77,7 @@
                 }
             }
         } failure:^(NSError *error) {
+            NSLog(@"服务器验证请求失败");
             [LSVProgressHUD showErrorWithStatus:LanguageStrings(@"no_succ")];
             failureBlock([NSError errorWithDomain:@"Net Error" code:RMStoreErrorCodeUnableToCompleteVerification userInfo:nil]);
         }];
