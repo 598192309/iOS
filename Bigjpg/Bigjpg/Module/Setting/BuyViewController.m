@@ -64,16 +64,16 @@
 #pragma mark - net
 - (void)buyProduct:(NSString *)productId{
     if (!RI.is_logined && RI.userInfo.username.length <= 0) {
-        [LSVProgressHUD showWithStatus:@"plz_login"];
+        [LSVProgressHUD showInfoWithStatus:LanguageStrings(@"plz_login")];
         return;
     }
     [LSVProgressHUD show];
     [[RMStore defaultStore] addPayment:productId user:RI.userInfo.username success:^(SKPaymentTransaction *transaction) {
         NSLog(@"购买商品成功%@",productId);
-        [LSVProgressHUD showSuccessWithStatus:LanguageStrings(@"pay_succ")];
+        
     } failure:^(SKPaymentTransaction *transaction, NSError *error) {
         NSLog(@"购买商品失败%@",productId);
-        [LSVProgressHUD showErrorWithStatus:LanguageStrings(@"no_succ")];
+        
     }];
 }
 

@@ -59,19 +59,28 @@
         NSString* receipt_data = [receipt base64EncodedStringWithOptions:0];
         NSString *productId = transaction.payment.productIdentifier;
         NSString *transaction_id = transaction.transactionIdentifier;
-        [I_Account authWithUserName:RI.userInfo.username product_id:productId transaction_id:transaction_id receipt_data:receipt_data success:^{
-               successBlock();
-           } failure:^(NSError *error) {
-               failureBlock([NSError errorWithDomain:@"Net Error" code:RMStoreErrorCodeUnableToCompleteVerification userInfo:nil]);
-           }];
-    }
-    
-    
-    
 
-   
-    
+        [I_Account authWithUserName:RI.userInfo.username product_id:productId transaction_id:transaction_id receipt_data:receipt_data success:^(NSDictionary * _Nonnull resultObject) {
+            NSString *status = SAFE_VALUE_FOR_KEY(resultObject, @"status");//ok代表成功
+            if ([status isEqualToString:@"ok"]) {
+                [LSVProgressHUD showSuccessWithStatus:LanguageStrings(@"pay_succ")];
+                successBlock();
+            } else {
+                long info = [SAFE_VALUE_FOR_KEY(resultObject, @"info")longValue];
+                if (info == 21005 || (info>= 21100 && info <= 21199)) {
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        [self verifyTransaction:transaction success:successBlock failure:failureBlock];
+                    });
+                }
+            }
+        } failure:^(NSError *error) {
+            [LSVProgressHUD showErrorWithStatus:LanguageStrings(@"no_succ")];
+            failureBlock([NSError errorWithDomain:@"Net Error" code:RMStoreErrorCodeUnableToCompleteVerification userInfo:nil]);
+        }];
+
+    }
 }
+
 
 #pragma mark - 自定义
 

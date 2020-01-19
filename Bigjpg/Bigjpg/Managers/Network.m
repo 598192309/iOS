@@ -81,15 +81,14 @@
     // 二进制格式
     _manager.requestSerializer=[AFHTTPRequestSerializer serializer];
     // 设置接受文本类型
-    [_manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+//    [_manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     // 设置接受文本类型Content-Type
     [_manager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     
     // 二进制格式
-    _manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    _manager.responseSerializer = [AFJSONResponseSerializer serializer];
     // 设置接受文本类型
-     
-
+    _manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"application/x-www-form-urlencoded", nil];
     //超时
     _manager.requestSerializer.timeoutInterval = 15;
 

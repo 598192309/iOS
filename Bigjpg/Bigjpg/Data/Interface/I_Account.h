@@ -57,7 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param userName 用户名
 /// @param successBlock 成功回调
 /// @param failureBlock 失败回调
-+ (NetworkTask *)authWithUserName:(NSString *)userName product_id:(NSString *)product_id transaction_id:(NSString *)transaction_id receipt_data:(NSString *)receipt_data success:(void(^)(void))successBlock failure:(ErrorBlock)failureBlock;
++ (NetworkTask *)authWithUserName:(NSString *)userName product_id:(NSString *)product_id transaction_id:(NSString *)transaction_id receipt_data:(NSString *)receipt_data success:(void(^)(NSDictionary *response))successBlock failure:(ErrorBlock)failureBlock;
 @end
 
 NS_ASSUME_NONNULL_END
