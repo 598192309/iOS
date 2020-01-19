@@ -18,9 +18,9 @@
 #pragma mark - 重写
 
 #pragma mark - 生命周期
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [SVProgressHUD dismiss];
     
 }
 - (void)viewDidLoad {
