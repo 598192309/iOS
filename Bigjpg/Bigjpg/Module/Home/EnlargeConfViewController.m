@@ -38,16 +38,17 @@
     [self addNavigationView];
     self.navigationTextLabel.text = LanguageStrings(@"configure");
     
-    UIFont *font = [UIFont systemFontOfSize:15];
+    UIFont *font = [UIFont systemFontOfSize:16];
     UIColor *selectColor = [UIColor whiteColor];
     UIColor *normalColor = RI.isNight ? TitleGrayColor : [UIColor lq_colorWithHexString:@"4A4A4A"];
-
+    UIColor *disableColor = RI.isNight ? RGB(85, 85, 85) : [UIColor lq_colorWithHexString:@"ABABAB"];
     UIImage *selectImage = RI.isNight ? [UIImage qmui_imageWithColor:RGB(30,30,30) size:CGSizeMake(200, 32) cornerRadius:4] : [UIImage qmui_imageWithColor:[UIColor lq_colorWithHexString:@"EEEEEF"] size:CGSizeMake(200, 32) cornerRadius: 4];
     NSArray<UISegmentedControl *> *arr = @[_typeSegment,_ennargeFactorSegment,_denoiseSegment];
        for (UISegmentedControl *seg in arr) {
            seg.tintColor = RI.isNight ? RGB(40,40,40) : RGB(220,220,220);
             [seg setTitleTextAttributes:@{NSForegroundColorAttributeName:selectColor,NSFontAttributeName:font} forState:UIControlStateSelected];
            [seg setTitleTextAttributes:@{NSForegroundColorAttributeName:normalColor,NSFontAttributeName:font} forState:UIControlStateNormal];
+            [seg setTitleTextAttributes:@{NSForegroundColorAttributeName:disableColor,NSFontAttributeName:font} forState:UIControlStateDisabled];
            [seg setBackgroundImage:selectImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
            [seg setBackgroundImage:[UIImage qmui_imageWithColor:[UIColor lq_colorWithHexString:@"1AAC19"] size:CGSizeMake(200, 32) cornerRadius: 4] forState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
        }
@@ -84,7 +85,7 @@
     self.view.backgroundColor = BackGroundColor;
     NSArray *legelarr = [ConfManager.shared contentWith:@"version"];
     NSLog(@"RI.userInfo.version----%@",RI.userInfo.version);
-    if ([RI.userInfo.version isEqualToString:@"free"] || RI.userInfo.is_expire) {//免费 或者过期
+    if (!RI.is_logined || [RI.userInfo.version isEqualToString:@"free"] || RI.userInfo.is_expire) {//免费 或者过期
         [self.ennargeFactorSegment setEnabled:NO forSegmentAtIndex:2];
         [self.ennargeFactorSegment setEnabled:NO forSegmentAtIndex:3];
     }else{
