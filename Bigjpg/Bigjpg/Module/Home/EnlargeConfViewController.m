@@ -82,7 +82,15 @@
     _confimAllBtn.backgroundColor = RI.isNight ? RGB(31, 31, 31) : [UIColor lq_colorWithHexString:@"EEEEEF"];;
 
     self.view.backgroundColor = BackGroundColor;
-    
+    NSArray *legelarr = [ConfManager.shared contentWith:@"version"];
+    NSLog(@"RI.userInfo.version----%@",RI.userInfo.version);
+    if ([RI.userInfo.version isEqualToString:@"free"] || RI.userInfo.is_expire) {//免费 或者过期
+        [self.ennargeFactorSegment setEnabled:NO forSegmentAtIndex:2];
+        [self.ennargeFactorSegment setEnabled:NO forSegmentAtIndex:3];
+    }else{
+        [self.ennargeFactorSegment setEnabled:YES forSegmentAtIndex:2];
+        [self.ennargeFactorSegment setEnabled:YES forSegmentAtIndex:3];
+    }
     
 }
 

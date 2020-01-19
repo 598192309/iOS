@@ -154,7 +154,7 @@
         _iconImageV = [[UIImageView alloc] init];
         [contentV addSubview:_iconImageV];
         [_iconImageV mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.height.width.mas_equalTo(80);
+            make.height.width.mas_equalTo(78);
             make.left.mas_equalTo(15);
             make.centerY.mas_equalTo(contentV);
         }];
@@ -184,7 +184,7 @@
         _retryOrDownloadBtn.contentEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 10);
 //        _retryOrDownloadBtn.titleLabel.adjustsFontSizeToFitWidth = YES;
         [_retryOrDownloadBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(Adaptor_Value(40));
+            make.height.mas_equalTo(Adaptor_Value(35));
             make.right.mas_equalTo(contentV).offset(-Adaptor_Value(15));
             make.centerY.mas_equalTo(contentV.mas_centerY);
             make.width.mas_greaterThanOrEqualTo(70);
