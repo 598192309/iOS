@@ -99,14 +99,22 @@
       
         NSArray *arr = [ConfManager.shared contentWith:@"version"];
         NSString *typestr;
+
         if ([item.version isEqualToString:@"pro"]) {
             typestr = [arr safeObjectAtIndex:3];
+            self.lorginTipView.backgroundColor = RGB(44, 152, 240);
         }else if ([item.version isEqualToString:@"basic"]) {
             typestr = [arr safeObjectAtIndex:1];
+            self.lorginTipView.backgroundColor = RGB(155, 48, 175);
+
         }else if ([item.version isEqualToString:@"std"]) {
             typestr = [arr safeObjectAtIndex:2];
+            self.lorginTipView.backgroundColor = RGB(31, 184, 34);
+
         }else{
             typestr = [arr safeObjectAtIndex:0];
+            self.lorginTipView.backgroundColor = TitleGrayColor;
+
         }
         NSArray *typeArr;
         if ([typestr containsString:@":"]) {
@@ -123,6 +131,9 @@
         self.lorgintotalTipLabel.text = [NSString stringWithFormat:@"%@%lu",LanguageStrings(@"used"),(unsigned long)item.used];
         
         [_forgetBtn setTitle:LanguageStrings(@"change_password") forState:UIControlStateNormal];
+        [_forgetBtn setBackgroundColor:TabbarGrayColor];
+        ViewBorderRadius(_forgetBtn, 4, kOnePX, LineGrayColor);
+
     }else{
  
         [_textFBackView mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -144,8 +155,9 @@
              make.top.mas_equalTo(weakSelf.zhuceView.mas_bottom).offset(Adaptor_Value(25));
          }];
         [_forgetBtn setTitle:LanguageStrings(@"reset") forState:UIControlStateNormal];
+        [_forgetBtn setBackgroundColor:[UIColor clearColor]];
+        ViewBorderRadius(_forgetBtn, 4, kOnePX, [UIColor clearColor]);
 
-    
     }
 
     self.lorginTipView.hidden = !RI.is_logined;
@@ -181,7 +193,11 @@
     [self zhuceChooseBtnClick:self.zhuceChooseBtn];
 }
 
-
+- (void)savePicture:(UITapGestureRecognizer *)gest{
+    if (self.settingCustomViewSavePictureBlock) {
+        self.settingCustomViewSavePictureBlock(self.erweimaImageV.image);
+    }
+}
 #pragma  mark - UITextField delegate
 - (void)textFDidChange:(UITextField *)textf{
     
@@ -230,7 +246,7 @@
             make.height.mas_equalTo(Adaptor_Value(120));
             make.top.mas_equalTo(Adaptor_Value(45));
         }];
-        ViewRadius(_tipView, Adaptor_Value(10));
+        ViewRadius(_tipView, 4);
                 
         
         _tipBtn = [[UIButton alloc] init];
@@ -259,16 +275,18 @@
         [_updateBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _updateBtn.titleLabel.font = [UIFont systemFontOfSize:16 weight:UIFontWeightMedium];
         [_tipView addSubview:_updateBtn];
-        CGFloat w = [LanguageStrings(@"upgrade") boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:_updateBtn.titleLabel.font} context:nil].size.width + Adaptor_Value(20);
+        _updateBtn.contentEdgeInsets = UIEdgeInsetsMake(5, 10, 5, 10);
+
+//        CGFloat w = [LanguageStrings(@"upgrade") boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:_updateBtn.titleLabel.font} context:nil].size.width + Adaptor_Value(20);
 
         [_updateBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(weakSelf.tipView);
             make.left.mas_equalTo(weakSelf.tipView.mas_centerX).offset(Adaptor_Value(10));
-            make.width.mas_equalTo(w);
+//            make.width.mas_equalTo(w);
             
         }];
         _updateBtn.backgroundColor = LihgtGreenColor;
-        ViewRadius(_updateBtn, Adaptor_Value(5));
+        ViewRadius(_updateBtn, 4);
         
         [contentV addSubview:self.lorginTipView];
         [self.lorginTipView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -418,7 +436,7 @@
             make.top.mas_equalTo(zhuceView.mas_bottom).offset(Adaptor_Value(25));
             
         }];
-        ViewRadius(_confirmBtn, Adaptor_Value(5));
+        ViewRadius(_confirmBtn, 4);
         
         
 
@@ -430,11 +448,13 @@
         [contentV addSubview:_forgetBtn];
 
         [_forgetBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.mas_equalTo(contentV);
-            make.top.mas_equalTo(weakSelf.confirmBtn.mas_bottom).offset(20);
+//            make.centerX.mas_equalTo(contentV);
+            make.top.mas_equalTo(weakSelf.confirmBtn.mas_bottom).offset(10);
+            make.left.right.height.mas_equalTo(weakSelf.confirmBtn);
 
-            
         }];
+        ViewBorderRadius(_forgetBtn, 4, kOnePX, LineGrayColor);
+        
         BOOL iszh = [ConfManager.shared.localLanguage isEqualToString:@"zh"];
         
         UIView *rowLine3 =  [UIView new];
@@ -461,6 +481,8 @@
         }];
         _erweimaImageV.hidden = !iszh;
         
+
+        
         UIView *rowLine4 =  [UIView new];
         rowLine4.backgroundColor = LineGrayColor;
         [contentV addSubview:rowLine4];
@@ -484,15 +506,26 @@
         }];
         _erweimaTipLable.hidden = !iszh;
 
-        
+        UIView *tapView = [UIView new];
+        [contentV addSubview:tapView];
+        [tapView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(weakSelf.erweimaImageV);
+            make.top.right.mas_equalTo(weakSelf.erweimaTipLable);
+            make.centerY.mas_equalTo(weakSelf.erweimaTipLable);
+            make.height.mas_greaterThanOrEqualTo(weakSelf.erweimaImageV);
+        }];
+        UITapGestureRecognizer *erweimatap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(savePicture:)];
+        [tapView addGestureRecognizer:erweimatap];
+        tapView.userInteractionEnabled = YES;
     }
     return _header;
 }
 - (UIView *)lorginTipView{
     if (!_lorginTipView) {
         _lorginTipView = [UIView new];
+        _lorginTipView.backgroundColor = BlueBackColor;
+
         UIView *contentV = [UIView new];
-        contentV.backgroundColor = BlueBackColor;
         [_lorginTipView addSubview:contentV];
         __weak __typeof(self) weakSelf = self;
         
@@ -509,10 +542,11 @@
         }];
         _lorgintimeLabel = [[UILabel alloc] init];
         _lorgintimeLabel.textColor = [UIColor whiteColor];
-        _lorgintimeLabel.font = [UIFont systemFontOfSize:16];
+        _lorgintimeLabel.font = AdaptedFontSize(16);
         [topBackView addSubview:_lorgintimeLabel];
         [_lorgintimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.bottom.mas_equalTo(topBackView);
+            make.height.mas_equalTo(Adaptor_Value(20));
         }];
 
         _lorgintipBtn = [[UIButton alloc] init];
@@ -521,7 +555,7 @@
         [_lorgintipBtn setTitle:[arr safeObjectAtIndex:0] forState:UIControlStateNormal];
         [_lorgintipBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [topBackView addSubview:_lorgintipBtn];
-        _lorgintipBtn.titleLabel.font = [UIFont systemFontOfSize:16 weight:UIFontWeightMedium];
+        _lorgintipBtn.titleLabel.font = AdaptedFontSize(18);
         [_lorgintipBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(weakSelf.lorgintimeLabel);
             make.right.mas_equalTo(weakSelf.lorgintimeLabel.mas_left).offset(-Adaptor_Value(10));
@@ -534,9 +568,9 @@
         [_lorginupdateBtn setTitle:LanguageStrings(@"upgrade") forState:UIControlStateNormal];
         [_lorginupdateBtn addTarget:self action:@selector(updateBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [_lorginupdateBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        _lorginupdateBtn.titleLabel.font = _lorgintimeLabel.font;
+        _lorginupdateBtn.titleLabel.font = AdaptedFontSize(15);
         [topBackView addSubview:_lorginupdateBtn];
-        _lorginupdateBtn.contentEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5);
+        _lorginupdateBtn.contentEdgeInsets = UIEdgeInsetsMake(5, 10, 5, 10);
         
         [_lorginupdateBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(weakSelf.lorgintimeLabel);
@@ -552,7 +586,7 @@
             make.centerX.mas_equalTo(contentV);
             make.top.mas_equalTo(weakSelf.lorginupdateBtn.mas_bottom).offset(Adaptor_Value(15));
         }];
-        ViewRadius(_lorginTipView, Adaptor_Value(10));
+        ViewRadius(_lorginTipView, 4);
 
     }
     return _lorginTipView;

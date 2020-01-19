@@ -390,7 +390,7 @@
             make.center.mas_equalTo(contentV);
             make.width.mas_lessThanOrEqualTo(LQScreemW - Adaptor_Value(50));
         }];
-        ViewBorderRadius(_unloginCheckLable, Adaptor_Value(2.5), kOnePX*2, LineGrayColor);
+        ViewBorderRadius(_unloginCheckLable, 4, kOnePX*2, LineGrayColor);
         _unloginCheckLable.backgroundColor =  RI.isNight ? BackGroundColor : TabbarGrayColor;
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(unloginTap:)];
         _unloginCheckLable.userInteractionEnabled = YES;

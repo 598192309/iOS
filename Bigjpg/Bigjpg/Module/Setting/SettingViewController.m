@@ -181,6 +181,11 @@
             [weakSelf.navigationController pushViewController:vc animated:YES];
         }
     };
+    
+    //保存图片
+    self.settingCustomView.settingCustomViewSavePictureBlock = ^(UIImage * _Nonnull image) {
+        [weakSelf saveErweima:image];
+    };
 }
 //系统分享
 - (void)activityShare{
@@ -306,7 +311,19 @@
         }];
     }];
 }
-
+#pragma mark - save image
+- (void)saveErweima:(UIImage *)image{
+    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
+}
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+    if(!error){
+        [LSVProgressHUD showInfoWithStatus:NSLocalizedString(@"二维码图片已保存至相册", nil)];
+    }else{
+        [LSVProgressHUD showInfoWithStatus:NSLocalizedString(@"二维码图片保存至相册失败", nil)];
+        
+    }
+}
 #pragma mark -  UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;

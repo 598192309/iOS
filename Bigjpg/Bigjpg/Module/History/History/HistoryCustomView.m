@@ -123,7 +123,7 @@
             make.width.mas_greaterThanOrEqualTo(100);
         }];
         
-        ViewBorderRadius(_cancleBtn, Adaptor_Value(4), kOnePX, LineGrayColor);
+        ViewBorderRadius(_cancleBtn, 4, kOnePX, LineGrayColor);
         _cancleBtn.backgroundColor = RI.isNight ? RGB(20,20,20) :RGB(247,247,247);
         _cancleBtn.hidden = YES;
         
