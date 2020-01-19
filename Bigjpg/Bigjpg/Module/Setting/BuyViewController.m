@@ -73,7 +73,7 @@
         [LSVProgressHUD showSuccessWithStatus:LanguageStrings(@"pay_succ")];
     } failure:^(SKPaymentTransaction *transaction, NSError *error) {
         NSLog(@"购买商品失败%@",productId);
-         [LSVProgressHUD showErrorWithStatus:LanguageStrings(@"no_succ")];
+         [LSVProgressHUD showErrorWithStatus:LanguageStrings(@"pay_error")];
     }];
 }
 

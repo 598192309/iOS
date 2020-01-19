@@ -22,21 +22,24 @@
 @property (strong, nonatomic) IBOutlet UIButton *confimAllBtn;
 
 
-@property (nonatomic, strong) M_EnlargeUpload *enlargeUpload;
+@property (nonatomic, strong) NSArray<M_EnlargeUpload *> *enlargeUploads;
+
 @end
 
 @implementation EnlargeConfViewController
 
-+ (instancetype)controllerWithEnlargeUpload:(M_EnlargeUpload *)enlargeUpload
++ (instancetype)controllerWithEnlargeUploads:(NSArray<M_EnlargeUpload *> *)enlargeUploads
 {
     EnlargeConfViewController *vc = [UIStoryboard lq_controllerWithStoryBoardIdentify:@"EnlargeConfViewController" inStoryBoard:@"Home"];
-    vc.enlargeUpload = enlargeUpload;
+    vc.enlargeUploads = enlargeUploads;
+    
     return vc;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addNavigationView];
     self.navigationTextLabel.text = LanguageStrings(@"configure");
+    
     
     UIFont *font = [UIFont systemFontOfSize:16];
     UIColor *selectColor = [UIColor whiteColor];
@@ -73,8 +76,13 @@
     [_denoiseSegment setTitle:LanguageStrings(@"highest") forSegmentAtIndex:4];
     
     [_comfirBtn setTitle:LanguageStrings(@"ok") forState:UIControlStateNormal];
-    [_confimAllBtn setTitle:LanguageStrings(@"batch_btn") forState:UIControlStateNormal];
-    
+   
+    if (_enlargeUploads.count > 1) {
+        _confimAllBtn.hidden = NO;
+         [_confimAllBtn setTitle:LanguageStrings(@"batch_btn") forState:UIControlStateNormal];
+    } else {
+        _confimAllBtn.hidden = YES;
+    }
     _comfirBtn.layer.cornerRadius = 4;
     _comfirBtn.layer.masksToBounds = YES;
     
@@ -103,12 +111,12 @@
     } else {
         conf.style = @"photo";
     }
-    conf.x2 = _ennargeFactorSegment.selectedSegmentIndex + 1;
-    conf.noise = _denoiseSegment.selectedSegmentIndex - 1;
+    conf.x2 = (int)_ennargeFactorSegment.selectedSegmentIndex + 1;
+    conf.noise = (int)_denoiseSegment.selectedSegmentIndex - 1;
     
     NSDictionary *dic = @{@"conf":conf,
-                          @"enlargeAll":@(sender.tag),
-                          @"upload":_enlargeUpload
+                          @"enlargeBatch":@(sender.tag),
+                          @"uploads":_enlargeUploads
     };
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kEnlargeConfigarationFinishNoti object:dic];

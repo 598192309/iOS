@@ -34,8 +34,9 @@
     switch (self.upload.uploadStep) {
            case EnlargeUploadStepInitialize:
            {//开始
-               EnlargeConfViewController *confVC = [EnlargeConfViewController controllerWithEnlargeUpload:self.upload];
-               [[self lq_getCurrentViewController].navigationController pushViewController:confVC animated:YES];
+               if ([self.delegate respondsToSelector:@selector(uploadEvent:enlarge:)]) {
+                   [self.delegate uploadEvent:self enlarge:self.upload];
+               }
            }
                break;
         case EnlargeUploadStepDataUploadFail:
@@ -53,8 +54,8 @@
                    }];
                } else {//重新上传
                    NSDictionary *dic = @{@"conf":self.upload.conf,
-                                         @"enlargeAll":@(NO),
-                                         @"upload":self.upload
+                                         @"enlargeBatch":@(NO),
+                                         @"uploads":@[self.upload]
                    };
                    [[NSNotificationCenter defaultCenter] postNotificationName:kEnlargeConfigarationFinishNoti object:dic];
                }

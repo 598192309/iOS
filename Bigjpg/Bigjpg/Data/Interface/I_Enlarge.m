@@ -117,7 +117,11 @@ failure:(ErrorBlock)failureBlock
                 NSLog(@"下载失败%@",output);
             } else {
                 if (urlList.count == 1) {
-                    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), (__bridge void *)self);
+                    if (autoDownLoad) {
+                        UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), (__bridge void *)self);
+                    } else {
+                        UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:),nil);
+                    }
                 } else {
                     UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
                 }
@@ -136,6 +140,9 @@ failure:(ErrorBlock)failureBlock
 
 + (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
 {
+    if (contextInfo) {
+        return;
+    }
     if (error) {
         [LSVProgressHUD showInfoWithStatus:LanguageStrings(@"save_fail")];
         

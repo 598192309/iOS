@@ -10,7 +10,8 @@
 #import <ZLPhotoBrowser/ZLPhotoBrowser.h>
 #import "I_Enlarge.h"
 #import "HomeTableViewCell.h"
-@interface HomeViewController () <UITableViewDelegate,UITableViewDataSource>
+#import "EnlargeConfViewController.h"
+@interface HomeViewController () <UITableViewDelegate,UITableViewDataSource,HomeTableViewCellDelegate>
 @property (weak, nonatomic) IBOutlet UIView *headerBackView;
 @property (weak, nonatomic) IBOutlet UIButton *choiceImageBtn;
 @property (weak, nonatomic) IBOutlet UILabel *describerLabel;
@@ -196,12 +197,12 @@
 - (void)enlargeConfSuccess:(NSNotification *)noti
 {
     NSDictionary *info = noti.object;
-    BOOL enlargeAll = [[info safeObjectForKey:@"enlargeAll"]boolValue];
+    BOOL enlargeBatch = [[info safeObjectForKey:@"enlargeBatch"]boolValue];
     M_EnlargeConf *conf = [info safeObjectForKey:@"conf"];
-    
+    NSArray<M_EnlargeUpload *> *uploads = [info safeObjectForKey:@"uploads"];
     NSMutableArray *list = [NSMutableArray array];
-    if (enlargeAll) {
-        for (M_EnlargeUpload *upload in self.dataSource) {
+    if (enlargeBatch) {
+        for (M_EnlargeUpload *upload in uploads) {
             if (upload.uploadStep == EnlargeUploadStepInitialize) {
                 upload.conf.x2 = conf.x2;
                 upload.conf.style = conf.style;
@@ -210,7 +211,10 @@
             }
         }
     } else {
-        M_EnlargeUpload *upload = [info safeObjectForKey:@"upload"];
+        M_EnlargeUpload *upload = uploads.firstObject;
+        if (upload == nil) {
+            return;
+        }
         upload.conf.x2 = conf.x2;
         upload.conf.style = conf.style;
         upload.conf.noise = conf.noise;
@@ -277,6 +281,7 @@
 {
     HomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([HomeTableViewCell class])];
     cell.upload = self.dataSource[indexPath.row];
+    cell.delegate = self;
     return cell;
 }
 
@@ -310,5 +315,19 @@
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     return [UIView new];
+}
+#pragma mark HomeTableViewCellDelegate
+- (void)uploadEvent:(HomeTableViewCell *)cell enlarge:(M_EnlargeUpload *)upload
+{
+    int index = (int)[self.dataSource indexOfObject:upload];
+    NSMutableArray *uploads = [NSMutableArray array];
+    for (int i = index; i < self.dataSource.count ; i++) {
+        M_EnlargeUpload *model = self.dataSource[i];
+        if (model.uploadStep == EnlargeUploadStepInitialize) {
+            [uploads addObject:model];
+        }
+    }
+    EnlargeConfViewController *vc = [EnlargeConfViewController controllerWithEnlargeUploads:uploads];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 @end

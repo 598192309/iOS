@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface EnlargeConfViewController : BaseViewController
-+ (instancetype)controllerWithEnlargeUpload:(M_EnlargeUpload *)enlargeUpload;
++ (instancetype)controllerWithEnlargeUploads:(NSArray<M_EnlargeUpload *> *)enlargeUploads;
 @end
 
 NS_ASSUME_NONNULL_END
