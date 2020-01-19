@@ -122,7 +122,7 @@
         }];
         contentV.backgroundColor = RI.isNight ? RGB(20, 20, 20) : BackGrayColor;
         _cellBackgroundViewContentV = contentV;
-        ViewBorderRadius(contentV, Adaptor_Value(5), kOnePX, TitleGrayColor);
+        ViewBorderRadius(contentV, 4, kOnePX, TitleGrayColor);
         
         _titleLabel = [UILabel lableWithText:lqLocalized(@"",nil) textColor:TitleBlackColor fontSize:AdaptedBoldFontSize(17) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
         [contentV addSubview:_titleLabel];

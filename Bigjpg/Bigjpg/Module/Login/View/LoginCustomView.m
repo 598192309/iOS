@@ -228,7 +228,7 @@
             make.top.mas_equalTo(zhuceView.mas_bottom).offset(Adaptor_Value(25));
             
         }];
-        ViewRadius(_confirmBtn, Adaptor_Value(5));
+        ViewRadius(_confirmBtn, 4);
         _confirmBtn.enabled = NO;
         
         

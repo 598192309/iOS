@@ -76,7 +76,7 @@
     self.headerBackView.backgroundColor = RI.isNight ? RGB(31, 31, 31) : RGB(238, 238, 238);
     self.describerLabel.textColor = RI.isNight ? TitleGrayColor : [UIColor lq_colorWithHexString:@"9A9A9A"];
     
-    ViewRadius(_headerBackView, Adaptor_Value(10));
+    ViewRadius(_headerBackView, 4);
 
 }
 

@@ -11,7 +11,6 @@
 @interface HistoryCustomView()
 //头部view
 @property (nonatomic,strong)UIView *header;
-@property (nonatomic,strong)UIButton *downloadBtn;
 @property (nonatomic,strong)UIButton *cancleBtn;
 @property (nonatomic,strong)UIButton *confrimBtn;
 
@@ -100,8 +99,10 @@
 
         [_downloadBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(contentV);
-            make.top.mas_equalTo(Adaptor_Value(60));
-            make.height.equalTo(@(40));
+//            make.top.mas_equalTo(Adaptor_Value(60));
+//            make.height.equalTo(@(40));
+            make.top.mas_equalTo(TopAdaptor_Value(30));
+            make.height.mas_equalTo(0);
             make.width.mas_greaterThanOrEqualTo(100);
         }];
         _downloadBtn.titleLabel.font = AdaptedFontSize(15);

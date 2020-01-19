@@ -218,7 +218,7 @@
             make.bottom.mas_equalTo(contentV);
             
         }];
-        ViewRadius(_confirmBtn, Adaptor_Value(5));
+        ViewRadius(_confirmBtn, 4);
 
     }
     return _header;

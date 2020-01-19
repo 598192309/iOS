@@ -45,7 +45,7 @@
 }
 
 
-- (void)configUIWithItem:(M_EnlargeHistory *)item downAll:(BOOL)downAll{
+- (void)configUIWithItem:(M_EnlargeHistory *)item downAll:(BOOL)downAll backColor:(UIColor *)backColor{
     
     _item = item;
     //设置图片
@@ -119,7 +119,7 @@
     self.iconImageVCoverView.hidden = [item.status isEqualToString:@"success"];
     
     _iconImageV.backgroundColor = RI.isNight ? RGB(38,38,38) : LineGrayColor;
-    _cellBackgroundView.backgroundColor = BackGroundColor;
+    _cellBackgroundView.backgroundColor = backColor;
 
 }
 
@@ -188,10 +188,10 @@
             make.right.mas_equalTo(contentV).offset(-Adaptor_Value(15));
             make.centerY.mas_equalTo(contentV.mas_centerY);
             make.width.mas_greaterThanOrEqualTo(70);
-            make.width.mas_lessThanOrEqualTo(100);
+            make.width.mas_lessThanOrEqualTo(80);
         }];
         _retryOrDownloadBtn.backgroundColor = YellowBackColor;
-        ViewRadius(_retryOrDownloadBtn, Adaptor_Value(4));
+        ViewRadius(_retryOrDownloadBtn, 4);
         
         
         _chooseBtn = [[UIButton alloc] init];

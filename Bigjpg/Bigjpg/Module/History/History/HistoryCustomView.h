@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 /**点击cancell */
 @property(nonatomic,copy)void(^historyCustomViewCancleBtnClickBlock)(NSDictionary *dict,UIButton *sender);
 - (void)reset;
+@property (nonatomic,strong)UIButton *downloadBtn;
+
 @end
 
 NS_ASSUME_NONNULL_END

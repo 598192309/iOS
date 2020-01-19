@@ -221,7 +221,16 @@
     return YES;
 }
 
-
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    if ([textField isEqual:self.emailTextF]) {
+        [self.pwdTF becomeFirstResponder];
+    }else{
+        if (self.settingCustomViewConfirmBtnClickBlock) {
+            self.settingCustomViewConfirmBtnClickBlock(@{@"email":SAFE_NIL_STRING(self.emailTextF.text),@"pwd":SAFE_NIL_STRING(self.pwdTF.text),@"zhuce":@(self.zhuceChooseBtn.selected)}, self.confirmBtn);
+        }
+    }
+    return YES;
+}
 
 
 #pragma mark - lazy

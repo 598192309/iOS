@@ -25,6 +25,8 @@
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, assign) BOOL downAll;
 
+@property (nonatomic,strong)NSMutableArray *dataArr;
+
 @end
 
 @implementation HistoryViewController
@@ -68,6 +70,9 @@
         [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
         [self.timer setFireDate:[NSDate date]];
     }
+    if (!self.isFirstViewDidAppear) {
+        [self requestData];
+    }
 }
 - (void)viewDidDisappear:(BOOL)animated
 {
@@ -89,21 +94,56 @@
     }];
     self.customTableView.contentInset = UIEdgeInsetsMake(0, 0, TabbarH, 0);
     [self setUpHeader];
-
     [self changeUIWithLoginStatus];
     
 }
 - (void)setUpHeader{
-    UIView *tableHeaderView = [[UIView alloc] init];
-    [tableHeaderView addSubview:self.historyCustomView];
-    [self.historyCustomView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(tableHeaderView);
-    }];
-    CGFloat H = [tableHeaderView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-    tableHeaderView.lq_height = H;
-    self.customTableView.tableHeaderView = tableHeaderView;
-    self.customTableView.tableHeaderView.lq_height = H;
-    [self historyCustomViewAct];
+    if (_historyCustomView) {
+        if (self.dataArr.count == 0 || !RI.is_logined) {//没有历史记录 不显示批量下载按钮
+            [self.historyCustomView.downloadBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.height.mas_equalTo(0);
+                make.top.mas_equalTo(TopAdaptor_Value(30));
+
+            }];
+
+        }else{
+            [self.historyCustomView.downloadBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.height.mas_equalTo(40);
+                make.top.mas_equalTo(Adaptor_Value(60));
+
+            }];
+        }
+        CGFloat H = [self.historyCustomView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+        self.customTableView.tableHeaderView.lq_height = H;
+    }else{
+        UIView *tableHeaderView = [[UIView alloc] init];
+        [tableHeaderView addSubview:self.historyCustomView];
+        if (self.userInfo.historyList.count == 0 || !RI.is_logined) {//没有历史记录 不显示批量下载按钮
+            [self.historyCustomView.downloadBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.height.mas_equalTo(0);
+                make.top.mas_equalTo(TopAdaptor_Value(30));
+
+            }];
+
+        }else{
+            [self.historyCustomView.downloadBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.height.mas_equalTo(40);
+                make.top.mas_equalTo(Adaptor_Value(60));
+
+            }];
+        }
+        [self.historyCustomView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(tableHeaderView);
+        }];
+        CGFloat H = [tableHeaderView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+        tableHeaderView.lq_height = H;
+        self.customTableView.tableHeaderView = tableHeaderView;
+        self.customTableView.tableHeaderView.lq_height = H;
+        [self historyCustomViewAct];
+    }
+
+
+
 
 }
 #pragma mark - refresh ui
@@ -207,13 +247,18 @@
         [I_Account getUserInfoOnSuccess:^(M_User * _Nonnull userInfo) {
             if (!weakSelf.downAll) {
                 weakSelf.userInfo = userInfo;
+                weakSelf.dataArr = [NSMutableArray arrayWithArray:userInfo.historyList];
                  [weakSelf.customTableView reloadData];
             }
+            [self setUpHeader];
+
         } failure:^(NSError *error) {
             if (weakSelf.userInfo == nil) {
                 [LSVProgressHUD showError:error];
             }
         }];
+    }else{
+        [self setUpHeader];
     }
    
 }
@@ -262,14 +307,19 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 
-    return RI.is_logined ? self.userInfo.historyList.count : 0;
+    return RI.is_logined ? self.dataArr.count : 0;
 
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     HistoryCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([HistoryCell class]) forIndexPath:indexPath];
-
-    [cell configUIWithItem:[self.userInfo.historyList safeObjectAtIndex:indexPath.row] downAll:self.downAll];
+    UIColor *color = BackGroundColor;
+    if (indexPath.row % 2 == 0) {
+        color = BackGroundColor;
+    }else{
+        color = TabbarGrayColor;
+    }
+    [cell configUIWithItem:[self.dataArr safeObjectAtIndex:indexPath.row] downAll:self.downAll backColor:color];
     return cell;
 }
 
@@ -325,6 +375,8 @@
       } commitBlock:^{
           M_EnlargeHistory *item = [self.userInfo.historyList safeObjectAtIndex:indexPath.row];
           [weakSelf removeTaskWithIdsArr:@[item.fid] withIndex:indexPath.row];
+          [weakSelf.dataArr removeObject:item];
+          [weakSelf setUpHeader];
       }];
 }
 

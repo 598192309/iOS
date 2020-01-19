@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HistoryCell : UITableViewCell
-- (void)configUIWithItem:(M_EnlargeHistory *)item downAll:(BOOL)downAll;
+- (void)configUIWithItem:(M_EnlargeHistory *)item downAll:(BOOL)downAll backColor:(UIColor *)backColor;
 @end
 
 NS_ASSUME_NONNULL_END
