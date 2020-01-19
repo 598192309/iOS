@@ -20,6 +20,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy)void(^settingCustomViewConfirmBtnClickBlock)(NSDictionary *dict,UIButton *sender);
 
 
+/**保存图片*/
+@property(nonatomic,copy)void(^settingCustomViewSavePictureBlock)(UIImage *image);
+
+
 - (void)configUIWithItem:(M_User *)item finishi:(void(^)())finishBlock;
 
 - (NSString *)getemail;

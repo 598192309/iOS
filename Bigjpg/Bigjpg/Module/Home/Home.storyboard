@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,10 +17,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hk5-Ls-cdQ">
-                                <rect key="frame" x="0.0" y="44" width="414" height="120"/>
+                                <rect key="frame" x="10" y="44" width="394" height="120"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kbw-0f-7BT">
-                                        <rect key="frame" x="160" y="20" width="94" height="40"/>
+                                        <rect key="frame" x="150" y="20" width="94" height="40"/>
                                         <color key="backgroundColor" red="0.10196078431372549" green="0.67450980392156867" blue="0.098039215686274508" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="6Fr-Yw-Ug8"/>
@@ -34,7 +34,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="图片限制：文件大小&lt;10MB，尺寸小于3000x3000px" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hIt-BR-5UT">
-                                        <rect key="frame" x="10" y="78" width="394" height="16"/>
+                                        <rect key="frame" x="10" y="78" width="374" height="16"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" red="0.60392156862745094" green="0.60392156862745094" blue="0.60392156862745094" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -157,9 +157,9 @@
                             <constraint firstItem="adL-QL-C3b" firstAttribute="bottom" secondItem="HuX-B9-hPA" secondAttribute="bottom" id="aGD-Xg-zzK"/>
                             <constraint firstItem="Hk5-Ls-cdQ" firstAttribute="top" secondItem="adL-QL-C3b" secondAttribute="top" id="cWu-z2-lsb"/>
                             <constraint firstItem="HuX-B9-hPA" firstAttribute="top" secondItem="Hk5-Ls-cdQ" secondAttribute="bottom" id="jdh-Je-zJy"/>
-                            <constraint firstItem="Hk5-Ls-cdQ" firstAttribute="leading" secondItem="adL-QL-C3b" secondAttribute="leading" id="kQL-pv-vpa"/>
+                            <constraint firstItem="Hk5-Ls-cdQ" firstAttribute="leading" secondItem="adL-QL-C3b" secondAttribute="leading" constant="10" id="kQL-pv-vpa"/>
                             <constraint firstItem="HuX-B9-hPA" firstAttribute="leading" secondItem="adL-QL-C3b" secondAttribute="leading" id="ndV-P3-Qw0"/>
-                            <constraint firstItem="Hk5-Ls-cdQ" firstAttribute="trailing" secondItem="adL-QL-C3b" secondAttribute="trailing" id="pTI-Kr-RDF"/>
+                            <constraint firstItem="Hk5-Ls-cdQ" firstAttribute="trailing" secondItem="adL-QL-C3b" secondAttribute="trailing" constant="-10" id="pTI-Kr-RDF"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="adL-QL-C3b"/>
                     </view>
