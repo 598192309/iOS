@@ -9,9 +9,9 @@
 #import <Foundation/Foundation.h>
 
 
-//#define KHOST    @"https://bigjpg.com"      //正式环境
+#define KHOST    @"https://bigjpg.com"      //正式环境
 
-#define KHOST    @"http://47.56.91.245:2005"      //正式环境
+//#define KHOST    @"http://47.56.91.245:2005"      //正式环境
 
 #define NET [Network shareInstance]
 
