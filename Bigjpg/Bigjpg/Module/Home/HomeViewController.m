@@ -20,6 +20,10 @@
 
 @property (nonatomic, strong) NSMutableArray *pollingFids;
 @property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, strong) UIView *headerView;
+@property (nonatomic, strong) UILabel *gradeLabel;
+@property (nonatomic, strong) UIImageView *exclamation_markImageView;
+//@property (nonatomic, strong) NSDate *start
 @end
 
 @implementation HomeViewController
@@ -40,6 +44,13 @@
     _dataSource = [NSMutableArray<M_EnlargeUpload *> array];
     //切换夜间模式
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeNight) name:kChangeNightNotification object:nil];
+    _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, 40)];
+    _gradeLabel = [[UILabel alloc] init];
+    _exclamation_markImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"exclamation_mark"]];
+    _exclamation_markImageView.frame = CGRectMake(0, 0, 30, 30);
+    [_headerView addSubview:_exclamation_markImageView];
+
+    [_headerView addSubview:_gradeLabel];
     
 }
 
@@ -74,11 +85,27 @@
     
     self.view.backgroundColor = BackGroundColor;
     self.tableView.backgroundColor = BackGroundColor;
+    self.tableView.tableHeaderView.backgroundColor =  self.tableView.backgroundColor;
     self.headerBackView.backgroundColor = RI.isNight ? RGB(31, 31, 31) : RGB(238, 238, 238);
     self.describerLabel.textColor = RI.isNight ? TitleGrayColor : [UIColor lq_colorWithHexString:@"9A9A9A"];
-    
+    _headerView.backgroundColor = self.tableView.backgroundColor;
+    _gradeLabel.textColor = BlueBackColor;
+    _gradeLabel.text = LanguageStrings(@"upgrade_16");
+    [_gradeLabel sizeToFit];
+    _gradeLabel.lq_bottom = self.headerView.lq_bottom;
+    _gradeLabel.lq_centerX = self.headerView.lq_centerX;
+    _exclamation_markImageView.lq_centerY = _gradeLabel.lq_centerY;
+    _exclamation_markImageView.lq_right = _gradeLabel.lq_left - 5;
     ViewRadius(_headerBackView, 4);
 
+}
+
+- (void)showUpgradeHeaderView
+{
+    if (!RI.is_logined || [RI.userInfo.version isEqualToString:@"free"] || RI.userInfo.is_expire) {
+        self.tableView.tableHeaderView = self.headerView;
+    }
+   
 }
 
 - (void)polling
@@ -109,6 +136,12 @@
                                 [I_Enlarge downloadPictureWithUrls:@[upload.output] isAutoDown:YES];
                             }
                         }
+                        
+                        if (![task.status isEqualToString:@"success"]) {
+                            if ([[NSDate date]timeIntervalSinceDate:upload.createTime] > 30) {
+                                [weakSelf showUpgradeHeaderView];
+                            }
+                        }
 
                     }
                 }
@@ -135,6 +168,7 @@
     actionSheet.configuration.navBarColor=  RI.isNight ? RGB(31, 31, 31) : [UIColor whiteColor];
     actionSheet.configuration.navTitleColor =  RI.isNight ?[UIColor whiteColor]: RGB(31, 31, 31) ;
     actionSheet.configuration.bottomViewBgColor = RI.isNight ? RGB(31, 31, 31) : [UIColor whiteColor];
+    
 //    actionSheet.configuration.previewTextColor = [UIColor redColor];
     actionSheet.configuration.showSelectedMask = YES;
     actionSheet.configuration.bottomBtnsNormalTitleColor = [UIColor whiteColor];
@@ -143,11 +177,19 @@
     actionSheet.configuration.bottomBtnsDisableBgColor = RGBA(30,161,20,0.5);
     actionSheet.configuration.indexLabelBgColor = LihgtGreenColor;
     actionSheet.configuration.maxPreviewCount = 0;
-    actionSheet.configuration.customLanguageKeyValue = @{@"ZLPhotoBrowserCancelText":LanguageStrings(@"cancel"),@"ZLPhotoBrowserSaveImageErrorText":LanguageStrings(@"error"),@"ZLPhotoBrowserNoCameraAuthorityText":LanguageStrings(@"error"),@"ZLPhotoBrowserNoAblumAuthorityText":LanguageStrings(@"error"),@""ZLPhotoBrowserSaveText:LanguageStrings(@"ok"),@"ZLPhotoBrowserPreviewText":@""};
+    actionSheet.configuration.customLanguageKeyValue = @{@"ZLPhotoBrowserCancelText":LanguageStrings(@"cancel"),@"ZLPhotoBrowserSaveImageErrorText":LanguageStrings(@"error"),@"ZLPhotoBrowserNoCameraAuthorityText":LanguageStrings(@"error"),@"ZLPhotoBrowserNoAblumAuthorityText":LanguageStrings(@"error"),@"ZLPhotoBrowserDoneText":LanguageStrings(@"ok"),@"ZLPhotoBrowserPreviewText":@""};
     actionSheet.configuration.customImageNames = @[@"zl_navBack"];
-//    if ([ConfManager.shared.localLanguage isEqualToString:@"zh"]) {
-//        actionSheet.configuration.languageType = ZLLanguageChineseSimplified;
-//    } else if (actionSheet.configuration)
+    if ([ConfManager.shared.localLanguage isEqualToString:@"zh"]) {
+        actionSheet.configuration.languageType = ZLLanguageChineseSimplified;
+    } else if ([ConfManager.shared.localLanguage isEqualToString:@"tw"]) {
+        actionSheet.configuration.languageType = ZLLanguageChineseTraditional;
+    } else if ([ConfManager.shared.localLanguage isEqualToString:@"jp"]) {
+        actionSheet.configuration.languageType = ZLLanguageJapanese;
+    } else if ([ConfManager.shared.localLanguage isEqualToString:@"en"]) {
+        actionSheet.configuration.languageType = ZLLanguageEnglish;
+    } else {
+        actionSheet.configuration.languageType = ZLLanguageEnglish;
+    }
     actionSheet.sender = self;
             
     __weak typeof(self) weakSelf = self;
@@ -208,6 +250,7 @@
                 upload.conf.style = conf.style;
                 upload.conf.noise = conf.noise;
                 [list addObject:upload];
+                
             }
         }
     } else {
@@ -252,6 +295,11 @@
                     upload.uploadStep = EnlargeUploadStepDataUploadFail;
                     [weakSelf.tableView reloadData];
                     [LSVProgressHUD showError:error];
+                    
+                    if ([error.lq_errorMsg isEqualToString:@"parallel_limit"]) {
+                        [weakSelf showUpgradeHeaderView];
+                    }
+                    
                 }];
                 
             }
@@ -282,6 +330,7 @@
     HomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([HomeTableViewCell class])];
     cell.upload = self.dataSource[indexPath.row];
     cell.delegate = self;
+//    cell.backgroundColor = [UIColor colorWithRed:arc4random()%255 / 255.0 green:arc4random()%255 / 255.0 blue:arc4random()%255 / 255.0 alpha:1];
     return cell;
 }
 
@@ -311,9 +360,15 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 5;
+    return 20;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    return [UIView new];
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 0.01;
+}
+- (UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     return [UIView new];
 }
 #pragma mark HomeTableViewCellDelegate
