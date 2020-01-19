@@ -63,7 +63,7 @@
         [I_Account authWithUserName:RI.userInfo.username product_id:productId transaction_id:transaction_id receipt_data:receipt_data success:^(NSDictionary * _Nonnull resultObject) {
             NSString *status = SAFE_VALUE_FOR_KEY(resultObject, @"status");//ok代表成功
             if ([status isEqualToString:@"ok"]) {
-                [LSVProgressHUD showSuccessWithStatus:LanguageStrings(@"pay_succ")];
+                
                 NSLog(@"服务器验证成功");
                 successBlock();
             } else {
@@ -78,7 +78,7 @@
             }
         } failure:^(NSError *error) {
             NSLog(@"服务器验证请求失败");
-            [LSVProgressHUD showErrorWithStatus:LanguageStrings(@"no_succ")];
+           
             failureBlock([NSError errorWithDomain:@"Net Error" code:RMStoreErrorCodeUnableToCompleteVerification userInfo:nil]);
         }];
 

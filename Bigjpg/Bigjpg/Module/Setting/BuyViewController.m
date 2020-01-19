@@ -70,10 +70,10 @@
     [LSVProgressHUD show];
     [[RMStore defaultStore] addPayment:productId user:RI.userInfo.username success:^(SKPaymentTransaction *transaction) {
         NSLog(@"购买商品成功%@",productId);
-        
+        [LSVProgressHUD showSuccessWithStatus:LanguageStrings(@"pay_succ")];
     } failure:^(SKPaymentTransaction *transaction, NSError *error) {
         NSLog(@"购买商品失败%@",productId);
-        
+         [LSVProgressHUD showErrorWithStatus:LanguageStrings(@"no_succ")];
     }];
 }
 
