@@ -93,7 +93,7 @@
     }else if (item.conf.x2 == 3) {
         x2Str = @"8x";
     }else if (item.conf.x2 == 4) {
-        x2Str = @"14x";
+        x2Str = @"16x";
     }
     NSString *typeStr ;
      if ([item.conf.style isEqualToString:@"art"]) {

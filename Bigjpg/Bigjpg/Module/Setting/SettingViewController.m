@@ -191,44 +191,42 @@
 //系统分享
 - (void)activityShare{
     // 1、设置分享的内容，并将内容添加到数组中
-    NSString *shareText = @"分享的标题";
+   // 1、设置分享的内容，并将内容添加到数组中
+   NSString *shareText = LanguageStrings(@"title");
+   //图片应是加载完成后的image或本地的image，否则可能会出错
     UIImage *shareImage = [UIImage imageNamed:@"ic_launch_screen"];
-    NSURL *shareUrl = [NSURL URLWithString:@"https://www.baidu.com"];
+    NSURL *shareUrl = [NSURL URLWithString:@"https://bigjpg.com"];
     NSArray *activityItemsArray = @[shareText,shareImage,shareUrl];
-    
-    // 自定义的CustomActivity，继承自UIActivity
-    CustomActivity *customActivity = [[CustomActivity alloc]initWithTitle:shareText ActivityImage:[UIImage imageNamed:@"custom.png"] URL:shareUrl ActivityType:@"Custom"];
-    NSArray *activityArray = @[customActivity];
-    
-    // 2、初始化控制器，添加分享内容至控制器
-    UIActivityViewController *activityVC = [[UIActivityViewController alloc]initWithActivityItems:activityItemsArray applicationActivities:activityArray];
-    activityVC.modalInPopover = YES;
-    // 3、设置回调
-    if ([UIDevice currentDevice].systemVersion.floatValue >= 8.0) {
-        // ios8.0 之后用此方法回调
-        UIActivityViewControllerCompletionWithItemsHandler itemsBlock = ^(UIActivityType __nullable activityType, BOOL completed, NSArray * __nullable returnedItems, NSError * __nullable activityError){
-            NSLog(@"activityType == %@",activityType);
-            if (completed == YES) {
-                NSLog(@"completed");
-            }else{
-                NSLog(@"cancel");
-            }
-        };
-        activityVC.completionWithItemsHandler = itemsBlock;
-    }else{
-        // ios8.0 之前用此方法回调
-        UIActivityViewControllerCompletionHandler handlerBlock = ^(UIActivityType __nullable activityType, BOOL completed){
-            NSLog(@"activityType == %@",activityType);
-            if (completed == YES) {
-                NSLog(@"completed");
-            }else{
-                NSLog(@"cancel");
-            }
-        };
-        activityVC.completionHandler = handlerBlock;
-    }
-    // 4、调用控制器
-    [self presentViewController:activityVC animated:YES completion:nil];
+   // 2、初始化控制器，添加分享内容至控制器
+   UIActivityViewController *activityVC = [[UIActivityViewController alloc]initWithActivityItems:activityItemsArray applicationActivities:nil];
+   activityVC.modalInPopover = YES;
+   // 3、设置回调
+   if ([UIDevice currentDevice].systemVersion.floatValue >= 8.0) {
+       // ios8.0 之后用此方法回调
+       UIActivityViewControllerCompletionWithItemsHandler itemsBlock = ^(UIActivityType __nullable activityType, BOOL completed, NSArray * __nullable returnedItems, NSError * __nullable activityError){
+           NSLog(@"activityType == %@",activityType);
+           if (completed == YES) {
+               NSLog(@"completed");
+           }else{
+               NSLog(@"cancel");
+           }
+       };
+       activityVC.completionWithItemsHandler = itemsBlock;
+   }else{
+       // ios8.0 之前用此方法回调
+       UIActivityViewControllerCompletionHandler handlerBlock = ^(UIActivityType __nullable activityType, BOOL completed){
+           NSLog(@"activityType == %@",activityType);
+           if (completed == YES) {
+               NSLog(@"completed");
+           }else{
+               NSLog(@"cancel");
+           }
+       };
+       activityVC.completionHandler = handlerBlock;
+   }
+   // 4、调用控制器
+   [self presentViewController:activityVC animated:YES completion:nil];
+  
     
 }
 
@@ -374,7 +372,10 @@
             
             break;
         case 2:{
-            
+            //打开官网
+            if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"https://"]]) {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://bigjpg.com"]];
+            }
         }
             
             break;

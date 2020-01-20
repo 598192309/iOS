@@ -253,7 +253,7 @@
             make.left.mas_equalTo(Adaptor_Value(10));
             make.right.mas_equalTo(contentV).offset(-Adaptor_Value(10));
             make.height.mas_equalTo(Adaptor_Value(120));
-            make.top.mas_equalTo(Adaptor_Value(45));
+            make.top.mas_equalTo(TopAdaptor_Value(30));
         }];
         ViewRadius(_tipView, 4);
                 
