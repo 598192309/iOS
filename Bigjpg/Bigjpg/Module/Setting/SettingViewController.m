@@ -15,6 +15,7 @@
 #import "ForgetPwdViewController.h"
 #import "ModifyPwdViewController.h"
 #import "BuyViewController.h"
+#import "PrivacyPolicyViewController.h"
 
 @interface SettingViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) UITableView  *customTableView;
@@ -331,7 +332,7 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 
-    return 4;
+    return 5;
 
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -350,6 +351,9 @@
 
     }else if (indexPath.row == 3) {
         [cell refreshUIWithTitle:LanguageStrings(@"feedback")];
+
+    }else if (indexPath.row == 4) {
+        [cell refreshUIWithTitle:@"Privacy Policy"];
 
     }
   
@@ -380,11 +384,10 @@
             
             break;
         case 4:{
-            
-        }
-            
-            b54:{
-            
+            //隐私协议
+            PrivacyPolicyViewController *vc = [[PrivacyPolicyViewController alloc] init];
+            vc.urlStr = @"https://bigjpg.com/htdocs/privacy_policy.html";
+            [self.navigationController pushViewController:vc animated:YES];
         }
             
             break;

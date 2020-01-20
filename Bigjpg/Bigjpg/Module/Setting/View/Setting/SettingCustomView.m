@@ -284,7 +284,7 @@
         [_updateBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _updateBtn.titleLabel.font = [UIFont systemFontOfSize:16 weight:UIFontWeightMedium];
         [_tipView addSubview:_updateBtn];
-        _updateBtn.contentEdgeInsets = UIEdgeInsetsMake(5, 10, 5, 10);
+        _updateBtn.contentEdgeInsets = UIEdgeInsetsMake(7, 15, 7, 15);
 
 //        CGFloat w = [LanguageStrings(@"upgrade") boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:_updateBtn.titleLabel.font} context:nil].size.width + Adaptor_Value(20);
 
@@ -579,8 +579,8 @@
         [_lorginupdateBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _lorginupdateBtn.titleLabel.font = AdaptedFontSize(15);
         [topBackView addSubview:_lorginupdateBtn];
-        _lorginupdateBtn.contentEdgeInsets = UIEdgeInsetsMake(5, 10, 5, 10);
-        
+        _lorginupdateBtn.contentEdgeInsets = UIEdgeInsetsMake(7, 15, 7, 15);
+
         [_lorginupdateBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(weakSelf.lorgintimeLabel);
             make.left.mas_equalTo(weakSelf.lorgintimeLabel.mas_right).offset(Adaptor_Value(10));
