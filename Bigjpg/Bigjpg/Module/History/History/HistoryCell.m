@@ -58,7 +58,7 @@
         self.retryOrDownloadBtn.hidden = downAll;
         self.chooseBtn.selected = item.customSlected;
         //设置图片
-        NSString *smallImagesStr = [NSString stringWithFormat:@"%@?x-oss-process=image/resize,m_fill,w_%d,h_%d",item.output,50,50];
+        NSString *smallImagesStr = [NSString stringWithFormat:@"%@?x-oss-process=image/resize,m_fill,w_%d,h_%d",item.output,100,100];
         [_iconImageV sd_setImageWithURL:[NSURL URLWithString:smallImagesStr]];
     }else if ([item.status isEqualToString:@"error"]) {
         _retryOrDownloadBtn.hidden = NO;
@@ -68,13 +68,13 @@
         self.retryOrDownloadBtn.hidden = downAll;
         self.chooseBtn.selected = item.customSlected;
         //设置图片
-        NSString *smallImagesStr = [NSString stringWithFormat:@"%@?x-oss-process=image/resize,m_fill,w_%d,h_%d",item.conf.input,50,50];
+        NSString *smallImagesStr = [NSString stringWithFormat:@"%@?x-oss-process=image/resize,m_fill,w_%d,h_%d",item.conf.input,100,100];
         [_iconImageV sd_setImageWithURL:[NSURL URLWithString:smallImagesStr]];
     } else {
         _retryOrDownloadBtn.hidden = YES;
         self.chooseBtn.hidden = YES;
         //设置图片
-        NSString *smallImagesStr = [NSString stringWithFormat:@"%@?x-oss-process=image/resize,m_fill,w_%d,h_%d",item.conf.input,50,50];
+        NSString *smallImagesStr = [NSString stringWithFormat:@"%@?x-oss-process=image/resize,m_fill,w_%d,h_%d",item.conf.input,100,100];
         [_iconImageV sd_setImageWithURL:[NSURL URLWithString:smallImagesStr]];
 
     }
@@ -187,7 +187,7 @@
         [_retryOrDownloadBtn setTitle:@"" forState:UIControlStateNormal];
         [_retryOrDownloadBtn addTarget:self action:@selector(downloadOrRetryBtnClick:) forControlEvents:UIControlEventTouchDown];
         [contentV addSubview:_retryOrDownloadBtn];
-        _retryOrDownloadBtn.titleLabel.font = [UIFont systemFontOfSize:16 weight:UIFontWeightMedium];
+        _retryOrDownloadBtn.titleLabel.font = [UIFont systemFontOfSize:14 weight:UIFontWeightRegular];
         _retryOrDownloadBtn.contentEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 10);
 //        _retryOrDownloadBtn.titleLabel.adjustsFontSizeToFitWidth = YES;
         [_retryOrDownloadBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -195,7 +195,7 @@
             make.right.mas_equalTo(contentV).offset(-Adaptor_Value(15));
             make.centerY.mas_equalTo(contentV.mas_centerY);
             make.width.mas_greaterThanOrEqualTo(70);
-            make.width.mas_lessThanOrEqualTo(80);
+            make.width.mas_lessThanOrEqualTo(90);
         }];
         _retryOrDownloadBtn.backgroundColor = YellowBackColor;
         ViewRadius(_retryOrDownloadBtn, 4);
