@@ -13,9 +13,9 @@
 {
     NSDictionary *param;
     if (notReg) {
-        param = @{@"username":SAFE_NIL_STRING(userName),@"password":SAFE_NIL_STRING(pwd),@"not_reg":@(1)};
+        param = @{@"username":SAFE_NIL_STRING(userName),@"password":SAFE_NIL_STRING(pwd)};
     } else {
-        param = @{@"username":SAFE_NIL_STRING(userName),@"password":SAFE_NIL_STRING(pwd),@"not_reg":@(0)};
+        param = @{@"username":SAFE_NIL_STRING(userName),@"password":SAFE_NIL_STRING(pwd),@"not_reg":@(1)};
     }
     
     return [NET POST:@"/login" parameters:param criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {

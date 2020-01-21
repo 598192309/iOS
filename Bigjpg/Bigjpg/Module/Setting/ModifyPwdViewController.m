@@ -97,7 +97,7 @@
         return;
     }
     if (![pwd1 isEqualToString:pwd2]) {
-        [LSVProgressHUD showInfoWithStatus:LanguageStrings(@"两次输入的密码不一致")];
+        [LSVProgressHUD showInfoWithStatus:LanguageStrings(@"reset_error")];
         return;
     }
     

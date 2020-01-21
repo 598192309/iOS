@@ -48,9 +48,7 @@
 - (void)configUIWithItem:(M_EnlargeHistory *)item downAll:(BOOL)downAll backColor:(UIColor *)backColor{
     
     _item = item;
-    //设置图片
-    NSString *smallImagesStr = [NSString stringWithFormat:@"%@?x-oss-process=image/resize,m_fill,w_%d,h_%d",item.output,100,100];
-    [_iconImageV sd_setImageWithURL:[NSURL URLWithString:smallImagesStr]];
+    
     [_retryOrDownloadBtn setTitle:LanguageStrings(@"retry") forState:UIControlStateNormal];
     if ([item.status isEqualToString:@"success"]) {
         _retryOrDownloadBtn.hidden = NO;
@@ -59,6 +57,9 @@
         self.chooseBtn.hidden = !downAll;
         self.retryOrDownloadBtn.hidden = downAll;
         self.chooseBtn.selected = item.customSlected;
+        //设置图片
+        NSString *smallImagesStr = [NSString stringWithFormat:@"%@?x-oss-process=image/resize,m_fill,w_%d,h_%d",item.output,50,50];
+        [_iconImageV sd_setImageWithURL:[NSURL URLWithString:smallImagesStr]];
     }else if ([item.status isEqualToString:@"error"]) {
         _retryOrDownloadBtn.hidden = NO;
         [_retryOrDownloadBtn setTitle:LanguageStrings(@"retry") forState:UIControlStateNormal];
@@ -66,9 +67,15 @@
         self.chooseBtn.hidden = !downAll;
         self.retryOrDownloadBtn.hidden = downAll;
         self.chooseBtn.selected = item.customSlected;
+        //设置图片
+        NSString *smallImagesStr = [NSString stringWithFormat:@"%@?x-oss-process=image/resize,m_fill,w_%d,h_%d",item.conf.input,50,50];
+        [_iconImageV sd_setImageWithURL:[NSURL URLWithString:smallImagesStr]];
     } else {
         _retryOrDownloadBtn.hidden = YES;
         self.chooseBtn.hidden = YES;
+        //设置图片
+        NSString *smallImagesStr = [NSString stringWithFormat:@"%@?x-oss-process=image/resize,m_fill,w_%d,h_%d",item.conf.input,50,50];
+        [_iconImageV sd_setImageWithURL:[NSURL URLWithString:smallImagesStr]];
 
     }
 

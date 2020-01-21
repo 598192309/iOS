@@ -317,6 +317,7 @@
       
         _emailTextF = [[UITextField alloc] init];
         [_textFBackView addSubview:_emailTextF];
+        _emailTextF.returnKeyType = UIReturnKeyNext;
         [_emailTextF mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(Adaptor_Value(10));
             make.right.mas_equalTo(weakSelf.textFBackView);
@@ -359,6 +360,7 @@
         
         _pwdTF = [[UITextField alloc] init];
         [_textFBackView addSubview:_pwdTF];
+        _pwdTF.returnKeyType = UIReturnKeyDone;
         [_pwdTF mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(weakSelf.emailTextF);
             make.height.mas_equalTo(Adaptor_Value(35));
