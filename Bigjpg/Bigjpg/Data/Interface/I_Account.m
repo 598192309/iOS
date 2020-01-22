@@ -100,7 +100,6 @@
 + (NetworkTask *)requestConfOnSuccess:(void(^)(NSDictionary *confDic))successBlock failure:(ErrorBlock)failureBlock
 {
     return [NET GET:@"conf" parameters:nil criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
-        [ConfManager.shared updateConf:resultObject];
         successBlock(resultObject);
     } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error) {
         failureBlock(error);
@@ -132,7 +131,7 @@
 
     NSDictionary *param = @{@"receipt-data":SAFE_NIL_STRING(receipt_data),@"product_id":SAFE_NIL_STRING(product_id),@"transaction_id":SAFE_NIL_STRING(transaction_id)} ;
     return [NET POST:@"/apple_verify" parameters:param criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
-        NSString *status = SAFE_VALUE_FOR_KEY(resultObject, @"status");//ok代表成功
+        
         successBlock(resultObject);
     } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error) {
         failureBlock(error);

@@ -7,7 +7,7 @@
 //
 
 #import "ConfManager.h"
-
+#import "I_Account.h"
 @implementation ConfManager
 
 + (ConfManager *)shared
@@ -26,6 +26,13 @@
         sharedInstance.conf = conf;
         //初始化设置localLanguage
         sharedInstance.localLanguage = [ConfManager defaultLocalLanguage];
+        
+        //请求服务端Conf
+        [I_Account requestConfOnSuccess:^(NSDictionary * _Nonnull confDic) {
+            [ConfManager.shared updateConf:confDic];
+        } failure:^(NSError *error) {
+            
+        }];
         
     });
     return sharedInstance;

@@ -142,9 +142,13 @@
             //进度条
             NSTimeInterval nowInte = [[NSDate date] timeIntervalSince1970];
              NSTimeInterval createInte = [upload.createTime timeIntervalSince1970];
-             NSInteger seconds = upload.conf.time * 60;
+             CGFloat seconds = upload.conf.time ;
             
             CGFloat progress = (nowInte - createInte) / seconds;
+            NSLog(@"%f,%f,%f",(nowInte - createInte),seconds, progress);
+            if (progress < 0.03) {
+                progress = 0.03;
+            }
             
             if (progress > 0.9) {
                 progress = 0.9;
