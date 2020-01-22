@@ -16,8 +16,12 @@
     static ConfManager *sharedInstance = nil;
     dispatch_once(&t, ^{
         sharedInstance = [[ConfManager alloc] init];
-        NSDictionary *defaultDic = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Conf" ofType:@"plist"]];
-        NSDictionary *conf = [defaultDic safeObjectForKey:@"Conf"];
+        NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
+        NSDictionary *conf = [def objectForKey:@"Conf"];
+        if (conf == nil) {
+            NSDictionary *defaultDic = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Conf" ofType:@"plist"]];
+            conf = [defaultDic safeObjectForKey:@"Conf"];
+        }
         //初始化设置conf
         sharedInstance.conf = conf;
         //初始化设置localLanguage
