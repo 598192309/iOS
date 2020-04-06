@@ -1,21 +1,21 @@
 //
-//  PrivacyPolicyViewController.m
+//  BigjpgWebViewController.m
 //  Bigjpg
 //
 //  Created by 黎芹 on 2020/1/20.
 //  Copyright © 2020 lqq. All rights reserved.
 //
 
-#import "PrivacyPolicyViewController.h"
+#import "BigjpgWebViewController.h"
 #import "SYProgressWebView.h"
 
-@interface PrivacyPolicyViewController ()<SYProgressWebViewDelegate>
+@interface BigjpgWebViewController ()<SYProgressWebViewDelegate>
 
 @property (nonatomic, strong)  SYProgressWebView *webView;
 
 @end
 
-@implementation PrivacyPolicyViewController
+@implementation BigjpgWebViewController
 
 
 - (void)viewDidLoad
@@ -63,7 +63,7 @@
 - (void)setUI
 {
     [self addNavigationView];
-    self.navigationTextLabel.text =@"Privacy Policy";
+    self.navigationTextLabel.text =_webTitle;
 
     
     [self webViewUIPush];

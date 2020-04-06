@@ -11,7 +11,7 @@
 		094C433923C23FFD0007B800 /* ModifyPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 094C433823C23FFD0007B800 /* ModifyPwdViewController.m */; };
 		094C433F23CCBDAB0007B800 /* UIImage+extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 094C433E23CCBDAB0007B800 /* UIImage+extension.m */; };
 		094C434223D5F1E10007B800 /* SYProgressWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 094C434123D5F1E10007B800 /* SYProgressWebView.m */; };
-		094C434523D5F20E0007B800 /* PrivacyPolicyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 094C434423D5F20E0007B800 /* PrivacyPolicyViewController.m */; };
+		094C434523D5F20E0007B800 /* BigjpgWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 094C434423D5F20E0007B800 /* BigjpgWebViewController.m */; };
 		095CB7CD23B3B0E0003CF4C6 /* ConfManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 095CB7CC23B3B0E0003CF4C6 /* ConfManager.m */; };
 		1118103F23B30A4400BEE5EF /* CustomActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1118103E23B30A4400BEE5EF /* CustomActivity.m */; };
 		1118104223B30BB400BEE5EF /* SetConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1118104123B30BB400BEE5EF /* SetConfigViewController.m */; };
@@ -84,8 +84,8 @@
 		094C433E23CCBDAB0007B800 /* UIImage+extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+extension.m"; sourceTree = "<group>"; };
 		094C434023D5F1E10007B800 /* SYProgressWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYProgressWebView.h; sourceTree = "<group>"; };
 		094C434123D5F1E10007B800 /* SYProgressWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYProgressWebView.m; sourceTree = "<group>"; };
-		094C434323D5F20E0007B800 /* PrivacyPolicyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrivacyPolicyViewController.h; sourceTree = "<group>"; };
-		094C434423D5F20E0007B800 /* PrivacyPolicyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PrivacyPolicyViewController.m; sourceTree = "<group>"; };
+		094C434323D5F20E0007B800 /* BigjpgWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BigjpgWebViewController.h; sourceTree = "<group>"; };
+		094C434423D5F20E0007B800 /* BigjpgWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BigjpgWebViewController.m; sourceTree = "<group>"; };
 		095CB7CB23B3B0E0003CF4C6 /* ConfManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConfManager.h; sourceTree = "<group>"; };
 		095CB7CC23B3B0E0003CF4C6 /* ConfManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConfManager.m; sourceTree = "<group>"; };
 		1118103D23B30A4300BEE5EF /* CustomActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomActivity.h; sourceTree = "<group>"; };
@@ -357,8 +357,8 @@
 				094C433823C23FFD0007B800 /* ModifyPwdViewController.m */,
 				49337E5B23CCCC8C00CDA2EA /* BuyViewController.h */,
 				49337E5C23CCCC8C00CDA2EA /* BuyViewController.m */,
-				094C434323D5F20E0007B800 /* PrivacyPolicyViewController.h */,
-				094C434423D5F20E0007B800 /* PrivacyPolicyViewController.m */,
+				094C434323D5F20E0007B800 /* BigjpgWebViewController.h */,
+				094C434423D5F20E0007B800 /* BigjpgWebViewController.m */,
 				118FED4023B20CBA0055E56C /* View */,
 			);
 			path = Setting;
@@ -880,7 +880,7 @@
 				1118105A23B36FD700BEE5EF /* HistoryCell.m in Sources */,
 				4920AEDB23B0598D00FE7A65 /* I_Account.m in Sources */,
 				495435C423B4AAD2008CCB60 /* M_Enlarge.m in Sources */,
-				094C434523D5F20E0007B800 /* PrivacyPolicyViewController.m in Sources */,
+				094C434523D5F20E0007B800 /* BigjpgWebViewController.m in Sources */,
 				094C433F23CCBDAB0007B800 /* UIImage+extension.m in Sources */,
 				118FED4723B215CB0055E56C /* SettingCell.m in Sources */,
 				4920AEAA23AD2CC100FE7A65 /* M_Base.m in Sources */,
@@ -1078,7 +1078,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = 9R3769TB7U;
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1169,7 +1169,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = 9R3769TB7U;
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

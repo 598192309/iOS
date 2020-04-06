@@ -15,7 +15,7 @@
 #import "ForgetPwdViewController.h"
 #import "ModifyPwdViewController.h"
 #import "BuyViewController.h"
-#import "PrivacyPolicyViewController.h"
+#import "BigjpgWebViewController.h"
 
 @interface SettingViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) UITableView  *customTableView;
@@ -330,7 +330,7 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 
-    return 5;
+    return 6;
 
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -351,8 +351,10 @@
         [cell refreshUIWithTitle:LanguageStrings(@"feedback")];
 
     }else if (indexPath.row == 4) {
-        [cell refreshUIWithTitle:@"Privacy Policy"];
+        [cell refreshUIWithTitle:@"User Agreement"];
 
+    } else if (indexPath.row == 5) {
+        [cell refreshUIWithTitle:@"Privacy Policy"];
     }
   
     return cell;
@@ -385,9 +387,19 @@
             
             break;
         case 4:{
+            //用户协议
+            BigjpgWebViewController *vc = [[BigjpgWebViewController alloc] init];
+            vc.urlStr = @"http://bigjpg.com/htdocs/term.html";
+            vc.webTitle = @"User Agreement";
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            
+            break;
+        case 5:{
             //隐私协议
-            PrivacyPolicyViewController *vc = [[PrivacyPolicyViewController alloc] init];
+            BigjpgWebViewController *vc = [[BigjpgWebViewController alloc] init];
             vc.urlStr = @"https://bigjpg.com/htdocs/privacy_policy.html";
+            vc.webTitle = @"Privacy Policy";
             [self.navigationController pushViewController:vc animated:YES];
         }
             
